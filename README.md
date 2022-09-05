@@ -1,11 +1,11 @@
 # Dự án tốt nghiệp (TKTW-PHP Framework) - Nhóm Fivepass
-**Clone source code về (Nhớ đặt trong thư mục www của Laragon | htdocs của Xampp):**
+**Vào thư mục www của Laragon hoặc htdocs của Xampp, chạy lệnh dưới để kéo source code về máy:**
 ```
 git clone https://github.com/tanthang88/datn-fivepass.git
 ```
 **Chạy tiếp lệnh vào thư mục chứa source code:**
 ```
-cd datn-fivepas
+cd datn-fivepass
 ```
 **Chuyển sang nhánh dev**
 ```
