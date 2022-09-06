@@ -10,6 +10,6 @@ git checkout dev
 
 ## Step3: Tạo nhánh cá nhân
 ```
-git checkout -b **username**
+git checkout -b username
 ```
 > Đang cập nhật thêm...
