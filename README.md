@@ -9,13 +9,13 @@
 >>
 >> - Theo chủng loại
 >>
-> Nhà sản xuất
->
-> Tìm kiếm theo văn bản gõ vào
->
-> Xem chi tiết sản phẩm được chọn
->
-> Xem khuyến mãi
->
-> Xem so sánh
+>> - Nhà sản xuất
+>>
+>> - Tìm kiếm theo văn bản gõ vào
+>>
+>> -  Xem chi tiết sản phẩm được chọn
+>>
+>> - Xem khuyến mãi
+>>
+>> - Xem so sánh
 >
