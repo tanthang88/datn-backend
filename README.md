@@ -7,7 +7,7 @@
 >
 > - Xem các sản phẩm theo:
 >
-> Theo chủng loại
+> -- Theo chủng loại
 >
 > Nhà sản xuất
 >
