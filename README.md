@@ -1,7 +1,7 @@
 # Dự án tốt nghiệp (TKTW-PHP Framework) - Nhóm Fivepass
 ## Xác định Actor, Đặc tả Use Case
 
-> ###### Khách hàng tiềm năng (Guest)
+> ### Khách hàng tiềm năng (Guest)
 >
 > - Xem trang chủ
 >
