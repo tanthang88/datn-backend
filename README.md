@@ -5,7 +5,7 @@
 >
 > - Xem trang chủ
 >
-> -Xem các sản phẩm theo:
+> - Xem các sản phẩm theo:
 >
 > Theo chủng loại
 >
