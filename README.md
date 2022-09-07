@@ -30,6 +30,8 @@
 > ### Khách hàng (User)
 >
 > - Đăng nhập
+> 
+> - Chat với người bán hàng
 >
 > - Xem đơn hàng
 >
@@ -41,6 +43,8 @@
 > - Đăng nhập
 >
 > - Bình luận ,trả lời bình luận
+> 
+> - Chat với khách hàng
 >
 > - Tạo đơn hàng
 >
