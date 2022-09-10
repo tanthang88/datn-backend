@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class AdminUser extends Authenticatable
 {
-    use HasFactory, SoftDeletes, Notifiable;
-    protected $table = 'users';
+    use HasFactory, Notifiable ,SoftDeletes;
+    protected $table = 'admin_users';
     
     /**
      * fillable
@@ -20,11 +20,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'birthday',
-        'gender',
-        'tel',
-        'avatar',
-        'created_at',
         'password',
     ];
     
@@ -35,16 +30,15 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
-
+    
     /**
-     * The attributes that should be cast.
+     * AdminRolesUser
      *
-     * @var array<string, string>
+     * @return Collection
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
+    public function AdminRolesUser()
+    {
+        return $this->belongsToMany(AdminRole::class, 'admin_role_user', 'user_id', 'role_id');
+    }
 }
