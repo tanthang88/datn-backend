@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_trackings', function (Blueprint $table) {
+        Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->integer('tracking_id');
-            $table->integer('active');
-            $table->text('place');
-            $table->text('vahicle');
-            $table->datetime('day_start');
-            $table->datetime('day_end');
+            $table->string('name');
+            $table->string('type');
+            $table->string('description');
+            $table->string('content');
+            $table->string('seo_title');
+            $table->string('seo_keyword');
+            $table->string('seo_description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_trackings');
+        Schema::dropIfExists('abouts');
     }
 };

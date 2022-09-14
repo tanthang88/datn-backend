@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->integer('into_price');
             $table->integer('sale');
+            $table->integer('ship_id');
             $table->integer('total');
             $table->timestamps();
         });

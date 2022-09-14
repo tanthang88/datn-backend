@@ -16,9 +16,14 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('phone',10);
+            $table->string('address',250);
+            $table->integer('ward_id');
+            $table->integer('dist_id');
+            $table->integer('city_id');
             $table->integer('bill_detail_id');
             $table->integer('bill_price');
-            $table->integer('active');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
