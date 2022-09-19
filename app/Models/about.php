@@ -9,5 +9,5 @@ use Illuminate\Notifications\Notifiable;
 
 class About extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 }
