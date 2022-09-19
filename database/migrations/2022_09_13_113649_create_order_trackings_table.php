@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('tracking_id');
             $table->integer('active');
-            $table->text('place');
-            $table->text('vahicle');
+            $table->text('address');
+            $table->text('vehicle');
             $table->datetime('day_start');
             $table->datetime('day_end');
             $table->timestamps();
