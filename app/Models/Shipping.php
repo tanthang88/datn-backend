@@ -11,11 +11,11 @@ class Shipping extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'shipping';
     protected $fillable = [
-        'company_ id_',
-        'company_ name_',
-        'company_ship_',
-        'company_product_id',
-        'company_created_at',
-        'company_updated_at',
+        'id',
+        'name',
+        'ship',
+        'product_id',
+        'created_at',
+        'updated_at',
     ];
 }
