@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class SupplierController extends Controller
 {
     //
-    //
+    
     public function getAdd()
     {
 
