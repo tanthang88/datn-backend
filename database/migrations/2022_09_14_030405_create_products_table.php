@@ -15,20 +15,24 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('product_name');
-            $table->string('product_image');
-            $table->integer('product_price');
-            $table->integer('quantity');
-            $table->integer('viewCounts');
-            $table->boolean('status');
-            $table->text('product_content');
-            $table->string('description');
-            $table->string('seo_titles');
-            $table->string('seo_keywords');
-            $table->bigIncrements('category_id');
-            $table->bigIncrements('supplier');
-            $table->integer('product_order');
-            $table->integer('product_outstanding');
+            $table->string('product_name', 255)->unique();
+            $table->string('product_slug', 255)->unique();
+            $table->string('product_image', 255)->nullable();
+            $table->integer('product_price')->nullable();
+            $table->integer('product_quantity')->default(0);
+            $table->integer('product_views')->default(0);
+            $table->boolean('product_display')->default(1);
+            $table->integer('product_order')->default(1);
+            $table->boolean('product_outstanding')->default(1);
+            $table->text('product_content')->nullable();
+            $table->text('product_desc')->nullable();
+            $table->string('seo_title', 200)->nullable();
+            $table->string('seo_description', 200)->nullable();
+            $table->string('seo_keywords', 1000)->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('supplier_id');
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductTags extends Model
+class ProductImage extends Model
 {
     use HasFactory, SoftDeletes;
-
-    protected $table = 'product_tags';
+    protected $table = 'product_images';
 
     /**
      * fillable
@@ -18,7 +17,7 @@ class ProductTags extends Model
      * @var array
      */
     protected $fillable = [
-        'tags',
+        'images',
         'product_id',
         'created_at'
     ];

@@ -14,12 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_comments', function (Blueprint $table) {
-            $table->id();
-            $table->string('product_comment_name', 255);
-            $table->string('product_comment_phone', 255);
-            $table->string('product_comment_email', 255)->nullable();
-            $table->string('product_comment_content', 500);
-            $table->integer('product_comment_rating');
+            $table->bigIncrements('id');
+            $table->string('comment_name', 255);
+
+            $table->string('comment_phone', 255);
+            $table->string('comment_email', 255)->nullable();
+            $table->string('comment_content', 500);
+            $table->boolean('comment_display')->default(0);
+            $table->integer('comment_rating')->nullable();
+            $table->integer('parent_id')->default(0);
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+
+
             $table->timestamps();
             $table->softDeletes();
         });

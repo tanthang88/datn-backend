@@ -14,14 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_trackings', function (Blueprint $table) {
-            $table->id();
-            $table->integer('tracking_id');
-            $table->integer('active');
-            $table->text('address');
-            $table->text('vehicle');
-            $table->datetime('day_start');
-            $table->datetime('day_end');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('bill_id');
+            $table->integer('status')->default(0)->comment('0:Đã lấy hàng,1:Đang vận chuyển,2:Thành công,3:Thất bại');
+            $table->unsignedInteger('city_id');
+            
+            $table->dateTime('date_now')->comment('Ngày hiện tại của kiện hàng');
+            $table->dateTime('date_expected')->comment('Ngày dự kiến giao hàng');
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+    $table->collation = 'utf8mb4_unicode_ci';
+            $table->softDeletes();
+
         });
     }
 

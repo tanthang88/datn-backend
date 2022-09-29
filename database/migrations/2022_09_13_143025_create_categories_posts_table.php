@@ -13,15 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories_posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('category_post_name', 255);
-            $table->integer('category_post_order');
-            $table->boolean('category_post_display');
-            $table->string('category_post_slug', 255);
+        Schema::create('post_categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('category_name', 255)->unique();
+            $table->string('category_slug', 255)->unique();
+            $table->integer('category_order')->default(1);
+            $table->boolean('category_display')->default(1);
+            $table->boolean('category_outstanding')->default(1);
+            $table->text('category_desc')->nullable();
+            $table->string('type',255);
+            $table->text('category_content')->nullable();
+            $table->string('category_title',100)->nullable();
+            $table->string('seo_keyword',1000)->nullable();
+            $table->string('seo_description',200)->nullable();
             $table->index('id');
             $table->timestamps();
             $table->softDeletes();
+            $table->charset = 'utf8mb4';
+    $table->collation = 'utf8mb4_unicode_ci';
         });
     }
 
@@ -32,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories_posts');
+        Schema::dropIfExists('post_categories');
     }
 };

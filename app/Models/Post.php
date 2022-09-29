@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Posts extends Model
+class Post extends Model
 {
-    use HasFactory,SoftDeletes, Notifiable;    
+    use HasFactory,SoftDeletes, Notifiable;
     /**
      * table
      *
      * @var string
      */
-    protected $table = 'posts';    
+    protected $table = 'posts';
     /**
      * fillable
      *
@@ -28,7 +28,7 @@ class Posts extends Model
         'post_content',
         'post_status',
         'post_outstanding',
-    ];    
+    ];
     /**
      * timestamps
      *

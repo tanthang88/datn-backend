@@ -14,15 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bill_details', function (Blueprint $table) {
-            $table->id();
-            $table->integer('product_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
             $table->integer('price');
             $table->integer('amount');
             $table->integer('into_price');
             $table->integer('sale');
-            $table->integer('ship_id');
+            $table->integer('fee');
             $table->integer('total');
+            $table->charset = 'utf8mb4';
+             $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

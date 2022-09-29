@@ -13,17 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shipping', function (Blueprint $table) {
-            $table->bigIncrements('id')->unique();
-            $table->integer('id_');
-            $table->string('name_',255);
-            $table->integer('ship');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
-            $table->softDeletes();
-           
+        Schema::table('bills', function (Blueprint $table) {
+            //
+            $table->foreign('city_id')->references('id')->on('place_city');
+            $table->foreign('dist_id')->references('id')->on('place_dist');
         });
-        //
     }
 
     /**
@@ -33,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('bills', function (Blueprint $table) {
+            //
+        });
     }
 };

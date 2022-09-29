@@ -13,19 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('promotion_products', function (Blueprint $table) {
+            //
             $table->bigIncrements('id');
-            $table->string('propertie_name',255);//mau sac
-            $table->string('propertie_slug',255);
-            $table->text('propertie_value');//do|xanh->to_array "|"
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('promotion_id');
+            $table->string('promotion_code', 255)->unique();
+            $table->unsignedBigInteger('promotion_id_product');
+            $table->unsignedBigInteger('promotion_id_product_combo');
+            $table->integer('promotion_rate');//mức giảm
+            $table->integer('promotion_order_value');//giá trị đơn hàng
+            $table->index('id');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
+
+
             $table->timestamps();
             $table->softDeletes();
-
         });
-        //
     }
 
     /**
@@ -35,8 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('properties');
-
+        Schema::dropIfExists('promotion_products');
     }
 };

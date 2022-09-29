@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class ProductComments extends Model
+class ProductComment extends Model
 {
     use HasFactory, Notifiable, SoftDeletes;
     protected $table = 'product_comments';

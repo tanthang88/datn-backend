@@ -7,18 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Create products of tags table.
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('product_tags', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('tags');
-            $table->bigIncrements('product_id');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('order_trackings', function (Blueprint $table) {
+            //
+            $table->foreign('bill_id')->references('id')->on('bills');
+          
+
         });
     }
 
@@ -29,6 +28,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_tags');
+        Schema::table('order_trackings', function (Blueprint $table) {
+            //
+        });
     }
 };

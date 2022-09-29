@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('images');
-            $table->bigIncrements('product_id');
+            $table->string('image',255);
+            $table->unsignedBigInteger('product_id');
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,18 +14,24 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('categories_post_id');
-            $table->string('post_title', 500);
-            $table->string('post_slug', 500);
-            $table->longText('post_describe');
-            $table->longText('post_content');
-            $table->boolean('post_status');
-            $table->boolean('post_outstanding');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('category_id');
+
+            $table->string('post_name', 500)->unique();
+            $table->string('post_slug', 500)->unique();
+            $table->string('type', 255);
+            $table->text('post_desc')->nullable();
+            $table->longText('post_content')->nullable();
+            $table->boolean('post_display')->default(1);
+            $table->integer('post_order')->default(1);
+            $table->boolean('post_outstanding')->default(1);
             $table->string('post_seo_title', 200)->nullable();
             $table->string('post_seo_keyword', 1000)->nullable();
             $table->string('post_seo_description', 200)->nullable();
-            $table->index(array('id', 'categories_post_id', 'post_status', 'post_outstanding'));
+            $table->index(array('id', 'category_id', 'post_display', 'post_outstanding'));
+
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
             $table->softDeletes();
         });

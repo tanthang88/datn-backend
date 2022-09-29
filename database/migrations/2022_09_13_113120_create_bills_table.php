@@ -14,17 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('phone',10);
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('customer_id');
+            $table->string('bill_phone',10);
+            $table->string('customer_name',255);
             $table->string('address',250);
-            $table->integer('ward_id');
-            $table->integer('dist_id');
-            $table->integer('city_id');
-            $table->integer('bill_detail_id');
+            $table->unsignedInteger('city_id');
+            $table->unsignedInteger('dist_id');
+            
+
             $table->integer('bill_price');
-            $table->boolean('active');
+            $table->integer('bill_status')->default(0)->comment("0:Chờ xác nhận,1:Đã xác nhận,2:Đang giao hàng,3:Giao hàng thành công,4:Huỷ");
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

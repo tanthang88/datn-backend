@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class CategoriesPosts extends Model
+class PostCategory extends Model
 {
-    use HasFactory, SoftDeletes, Notifiable;    
+    use HasFactory, SoftDeletes, Notifiable;
     /**
      * table
      *
      * @var string
      */
-    protected $table = 'categories_posts';    
+    protected $table = 'post_categories';
     /**
      * fillable
      *
@@ -26,7 +26,7 @@ class CategoriesPosts extends Model
         'category_post_order',
         'category_post_display',
         'category_post_slug',
-    );    
+    );
     /**
      * timestamps
      *

@@ -13,19 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admin_suppliers', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('supplier_name', 255)->unique();
-            $table->string('supplier_slug', 255)->unique();
-            $table->integer('supplier_photo', 255);
-            $table->integer('supplier_order', 11);
-            $table->boolean('supplier_display');
-            $table->boolean('supplier_outstanding');
-            $table->text('category_desc');
+            $table->string('supplier_photo', 255)->nullable();
+            $table->integer('supplier_order')->default(1);
+            $table->boolean('supplier_display')->default(1);
+            $table->boolean('supplier_outstanding')->default(1);
+            $table->text('category_desc')->nullable();
             $table->string('supplier_address',255);
-            $table->text('supplier_map');
+            $table->text('supplier_map')->nullable();
             $table->string('supplier_phone',10);
             $table->string('supplier_email',200);
+            $table->charset = 'utf8mb4';
+    $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
             $table->softDeletes();
         });
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_suppliers');
+        Schema::dropIfExists('suppliers');
     }
 };

@@ -14,14 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('abouts', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->string('description');
-            $table->string('content');
-            $table->string('seo_title');
-            $table->string('seo_keyword');
-            $table->string('seo_description');
+            $table->bigIncrements('id');
+            $table->string('about_name',255)->unique();
+            $table->string('about_slug',255)->unique();
+            $table->string('type',255);
+            $table->integer('about_order')->default(1);
+            $table->boolean('about_display')->default(1);
+            $table->string('about_desc',500)->nullable();
+            $table->text('about_content')->nullable();
+            $table->string('seo_title',200)->nullable();
+            $table->string('seo_keyword',1000)->nullable();
+            $table->string('seo_description',200)->nullable();
+            $table->charset = 'utf8mb4';
+    $table->collation = 'utf8mb4_unicode_ci';
             $table->timestamps();
             $table->softDeletes();
         });
