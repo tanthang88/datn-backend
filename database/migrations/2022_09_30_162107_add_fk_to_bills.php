@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('bills', function (Blueprint $table) {
-            //
-            $table->foreign('city_id')->references('id')->on('place_city');
-            $table->foreign('dist_id')->references('id')->on('place_dist');
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('dist_id')->references('id')->on('dists');
         });
     }
 
@@ -28,7 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('bills', function (Blueprint $table) {
-            //
+            $table->dropColumn('pref_id')->nullable();
+            $table->dropColumn('city_id')->nullable();
         });
     }
 };
