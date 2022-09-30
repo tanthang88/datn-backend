@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bills', function (Blueprint $table) {
-            $table->foreign('city_id')->references('id')->on('cities');
-            $table->foreign('dist_id')->references('id')->on('dists');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('ward_id');
+            $table->dropColumn('city_id');
+            $table->dropColumn('dist_id');
+            $table->string('address')->after('status');
+
         });
     }
 
@@ -26,9 +29,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('bills', function (Blueprint $table) {
-            $table->dropColumn('dist_id')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('ward_id')->nullable();
             $table->dropColumn('city_id')->nullable();
+            $table->dropColumn('dist_id')->nullable();
         });
     }
 };
