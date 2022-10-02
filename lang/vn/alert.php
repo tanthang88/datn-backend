@@ -5,4 +5,7 @@ return [
         'status_block' => 'Tài khoản của bạn đã bị khoá, vui lòng liên hệ với cửa hàng',
         'failed' => 'Đã có lỗi xảy ra',
     ],
+    'register' => [
+        'failed' => 'Đã có lỗi xảy ra',
+    ],
 ];
