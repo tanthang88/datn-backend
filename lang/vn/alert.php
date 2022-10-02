@@ -8,4 +8,10 @@ return [
     'register' => [
         'failed' => 'Đã có lỗi xảy ra',
     ],
+    'city' => [
+        'failed' => 'Không lấy được thông tin thành phố',
+    ],
+    'dist' => [
+        'failed' => 'Không lấy được thông tin quận huyện',
+    ],
 ];

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\DistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::prefix('information')->group(function () {
+    Route::get('/city', [CityController::class, 'city']);
+    Route::get('/dist/{city}', [DistController::class, 'dist']);
+});
 
 Route::prefix('client')->group(function () {
     Route::post('login', [LoginController::class, 'loginClient']);
