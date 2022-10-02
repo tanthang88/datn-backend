@@ -8,4 +8,10 @@ return [
     'register' => [
         'failed' => 'An error has occurred',
     ],
+    'city' => [
+        'failed' => 'Get City failed',
+    ],
+    'dist' => [
+        'failed' => 'Get Dist failed',
+    ],
 ];
