@@ -5,4 +5,7 @@ return [
         'status_block' => 'Your account is locked cant log in, please contact the store',
         'failed' => 'An error has occurred',
     ],
+    'register' => [
+        'failed' => 'An error has occurred',
+    ],
 ];

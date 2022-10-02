@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginService
 {
-    // /**
-    //  * __construct
-    //  *
-    //  * @param  Request $request
-    //  * @return void
-    //  */
+    /**
+     * __construct
+     *
+     * @param  Request $request
+     * @return void
+     */
     public function __construct(Request $request)
     {
         $this->_request = $request;
@@ -72,6 +72,6 @@ class LoginService
      */
     public function logout()
     {
-        // Auth::user()->token()->revoke();
+        Auth::user()->token()->revoke();
     }
 }
