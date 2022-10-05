@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\DistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('information')->group(function () {
+    Route::get('/city', [CityController::class, 'city']);
+    Route::get('/dist/{city}', [DistController::class, 'dist']);
+});
+
+Route::prefix('client')->group(function () {
+    Route::post('login', [LoginController::class, 'loginClient']);
+    Route::post('register', [RegisterController::class, 'registerClient']);
+    Route::middleware(['auth:user'])->group(function () {
+        Route::post('logout', [LoginController::class, 'logoutClient']);
+    });
 });

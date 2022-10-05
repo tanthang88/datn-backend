@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 
 class User extends Authenticatable
 {
-    use HasFactory, SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable, HasApiTokens;
+    const STATUS_BLOCK = 0;
+    const STATUS_ACTIVE = 1;
+
+
     protected $table = 'users';
-    
+
     /**
      * fillable
      *
@@ -23,12 +28,16 @@ class User extends Authenticatable
         'email',
         'birthday',
         'gender',
+        'status',
+        'address',
+        'city_id',
+        'dist_id',
         'tel',
         'avatar',
         'created_at',
         'password',
     ];
-    
+
     /**
      * hidden
      *
