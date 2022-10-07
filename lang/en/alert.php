@@ -14,4 +14,13 @@ return [
     'dist' => [
         'failed' => 'Get Dist failed',
     ],
+    'post' => [
+        'get_list' => [
+            'failed' => 'Get list Post failed',
+        ],
+        'get_detail' => [
+            'failed' => 'Get Detail Post Failed',
+        ],
+        'failed' => 'An error has occurred',
+    ],
 ];
