@@ -9,13 +9,17 @@ use Illuminate\Notifications\Notifiable;
 
 class Post extends Model
 {
-    use HasFactory,SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable;
+    const POST_BLOCK = 0;
+    const POST_ACTIVE = 1;
+
     /**
      * table
      *
      * @var string
      */
     protected $table = 'posts';
+
     /**
      * fillable
      *
@@ -28,6 +32,8 @@ class Post extends Model
         'post_content',
         'post_status',
         'post_outstanding',
+        'id',
+        'category_id',
     ];
     /**
      * timestamps
@@ -35,4 +41,14 @@ class Post extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * getPostCategory
+     *
+     * @return void
+     */
+    public function postCategory()
+    {
+        return $this->belongsTo(PostCategory::class, 'category_id', 'id');
+    }
 }

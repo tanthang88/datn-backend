@@ -22,10 +22,11 @@ class PostCategory extends Model
      * @var array
      */
     protected $fillable = array(
-        'category_post_name',
-        'category_post_order',
-        'category_post_display',
-        'category_post_slug',
+        'category_name',
+        'category_order',
+        'category_display',
+        'category_slug',
+        'id',
     );
     /**
      * timestamps
@@ -33,4 +34,9 @@ class PostCategory extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'category_id', 'id');
+    }
 }

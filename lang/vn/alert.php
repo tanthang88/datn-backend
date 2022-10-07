@@ -14,4 +14,13 @@ return [
     'dist' => [
         'failed' => 'Không lấy được thông tin quận huyện',
     ],
+    'post' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách bài viết',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết bài viết',
+        ],
+        'failed' => 'Đã có lỗi xảy ra',
+    ],
 ];
