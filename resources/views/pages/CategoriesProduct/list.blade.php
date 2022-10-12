@@ -1,6 +1,6 @@
 @extends('layout/masterLayout')
 @section('title')
-Nhà cung cấp
+Danh mục sản phẩm
 @endsection
 @push('styles')
 <style>
@@ -14,7 +14,7 @@ Nhà cung cấp
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-              <div class="col-12">Danh sách nhà cung cấp</div>
+              <div class="col-12">Danh sách các danh mục sản phẩm</div>
                 <!-- ./col -->
             </div>
             <!-- /.row -->
@@ -25,30 +25,31 @@ Nhà cung cấp
                     <thead>
                     <tr>
                     <th>ID</th>
-                    <th>Tên nhà cung cấp</th>
+                    <th>Tên Danh Mục</th>
                     <th>Hình ảnh</th>
                     <th>Số thứ tự</th>
+                    <th>Loại danh mục</th>                  
                     <th>Hiển Thị</th>
                     <th>Nổi bật</th>
-                    <th>Mô tả</th>
-                    <th>Địa chỉ</th>
-                    <th>Google Map</th>
-                    <th>Điện thoại</th>
-                    <th>Email</th>
                     <th>Ngày Tạo</th>
                     </tr>
                     </thead>
-                    @foreach($supplier as $supplier)
+                    @foreach($product_categories as $product_categories)
                         <tbody>
                             <tr>
-                                <td>{{$supplier->id}}</td>
-                                <td>{{$supplier->supplier_name}}</td>
-                                <td>{{$supplier->supplier_photo}}</td>
-                              
-                                <td>{{$supplier->supplier_order}}</td>
-            
+                                <td>{{$product_categories->id}}</td>
+                                <td>{{$product_categories->category_name}}</td>
+                                <td>{{$product_categories->category_image}}</td>                  
+                                <td>{{$product_categories->category_order}}</td>
                                 <td>
-                                    @if($supplier->supplier_display == 0)
+                                    @if($product_categories->parent_id == 0)
+                                    {{'Danh mục cha'}}
+                                    @else
+                                    {{'Danh mục con'}}
+                                    @endif
+                                </td> 
+                                <td>
+                                    @if($product_categories->category_display == 0)
                                     {{'Không'}}
                                     @else
                                     {{'Có'}}
@@ -56,20 +57,15 @@ Nhà cung cấp
                                 </td>
                                 
                                 <td>
-                                    @if($supplier->supplier_outstanding == 0)
+                                    @if($product_categories->category_outstanding == 0)
                                     {{'Không'}}
                                     @else
                                     {{'Có'}}
                                     @endif
                                 </td>
-                                <td>{{$supplier->supplier_desc}}</td>
-                                <td>{{$supplier->supplier_address}}</td>
-                                <td>{{$supplier->supplier_map}}</td>
-                                <td>{{$supplier->supplier_phone}}</td>
-                                <td>{{$supplier->supplier_email}}</td>
-                                <td>{{$supplier->created_at}}</td>   
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="Supplier/Update/{{$supplier->id}}">Sửa</a></td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="Supplier/Delete/{{$supplier->id}}"> Xóa</a></td>       
+                                <td>{{$product_categories->created_at}}</td>   
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="CategoriesProduct/Update/{{$product_categories->id}}">Sửa</a></td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="CategoriesProduct/Delete/{{$product_categories->id}}"> Xóa</a></td>       
                             </tr>
                             
                             </tbody>

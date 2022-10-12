@@ -13,7 +13,7 @@ Nhà cung cấp
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-              <div class="col-12">Thêm mới nhà cung cấp</div>
+              <div class="col-12">Chỉnh sửa nhà cung cấp</div>
                 <!-- ./col -->
             </div>
             <!-- /.row -->
@@ -28,52 +28,61 @@ Nhà cung cấp
     <form action="" method="POST">
         {{csrf_field() }}
         <div class="card-body">
-
+@foreach($UpdateSL as $updateSl)
             <div class="form-group">
                 <label for="Supplier">Tên Nhà Cung Cấp</label>
-                <input type="text" name="supplier_name" class="form-control"  placeholder="Nhập tên nhà cung cấp" required>
+                <input type="text" name="supplier_name" class="form-control"  value="{{$updateSl->supplier_name}}">
             </div>
             <div class="form-group">
                 <label for="Supplier">Hình Ảnh Nhà Cung Cấp</label>         
-                <input type="file" name="supplier_photo" class="form-control" id = "Supplier" required>
+                <input type="file" name="supplier_photo" class="form-control" id ="Supplier">
             </div>
             <div class="form-group">
                 <label for="Supplier">STT</label>
-                <input type="number" name="supplier_order" class="form-control"  placeholder="Nhập số thứ tự" required>
+                <input type="number" name="supplier_order" class="form-control"   value="{{$updateSl->supplier_order}}">
             </div>
             <div class="form-group">
                 <label for="Supplier">Hiển thị</label>
-                <input style="margin-left:17px"; type="checkbox" name="supplier_display" >
+                @if( $updateSl->supplier_display==1)
+                    <input style="margin-left:17px"; type="checkbox" checked="checked" name="supplier_display">
+                @else
+                    <input style="margin-left:17px"; type="checkbox" name="supplier_display">
+                
+                @endif
             </div>
             <div class="form-group">
                 <label for="Supplier">Nổi bật</label>
-                <input style="margin-left:17px"; type="checkbox" name="supplier_outstanding" >
+                @if( $updateSl->supplier_display==1)
+                    <input style="margin-left:17px"; type="checkbox" checked="checked" name="supplier_outstanding">
+                @else
+                    <input style="margin-left:17px"; type="checkbox" name="supplier_outstanding">
+                
+                @endif
             </div>
             <div class="form-group">
                 <label>Mô Tả </label>
-                <textarea name="supplier_desc" class="form-control"></textarea>
+                <textarea name="supplier_desc" class="form-control" > {{$updateSl->supplier_desc}}</textarea>
             </div>
             <div class="form-group">
                 <label>Địa chỉ </label>
-                <textarea name="supplier_address" class="form-control"></textarea>
+                <textarea name="supplier_address" class="form-control" >{{$updateSl->supplier_address}}</textarea>
             </div>
             <div class="form-group">
                 <label>Google Map</label>
-                <input type="text" name="supplier_map" class="form-control"  placeholder="Nhập iframe ggmap">
+                <input type="text" name="supplier_map" class="form-control"  value="{{$updateSl->supplier_map}}">
             </div>
             <div class="form-group">
                 <label for="Supplier">Điện thoại</label>
-                <input type="text" name="supplier_phone" class="form-control"  placeholder="Nhập số điện thoại nhà cung cấp" required>
+                <input type="text" name="supplier_phone" class="form-control" value="{{$updateSl->supplier_phone}}">
             </div>
             <div class="form-group">
                 <label for="Supplier">Email</label>
-                <input type="email" name="supplier_email" class="form-control"  placeholder="Nhập email điện thoại nhà cung cấp" required>
+                <input type="email" name="supplier_email" class="form-control" value="{{$updateSl->supplier_email}}">
             </div>
-       
         </div>
-
+@endforeach
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Thêm Mới</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
         </div>
         @csrf
     </form>
