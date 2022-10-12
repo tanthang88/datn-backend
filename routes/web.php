@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CategoriesProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,15 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/List', [SupplierController::class, 'getList']);
         Route::get('/Delete/{id}', [SupplierController::class, 'getDelete']);
     });
+ #Categories Product
+ Route::group(['prefix' => 'CategoriesProduct'], function () {
+    Route::get('/Add', [CategoriesProductController::class, 'getAdd']);
+    Route::post('/Add', [CategoriesProductController::class, 'postAdd']);
 
+    Route::get('/Update/{id}', [CategoriesProductController::class, 'getUpdate']);
+    Route::post('/Update/{id}', [CategoriesProductController::class, 'postUpdate']);
+
+    Route::get('/List', [CategoriesProductController::class, 'getList']);
+    Route::get('/Delete/{id}', [CategoriesProductController::class, 'getDelete']);
+});
 });
