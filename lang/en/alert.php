@@ -35,4 +35,13 @@ return [
             'failed' => 'Get list About failed',
         ],
     ],
+    'product' => [
+        'get_list' => [
+            'failed' => 'Get list Product failed',
+        ],
+        'get_detail' => [
+            'failed' => 'Get Detail Product Failed',
+        ],
+        'failed' => 'An error has occurred',
+    ],
 ];
