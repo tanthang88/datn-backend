@@ -23,4 +23,16 @@ return [
         ],
         'failed' => 'An error has occurred',
     ],
+    'company' => [
+        'failed' => 'Get Company failed',
+    ],
+    'about' => [
+        'failed' => 'An error has occurred',
+        'get_detail' => [
+            'failed' => 'Get Detail About Failed',
+        ],
+        'get_list' => [
+            'failed' => 'Get list About failed',
+        ],
+    ],
 ];

@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\DistController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\AboutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +38,12 @@ Route::group(['prefix' => 'post'], function () {
     Route::get('/categories/{category}', [PostController::class, 'listPosts']);
     Route::get('/{post}', [PostController::class, 'show']);
 });
+
+ Route::get('/company', [CompanyController::class, 'company']);
+
+ Route::group(['prefix' => 'about'], function () {
+    Route::get('/', [AboutController::class, 'listAbouts']);
+    Route::get('/types/{type}', [AboutController::class, 'listAboutsByType']);
+    Route::get('/{about}', [AboutController::class, 'show']);
+});
+
