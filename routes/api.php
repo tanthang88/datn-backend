@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\AboutController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +46,11 @@ Route::group(['prefix' => 'post'], function () {
     Route::get('/', [AboutController::class, 'listAbouts']);
     Route::get('/types/{type}', [AboutController::class, 'listAboutsByType']);
     Route::get('/{about}', [AboutController::class, 'show']);
+});
+Route::group(['prefix' => 'product'], function () {
+    Route::get('/categories', [ProductController::class, 'listCategories']);
+    Route::get('/', [ProductController::class, 'listProducts']);
+    Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
+    Route::get('/{product}', [ProductController::class, 'show']);
 });
 

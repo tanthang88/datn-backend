@@ -35,4 +35,13 @@ return [
             'failed' => 'Không lấy được danh sách nội dung',
         ],
     ],
+    'post' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách sản phẩm',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết sản phẩm',
+        ],
+        'failed' => 'Đã có lỗi xảy ra',
+    ],
 ];

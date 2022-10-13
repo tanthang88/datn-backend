@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use App\Models\Supplier;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,Notifiable;
     protected $table = 'products';
-
+    const PRODUCT_BLOCK = 0;
+    const PRODUCT_ACTIVE = 1;
     /**
      * fillable
      *
@@ -34,4 +37,12 @@ class Product extends Model
         'product_outstanding',
         'created_at'
     ];
+    public function productCategory()
+    {
+        return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
+    }
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
+    }
 }

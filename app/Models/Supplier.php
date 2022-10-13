@@ -25,5 +25,8 @@ class Supplier extends Model
         'created_at',
         'updated_at',
     ];
-    
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'supplier_id', 'id');
+    }
 }
