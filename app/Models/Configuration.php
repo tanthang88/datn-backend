@@ -12,6 +12,7 @@ class Configuration extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'configurations';
     protected $fillable = [
+        'product_id',
         'config_screen',
         'config_cpu',
         'config_ram',

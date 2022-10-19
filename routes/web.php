@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoriesProductController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,19 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/List', [CategoriesProductController::class, 'getList']);
     Route::get('/Delete/{id}', [CategoriesProductController::class, 'getDelete']);
 });
+    Route::group(['prefix' => 'product'], function () {
+        Route::get('/add', [ProductController::class, 'getAdd']);
+        Route::post('/add', [ProductController::class, 'postAdd']);
+
+        Route::get('/update/{id}', [ProductController::class, 'getUpdate']);
+        Route::post('/update/{id}', [ProductController::class, 'postUpdate']);
+
+        Route::get('/list', [ProductController::class, 'getList']);
+        Route::get('delete/{id}', [ProductController::class,'delete']);
+
+    });
+
+    Route::group(['prefix' => 'laravel-filemanager',], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
 });

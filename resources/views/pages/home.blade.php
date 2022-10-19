@@ -4,7 +4,7 @@ Trang chủ
 @endsection
 @push('styles')
 <style>
-    
+
 </style>
 @endpush
 @section('content')

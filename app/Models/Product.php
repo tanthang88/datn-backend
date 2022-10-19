@@ -20,11 +20,9 @@ class Product extends Model
         'product_name',
         'product_image',
         'product_price',
-        'quantity',
-        'viewCounts',
-        'status',
+        'product_quantity',
+        'product_display',
         'product_content',
-        'description',
         'seo_titles',
         'seo_keywords',
         'seo_descriptions',
@@ -34,4 +32,18 @@ class Product extends Model
         'product_outstanding',
         'created_at'
     ];
+
+    public function product_categories()
+    {
+        return $this->hasOne(ProductCategories::class, 'id', 'category_id');
+    }
+    public function configurations()
+    {
+        return $this->hasOne(Configurations::class, 'product_id', 'id');
+    }
+    public function product_images()
+    {
+        return $this->hasMany(ProductImages::class, 'product_id', 'id');
+    }
+
 }
