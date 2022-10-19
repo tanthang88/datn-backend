@@ -23,4 +23,25 @@ return [
         ],
         'failed' => 'Đã có lỗi xảy ra',
     ],
+    'company' => [
+        'failed' => 'Không lấy được thông tin cửa hàng',
+    ],
+    'about' => [
+        'failed' => 'Đã có lỗi xảy ra',
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết nội dung',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách nội dung',
+        ],
+    ],
+    'post' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách sản phẩm',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết sản phẩm',
+        ],
+        'failed' => 'Đã có lỗi xảy ra',
+    ],
 ];

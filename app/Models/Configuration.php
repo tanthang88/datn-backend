@@ -21,4 +21,8 @@ class Configuration extends Model
         'config_battery',
         'config_system',
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }

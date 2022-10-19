@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use App\Models\Supplier;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,Notifiable;
     protected $table = 'products';
-
+    const PRODUCT_BLOCK = 0;
+    const PRODUCT_ACTIVE = 1;
     /**
      * fillable
      *
@@ -32,18 +35,28 @@ class Product extends Model
         'product_outstanding',
         'created_at'
     ];
-
-    public function product_categories()
+    public function productCategory()
     {
-        return $this->hasOne(ProductCategories::class, 'id', 'category_id');
+        return $this->belongsTo(ProductCategories::class, 'category_id', 'id');
     }
-    public function configurations()
+    public function supplier()
     {
-        return $this->hasOne(Configurations::class, 'product_id', 'id');
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
-    public function product_images()
+    public function productImage()
     {
-        return $this->hasMany(ProductImages::class, 'product_id', 'id');
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
-
+    public function productConfig()
+    {
+        return $this->hasOne(Configuration::class, 'product_id', 'id');
+    }
+    public function productPropertie()
+    {
+        return $this->hasMany(Propertie::class, 'product_id', 'id');
+    }
+    public function productVariantion()
+    {
+        return $this->hasMany(Variantion::class, 'product_id', 'id');
+    }
 }
