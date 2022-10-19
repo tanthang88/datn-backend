@@ -8,7 +8,8 @@ use App\Models\ProductCategories;
 class ProductService
 {
     private mixed $perPage;
-    public function __construct(){
+    public function __construct()
+    {
         $this->perPage = request()->get('limit', 12);
     }
 
@@ -19,12 +20,17 @@ class ProductService
      */
     public function getListCategory()
     {
-        return ProductCategories::all();
+        return ProductCategories::where('parent_id', 0)
+            ->with(['children' => function ($query) {
+                $query->with(['children']);
+            }])
+            ->get();
     }
-    // getListProduct
+    //  getListProduct
+
     public function getListProduct()
     {
-        return Product::all();
+        return Product::select('*')->paginate($this->perPage);
     }
     /**
      * getListProductByCategory
@@ -44,7 +50,7 @@ class ProductService
                 $query->where('product_display', PRODUCT::PRODUCT_ACTIVE);
             })
             ->orderBy('id', 'DESC')
-            ->orderBy('product_order','DESC')
+            ->orderBy('product_order', 'DESC')
             ->paginate($this->perPage);
     }
 
@@ -62,5 +68,4 @@ class ProductService
             ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
             ->first();
     }
-
 }

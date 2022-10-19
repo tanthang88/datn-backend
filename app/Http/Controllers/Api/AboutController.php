@@ -37,8 +37,7 @@ class AboutController extends Controller
         try {
             $abouts = $this->aboutService->getListAboutByType($request);
             $listData = AboutResource::collection($abouts);
-            $abouts->data = $listData;
-            return $this->responseSuccess(['data' => $abouts]);
+            return $this->responseSuccess(['data' => $listData]);
         } catch (\Throwable $th) {
             Log::error("get about ", $th);
             return $this->responseError(

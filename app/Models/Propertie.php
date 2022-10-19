@@ -17,4 +17,11 @@ class Propertie extends Model
         'created_at',
         'updated_at',
     ];
+    public function product(){
+        return $this->belongTo(Product::class, 'product_id', 'id');
+    }
+    public function variantion()
+    {
+        return $this->hasMany(Variantion::class, 'propertie_id', 'id');
+    }
 }

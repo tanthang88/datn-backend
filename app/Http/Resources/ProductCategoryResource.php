@@ -17,9 +17,11 @@ class ProductCategoryResource extends JsonResource
         $request = $request;
         return [
             'id' => $this->id,
-            'name' => $this->category_name,
-            'slug' => $this->category_slug,
+            'category_name' => $this->category_name,
+            'category_slug' => $this->category_slug,
+            'category_image'=>$this->category_image,
             'parent_id' => $this->parent_id,
+            'children'=>$this->children
         ];
     }
 }

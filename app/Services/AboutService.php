@@ -24,7 +24,8 @@ class AboutService
             ->where('type', $request->type)
             ->orderBy('id', 'DESC')
             ->orderBy('about_order', 'DESC')
-            ->paginate($this->perPage);
+            ->get();
+
     }
     //getAbout
     public function getAbout(About $about, array $select = ['*'])

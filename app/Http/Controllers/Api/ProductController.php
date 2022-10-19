@@ -37,7 +37,6 @@ class ProductController extends Controller
             );
         }
     }
-
     /**
      * listProducts
      *
@@ -48,7 +47,8 @@ class ProductController extends Controller
         try {
             $data = $this->productService->getListProduct();
             $listData = ProductResource::collection($data);
-            return $this->responseSuccess(['data' => $listData]);
+            $data->data=$listData;
+            return $this->responseSuccess(['data' => $data]);
         } catch (\Throwable $th) {
             Log::error("get list product ", $th);
             return $this->responseError(

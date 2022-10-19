@@ -21,4 +21,7 @@ class ProductImage extends Model
         'product_id',
         'created_at'
     ];
+    public function product(){
+        return $this->belongTo(Product::class, 'product_id', 'id');
+    }
 }
