@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('properties', function (Blueprint $table) {
-          $table->dropColumn('propertie_id');
-          $table->string('propertie_img',255)->nullable()->after('propertie_value'); //ảnh avt của thuộc tính
+            $table->dropForeign('properties_propertie_id_foreign');
+            $table->dropColumn('propertie_id');
+            $table->string('propertie_img', 255)->nullable()->after('propertie_value'); //ảnh avt của thuộc tính
         });
     }
 
