@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\DistController;
 use App\Http\Controllers\Api\PostController;
@@ -31,6 +32,11 @@ Route::prefix('client')->group(function () {
     Route::post('register', [RegisterController::class, 'registerClient']);
     Route::middleware(['auth:user'])->group(function () {
         Route::post('logout', [LoginController::class, 'logoutClient']);
+        Route::group(['prefix' => 'bills'], function () {
+            Route::get('/', [BillController::class, 'index']);
+            Route::get('/{bill}', [BillController::class, 'show']);
+            Route::post('/add_to_bill', [BillController::class, 'create']);
+        });
     });
 });
 
