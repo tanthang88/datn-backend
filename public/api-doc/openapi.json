@@ -1061,9 +1061,9 @@
     "/api/client/bills/create": {
       "post": {
         "tags": [
-          "bill"
+          "Bill"
         ],
-        "summary": "Payment product in cart",
+        "summary": "Order product in cart",
         "operationId": "create-bill",
         "parameters": [
           {
@@ -1149,9 +1149,9 @@
     "/api/client/bills/{id}": {
       "get": {
         "tags": [
-          "bill"
+          "Bill"
         ],
-        "summary": "detail bill",
+        "summary": "Detail bill",
         "operationId": "get-detail-bill",
         "responses": {
           "200": {
@@ -1227,9 +1227,9 @@
     "/api/client/bills ": {
       "get": {
         "tags": [
-          "bill"
+          "Bill"
         ],
-        "summary": "detail bill",
+        "summary": "List bill",
         "operationId": "get-detail-bill",
         "responses": {
           "200": {
