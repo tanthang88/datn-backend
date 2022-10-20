@@ -17,7 +17,7 @@ class Supplier extends Model
         'supplier_order',
         'supplier_display',
         'supplier_outstanding',
-        'category_desc',
+        'supplier_desc',
         'supplier_address',
         'supplier_map',
         'supplier_phone',
