@@ -44,4 +44,15 @@ return [
         ],
         'failed' => 'An error has occurred',
     ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Create bill failed',
+        ],
+        'get_list' => [
+            'failed' => 'get list bill failed',
+        ],
+        'get_detail' => [
+            'failed' => 'get detail bill failed',
+        ],
+    ],
 ];

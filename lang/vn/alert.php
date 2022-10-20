@@ -23,6 +23,18 @@ return [
         ],
         'failed' => 'Đã có lỗi xảy ra',
     ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Không thêm được đơn hàng',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách đơn hàng',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết đơn hàng',
+        ],
+
+    ],
     'company' => [
         'failed' => 'Không lấy được thông tin cửa hàng',
     ],
@@ -43,5 +55,16 @@ return [
             'failed' => 'Không lấy được chi tiết sản phẩm',
         ],
         'failed' => 'Đã có lỗi xảy ra',
+    ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Không thêm được đơn hàng',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách đơn hàng',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết đơn hàng',
+        ],
     ],
 ];
