@@ -20,12 +20,12 @@ class ConfigurationsTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         foreach(range(1,10) as $value){
             DB::table('configurations')->insert([
-                'config_screen' =>$faker->name,
+                'config_screen' =>$faker->randomFloat(1,1,100) ,
                 'config_cpu'=>$faker->name,
                 'config_system'=>$faker->name,
                 'config_battery'=>$faker->numerify($string = '##') ,
-                'config_selfie'=>$faker->numerify($string = '##') ,
-                'config_camera'=>$faker->numerify($string = '##') ,
+                'config_selfie'=>$faker->randomFloat(1,1,100) ,
+                'config_camera'=>$faker->randomFloat(1,1,100) ,
                 'config_ram'=>$faker->numerify($string = '##') ,
                 'product_id'=>$faker->numberBetween($min = 1, $max = 10),
             ]);
