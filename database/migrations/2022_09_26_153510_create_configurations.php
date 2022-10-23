@@ -17,11 +17,11 @@ return new class extends Migration
             //
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id');
-            $table->string('config_screen', 255)->nullable();
+            $table->float('config_screen')->nullable();
             $table->string('config_cpu', 255)->nullable();
             $table->integer('config_ram')->nullable();
-            $table->integer('config_camera')->nullable();
-            $table->integer('config_selfie')->nullable();
+            $table->float('config_camera')->nullable();
+            $table->float('config_selfie')->nullable();
             $table->integer('config_battery')->nullable();
             $table->string('config_system',255)->nullable();
 
