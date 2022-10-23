@@ -190,8 +190,176 @@
             "schema": {
               "type": "number"
             }
+          },
+          {
+            "in": "body",
+            "name": "avatar",
+            "required": false,
+            "description": "avatar",
+            "schema": {
+              "type": "string"
+            }
           }
         ]
+      }
+    },
+    "/api/client/account/{id}": {
+      "get": {
+        "tags": [
+          "User (client)"
+        ],
+        "summary": "get detail user",
+        "operationId": "get-detail-user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": false,
+            "description": "id user",
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client login",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": 5,
+                    "name": "Trần thanh tùng",
+                    "email": "trungtv0910@gmail.com",
+                    "birthday": "2022-10-02",
+                    "gender": null,
+                    "tel": "0973127008",
+                    "avatar": null,
+                    "status": 1,
+                    "address": "Thừa thiên huế",
+                    "city_id": 18,
+                    "dist_id": 111,
+                    "email_verified_at": null,
+                    "created_at": null,
+                    "updated_at": "2022-10-23T11:26:26.000000Z",
+                    "deleted_at": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/client/account/{id}/update": {
+      "put": {
+        "tags": [
+          "User (client)"
+        ],
+        "summary": "Update user account",
+        "operationId": "update-user-account",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "password",
+            "required": false,
+            "description": "password",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "password_confirmation",
+            "required": false,
+            "description": "password confimed",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "birthday",
+            "required": false,
+            "description": "birth day",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "gender",
+            "required": false,
+            "description": "gender 0 or 1",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "tel",
+            "required": false,
+            "description": "tel",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "address",
+            "required": false,
+            "description": "address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "city_id",
+            "required": false,
+            "description": "city_id",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "dist_id",
+            "required": false,
+            "description": "tel",
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client login",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": 5,
+                    "name": "Trần thanh tùng",
+                    "email": "trungtv0910@gmail.com",
+                    "birthday": "2022-10-02",
+                    "gender": null,
+                    "tel": "0973127008",
+                    "avatar": null,
+                    "status": 1,
+                    "address": "Thừa thiên huế",
+                    "city_id": 18,
+                    "dist_id": 111,
+                    "email_verified_at": null,
+                    "created_at": null,
+                    "updated_at": "2022-10-23T11:26:26.000000Z",
+                    "deleted_at": null
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/information/city": {
