@@ -67,4 +67,12 @@ return [
             'failed' => 'Không lấy được chi tiết đơn hàng',
         ],
     ],
+    'comment' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách bình luận',
+        ],
+        'create' => [
+            'failed' => 'Không thể bình luận',
+        ],
+    ],
 ];

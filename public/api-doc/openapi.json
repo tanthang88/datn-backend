@@ -896,6 +896,119 @@
         }
       }
     },
+    "/api/product/{id}/list_comments ": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "List comment for product",
+        "operationId": "get-list-comment-product",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "comment_id": 2,
+                      "customer_id": 7,
+                      "comment_name": "Tài phan",
+                      "comment_content": "Có màu vàng không vậy",
+                      "comment_date": "23-10-2022 09:29",
+                      "children_comments": []
+                    },
+                    {
+                      "comment_id": 1,
+                      "customer_id": null,
+                      "comment_name": "Trung Văn",
+                      "comment_content": "sản phẩm còn không ạ?",
+                      "comment_date": "23-10-2022 09:29",
+                      "children_comments": [
+                        {
+                          "comment_id": 3,
+                          "customer_id": 5,
+                          "comment_name": "Admin",
+                          "comment_content": "dạ sản phẩm này đang tạm hết hàng",
+                          "comment_date": "23-10-2022 09:29",
+                          "children_comments": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/{id}/comment": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Comment for a product",
+        "operationId": "comment-product",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "comment_content",
+            "required": true,
+            "description": "Comment content for product",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "customer_id",
+            "required": false,
+            "description": "customer id ",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "comment_name",
+            "required": true,
+            "description": "comment_name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "comment_phone",
+            "required": true,
+            "description": "comment_phone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "comment_email",
+            "required": true,
+            "description": "comment_email",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/about": {
       "get": {
         "tags": [
