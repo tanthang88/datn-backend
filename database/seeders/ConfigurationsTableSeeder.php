@@ -23,10 +23,10 @@ class ConfigurationsTableSeeder extends Seeder
                 'config_screen' =>$faker->name,
                 'config_cpu'=>$faker->name,
                 'config_system'=>$faker->name,
-                'config_battery'=>$faker->name,
-                'config_selfie'=>$faker->name,
-                'config_camera'=>$faker->name,
-                'config_ram'=>$faker->name,
+                'config_battery'=>$faker->numerify($string = '##') ,
+                'config_selfie'=>$faker->numerify($string = '##') ,
+                'config_camera'=>$faker->numerify($string = '##') ,
+                'config_ram'=>$faker->numerify($string = '##') ,
                 'product_id'=>$faker->numberBetween($min = 1, $max = 10),
             ]);
         }
