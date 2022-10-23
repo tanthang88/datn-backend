@@ -37,28 +37,39 @@ class Product extends Model
         'product_outstanding',
         'created_at'
     ];
+    
     public function productCategory()
     {
         return $this->belongsTo(ProductCategories::class, 'category_id', 'id');
     }
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
+
     public function productImage()
     {
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
+
     public function productConfig()
     {
         return $this->hasOne(Configuration::class, 'product_id', 'id');
     }
+
     public function productPropertie()
     {
         return $this->hasMany(Propertie::class, 'product_id', 'id');
     }
+
     public function productVariantion()
     {
         return $this->hasMany(Variantion::class, 'product_id', 'id');
+    }
+
+    public function productComments()
+    {
+        return $this->hasMany(ProductComment::class, 'product_id', 'id');
     }
 }

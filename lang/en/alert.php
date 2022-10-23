@@ -55,4 +55,12 @@ return [
             'failed' => 'get detail bill failed',
         ],
     ],
+    'comment' => [
+        'get_list' => [
+            'failed' => 'Get list comments failed',
+        ],
+        'create' => [
+            'failed' => 'Create comment failed',
+        ],
+    ],
 ];

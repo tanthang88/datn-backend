@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\DistController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\ProductCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 
@@ -58,5 +59,6 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/', [ProductController::class, 'listProducts']);
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
+    Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
 });
-
