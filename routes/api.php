@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\DistController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\Auth\AccountController;
 use App\Http\Controllers\Api\ProductCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
@@ -37,6 +38,10 @@ Route::prefix('client')->group(function () {
             Route::get('/', [BillController::class, 'index']);
             Route::get('/{bill}', [BillController::class, 'show']);
             Route::post('/add_to_bill', [BillController::class, 'create']);
+        });
+        Route::group(['prefix' => 'account'], function () {
+            Route::get('/{user}', [AccountController::class, 'show']);
+            Route::put('/{user}/update', [AccountController::class, 'update']);
         });
     });
 });

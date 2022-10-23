@@ -63,4 +63,12 @@ return [
             'failed' => 'Create comment failed',
         ],
     ],
+    'account' => [
+        'update' => [
+            'failed' => 'Update account failed',
+        ],
+        'get_detail' => [
+            'failed' => 'get detail account failed',
+        ],
+    ],
 ];
