@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\Auth\AccountController;
 use App\Http\Controllers\Api\ProductCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
-
+use App\Http\Controllers\Api\ProductFilterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,6 +62,9 @@ Route::group(['prefix' => 'post'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::get('/categories', [ProductController::class, 'listCategories']);
     Route::get('/', [ProductController::class, 'listProducts']);
+    Route::get('/filter', [ProductFilterController::class, 'listFilter']);
+    Route::get('/sort', [ProductFilterController::class, 'listSort']);
+    Route::get('/{categories}/{filter}', [ProductFilterController::class, 'listProductFilter']);
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
     Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
