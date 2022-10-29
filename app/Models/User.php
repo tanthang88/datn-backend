@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-
 
 class User extends Authenticatable
 {
@@ -15,7 +14,13 @@ class User extends Authenticatable
     const STATUS_BLOCK = 0;
     const STATUS_ACTIVE = 1;
 
+    const FEMALE = 0;
+    const MALE = 1;
 
+    const GENDER = [
+        self::MALE,
+        self::FEMALE,
+    ];
     protected $table = 'users';
 
     /**

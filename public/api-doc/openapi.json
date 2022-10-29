@@ -1,1919 +1,1589 @@
 {
-    "openapi": "3.0.0",
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "OAuth2"
-            }
-        }
-    },
-    "servers": [
-        {
-            "url": "http://127.0.0.1:8000/",
-            "description": "",
-            "variables": {}
-        }
-    ],
-    "info": {
-        "version": "",
-        "title": "Dự Án Tốt Nghiệp API document",
-        "description": "",
-        "termsOfService": "",
-        "contact": {}
-    },
-    "paths": {
-        "/api/client/login": {
-            "post": {
-                "tags": ["Auth"],
-                "summary": "Client login",
-                "operationId": "client-login",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "email",
-                        "required": true,
-                        "description": "Client email",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "password",
-                        "required": true,
-                        "description": "Client password",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Client login",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "token_type": "Bearer",
-                                    "expires_in": 31536000,
-                                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxMCIsImp0aSI6IjM0NDRiNGI0ZmIwMjQ1OWVjZDkzNDUxMjdhNTE1ZWU5ZDM3MWQ5MWNiNzk0YmY1NjcwODAxMTU2MjljZDBlYmMzM2I0Yjg3ZjE0Mjc4YTQ1IiwiaWF0IjoxNjY1MTYyNTQzLjA5NzAyOCwibmJmIjoxNjY1MTYyNTQzLjA5NzAzMiwiZXhwIjoxNjk2Njk4NTQyLjc3NTY4Nywic3ViIjoiNSIsInNjb3BlcyI6WyIqIl19.XWW76VELsNH-9NaLKV8mNHGcLGgSOmX9r8rQGc1_uWmcpfDLaTk0vKLP1O3761aSR1lkfVgPZi8GI20DQDKMcS8KPj9dmWXIjLFSwlOi6lCpNFUfx60fntrHy0-6xyz7KaLbo9751mr_zxyCBJh8drv5tN0kK406nX0DiDZZWBdrasq-0AjnQBdB7g3m-JbV1i92EoXGlOE_dg6UQ3TgH5SrGgkp1XnGtLtO-3k23dIU_cBfEajerX16kc6ZRxrcGzAAH-2Fh2Irdqj5uohxqe-h7YE0mnf_LvAi1OputZObUKQjR3P5daidIU94-aQ7JSRkb-UNcaUpVulsJVo2HbnG18RSp1BKpwgplZ4sL8PA1J3Tz-0sCT2LvBgmClFkWddNvmsRaDeUySrgdwjyWYi9jgBdppjhEme53bsD573ERbTfiHvmjAI-cskD0FWhKW-C9Qd8qg9rbMAGor92oEaysgtAjx57OWPh6elRYGlyVC9bdL4n0rZrpAMAtLPdOcwsEG-yO3JMAbf2ahHw3NAHBM3DgZpQ43OANg4pu3SQvguUvk7WZDezGmXAMUy8lpJfDP3sguh0oLalnWpiTjvw8VMYn_nGkLETo8iFVWLlOS0kAyuH6gu6Xy-90xFr01p-tKgT9kkZaSZGjefJvE86YgMdN3L8j3BBgq-Fqf8",
-                                    "refresh_token": "def50200cc324e8bb01c6a0a9931461770787470d87bed5250c860c2b53f0197de8e6a38d777fe74e0209ecf650be0bacc07356333c99b359603d521d67ebe07f99f30d403c124d8ff28bd0f7b6c8905abfa8254bd4ea750980791ec003cb4612e8dd6ecf0f426e1e1b4300b84922430dc94af1379d7a5f3fcf49e3e5faf7b9851af59eafa5d726b4d3d95952f6c52c6a9f0e3e774154fcff7dd6798e6419eafb760fab4913951440638b01d484bbb3dbb16674431575cf2597abbe400700640b2f1723f29f23f7d36de31dc689177f4bfd48f0e84a208e2916ddb732fee20a4534d4acce1b14eb080396a8058bfcbc18a3809fe9e9530cb3238546c6eddce69af174fce3cc58334e271e2b27e7b145ca6f53af97aa98bf55ffc6392bcac9ffeae26ef0b605049668f86eabfa7622e5f7dfc10117738e7aac1a56365ab72af84e61c6374bb0990524d925f58d0b9e93018cee746932034170050ba638c8f222585c702d68e",
-                                    "user": {
-                                        "id": 5,
-                                        "name": "Aloalo123",
-                                        "email": "trungtv0910@gmail.com",
-                                        "birthday": "2000-08-30",
-                                        "gender": 1,
-                                        "tel": "0931231222",
-                                        "avatar": null,
-                                        "status": 1,
-                                        "address": "Thừa thiên huế",
-                                        "city_id": 18,
-                                        "dist_id": 111,
-                                        "email_verified_at": null,
-                                        "created_at": "2022-09-07T08:44:54.000000Z",
-                                        "updated_at": null,
-                                        "deleted_at": null
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/client/logout": {
-            "post": {
-                "tags": ["Auth"],
-                "summary": "Client logout",
-                "operationId": "client-logout",
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "logout success",
-                        "content": {
-                            "application/json": {
-                                "example": [{}]
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/client/register": {
-            "post": {
-                "tags": ["Register"],
-                "summary": "Client register",
-                "operationId": "get-list-category",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "email",
-                        "required": true,
-                        "description": "Client email",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "password",
-                        "required": true,
-                        "description": "Client password",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "name",
-                        "required": true,
-                        "description": "Client name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "birthday",
-                        "required": false,
-                        "description": "Client birthday",
-                        "schema": {
-                            "type": "date"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "address",
-                        "required": true,
-                        "description": "Client address",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "city_id",
-                        "required": true,
-                        "description": "City id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "dist_id",
-                        "required": true,
-                        "description": "dist id (quận huyện)",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "tel",
-                        "required": false,
-                        "description": "tel contact",
-                        "schema": {
-                            "type": "number"
-                        }
-                    }
-                ]
-            }
-        },
-        "/api/information/city": {
-            "get": {
-                "tags": ["Address"],
-                "summary": "Client ciity",
-                "operationId": "get-list-city",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": [
-                                    {
-                                        "id": 1,
-                                        "name": "Thành phố Hà Nội",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 2,
-                                        "name": "Tỉnh Hà Giang",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 3,
-                                        "name": "Tỉnh Cao Bằng",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 4,
-                                        "name": "Tỉnh Bắc Kạn",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 5,
-                                        "name": "Tỉnh Tuyên Quang",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 6,
-                                        "name": "Tỉnh Lào Cai",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 7,
-                                        "name": "Tỉnh Điện Biên",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 8,
-                                        "name": "Tỉnh Lai Châu",
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 9,
-                                        "name": "Tỉnh Sơn La",
-                                        "transport_fee": 0
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/information/dist/{id}": {
-            "get": {
-                "tags": ["Address"],
-                "summary": "Client dists",
-                "operationId": "get-list-dists",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": [
-                                    {
-                                        "id": 598,
-                                        "name": "Thành phố Bến Tre",
-                                        "slug": "thanh-pho-ben-tre",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 599,
-                                        "name": "Huyện Châu Thành",
-                                        "slug": "huyen-chau-thanh",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 600,
-                                        "name": "Huyện Chợ Lách",
-                                        "slug": "huyen-cho-lach",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 601,
-                                        "name": "Huyện Mỏ Cày Nam",
-                                        "slug": "huyen-mo-cay-nam",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 602,
-                                        "name": "Huyện Giồng Trôm",
-                                        "slug": "huyen-giong-trom",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 603,
-                                        "name": "Huyện Bình Đại",
-                                        "slug": "huyen-binh-dai",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 604,
-                                        "name": "Huyện Ba Tri",
-                                        "slug": "huyen-ba-tri",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 605,
-                                        "name": "Huyện Thạnh Phú",
-                                        "slug": "huyen-thanh-phu",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    },
-                                    {
-                                        "id": 606,
-                                        "name": "Huyện Mỏ Cày Bắc",
-                                        "slug": "huyen-mo-cay-bac",
-                                        "code": 83,
-                                        "transport_fee": 0
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/post/categories": {
-            "get": {
-                "tags": ["Post (Bài viết)"],
-                "summary": "Get list categories post (list danh mục bài viết)",
-                "operationId": "get-list-category",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "name": "Tin công nghệ"
-                                        },
-                                        {
-                                            "id": 2,
-                                            "name": "Tin tài chính"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/post/categories/{id}": {
-            "get": {
-                "tags": ["Post (Bài viết)"],
-                "summary": "Get list Post by Category ID",
-                "operationId": "get-list-post-by-category-id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "description": "Category id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "current_page": 1,
-                                        "data": [
-                                            {
-                                                "id": 4,
-                                                "post_title": "Vespa GTS phiên bản hoàn toàn mới ra mắt: thay đổi nhẹ ở thiết kế, đồng hồ LCD, thêm Smartkey",
-                                                "post_slug": "post-slug",
-                                                "post_desc": "Tập đoàn Piaggio vừa giới thiệu dòng sản phẩm Vespa GTS thế hệ hoàn toàn mới, với tuỳ chọn động cơ trải dài từ 125 cho tới 300. Có thể nói đây là đợt nâng cấp lớn đối với Vespa GTS bởi có khá nhiều chi tiết trên xe được cải tiến và cũng thay đổi luôn thói quen sử dụng xe. Tóm lược về những sản phẩm thuộc dòng GTS thì chúng ta sẽ có 4 nhánh lớn, trong đó bao gồm GTS, GTS Super, GTS SuperSport và GTS SuperTech. Phân loại này cũng tương tự như phiên bản GTS hiện có. Cả 4 dòng GTS đều sẽ có 2 tuỳ chọn động cơ, đó là động cơ iGet 125 và động cơ HPE 300. Tại Ý, giá bán của các dòng xe cụ thể như sau:",
-                                                "date": null,
-                                                "category_name": "Tin công nghệ"
-                                            },
-                                            {
-                                                "id": 2,
-                                                "post_title": "Xiaomi ra mắt loạt smartphone, tai nghe, smartwatch, TV và thiết bị làm sạch",
-                                                "post_slug": "Xiaomi",
-                                                "post_desc": "Xiaomi 12T và 12T Pro là bộ đôi smartphone cao cấp vừa được Xiaomi ra mắt nổi bật với hệ thống camera có độ phân giải cao cùng hiệu năng mạnh mẽ, cạnh tranh với nhiều đối thủ trong cùng phân khúc giá.",
-                                                "date": "2022-10-12T16:24:28.000000Z",
-                                                "category_name": "Tin công nghệ"
-                                            }
-                                        ],
-                                        "first_page_url": "http://127.0.0.1:8000/api/post/categories/1?page=1",
-                                        "from": 1,
-                                        "last_page": 1,
-                                        "last_page_url": "http://127.0.0.1:8000/api/post/categories/1?page=1",
-                                        "links": [
-                                            {
-                                                "url": null,
-                                                "label": "pagination.previous",
-                                                "active": false
-                                            },
-                                            {
-                                                "url": "http://127.0.0.1:8000/api/post/categories/1?page=1",
-                                                "label": "1",
-                                                "active": true
-                                            },
-                                            {
-                                                "url": null,
-                                                "label": "pagination.next",
-                                                "active": false
-                                            }
-                                        ],
-                                        "next_page_url": null,
-                                        "path": "http://127.0.0.1:8000/api/post/categories/1",
-                                        "per_page": 20,
-                                        "prev_page_url": null,
-                                        "to": 2,
-                                        "total": 2
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/post/{id}": {
-            "get": {
-                "tags": ["Post (Bài viết)"],
-                "summary": "Get Post by ID",
-                "operationId": "get-post-by-id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "description": "Post id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "id": 2,
-                                        "post_category_name": "Tin công nghệ",
-                                        "post_title": "Xiaomi ra mắt loạt smartphone, tai nghe, smartwatch, TV và thiết bị làm sạch",
-                                        "post_desc": "Xiaomi 12T và 12T Pro là bộ đôi smartphone cao cấp vừa được Xiaomi ra mắt nổi bật với hệ thống camera có độ phân giải cao cùng hiệu năng mạnh mẽ, cạnh tranh với nhiều đối thủ trong cùng phân khúc giá.",
-                                        "post_content": "Xiaomi ra mắt loạt smartphone, tai nghe, smartwatch, TV và thiết bị làm sạch\r\nXiaomi 12T, 12T Pro, Redmi A1, Redmi Buds 4 Pro, Xiaomi Smart Band 7 Pro, robot hút bụi X10+, TV Xiaomi Q2,… là những thiết bị được Xiaomi ra mắt tại sự kiện tối nay\r\nXiaomi 12T và 12T Pro là tâm điểm của sự kiện\r\nCamera 108MP và 200MP là điểm nổi bật nhất\r\n12T-4.jpg\r\nXiaomi 12T và 12T Pro là bộ đôi smartphone cao cấp vừa được Xiaomi ra mắt nổi bật với hệ thống camera có độ phân giải cao cùng hiệu năng mạnh mẽ, cạnh tranh với nhiều đối thủ trong cùng phân khúc giá.\r\n12T-7.jpg\r\nCả hai chiếc máy đều được trang bị camera với độ phân giải cao. Xiaomi 12T được trang bị cụm 03 camera: camera chính 108MP, hỗ trợ chống rung OIS, camera siêu rộng 8MP và camera macro 2MP.\r\nQUẢNG CÁO\r\n\r\n\r\nXiaomi 12T Pro nổi bật với camera chính 200M với cảm biến kích thước lớn 1/1.22” cho phép máy chụp những bức ảnh với độ nét cao, camera siêu rộng 8MP và camera macro 2MP. Ngoài ra, máy có hỗ trợ quay video 8K và các tính năng chụp ảnh khác.\r\nXiaomi 12T dùng Dimensity, phiên bản Pro dùng Snapdragon\r\n12T-5.jpg\r\nXiaomi 12T Pro được trang bị bộ vi xử lý Snapdragon 8+ Gen 1 (4nm). So với Xiaomi 11T Pro, máy có hệ thống tản nhiệt bao gồm một khoang chứa hơi lớn hơn 65% với độ phủ vật liệu nhiệt cao hơn 125%, mang đến trải nghiệm mượt hơn, tiết kiệm điện hơn và kiểm soát nhiệt độ tốt hơn.\r\nTrong khi đó Xiaomi 12T được trang bị chipset của MediaTek là Dimensity 8100-Ultra với quy trình sản xuất TSMC 5nm. Theo Xiaomi, kiến trúc mở mã nguồn mới được MediaTek trang bị trên chipset Dimensity 8100 Ultra mang đến tính năng quay video khử nhiễu độc quyền Ultra Night Video trên Xiaomi 12T.\r\nDung lượng pin 5.000 mAh và sạc nhanh 120W\r\n12T.jpg\r\nXiaomi 12T Series sở hữu thời lượng pin 5.000mAh, nổi bật với công nghệ sạc nhanh HyperCharge 120W. Cả hai đều có thể được sạc đầy 100% trong 19 phút và thời gian sử dụng 13,5 giờ, theo Xiaomi.\r\nMàn hình CrystalRes AMOLED 6,67\", 1220p, 120Hz\r\n12T-6.jpg\r\nXiaomi 12T Series được trang bị màn hình CrystalRes đặc biệt của hãng với tấm nền AMOLED 6,67”, độ phân giải 1220p, hơn 68 tỷ màu, theo Xiaomi công bố . Màn hình cũng được nâng cấp bởi các tính năng thông minh chẳng hạn như AdaptiveSync, tự động điều chỉnh tốc độ làm mới dựa trên nội dung được xem.\r\nQUẢNG CÁO\r\n\r\n\r\n12T-8.jpg\r\nXiaomi 12T Series có 3 màu sắc, bao gồm màu Đen, Bạc và Xanh dương.\r\nGiá bán Xiaomi 12T Series\r\nxiaomi.jpg\r\nxiaomi-2.jpg\r\nXiaomi 12T có hai phiên bản: 8GB + 128GB với mức giá 12.490.000 VNĐ và 8GB + 256GB với mức giá 12.990.000 VNĐ, độc quyền tại Thế giới di động.\r\nXiaomi 12T Pro phiên bản 12GB + 256GB có mức giá 16.990.000 VNĐ, bán độc quyền tại CellphoneS\r\nXiaomi 12T Series chính thức mở bán từ ngày 13/10 tại các hệ thống cửa hàng Bán lẻ hàng đầu Thế giới Di động, FPTShop, Viettel Store, CellphoneS, Xiaomi Store, Hoàng Hà Mobile, Di động Việt, Di động thông minh, Siêu thị điện máy Chợ lớn và các trang thương mại điện tử hàng đầu Shopee và Lazada.\r\nTừ ngày 04/10 - 12/10/2022, người dùng đặt trước bộ đôi Xiaomi 12T Series có thể nhận được Máy lọc không khí Xiaomi Smart Air Purifier 4 Lite trị giá 3.990.000 VNĐ hoặc Chương trình thu cũ đổi mới 2.000.000 VNĐ cùng nhiều ưu đãi khi đặt trước máy.\r\nhttps://tinhte.vn/thread/tren-tay-xiaomi-12t-series-camera-200mp-pin-5-000mah-sac-nhanh-120w-gia-tu-12-5tr.3574133/\r\n\r\nTrên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr\r\nXiaomi 12T Series là bộ đôi smartphone mới nhất được Xiaomi ra mắt, được tập trung khá nhiều vào trang bị camera với độ phân giải cao, thời lượng pin lớn, sạc 120W và màn hình 120Hz,… Thiết kế đơn giản…\r\n tinhte.vn\r\nRedmi A1\r\nxiaomi.jpg\r\nBên cạnh bộ đôi cao cấp, Xiaomi cũng giới thiệu chiếc smartphone giá rẻ Redmi A1. Máy được trang bị màn hình 6,52\", HD+, camera kép 8MP, camera selfie 5MP, cùng thời lượng pin 5.00mAh. Về cấu hình, máy sử dụng chip MediaTek Helio A22, RAM 2G, bộ nhớ trong 32GB.\r\nxiaomi-6.jpg\r\nRedmi A1 với mặt lưng nhựa nhám nhẹ, màu sắc tươi sáng.\r\nxiaomi su kien.jpg\r\nMặt trước của máy với màn hình giọt nước và chúng ta không thể đòi hỏi quá cao về thiết kế hay công nghệ màn hình ở một chiếc máy có mức giá 2,190,000VNĐ.\r\nRedmi Buds 4 Pro\r\nredmi_buds_4_pro.jpg\r\nRedmi Buds 4 Pro là dòng tai nghe true-wireless mới nhất được Xiaomi ra mắt tại sự kiện ở Việt Nam. Một vài những thông tin nổi bật về tai nghe như khả năng chống ổn chủ động với 3 micro mỗi bên tay, hỗ trợ Hi-Res Audio không dây, chống nướ IP54, một lần sạc nghe được 9 tiếng,…",
-                                        "post_slug": "Xiaomi",
-                                        "post_seo_title": "Trên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr",
-                                        "post_seo_desc": null,
-                                        "post_seo_keyword": "Trên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr",
-                                        "post_seo_description": "Trên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr",
-                                        "date": "2022-10-12T16:24:28.000000Z"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/categories": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Get List Categories Product",
-                "operationId": "get-product-categories",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 3,
-                                            "category_name": "Điện thoại",
-                                            "category_slug": "dien-thoai",
-                                            "category_image": "24-hours-300x300.png",
-                                            "parent_id": 0,
-                                            "children": [
-                                                {
-                                                    "id": 5,
-                                                    "category_name": "Samsung",
-                                                    "category_slug": "samsung",
-                                                    "category_image": "images.jpg",
-                                                    "category_display": 0,
-                                                    "category_order": 1,
-                                                    "category_outstanding": 0,
-                                                    "category_content": null,
-                                                    "category_desc": null,
-                                                    "parent_id": 3,
-                                                    "seo_title": null,
-                                                    "seo_description": null,
-                                                    "seo_keywords": null,
-                                                    "created_at": "2022-10-13T12:36:23.000000Z",
-                                                    "updated_at": "2022-10-13T12:36:23.000000Z",
-                                                    "deleted_at": null,
-                                                    "children": [
-                                                        {
-                                                            "id": 7,
-                                                            "category_name": "samsung2",
-                                                            "category_slug": "",
-                                                            "category_image": null,
-                                                            "category_display": 1,
-                                                            "category_order": 1,
-                                                            "category_outstanding": 1,
-                                                            "category_content": null,
-                                                            "category_desc": null,
-                                                            "parent_id": 5,
-                                                            "seo_title": null,
-                                                            "seo_description": null,
-                                                            "seo_keywords": null,
-                                                            "created_at": null,
-                                                            "updated_at": null,
-                                                            "deleted_at": null
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 4,
-                                            "category_name": "Phụ kiện",
-                                            "category_slug": "phu-kien",
-                                            "category_image": null,
-                                            "parent_id": 0,
-                                            "children": []
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Get Product All",
-                "operationId": "get-product-all",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "current_page": 1,
-                                        "data": [
-                                            {
-                                                "id": 1,
-                                                "product_title": "Samsung J7",
-                                                "product_slug": "samsung-j7",
-                                                "product_desc": null,
-                                                "product_price": 200000,
-                                                "product_image": null,
-                                                "product_configurations": null,
-                                                "is_variation": 0,
-                                                "is_discount_product": 0,
-                                                "properties": [],
-                                                "category_name": "Điện thoại",
-                                                "category_parent_id": 0,
-                                                "product_suppiler_name": "Samsung Thái Nguyên"
-                                            },
-                                            {
-                                                "id": 2,
-                                                "product_title": "Samsungx100 ",
-                                                "product_slug": "samsungx100",
-                                                "product_desc": "Description",
-                                                "product_price": 5000000,
-                                                "product_image": "img.img",
-                                                "product_configurations": {
-                                                    "id": 1,
-                                                    "product_id": 2,
-                                                    "config_screen": "4.5",
-                                                    "config_cpu": "Android",
-                                                    "config_ram": 64,
-                                                    "config_camera": 120,
-                                                    "config_selfie": 12,
-                                                    "config_battery": 3800,
-                                                    "config_system": null,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                "is_variation": 0,
-                                                "is_discount_product": 0,
-                                                "properties": [
-                                                    {
-                                                        "id": 1,
-                                                        "propertie_name": "Màu sắc",
-                                                        "propertie_slug": "mau-sac",
-                                                        "propertie_value": "Xanh",
-                                                        "propertie_img": "img.img",
-                                                        "product_id": 2,
-                                                        "created_at": null,
-                                                        "updated_at": null,
-                                                        "deleted_at": null
-                                                    },
-                                                    {
-                                                        "id": 2,
-                                                        "propertie_name": "Dung lượng",
-                                                        "propertie_slug": "dung-luong",
-                                                        "propertie_value": "128 GB",
-                                                        "propertie_img": "img2.img",
-                                                        "product_id": 2,
-                                                        "created_at": null,
-                                                        "updated_at": null,
-                                                        "deleted_at": null
-                                                    },
-                                                    {
-                                                        "id": 3,
-                                                        "propertie_name": "Dung lượng",
-                                                        "propertie_slug": "dung-luong",
-                                                        "propertie_value": "64 GB",
-                                                        "propertie_img": "img.img",
-                                                        "product_id": 2,
-                                                        "created_at": null,
-                                                        "updated_at": null,
-                                                        "deleted_at": null
-                                                    }
-                                                ],
-                                                "category_name": "samsung2",
-                                                "category_parent_id": 5,
-                                                "product_suppiler_name": "Samsung Thái Nguyên"
-                                            }
-                                        ],
-                                        "first_page_url": "http://127.0.0.1:8000/api/product?page=1",
-                                        "from": 1,
-                                        "last_page": 1,
-                                        "last_page_url": "http://127.0.0.1:8000/api/product?page=1",
-                                        "links": [
-                                            {
-                                                "url": null,
-                                                "label": "pagination.previous",
-                                                "active": false
-                                            },
-                                            {
-                                                "url": "http://127.0.0.1:8000/api/product?page=1",
-                                                "label": "1",
-                                                "active": true
-                                            },
-                                            {
-                                                "url": null,
-                                                "label": "pagination.next",
-                                                "active": false
-                                            }
-                                        ],
-                                        "next_page_url": null,
-                                        "path": "http://127.0.0.1:8000/api/product",
-                                        "per_page": 12,
-                                        "prev_page_url": null,
-                                        "to": 2,
-                                        "total": 2
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/filter": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Get All Filter Fields",
-                "operationId": "get-all-filter-fields",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "filter_title": "Giá",
-                                            "filter_name": "price",
-                                            "fields": [
-                                                {
-                                                    "field_label": "Dưới 2 triệu",
-                                                    "field_slug": "duoi-2-trieu",
-                                                    "field_value": "<2000000"
-                                                },
-                                                {
-                                                    "field_label": "Từ 2-4 triệu",
-                                                    "field_slug": "tu-2-4-trieu",
-                                                    "field_value": "2000000<>4000000"
-                                                },
-                                                {
-                                                    "field_label": "Từ 4-7 triệu",
-                                                    "field_slug": "tu-4-7-trieu",
-                                                    "field_value": "4000000<>7000000"
-                                                },
-                                                {
-                                                    "field_label": "Từ 7-13 triệu",
-                                                    "field_slug": "tu-7-13-trieu",
-                                                    "field_value": "7000000<>13000000"
-                                                },
-                                                {
-                                                    "field_label": "Trên 13 triệu",
-                                                    "field_slug": "tren-13-trieu",
-                                                    "field_value": ">13000000"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 2,
-                                            "filter_title": "Hiệu năng và Pin",
-                                            "filter_name": "battery",
-                                            "fields": [
-                                                {
-                                                    "field_label": "Dưới 3000 mah",
-                                                    "field_slug": "duoi-3000-mah",
-                                                    "field_value": "<3000"
-                                                },
-                                                {
-                                                    "field_label": "Từ  3000 - 4000 mah",
-                                                    "field_slug": "tu-3000-4000-mah",
-                                                    "field_value": "3000<>4000"
-                                                },
-                                                {
-                                                    "field_label": "Từ  4000 - 5000 mah",
-                                                    "field_slug": "tu-4000-5000-mah",
-                                                    "field_value": "4000<>5000"
-                                                },
-                                                {
-                                                    "field_label": "Trên 5000 mah",
-                                                    "field_slug": "tren-5000-mah",
-                                                    "field_value": ">5000"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 3,
-                                            "filter_title": "Màn hình",
-                                            "filter_name": "screen",
-                                            "fields": [
-                                                {
-                                                    "field_label": "Màn hình nhỏ: dưới 5.0 inch",
-                                                    "field_slug": "man-hinh-nho:-duoi-5.0-inch",
-                                                    "field_value": "<5"
-                                                },
-                                                {
-                                                    "field_label": "Nhỏ gọn vừa tay: dưới 6.0 inch ,tràn viền",
-                                                    "field_slug": "nho-gon-vua-tay:-duoi-6.0-inch-,-tran-vien",
-                                                    "field_value": "5<>6"
-                                                },
-                                                {
-                                                    "field_label": "Trên 6.0 inch",
-                                                    "field_slug": "tren-6.0-inch",
-                                                    "field_value": ">6"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 4,
-                                            "filter_title": "Camera",
-                                            "filter_name": "camera",
-                                            "fields": [
-                                                {
-                                                    "field_label": "12 MP",
-                                                    "field_slug": "12-mp",
-                                                    "field_value": "=12"
-                                                },
-                                                {
-                                                    "field_label": "32 MP",
-                                                    "field_slug": "32-mp",
-                                                    "field_value": "=32"
-                                                },
-                                                {
-                                                    "field_label": "48 MP",
-                                                    "field_slug": "48-mp",
-                                                    "field_value": "=48"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/sort": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Get All Sort Fields",
-                "operationId": "get-all-sort-fields",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "sort_title": "Bán chạy nhất",
-                                            "sort_name": "bestselling",
-                                            "field_value": "1"
-                                        },
-                                        {
-                                            "id": 2,
-                                            "sort_title": "Giá thấp",
-                                            "sort_name": "orderby",
-                                            "field_value": "asc"
-                                        },
-                                        {
-                                            "id": 3,
-                                            "sort_title": "Giá cao",
-                                            "sort_name": "orderby",
-                                            "field_value": "desc"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/{category_id}/{filter}": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Filter Products By Category Id",
-                "operationId": "filter-products-by-category-id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "category_id",
-                        "required": true,
-                        "description": "1 or 2 or 3 ...",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "in": "path",
-                        "name": "filter",
-                        "required": true,
-                        "description": "filter?price=100",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "current_page": 1,
-                                        "data": [
-                                            {
-                                                "id": 12,
-                                                "product_name": "s",
-                                                "product_slug": "s",
-                                                "product_image": "s",
-                                                "product_quantity": 0,
-                                                "product_desc": null,
-                                                "product_promotion_desc": null,
-                                                "is_discount_product": 0,
-                                                "product_price": 200000,
-                                                "config_battery": 73,
-                                                "config_screen": "2.1",
-                                                "is_selling": 0,
-                                                "rating": 0
-                                            },
-                                            {
-                                                "id": 7,
-                                                "product_name": "Mrs. Georgianna Lakin II",
-                                                "product_slug": "illum-aut-aut-doloribus-qui",
-                                                "product_image": "https://via.placeholder.com/200x200.png/00ee55?text=id",
-                                                "product_quantity": 459,
-                                                "product_desc": "Accusamus excepturi similique corporis neque cumque occaecati voluptatem.",
-                                                "product_promotion_desc": "Et rerum in soluta dicta odio dignissimos sit ut ipsum natus pariatur voluptas architecto omnis aliquid doloremque omnis consectetur in doloribus quia odit distinctio eligendi molestiae quia vero dolore dolorum qui aut nobis et voluptatibus officia eaque expedita repudiandae et quis velit suscipit accusantium rem veritatis et quasi sit doloribus modi non et voluptatem a laboriosam dignissimos molestiae sint occaecati eveniet nemo fuga consequatur quas et placeat voluptatem odit veritatis illum incidunt et corporis beatae qui omnis deleniti beatae pariatur excepturi tempora iusto totam error sapiente nobis cum id deleniti ut voluptate qui commodi omnis omnis tempora commodi temporibus sed odit maiores repudiandae quia reprehenderit cumque sunt molestiae nam voluptas minus et enim et nihil corporis voluptatem pariatur dolores dolores voluptas omnis natus ea in consequatur nemo cum doloremque quis ducimus eveniet cum saepe ut ut itaque esse iure.",
-                                                "is_discount_product": 1,
-                                                "product_price": 735,
-                                                "config_battery": 36,
-                                                "config_screen": "44.0",
-                                                "is_selling": 1,
-                                                "rating": 0
-                                            }
-                                        ],
-                                        "first_page_url": "http://127.0.0.1:8000/api/product/3/filter?page=1",
-                                        "from": 1,
-                                        "last_page": 1,
-                                        "last_page_url": "http://127.0.0.1:8000/api/product/3/filter?page=1",
-                                        "links": [
-                                            {
-                                                "url": null,
-                                                "label": "pagination.previous",
-                                                "active": false
-                                            },
-                                            {
-                                                "url": "http://127.0.0.1:8000/api/product/3/filter?page=1",
-                                                "label": "1",
-                                                "active": true
-                                            },
-                                            {
-                                                "url": null,
-                                                "label": "pagination.next",
-                                                "active": false
-                                            }
-                                        ],
-                                        "next_page_url": null,
-                                        "path": "http://127.0.0.1:8000/api/product/3/filter",
-                                        "per_page": 12,
-                                        "prev_page_url": null,
-                                        "to": 2,
-                                        "total": 2
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/{id}": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Get Product By Id",
-                "operationId": "get-product-by-id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "description": "Product id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "id": 2,
-                                        "product_title": "Samsungx100 ",
-                                        "product_desc": "Description",
-                                        "product_content": "Content",
-                                        "product_slug": "samsungx100",
-                                        "product_image": "img.img",
-                                        "product_quantity": 1,
-                                        "product_price": 5000000,
-                                        "product_promotion_desc": null,
-                                        "product_images": [
-                                            {
-                                                "id": 1,
-                                                "image": "img.img",
-                                                "product_id": 2,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            },
-                                            {
-                                                "id": 2,
-                                                "image": "img2.img",
-                                                "product_id": 2,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            }
-                                        ],
-                                        "product_configurations": {
-                                            "id": 1,
-                                            "product_id": 2,
-                                            "config_screen": "4.5",
-                                            "config_cpu": "Android",
-                                            "config_ram": 64,
-                                            "config_camera": 120,
-                                            "config_selfie": 12,
-                                            "config_battery": 3800,
-                                            "config_system": null,
-                                            "created_at": null,
-                                            "updated_at": null,
-                                            "deleted_at": null
-                                        },
-                                        "is_variation": 0,
-                                        "is_discount_product": 0,
-                                        "properties": [
-                                            {
-                                                "id": 1,
-                                                "propertie_name": "Màu sắc",
-                                                "propertie_slug": "mau-sac",
-                                                "propertie_value": "Xanh",
-                                                "propertie_img": "img.img",
-                                                "product_id": 2,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            },
-                                            {
-                                                "id": 2,
-                                                "propertie_name": "Dung lượng",
-                                                "propertie_slug": "dung-luong",
-                                                "propertie_value": "128 GB",
-                                                "propertie_img": "img2.img",
-                                                "product_id": 2,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            },
-                                            {
-                                                "id": 3,
-                                                "propertie_name": "Dung lượng",
-                                                "propertie_slug": "dung-luong",
-                                                "propertie_value": "64 GB",
-                                                "propertie_img": "img.img",
-                                                "product_id": 2,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            }
-                                        ],
-                                        "category_name": "samsung2",
-                                        "category_parent_id": 5,
-                                        "product_suppiler_name": "Samsung Thái Nguyên",
-                                        "product_seo_title": null,
-                                        "product_seo_keyword": null,
-                                        "product_seo_description": null
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/categories/{id}": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "Get List Product By Id Category",
-                "operationId": "get-list-product-by-id-category",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "description": "Category id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "current_page": 1,
-                                        "data": [
-                                            {
-                                                "id": 1,
-                                                "product_title": "Samsung J7",
-                                                "product_slug": "samsung-j7",
-                                                "product_desc": null,
-                                                "product_price": 200000,
-                                                "product_image": null,
-                                                "product_configurations": null,
-                                                "is_variation": 0,
-                                                "is_discount_product": 0,
-                                                "properties": [],
-                                                "category_name": "Điện thoại",
-                                                "category_parent_id": 0,
-                                                "product_suppiler_name": "Samsung Thái Nguyên"
-                                            }
-                                        ],
-                                        "first_page_url": "http://127.0.0.1:8000/api/product/categories/3?page=1",
-                                        "from": 1,
-                                        "last_page": 1,
-                                        "last_page_url": "http://127.0.0.1:8000/api/product/categories/3?page=1",
-                                        "links": [
-                                            {
-                                                "url": null,
-                                                "label": "pagination.previous",
-                                                "active": false
-                                            },
-                                            {
-                                                "url": "http://127.0.0.1:8000/api/product/categories/3?page=1",
-                                                "label": "1",
-                                                "active": true
-                                            },
-                                            {
-                                                "url": null,
-                                                "label": "pagination.next",
-                                                "active": false
-                                            }
-                                        ],
-                                        "next_page_url": null,
-                                        "path": "http://127.0.0.1:8000/api/product/categories/3",
-                                        "per_page": 12,
-                                        "prev_page_url": null,
-                                        "to": 1,
-                                        "total": 1
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/{id}/list_comments ": {
-            "get": {
-                "tags": ["Product"],
-                "summary": "List comment for product",
-                "operationId": "get-list-comment-product",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "comment_id": 2,
-                                            "customer_id": 7,
-                                            "comment_name": "Tài phan",
-                                            "comment_content": "Có màu vàng không vậy",
-                                            "comment_date": "23-10-2022 09:29",
-                                            "children_comments": []
-                                        },
-                                        {
-                                            "comment_id": 1,
-                                            "customer_id": null,
-                                            "comment_name": "Trung Văn",
-                                            "comment_content": "sản phẩm còn không ạ?",
-                                            "comment_date": "23-10-2022 09:29",
-                                            "children_comments": [
-                                                {
-                                                    "comment_id": 3,
-                                                    "customer_id": 5,
-                                                    "comment_name": "Admin",
-                                                    "comment_content": "dạ sản phẩm này đang tạm hết hàng",
-                                                    "comment_date": "23-10-2022 09:29",
-                                                    "children_comments": []
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/product/{id}/comment": {
-            "post": {
-                "tags": ["Product"],
-                "summary": "Comment for a product",
-                "operationId": "comment-product",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "comment_content",
-                        "required": true,
-                        "description": "Comment content for product",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "customer_id",
-                        "required": false,
-                        "description": "customer id ",
-                        "schema": {
-                            "type": "int"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "comment_name",
-                        "required": true,
-                        "description": "comment_name",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "comment_phone",
-                        "required": true,
-                        "description": "comment_phone",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "comment_email",
-                        "required": true,
-                        "description": "comment_email",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {}
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/about": {
-            "get": {
-                "tags": ["About"],
-                "summary": "Get List About",
-                "operationId": "get-list-about",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "about_title": "Giới thiệu",
-                                            "about_slug": "gioi-thieu",
-                                            "about_desc": "s",
-                                            "type": "gioi-thieu",
-                                            "date": null
-                                        },
-                                        {
-                                            "id": 2,
-                                            "about_title": "Quy chế hoạt động",
-                                            "about_slug": "quy-che-hoat-dong",
-                                            "about_desc": "quy chế hoạt động",
-                                            "type": "quy-che-hoat-dong",
-                                            "date": null
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/about/types/{type}": {
-            "get": {
-                "tags": ["About"],
-                "summary": "Get List About By Type",
-                "operationId": "get-list-about-by-type",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "type",
-                        "required": true,
-                        "description": "type",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "about_title": "Giới thiệu",
-                                            "about_slug": "gioi-thieu",
-                                            "about_desc": "s",
-                                            "type": "gioi-thieu",
-                                            "date": null
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/about/{id}": {
-            "get": {
-                "tags": ["About"],
-                "summary": "Get  About By Id",
-                "operationId": "get-about-by-id",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "description": "id",
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "id": 1,
-                                        "about_title": "Giới thiệu",
-                                        "about_desc": "s",
-                                        "type": "gioi-thieu",
-                                        "about_content": "s",
-                                        "about_slug": "gioi-thieu",
-                                        "seo_title": "s",
-                                        "seo_keyword": "s",
-                                        "seo_description": "s",
-                                        "date": null
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/company": {
-            "get": {
-                "tags": ["Company"],
-                "summary": "Get  Company Info",
-                "operationId": "get-company-info",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "company_name": "Điện thoại- Phụ kiện | SnackMobile",
-                                    "company_slug": "",
-                                    "company_email": "snackmobile.contact@gmail.com",
-                                    "company_phone": "0123456789",
-                                    "company_address": "137 Nguyễn THị Thập  - Hoà Minh  - Liên Chiểu -Tp Đà Nẵng",
-                                    "company_fanpage": null,
-                                    "company_favicon": null,
-                                    "company_copyright": "Snackmobile",
-                                    "company_work_time": "",
-                                    "company_work_day": "",
-                                    "company_ggmap": "",
-                                    "company_gg_analytic": null,
-                                    "company_webmaster": null,
-                                    "company_hotline": "",
-                                    "seo_title": "Điện thoại - Phụ Kiện | SnackMobile",
-                                    "seo_keyword": null,
-                                    "seo_description": null,
-                                    "created_at": null,
-                                    "updated_at": null,
-                                    "deleted_at": null
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/client/bills/create": {
-            "post": {
-                "tags": ["Bill"],
-                "summary": "Order product in cart",
-                "operationId": "create-bill",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "customer_name",
-                        "required": true,
-                        "description": "name client",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "address",
-                        "required": true,
-                        "description": "address client",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "city_id",
-                        "required": true,
-                        "description": "id city",
-                        "schema": {
-                            "type": "int"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "dist_id",
-                        "required": true,
-                        "description": "id dist",
-                        "schema": {
-                            "type": "int"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "bill_price",
-                        "required": true,
-                        "description": "total product of bill",
-                        "schema": {
-                            "type": "int"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "bill_phone",
-                        "required": true,
-                        "description": "phone client buy product",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "body",
-                        "name": "products",
-                        "required": true,
-                        "description": "list product in cart",
-                        "schema": {
-                            "type": "array",
-                            "value": [
-                                {
-                                    "id": "1",
-                                    "price": 4000,
-                                    "amount": 2,
-                                    "into_price": 2,
-                                    "sale": 30,
-                                    "fee": 10,
-                                    "total": 2
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {}
-                }
-            }
-        },
-        "/api/client/bills/{id}": {
-            "get": {
-                "tags": ["Bill"],
-                "summary": "Detail bill",
-                "operationId": "get-detail-bill",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "id": 50,
-                                        "customer_id": 5,
-                                        "bill_phone": "0973127009",
-                                        "customer_name": "Tấn Thanh",
-                                        "address": "Nghệ An",
-                                        "city_id": 2,
-                                        "dist_id": 3,
-                                        "bill_price": 30000,
-                                        "bill_status": 0,
-                                        "created_at": "2022-10-20T07:45:59.000000Z",
-                                        "updated_at": "2022-10-20T07:45:59.000000Z",
-                                        "deleted_at": null,
-                                        "bill_details": [
-                                            {
-                                                "id": 79,
-                                                "bill_id": 50,
-                                                "product_id": 3,
-                                                "price": 333333,
-                                                "amount": 3,
-                                                "into_price": 1,
-                                                "sale": 3,
-                                                "fee": 2,
-                                                "total": 10,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            },
-                                            {
-                                                "id": 80,
-                                                "bill_id": 50,
-                                                "product_id": 3,
-                                                "price": 333333,
-                                                "amount": 3,
-                                                "into_price": 1,
-                                                "sale": 3,
-                                                "fee": 2,
-                                                "total": 10,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            },
-                                            {
-                                                "id": 81,
-                                                "bill_id": 50,
-                                                "product_id": 3,
-                                                "price": 333333,
-                                                "amount": 3,
-                                                "into_price": 1,
-                                                "sale": 3,
-                                                "fee": 2,
-                                                "total": 10,
-                                                "created_at": null,
-                                                "updated_at": null,
-                                                "deleted_at": null
-                                            }
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/client/bills ": {
-            "get": {
-                "tags": ["Bill"],
-                "summary": "List bill",
-                "operationId": "get-detail-bill",
-                "responses": {
-                    "200": {
-                        "description": "Get list success",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": [
-                                        {
-                                            "id": 1,
-                                            "customer_id": 5,
-                                            "bill_phone": "011111111",
-                                            "customer_name": "Nguyễn Tấn Dũng",
-                                            "address": "Thanh Xuân Hà lội",
-                                            "city_id": 1,
-                                            "dist_id": 19,
-                                            "bill_price": 500000,
-                                            "bill_status": 0,
-                                            "created_at": null,
-                                            "updated_at": null,
-                                            "deleted_at": null,
-                                            "bill_details": [
-                                                {
-                                                    "id": 2,
-                                                    "bill_id": 1,
-                                                    "product_id": 2,
-                                                    "price": 2250000,
-                                                    "amount": 1,
-                                                    "into_price": 1,
-                                                    "sale": 1,
-                                                    "fee": 12000,
-                                                    "total": 2250000,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                {
-                                                    "id": 3,
-                                                    "bill_id": 1,
-                                                    "product_id": 4,
-                                                    "price": 30000,
-                                                    "amount": 1,
-                                                    "into_price": 1,
-                                                    "sale": 1,
-                                                    "fee": 30000,
-                                                    "total": 30000,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                {
-                                                    "id": 4,
-                                                    "bill_id": 1,
-                                                    "product_id": 3,
-                                                    "price": 1450000,
-                                                    "amount": 1,
-                                                    "into_price": 1,
-                                                    "sale": 1,
-                                                    "fee": 90,
-                                                    "total": 1450000,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 2,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127008",
-                                            "customer_name": "Nguyễn Thanh Tùng",
-                                            "address": "Nghĩa Đàn",
-                                            "city_id": 1,
-                                            "dist_id": 19,
-                                            "bill_price": 1200000,
-                                            "bill_status": 0,
-                                            "created_at": null,
-                                            "updated_at": null,
-                                            "deleted_at": null,
-                                            "bill_details": [
-                                                {
-                                                    "id": 5,
-                                                    "bill_id": 2,
-                                                    "product_id": 3,
-                                                    "price": 2250000,
-                                                    "amount": 1,
-                                                    "into_price": 1,
-                                                    "sale": 1,
-                                                    "fee": 100,
-                                                    "total": 10000,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 12,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-11T16:56:24.000000Z",
-                                            "updated_at": "2022-10-11T16:56:24.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": [
-                                                {
-                                                    "id": 20,
-                                                    "bill_id": 12,
-                                                    "product_id": 3,
-                                                    "price": 530000,
-                                                    "amount": 2,
-                                                    "into_price": 3,
-                                                    "sale": 2,
-                                                    "fee": 1,
-                                                    "total": 1,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 16,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-11T17:20:51.000000Z",
-                                            "updated_at": "2022-10-11T17:20:51.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": [
-                                                {
-                                                    "id": 21,
-                                                    "bill_id": 16,
-                                                    "product_id": 3,
-                                                    "price": 530000,
-                                                    "amount": 2,
-                                                    "into_price": 3,
-                                                    "sale": 2,
-                                                    "fee": 1,
-                                                    "total": 1,
-                                                    "created_at": "2022-10-11T17:20:51.000000Z",
-                                                    "updated_at": "2022-10-11T17:20:51.000000Z",
-                                                    "deleted_at": null
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 18,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-19T07:30:48.000000Z",
-                                            "updated_at": "2022-10-19T07:30:48.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": []
-                                        },
-                                        {
-                                            "id": 19,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-19T07:42:16.000000Z",
-                                            "updated_at": "2022-10-19T07:42:16.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": []
-                                        },
-                                        {
-                                            "id": 20,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-19T07:42:36.000000Z",
-                                            "updated_at": "2022-10-19T07:42:36.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": []
-                                        },
-                                        {
-                                            "id": 21,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-19T07:43:21.000000Z",
-                                            "updated_at": "2022-10-19T07:43:21.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": []
-                                        },
-                                        {
-                                            "id": 22,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-19T07:44:44.000000Z",
-                                            "updated_at": "2022-10-19T07:44:44.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": []
-                                        },
-                                        {
-                                            "id": 31,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-20T06:37:54.000000Z",
-                                            "updated_at": "2022-10-20T06:37:54.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": [
-                                                {
-                                                    "id": 22,
-                                                    "bill_id": 31,
-                                                    "product_id": 3,
-                                                    "price": 530000,
-                                                    "amount": 2,
-                                                    "into_price": 3,
-                                                    "sale": 2,
-                                                    "fee": 1,
-                                                    "total": 1,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                {
-                                                    "id": 23,
-                                                    "bill_id": 31,
-                                                    "product_id": 3,
-                                                    "price": 530000,
-                                                    "amount": 2,
-                                                    "into_price": 3,
-                                                    "sale": 2,
-                                                    "fee": 1,
-                                                    "total": 1,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                {
-                                                    "id": 24,
-                                                    "bill_id": 31,
-                                                    "product_id": 3,
-                                                    "price": 530000,
-                                                    "amount": 2,
-                                                    "into_price": 3,
-                                                    "sale": 2,
-                                                    "fee": 1,
-                                                    "total": 1,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": 50,
-                                            "customer_id": 5,
-                                            "bill_phone": "0973127009",
-                                            "customer_name": "Tấn Thanh",
-                                            "address": "Nghệ An",
-                                            "city_id": 2,
-                                            "dist_id": 3,
-                                            "bill_price": 30000,
-                                            "bill_status": 0,
-                                            "created_at": "2022-10-20T07:45:59.000000Z",
-                                            "updated_at": "2022-10-20T07:45:59.000000Z",
-                                            "deleted_at": null,
-                                            "bill_details": [
-                                                {
-                                                    "id": 79,
-                                                    "bill_id": 50,
-                                                    "product_id": 3,
-                                                    "price": 333333,
-                                                    "amount": 3,
-                                                    "into_price": 1,
-                                                    "sale": 3,
-                                                    "fee": 2,
-                                                    "total": 10,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                {
-                                                    "id": 80,
-                                                    "bill_id": 50,
-                                                    "product_id": 3,
-                                                    "price": 333333,
-                                                    "amount": 3,
-                                                    "into_price": 1,
-                                                    "sale": 3,
-                                                    "fee": 2,
-                                                    "total": 10,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                },
-                                                {
-                                                    "id": 81,
-                                                    "bill_id": 50,
-                                                    "product_id": 3,
-                                                    "price": 333333,
-                                                    "amount": 3,
-                                                    "into_price": 1,
-                                                    "sale": 3,
-                                                    "fee": 2,
-                                                    "total": 10,
-                                                    "created_at": null,
-                                                    "updated_at": null,
-                                                    "deleted_at": null
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+  "openapi": "3.0.0",
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "OAuth2"
+      }
     }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8000/",
+      "description": "",
+      "variables": {}
+    }
+  ],
+  "info": {
+    "version": "",
+    "title": "Dự Án Tốt Nghiệp API document",
+    "description": "",
+    "termsOfService": "",
+    "contact": {}
+  },
+  "paths": {
+    "/api/client/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Client login",
+        "operationId": "client-login",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "required": true,
+            "description": "Client email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "required": true,
+            "description": "Client password",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Client login",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token_type": "Bearer",
+                  "expires_in": 31536000,
+                  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxMCIsImp0aSI6IjM0NDRiNGI0ZmIwMjQ1OWVjZDkzNDUxMjdhNTE1ZWU5ZDM3MWQ5MWNiNzk0YmY1NjcwODAxMTU2MjljZDBlYmMzM2I0Yjg3ZjE0Mjc4YTQ1IiwiaWF0IjoxNjY1MTYyNTQzLjA5NzAyOCwibmJmIjoxNjY1MTYyNTQzLjA5NzAzMiwiZXhwIjoxNjk2Njk4NTQyLjc3NTY4Nywic3ViIjoiNSIsInNjb3BlcyI6WyIqIl19.XWW76VELsNH-9NaLKV8mNHGcLGgSOmX9r8rQGc1_uWmcpfDLaTk0vKLP1O3761aSR1lkfVgPZi8GI20DQDKMcS8KPj9dmWXIjLFSwlOi6lCpNFUfx60fntrHy0-6xyz7KaLbo9751mr_zxyCBJh8drv5tN0kK406nX0DiDZZWBdrasq-0AjnQBdB7g3m-JbV1i92EoXGlOE_dg6UQ3TgH5SrGgkp1XnGtLtO-3k23dIU_cBfEajerX16kc6ZRxrcGzAAH-2Fh2Irdqj5uohxqe-h7YE0mnf_LvAi1OputZObUKQjR3P5daidIU94-aQ7JSRkb-UNcaUpVulsJVo2HbnG18RSp1BKpwgplZ4sL8PA1J3Tz-0sCT2LvBgmClFkWddNvmsRaDeUySrgdwjyWYi9jgBdppjhEme53bsD573ERbTfiHvmjAI-cskD0FWhKW-C9Qd8qg9rbMAGor92oEaysgtAjx57OWPh6elRYGlyVC9bdL4n0rZrpAMAtLPdOcwsEG-yO3JMAbf2ahHw3NAHBM3DgZpQ43OANg4pu3SQvguUvk7WZDezGmXAMUy8lpJfDP3sguh0oLalnWpiTjvw8VMYn_nGkLETo8iFVWLlOS0kAyuH6gu6Xy-90xFr01p-tKgT9kkZaSZGjefJvE86YgMdN3L8j3BBgq-Fqf8",
+                  "refresh_token": "def50200cc324e8bb01c6a0a9931461770787470d87bed5250c860c2b53f0197de8e6a38d777fe74e0209ecf650be0bacc07356333c99b359603d521d67ebe07f99f30d403c124d8ff28bd0f7b6c8905abfa8254bd4ea750980791ec003cb4612e8dd6ecf0f426e1e1b4300b84922430dc94af1379d7a5f3fcf49e3e5faf7b9851af59eafa5d726b4d3d95952f6c52c6a9f0e3e774154fcff7dd6798e6419eafb760fab4913951440638b01d484bbb3dbb16674431575cf2597abbe400700640b2f1723f29f23f7d36de31dc689177f4bfd48f0e84a208e2916ddb732fee20a4534d4acce1b14eb080396a8058bfcbc18a3809fe9e9530cb3238546c6eddce69af174fce3cc58334e271e2b27e7b145ca6f53af97aa98bf55ffc6392bcac9ffeae26ef0b605049668f86eabfa7622e5f7dfc10117738e7aac1a56365ab72af84e61c6374bb0990524d925f58d0b9e93018cee746932034170050ba638c8f222585c702d68e",
+                  "user": {
+                    "id": 5,
+                    "name": "Aloalo123",
+                    "email": "trungtv0910@gmail.com",
+                    "birthday": "2000-08-30",
+                    "gender": 1,
+                    "tel": "0931231222",
+                    "avatar": null,
+                    "status": 1,
+                    "address": "Thừa thiên huế",
+                    "city_id": 18,
+                    "dist_id": 111,
+                    "email_verified_at": null,
+                    "created_at": "2022-09-07T08:44:54.000000Z",
+                    "updated_at": null,
+                    "deleted_at": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/client/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Client logout",
+        "operationId": "client-logout",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "logout success",
+            "content": {
+              "application/json": {
+                "example": [
+                  {}
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/client/register": {
+      "post": {
+        "tags": [
+          "Register"
+        ],
+        "summary": "Client register",
+        "operationId": "get-list-category",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "email",
+            "required": true,
+            "description": "Client email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "password",
+            "required": true,
+            "description": "Client password",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "name",
+            "required": true,
+            "description": "Client name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "birthday",
+            "required": false,
+            "description": "Client birthday",
+            "schema": {
+              "type": "date"
+            }
+          },
+          {
+            "in": "body",
+            "name": "address",
+            "required": true,
+            "description": "Client address",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "city_id",
+            "required": true,
+            "description": "City id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "body",
+            "name": "dist_id",
+            "required": true,
+            "description": "dist id (quận huyện)",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "body",
+            "name": "tel",
+            "required": false,
+            "description": "tel contact",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ]
+      }
+    },
+    "/api/information/city": {
+      "get": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Client ciity",
+        "operationId": "get-list-city",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "name": "Thành phố Hà Nội",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 2,
+                    "name": "Tỉnh Hà Giang",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 3,
+                    "name": "Tỉnh Cao Bằng",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 4,
+                    "name": "Tỉnh Bắc Kạn",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 5,
+                    "name": "Tỉnh Tuyên Quang",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 6,
+                    "name": "Tỉnh Lào Cai",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 7,
+                    "name": "Tỉnh Điện Biên",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 8,
+                    "name": "Tỉnh Lai Châu",
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 9,
+                    "name": "Tỉnh Sơn La",
+                    "transport_fee": 0
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/information/dist/{id}": {
+      "get": {
+        "tags": [
+          "Address"
+        ],
+        "summary": "Client dists",
+        "operationId": "get-list-dists",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 598,
+                    "name": "Thành phố Bến Tre",
+                    "slug": "thanh-pho-ben-tre",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 599,
+                    "name": "Huyện Châu Thành",
+                    "slug": "huyen-chau-thanh",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 600,
+                    "name": "Huyện Chợ Lách",
+                    "slug": "huyen-cho-lach",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 601,
+                    "name": "Huyện Mỏ Cày Nam",
+                    "slug": "huyen-mo-cay-nam",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 602,
+                    "name": "Huyện Giồng Trôm",
+                    "slug": "huyen-giong-trom",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 603,
+                    "name": "Huyện Bình Đại",
+                    "slug": "huyen-binh-dai",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 604,
+                    "name": "Huyện Ba Tri",
+                    "slug": "huyen-ba-tri",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 605,
+                    "name": "Huyện Thạnh Phú",
+                    "slug": "huyen-thanh-phu",
+                    "code": 83,
+                    "transport_fee": 0
+                  },
+                  {
+                    "id": 606,
+                    "name": "Huyện Mỏ Cày Bắc",
+                    "slug": "huyen-mo-cay-bac",
+                    "code": 83,
+                    "transport_fee": 0
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/post/categories": {
+      "get": {
+        "tags": [
+          "Post (Bài viết)"
+        ],
+        "summary": "Get list categories post (list danh mục bài viết)",
+        "operationId": "get-list-category",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "name": "Tin công nghệ"
+                    },
+                    {
+                      "id": 2,
+                      "name": "Tin tài chính"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/post/categories/{id}": {
+      "get": {
+        "tags": [
+          "Post (Bài viết)"
+        ],
+        "summary": "Get list Post by Category ID",
+        "operationId": "get-list-post-by-category-id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Category id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "current_page": 1,
+                    "data": [
+                      {
+                        "id": 4,
+                        "post_title": "Vespa GTS phiên bản hoàn toàn mới ra mắt: thay đổi nhẹ ở thiết kế, đồng hồ LCD, thêm Smartkey",
+                        "post_slug": "post-slug",
+                        "post_desc": "Tập đoàn Piaggio vừa giới thiệu dòng sản phẩm Vespa GTS thế hệ hoàn toàn mới, với tuỳ chọn động cơ trải dài từ 125 cho tới 300. Có thể nói đây là đợt nâng cấp lớn đối với Vespa GTS bởi có khá nhiều chi tiết trên xe được cải tiến và cũng thay đổi luôn thói quen sử dụng xe. Tóm lược về những sản phẩm thuộc dòng GTS thì chúng ta sẽ có 4 nhánh lớn, trong đó bao gồm GTS, GTS Super, GTS SuperSport và GTS SuperTech. Phân loại này cũng tương tự như phiên bản GTS hiện có. Cả 4 dòng GTS đều sẽ có 2 tuỳ chọn động cơ, đó là động cơ iGet 125 và động cơ HPE 300. Tại Ý, giá bán của các dòng xe cụ thể như sau:",
+                        "date": null,
+                        "category_name": "Tin công nghệ"
+                      },
+                      {
+                        "id": 2,
+                        "post_title": "Xiaomi ra mắt loạt smartphone, tai nghe, smartwatch, TV và thiết bị làm sạch",
+                        "post_slug": "Xiaomi",
+                        "post_desc": "Xiaomi 12T và 12T Pro là bộ đôi smartphone cao cấp vừa được Xiaomi ra mắt nổi bật với hệ thống camera có độ phân giải cao cùng hiệu năng mạnh mẽ, cạnh tranh với nhiều đối thủ trong cùng phân khúc giá.",
+                        "date": "2022-10-12T16:24:28.000000Z",
+                        "category_name": "Tin công nghệ"
+                      }
+                    ],
+                    "first_page_url": "http://127.0.0.1:8000/api/post/categories/1?page=1",
+                    "from": 1,
+                    "last_page": 1,
+                    "last_page_url": "http://127.0.0.1:8000/api/post/categories/1?page=1",
+                    "links": [
+                      {
+                        "url": null,
+                        "label": "pagination.previous",
+                        "active": false
+                      },
+                      {
+                        "url": "http://127.0.0.1:8000/api/post/categories/1?page=1",
+                        "label": "1",
+                        "active": true
+                      },
+                      {
+                        "url": null,
+                        "label": "pagination.next",
+                        "active": false
+                      }
+                    ],
+                    "next_page_url": null,
+                    "path": "http://127.0.0.1:8000/api/post/categories/1",
+                    "per_page": 20,
+                    "prev_page_url": null,
+                    "to": 2,
+                    "total": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/post/{id}": {
+      "get": {
+        "tags": [
+          "Post (Bài viết)"
+        ],
+        "summary": "Get Post by ID",
+        "operationId": "get-post-by-id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Post id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": 2,
+                    "post_category_name": "Tin công nghệ",
+                    "post_title": "Xiaomi ra mắt loạt smartphone, tai nghe, smartwatch, TV và thiết bị làm sạch",
+                    "post_desc": "Xiaomi 12T và 12T Pro là bộ đôi smartphone cao cấp vừa được Xiaomi ra mắt nổi bật với hệ thống camera có độ phân giải cao cùng hiệu năng mạnh mẽ, cạnh tranh với nhiều đối thủ trong cùng phân khúc giá.",
+                    "post_content": "Xiaomi ra mắt loạt smartphone, tai nghe, smartwatch, TV và thiết bị làm sạch\r\nXiaomi 12T, 12T Pro, Redmi A1, Redmi Buds 4 Pro, Xiaomi Smart Band 7 Pro, robot hút bụi X10+, TV Xiaomi Q2,… là những thiết bị được Xiaomi ra mắt tại sự kiện tối nay\r\nXiaomi 12T và 12T Pro là tâm điểm của sự kiện\r\nCamera 108MP và 200MP là điểm nổi bật nhất\r\n12T-4.jpg\r\nXiaomi 12T và 12T Pro là bộ đôi smartphone cao cấp vừa được Xiaomi ra mắt nổi bật với hệ thống camera có độ phân giải cao cùng hiệu năng mạnh mẽ, cạnh tranh với nhiều đối thủ trong cùng phân khúc giá.\r\n12T-7.jpg\r\nCả hai chiếc máy đều được trang bị camera với độ phân giải cao. Xiaomi 12T được trang bị cụm 03 camera: camera chính 108MP, hỗ trợ chống rung OIS, camera siêu rộng 8MP và camera macro 2MP.\r\nQUẢNG CÁO\r\n\r\n\r\nXiaomi 12T Pro nổi bật với camera chính 200M với cảm biến kích thước lớn 1/1.22” cho phép máy chụp những bức ảnh với độ nét cao, camera siêu rộng 8MP và camera macro 2MP. Ngoài ra, máy có hỗ trợ quay video 8K và các tính năng chụp ảnh khác.\r\nXiaomi 12T dùng Dimensity, phiên bản Pro dùng Snapdragon\r\n12T-5.jpg\r\nXiaomi 12T Pro được trang bị bộ vi xử lý Snapdragon 8+ Gen 1 (4nm). So với Xiaomi 11T Pro, máy có hệ thống tản nhiệt bao gồm một khoang chứa hơi lớn hơn 65% với độ phủ vật liệu nhiệt cao hơn 125%, mang đến trải nghiệm mượt hơn, tiết kiệm điện hơn và kiểm soát nhiệt độ tốt hơn.\r\nTrong khi đó Xiaomi 12T được trang bị chipset của MediaTek là Dimensity 8100-Ultra với quy trình sản xuất TSMC 5nm. Theo Xiaomi, kiến trúc mở mã nguồn mới được MediaTek trang bị trên chipset Dimensity 8100 Ultra mang đến tính năng quay video khử nhiễu độc quyền Ultra Night Video trên Xiaomi 12T.\r\nDung lượng pin 5.000 mAh và sạc nhanh 120W\r\n12T.jpg\r\nXiaomi 12T Series sở hữu thời lượng pin 5.000mAh, nổi bật với công nghệ sạc nhanh HyperCharge 120W. Cả hai đều có thể được sạc đầy 100% trong 19 phút và thời gian sử dụng 13,5 giờ, theo Xiaomi.\r\nMàn hình CrystalRes AMOLED 6,67\", 1220p, 120Hz\r\n12T-6.jpg\r\nXiaomi 12T Series được trang bị màn hình CrystalRes đặc biệt của hãng với tấm nền AMOLED 6,67”, độ phân giải 1220p, hơn 68 tỷ màu, theo Xiaomi công bố . Màn hình cũng được nâng cấp bởi các tính năng thông minh chẳng hạn như AdaptiveSync, tự động điều chỉnh tốc độ làm mới dựa trên nội dung được xem.\r\nQUẢNG CÁO\r\n\r\n\r\n12T-8.jpg\r\nXiaomi 12T Series có 3 màu sắc, bao gồm màu Đen, Bạc và Xanh dương.\r\nGiá bán Xiaomi 12T Series\r\nxiaomi.jpg\r\nxiaomi-2.jpg\r\nXiaomi 12T có hai phiên bản: 8GB + 128GB với mức giá 12.490.000 VNĐ và 8GB + 256GB với mức giá 12.990.000 VNĐ, độc quyền tại Thế giới di động.\r\nXiaomi 12T Pro phiên bản 12GB + 256GB có mức giá 16.990.000 VNĐ, bán độc quyền tại CellphoneS\r\nXiaomi 12T Series chính thức mở bán từ ngày 13/10 tại các hệ thống cửa hàng Bán lẻ hàng đầu Thế giới Di động, FPTShop, Viettel Store, CellphoneS, Xiaomi Store, Hoàng Hà Mobile, Di động Việt, Di động thông minh, Siêu thị điện máy Chợ lớn và các trang thương mại điện tử hàng đầu Shopee và Lazada.\r\nTừ ngày 04/10 - 12/10/2022, người dùng đặt trước bộ đôi Xiaomi 12T Series có thể nhận được Máy lọc không khí Xiaomi Smart Air Purifier 4 Lite trị giá 3.990.000 VNĐ hoặc Chương trình thu cũ đổi mới 2.000.000 VNĐ cùng nhiều ưu đãi khi đặt trước máy.\r\nhttps://tinhte.vn/thread/tren-tay-xiaomi-12t-series-camera-200mp-pin-5-000mah-sac-nhanh-120w-gia-tu-12-5tr.3574133/\r\n\r\nTrên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr\r\nXiaomi 12T Series là bộ đôi smartphone mới nhất được Xiaomi ra mắt, được tập trung khá nhiều vào trang bị camera với độ phân giải cao, thời lượng pin lớn, sạc 120W và màn hình 120Hz,… Thiết kế đơn giản…\r\n tinhte.vn\r\nRedmi A1\r\nxiaomi.jpg\r\nBên cạnh bộ đôi cao cấp, Xiaomi cũng giới thiệu chiếc smartphone giá rẻ Redmi A1. Máy được trang bị màn hình 6,52\", HD+, camera kép 8MP, camera selfie 5MP, cùng thời lượng pin 5.00mAh. Về cấu hình, máy sử dụng chip MediaTek Helio A22, RAM 2G, bộ nhớ trong 32GB.\r\nxiaomi-6.jpg\r\nRedmi A1 với mặt lưng nhựa nhám nhẹ, màu sắc tươi sáng.\r\nxiaomi su kien.jpg\r\nMặt trước của máy với màn hình giọt nước và chúng ta không thể đòi hỏi quá cao về thiết kế hay công nghệ màn hình ở một chiếc máy có mức giá 2,190,000VNĐ.\r\nRedmi Buds 4 Pro\r\nredmi_buds_4_pro.jpg\r\nRedmi Buds 4 Pro là dòng tai nghe true-wireless mới nhất được Xiaomi ra mắt tại sự kiện ở Việt Nam. Một vài những thông tin nổi bật về tai nghe như khả năng chống ổn chủ động với 3 micro mỗi bên tay, hỗ trợ Hi-Res Audio không dây, chống nướ IP54, một lần sạc nghe được 9 tiếng,…",
+                    "post_slug": "Xiaomi",
+                    "post_seo_title": "Trên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr",
+                    "post_seo_desc": null,
+                    "post_seo_keyword": "Trên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr",
+                    "post_seo_description": "Trên tay Xiaomi 12T Series: Camera 200MP, Pin 5.000mAh, sạc nhanh 120W, giá từ 12,5tr",
+                    "date": "2022-10-12T16:24:28.000000Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/categories": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get List Categories Product",
+        "operationId": "get-product-categories",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": 3,
+                      "category_name": "Điện thoại",
+                      "category_slug": "dien-thoai",
+                      "category_image": "24-hours-300x300.png",
+                      "parent_id": 0,
+                      "children": [
+                        {
+                          "id": 5,
+                          "category_name": "Samsung",
+                          "category_slug": "samsung",
+                          "category_image": "images.jpg",
+                          "category_display": 0,
+                          "category_order": 1,
+                          "category_outstanding": 0,
+                          "category_content": null,
+                          "category_desc": null,
+                          "parent_id": 3,
+                          "seo_title": null,
+                          "seo_description": null,
+                          "seo_keywords": null,
+                          "created_at": "2022-10-13T12:36:23.000000Z",
+                          "updated_at": "2022-10-13T12:36:23.000000Z",
+                          "deleted_at": null,
+                          "children": [
+                            {
+                              "id": 7,
+                              "category_name": "samsung2",
+                              "category_slug": "",
+                              "category_image": null,
+                              "category_display": 1,
+                              "category_order": 1,
+                              "category_outstanding": 1,
+                              "category_content": null,
+                              "category_desc": null,
+                              "parent_id": 5,
+                              "seo_title": null,
+                              "seo_description": null,
+                              "seo_keywords": null,
+                              "created_at": null,
+                              "updated_at": null,
+                              "deleted_at": null
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": 4,
+                      "category_name": "Phụ kiện",
+                      "category_slug": "phu-kien",
+                      "category_image": null,
+                      "parent_id": 0,
+                      "children": []
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product All",
+        "operationId": "get-product-all",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "current_page": 1,
+                    "data": [
+                      {
+                        "id": 1,
+                        "product_title": "Samsung J7",
+                        "product_slug": "samsung-j7",
+                        "product_desc": null,
+                        "product_price": 200000,
+                        "product_image": null,
+                        "product_configurations": null,
+                        "is_variation": 0,
+                        "is_discount_product": 0,
+                        "properties": [],
+                        "category_name": "Điện thoại",
+                        "category_parent_id": 0,
+                        "product_suppiler_name": "Samsung Thái Nguyên"
+                      },
+                      {
+                        "id": 2,
+                        "product_title": "Samsungx100 ",
+                        "product_slug": "samsungx100",
+                        "product_desc": "Description",
+                        "product_price": 5000000,
+                        "product_image": "img.img",
+                        "product_configurations": {
+                          "id": 1,
+                          "product_id": 2,
+                          "config_screen": "4.5",
+                          "config_cpu": "Android",
+                          "config_ram": 64,
+                          "config_camera": 120,
+                          "config_selfie": 12,
+                          "config_battery": 3800,
+                          "config_system": null,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        "is_variation": 0,
+                        "is_discount_product": 0,
+                        "properties": [
+                          {
+                            "id": 1,
+                            "propertie_name": "Màu sắc",
+                            "propertie_slug": "mau-sac",
+                            "propertie_value": "Xanh",
+                            "propertie_img": "img.img",
+                            "product_id": 2,
+                            "created_at": null,
+                            "updated_at": null,
+                            "deleted_at": null
+                          },
+                          {
+                            "id": 2,
+                            "propertie_name": "Dung lượng",
+                            "propertie_slug": "dung-luong",
+                            "propertie_value": "128 GB",
+                            "propertie_img": "img2.img",
+                            "product_id": 2,
+                            "created_at": null,
+                            "updated_at": null,
+                            "deleted_at": null
+                          },
+                          {
+                            "id": 3,
+                            "propertie_name": "Dung lượng",
+                            "propertie_slug": "dung-luong",
+                            "propertie_value": "64 GB",
+                            "propertie_img": "img.img",
+                            "product_id": 2,
+                            "created_at": null,
+                            "updated_at": null,
+                            "deleted_at": null
+                          }
+                        ],
+                        "category_name": "samsung2",
+                        "category_parent_id": 5,
+                        "product_suppiler_name": "Samsung Thái Nguyên"
+                      }
+                    ],
+                    "first_page_url": "http://127.0.0.1:8000/api/product?page=1",
+                    "from": 1,
+                    "last_page": 1,
+                    "last_page_url": "http://127.0.0.1:8000/api/product?page=1",
+                    "links": [
+                      {
+                        "url": null,
+                        "label": "pagination.previous",
+                        "active": false
+                      },
+                      {
+                        "url": "http://127.0.0.1:8000/api/product?page=1",
+                        "label": "1",
+                        "active": true
+                      },
+                      {
+                        "url": null,
+                        "label": "pagination.next",
+                        "active": false
+                      }
+                    ],
+                    "next_page_url": null,
+                    "path": "http://127.0.0.1:8000/api/product",
+                    "per_page": 12,
+                    "prev_page_url": null,
+                    "to": 2,
+                    "total": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product By Id",
+        "operationId": "get-product-by-id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Product id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": 2,
+                    "product_title": "Samsungx100 ",
+                    "product_desc": "Description",
+                    "product_content": "Content",
+                    "product_slug": "samsungx100",
+                    "product_image": "img.img",
+                    "product_quantity": 1,
+                    "product_price": 5000000,
+                    "product_promotion_desc": null,
+                    "product_images": [
+                      {
+                        "id": 1,
+                        "image": "img.img",
+                        "product_id": 2,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      },
+                      {
+                        "id": 2,
+                        "image": "img2.img",
+                        "product_id": 2,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      }
+                    ],
+                    "product_configurations": {
+                      "id": 1,
+                      "product_id": 2,
+                      "config_screen": "4.5",
+                      "config_cpu": "Android",
+                      "config_ram": 64,
+                      "config_camera": 120,
+                      "config_selfie": 12,
+                      "config_battery": 3800,
+                      "config_system": null,
+                      "created_at": null,
+                      "updated_at": null,
+                      "deleted_at": null
+                    },
+                    "is_variation": 0,
+                    "is_discount_product": 0,
+                    "properties": [
+                      {
+                        "id": 1,
+                        "propertie_name": "Màu sắc",
+                        "propertie_slug": "mau-sac",
+                        "propertie_value": "Xanh",
+                        "propertie_img": "img.img",
+                        "product_id": 2,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      },
+                      {
+                        "id": 2,
+                        "propertie_name": "Dung lượng",
+                        "propertie_slug": "dung-luong",
+                        "propertie_value": "128 GB",
+                        "propertie_img": "img2.img",
+                        "product_id": 2,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      },
+                      {
+                        "id": 3,
+                        "propertie_name": "Dung lượng",
+                        "propertie_slug": "dung-luong",
+                        "propertie_value": "64 GB",
+                        "propertie_img": "img.img",
+                        "product_id": 2,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      }
+                    ],
+                    "category_name": "samsung2",
+                    "category_parent_id": 5,
+                    "product_suppiler_name": "Samsung Thái Nguyên",
+                    "product_seo_title": null,
+                    "product_seo_keyword": null,
+                    "product_seo_description": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/product/categories/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get List Product By Id Category",
+        "operationId": "get-list-product-by-id-category",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Category id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "current_page": 1,
+                    "data": [
+                      {
+                        "id": 1,
+                        "product_title": "Samsung J7",
+                        "product_slug": "samsung-j7",
+                        "product_desc": null,
+                        "product_price": 200000,
+                        "product_image": null,
+                        "product_configurations": null,
+                        "is_variation": 0,
+                        "is_discount_product": 0,
+                        "properties": [],
+                        "category_name": "Điện thoại",
+                        "category_parent_id": 0,
+                        "product_suppiler_name": "Samsung Thái Nguyên"
+                      }
+                    ],
+                    "first_page_url": "http://127.0.0.1:8000/api/product/categories/3?page=1",
+                    "from": 1,
+                    "last_page": 1,
+                    "last_page_url": "http://127.0.0.1:8000/api/product/categories/3?page=1",
+                    "links": [
+                      {
+                        "url": null,
+                        "label": "pagination.previous",
+                        "active": false
+                      },
+                      {
+                        "url": "http://127.0.0.1:8000/api/product/categories/3?page=1",
+                        "label": "1",
+                        "active": true
+                      },
+                      {
+                        "url": null,
+                        "label": "pagination.next",
+                        "active": false
+                      }
+                    ],
+                    "next_page_url": null,
+                    "path": "http://127.0.0.1:8000/api/product/categories/3",
+                    "per_page": 12,
+                    "prev_page_url": null,
+                    "to": 1,
+                    "total": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/about": {
+      "get": {
+        "tags": [
+          "About"
+        ],
+        "summary": "Get List About",
+        "operationId": "get-list-about",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "about_title": "Giới thiệu",
+                      "about_slug": "gioi-thieu",
+                      "about_desc": "s",
+                      "type": "gioi-thieu",
+                      "date": null
+                    },
+                    {
+                      "id": 2,
+                      "about_title": "Quy chế hoạt động",
+                      "about_slug": "quy-che-hoat-dong",
+                      "about_desc": "quy chế hoạt động",
+                      "type": "quy-che-hoat-dong",
+                      "date": null
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/about/types/{type}": {
+      "get": {
+        "tags": [
+          "About"
+        ],
+        "summary": "Get List About By Type",
+        "operationId": "get-list-about-by-type",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "description": "type",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "about_title": "Giới thiệu",
+                      "about_slug": "gioi-thieu",
+                      "about_desc": "s",
+                      "type": "gioi-thieu",
+                      "date": null
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/about/{id}": {
+      "get": {
+        "tags": [
+          "About"
+        ],
+        "summary": "Get  About By Id",
+        "operationId": "get-about-by-id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": 1,
+                    "about_title": "Giới thiệu",
+                    "about_desc": "s",
+                    "type": "gioi-thieu",
+                    "about_content": "s",
+                    "about_slug": "gioi-thieu",
+                    "seo_title": "s",
+                    "seo_keyword": "s",
+                    "seo_description": "s",
+                    "date": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/company": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Get  Company Info",
+        "operationId": "get-company-info",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "company_name": "Điện thoại- Phụ kiện | SnackMobile",
+                  "company_slug": "",
+                  "company_email": "snackmobile.contact@gmail.com",
+                  "company_phone": "0123456789",
+                  "company_address": "137 Nguyễn THị Thập  - Hoà Minh  - Liên Chiểu -Tp Đà Nẵng",
+                  "company_fanpage": null,
+                  "company_favicon": null,
+                  "company_copyright": "Snackmobile",
+                  "company_work_time": "",
+                  "company_work_day": "",
+                  "company_ggmap": "",
+                  "company_gg_analytic": null,
+                  "company_webmaster": null,
+                  "company_hotline": "",
+                  "seo_title": "Điện thoại - Phụ Kiện | SnackMobile",
+                  "seo_keyword": null,
+                  "seo_description": null,
+                  "created_at": null,
+                  "updated_at": null,
+                  "deleted_at": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/client/bills/create": {
+      "post": {
+        "tags": [
+          "Bill"
+        ],
+        "summary": "Order product in cart",
+        "operationId": "create-bill",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "customer_name",
+            "required": true,
+            "description": "name client",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "address",
+            "required": true,
+            "description": "address client",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "city_id",
+            "required": true,
+            "description": "id city",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "dist_id",
+            "required": true,
+            "description": "id dist",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "bill_price",
+            "required": true,
+            "description": "total product of bill",
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "in": "body",
+            "name": "bill_phone",
+            "required": true,
+            "description": "phone client buy product",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "products",
+            "required": true,
+            "description": "list product in cart",
+            "schema": {
+              "type": "array",
+              "value": [
+                {
+                  "id": "1",
+                  "price": 4000,
+                  "amount": 2,
+                  "into_price": 2,
+                  "sale": 30,
+                  "fee": 10,
+                  "total": 2
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {}
+        }
+      }
+    },
+    "/api/client/bills/{id}": {
+      "get": {
+        "tags": [
+          "Bill"
+        ],
+        "summary": "Detail bill",
+        "operationId": "get-detail-bill",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "id": 50,
+                    "customer_id": 5,
+                    "bill_phone": "0973127009",
+                    "customer_name": "Tấn Thanh",
+                    "address": "Nghệ An",
+                    "city_id": 2,
+                    "dist_id": 3,
+                    "bill_price": 30000,
+                    "bill_status": 0,
+                    "created_at": "2022-10-20T07:45:59.000000Z",
+                    "updated_at": "2022-10-20T07:45:59.000000Z",
+                    "deleted_at": null,
+                    "bill_details": [
+                      {
+                        "id": 79,
+                        "bill_id": 50,
+                        "product_id": 3,
+                        "price": 333333,
+                        "amount": 3,
+                        "into_price": 1,
+                        "sale": 3,
+                        "fee": 2,
+                        "total": 10,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      },
+                      {
+                        "id": 80,
+                        "bill_id": 50,
+                        "product_id": 3,
+                        "price": 333333,
+                        "amount": 3,
+                        "into_price": 1,
+                        "sale": 3,
+                        "fee": 2,
+                        "total": 10,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      },
+                      {
+                        "id": 81,
+                        "bill_id": 50,
+                        "product_id": 3,
+                        "price": 333333,
+                        "amount": 3,
+                        "into_price": 1,
+                        "sale": 3,
+                        "fee": 2,
+                        "total": 10,
+                        "created_at": null,
+                        "updated_at": null,
+                        "deleted_at": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/client/bills ": {
+      "get": {
+        "tags": [
+          "Bill"
+        ],
+        "summary": "List bill",
+        "operationId": "get-detail-bill",
+        "responses": {
+          "200": {
+            "description": "Get list success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    {
+                      "id": 1,
+                      "customer_id": 5,
+                      "bill_phone": "011111111",
+                      "customer_name": "Nguyễn Tấn Dũng",
+                      "address": "Thanh Xuân Hà lội",
+                      "city_id": 1,
+                      "dist_id": 19,
+                      "bill_price": 500000,
+                      "bill_status": 0,
+                      "created_at": null,
+                      "updated_at": null,
+                      "deleted_at": null,
+                      "bill_details": [
+                        {
+                          "id": 2,
+                          "bill_id": 1,
+                          "product_id": 2,
+                          "price": 2250000,
+                          "amount": 1,
+                          "into_price": 1,
+                          "sale": 1,
+                          "fee": 12000,
+                          "total": 2250000,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        {
+                          "id": 3,
+                          "bill_id": 1,
+                          "product_id": 4,
+                          "price": 30000,
+                          "amount": 1,
+                          "into_price": 1,
+                          "sale": 1,
+                          "fee": 30000,
+                          "total": 30000,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        {
+                          "id": 4,
+                          "bill_id": 1,
+                          "product_id": 3,
+                          "price": 1450000,
+                          "amount": 1,
+                          "into_price": 1,
+                          "sale": 1,
+                          "fee": 90,
+                          "total": 1450000,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        }
+                      ]
+                    },
+                    {
+                      "id": 2,
+                      "customer_id": 5,
+                      "bill_phone": "0973127008",
+                      "customer_name": "Nguyễn Thanh Tùng",
+                      "address": "Nghĩa Đàn",
+                      "city_id": 1,
+                      "dist_id": 19,
+                      "bill_price": 1200000,
+                      "bill_status": 0,
+                      "created_at": null,
+                      "updated_at": null,
+                      "deleted_at": null,
+                      "bill_details": [
+                        {
+                          "id": 5,
+                          "bill_id": 2,
+                          "product_id": 3,
+                          "price": 2250000,
+                          "amount": 1,
+                          "into_price": 1,
+                          "sale": 1,
+                          "fee": 100,
+                          "total": 10000,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        }
+                      ]
+                    },
+                    {
+                      "id": 12,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-11T16:56:24.000000Z",
+                      "updated_at": "2022-10-11T16:56:24.000000Z",
+                      "deleted_at": null,
+                      "bill_details": [
+                        {
+                          "id": 20,
+                          "bill_id": 12,
+                          "product_id": 3,
+                          "price": 530000,
+                          "amount": 2,
+                          "into_price": 3,
+                          "sale": 2,
+                          "fee": 1,
+                          "total": 1,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        }
+                      ]
+                    },
+                    {
+                      "id": 16,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-11T17:20:51.000000Z",
+                      "updated_at": "2022-10-11T17:20:51.000000Z",
+                      "deleted_at": null,
+                      "bill_details": [
+                        {
+                          "id": 21,
+                          "bill_id": 16,
+                          "product_id": 3,
+                          "price": 530000,
+                          "amount": 2,
+                          "into_price": 3,
+                          "sale": 2,
+                          "fee": 1,
+                          "total": 1,
+                          "created_at": "2022-10-11T17:20:51.000000Z",
+                          "updated_at": "2022-10-11T17:20:51.000000Z",
+                          "deleted_at": null
+                        }
+                      ]
+                    },
+                    {
+                      "id": 18,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-19T07:30:48.000000Z",
+                      "updated_at": "2022-10-19T07:30:48.000000Z",
+                      "deleted_at": null,
+                      "bill_details": []
+                    },
+                    {
+                      "id": 19,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-19T07:42:16.000000Z",
+                      "updated_at": "2022-10-19T07:42:16.000000Z",
+                      "deleted_at": null,
+                      "bill_details": []
+                    },
+                    {
+                      "id": 20,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-19T07:42:36.000000Z",
+                      "updated_at": "2022-10-19T07:42:36.000000Z",
+                      "deleted_at": null,
+                      "bill_details": []
+                    },
+                    {
+                      "id": 21,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-19T07:43:21.000000Z",
+                      "updated_at": "2022-10-19T07:43:21.000000Z",
+                      "deleted_at": null,
+                      "bill_details": []
+                    },
+                    {
+                      "id": 22,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-19T07:44:44.000000Z",
+                      "updated_at": "2022-10-19T07:44:44.000000Z",
+                      "deleted_at": null,
+                      "bill_details": []
+                    },
+                    {
+                      "id": 31,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-20T06:37:54.000000Z",
+                      "updated_at": "2022-10-20T06:37:54.000000Z",
+                      "deleted_at": null,
+                      "bill_details": [
+                        {
+                          "id": 22,
+                          "bill_id": 31,
+                          "product_id": 3,
+                          "price": 530000,
+                          "amount": 2,
+                          "into_price": 3,
+                          "sale": 2,
+                          "fee": 1,
+                          "total": 1,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        {
+                          "id": 23,
+                          "bill_id": 31,
+                          "product_id": 3,
+                          "price": 530000,
+                          "amount": 2,
+                          "into_price": 3,
+                          "sale": 2,
+                          "fee": 1,
+                          "total": 1,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        {
+                          "id": 24,
+                          "bill_id": 31,
+                          "product_id": 3,
+                          "price": 530000,
+                          "amount": 2,
+                          "into_price": 3,
+                          "sale": 2,
+                          "fee": 1,
+                          "total": 1,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        }
+                      ]
+                    },
+                    {
+                      "id": 50,
+                      "customer_id": 5,
+                      "bill_phone": "0973127009",
+                      "customer_name": "Tấn Thanh",
+                      "address": "Nghệ An",
+                      "city_id": 2,
+                      "dist_id": 3,
+                      "bill_price": 30000,
+                      "bill_status": 0,
+                      "created_at": "2022-10-20T07:45:59.000000Z",
+                      "updated_at": "2022-10-20T07:45:59.000000Z",
+                      "deleted_at": null,
+                      "bill_details": [
+                        {
+                          "id": 79,
+                          "bill_id": 50,
+                          "product_id": 3,
+                          "price": 333333,
+                          "amount": 3,
+                          "into_price": 1,
+                          "sale": 3,
+                          "fee": 2,
+                          "total": 10,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        {
+                          "id": 80,
+                          "bill_id": 50,
+                          "product_id": 3,
+                          "price": 333333,
+                          "amount": 3,
+                          "into_price": 1,
+                          "sale": 3,
+                          "fee": 2,
+                          "total": 10,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        },
+                        {
+                          "id": 81,
+                          "bill_id": 50,
+                          "product_id": 3,
+                          "price": 333333,
+                          "amount": 3,
+                          "into_price": 1,
+                          "sale": 3,
+                          "fee": 2,
+                          "total": 10,
+                          "created_at": null,
+                          "updated_at": null,
+                          "deleted_at": null
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

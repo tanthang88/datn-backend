@@ -9,6 +9,11 @@ return [
         ],
         'password' => [
             'required' => 'password is required',
+            'regex' => 'Password is not in the required format'
         ],
+        'gender' => [
+            'in' => 'Gender mismatch',
+            'required' => 'Gender is required',
+        ]
     ]
 ];

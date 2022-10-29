@@ -75,4 +75,12 @@ return [
             'failed' => 'Không thể bình luận',
         ],
     ],
+    'account' => [
+        'update' => [
+            'failed' => 'Không thể cập nhập tài khoản',
+        ],
+        'get_detail' => [
+            'failed' => 'Không thể lấy chi tiết tài khoản',
+        ],
+    ],
 ];

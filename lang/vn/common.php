@@ -9,6 +9,11 @@ return [
         ],
         'password' => [
             'required' => 'Mật khẩu không được để trống',
+            'regex' => 'Mật khẩu không đúng định dạng'
         ],
+        'gender' => [
+            'in' => 'Giới tính không phù hợp',
+            'required' => 'Giới tính bắt buộc phải nhập',
+        ]
     ]
 ];
