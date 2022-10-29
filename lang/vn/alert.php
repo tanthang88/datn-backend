@@ -23,4 +23,56 @@ return [
         ],
         'failed' => 'Đã có lỗi xảy ra',
     ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Không thêm được đơn hàng',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách đơn hàng',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết đơn hàng',
+        ],
+
+    ],
+    'company' => [
+        'failed' => 'Không lấy được thông tin cửa hàng',
+    ],
+    'about' => [
+        'failed' => 'Đã có lỗi xảy ra',
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết nội dung',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách nội dung',
+        ],
+    ],
+    'post' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách sản phẩm',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết sản phẩm',
+        ],
+        'failed' => 'Đã có lỗi xảy ra',
+    ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Không thêm được đơn hàng',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách đơn hàng',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết đơn hàng',
+        ],
+    ],
+    'comment' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách bình luận',
+        ],
+        'create' => [
+            'failed' => 'Không thể bình luận',
+        ],
+    ],
 ];

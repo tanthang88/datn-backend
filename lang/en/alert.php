@@ -23,4 +23,44 @@ return [
         ],
         'failed' => 'An error has occurred',
     ],
+    'company' => [
+        'failed' => 'Get Company failed',
+    ],
+    'about' => [
+        'failed' => 'An error has occurred',
+        'get_detail' => [
+            'failed' => 'Get Detail About Failed',
+        ],
+        'get_list' => [
+            'failed' => 'Get list About failed',
+        ],
+    ],
+    'product' => [
+        'get_list' => [
+            'failed' => 'Get list Product failed',
+        ],
+        'get_detail' => [
+            'failed' => 'Get Detail Product Failed',
+        ],
+        'failed' => 'An error has occurred',
+    ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Create bill failed',
+        ],
+        'get_list' => [
+            'failed' => 'get list bill failed',
+        ],
+        'get_detail' => [
+            'failed' => 'get detail bill failed',
+        ],
+    ],
+    'comment' => [
+        'get_list' => [
+            'failed' => 'Get list comments failed',
+        ],
+        'create' => [
+            'failed' => 'Create comment failed',
+        ],
+    ],
 ];

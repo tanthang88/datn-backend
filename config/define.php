@@ -1,6 +1,7 @@
 <?php
 return [
     'date_format' => 'd-m-Y',
+    'date_time_format' => 'd-m-Y H:i',
     'auth' => [
         'passport_personal_access_client_id' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
         'passport_personal_access_client_secret' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'),

@@ -17,7 +17,7 @@ class Supplier extends Model
         'supplier_order',
         'supplier_display',
         'supplier_outstanding',
-        'category_desc',
+        'supplier_desc',
         'supplier_address',
         'supplier_map',
         'supplier_phone',
@@ -25,5 +25,8 @@ class Supplier extends Model
         'created_at',
         'updated_at',
     ];
-    
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'supplier_id', 'id');
+    }
 }
