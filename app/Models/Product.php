@@ -35,9 +35,10 @@ class Product extends Model
         'supplier_id',
         'product_order',
         'product_outstanding',
+        'rating',
         'created_at'
     ];
-    
+
     public function productCategory()
     {
         return $this->belongsTo(ProductCategories::class, 'category_id', 'id');

@@ -33,7 +33,7 @@ class AboutController extends Controller
     }
     //listAboutByType
     public function listAboutsByType(Request $request)
-    {
+    {  
         try {
             $abouts = $this->aboutService->getListAboutByType($request);
             $listData = AboutResource::collection($abouts);
