@@ -71,4 +71,25 @@ return [
             'failed' => 'get detail account failed',
         ],
     ],
+    'filter' => [
+        'failed' => 'Get Filter failed',
+    ],
+    'filterProduct' => [
+        'failed' => 'Get List  Filter Product failed',
+    ],
+    'sort' => [
+        'failed' => 'Get Sort failed',
+    ],
+    'slider' => [
+        'failed' => 'An error has occurred',
+        'get_type' => [
+            'failed' => 'Get list Slider by Type failed',
+        ],
+    ],
+    'banner' => [
+        'failed' => 'An error has occurred',
+        'get_type' => [
+            'failed' => 'Get list Banner by Type failed',
+        ],
+    ],
 ];

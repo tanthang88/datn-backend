@@ -83,4 +83,25 @@ return [
             'failed' => 'Không thể lấy chi tiết tài khoản',
         ],
     ],
+    'filter' => [
+        'failed' => 'Không lấy được danh sách bộ lọc',
+    ],
+    'filterProduct' => [
+        'failed' => 'Không tìm thấy sản phẩm nào phù hợp ',
+    ],
+    'sort' => [
+        'failed' => 'Không lấy được danh sách sắp xếp',
+    ],
+    'slider' => [
+        'failed' => 'Đã có lỗi xảy ra',
+        'get_type' => [
+            'failed' => 'Không lấy được danh sách slider theo  type',
+        ],
+    ],
+    'banner' => [
+        'failed' => 'Đã có lỗi xảy ra',
+        'get_type' => [
+            'failed' => 'Không lấy được danh sách banner theo  type',
+        ],
+    ],
 ];
