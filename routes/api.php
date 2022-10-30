@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\ProductCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductFilterController;
+use App\Http\Controllers\Api\SliderController;
+use App\Http\Controllers\Api\BannerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -69,4 +71,12 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/{product}', [ProductController::class, 'show']);
     Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
     Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
+});
+Route::group(['prefix' => 'slider'], function () {
+    Route::get('/', [SliderController::class, 'listSliders']);
+    Route::get('/types/{type}', [SliderController::class, 'listSlidersByType']);
+});
+Route::group(['prefix' => 'banner'], function () {
+    Route::get('/', [BannerController::class, 'listBanners']);
+    Route::get('/types/{type}', [BannerController::class, 'listBannersByType']);
 });

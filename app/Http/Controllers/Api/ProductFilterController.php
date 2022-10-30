@@ -67,9 +67,9 @@ class ProductFilterController extends Controller
             $data = $this->productFilterService->getListProductFilter($request);
             return $this->responseSuccess(['data' => $data]);
         } catch (\Throwable $th) {
-            Log::error("get list  sort ", $th);
+            Log::error("get list  filter product", $th);
             return $this->responseError(
-                array(trans('alert.sort.failed')),
+                array(trans('alert.filterProduct.failed')),
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }

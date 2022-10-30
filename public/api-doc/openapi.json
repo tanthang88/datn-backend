@@ -1914,6 +1914,300 @@
                     }
                 }
             }
+        },
+        "/api/slider": {
+            "get": {
+                "tags": ["Slider"],
+                "summary": "Get List Slider",
+                "operationId": "get-list-slider",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Nick Gerlach",
+                                            "image": "https://via.placeholder.com/200x200.png/005533?text=fugit",
+                                            "link": "auer.net",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 2,
+                                            "title": "Dr. Brendon Hackett DVM",
+                                            "image": "https://via.placeholder.com/200x200.png/007799?text=nulla",
+                                            "link": "gaylord.info",
+                                            "type": "eligendi-voluptate",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 3,
+                                            "title": "Kari Mayer",
+                                            "image": "https://via.placeholder.com/200x200.png/00aa66?text=beatae",
+                                            "link": "west.com",
+                                            "type": "odio-voluptate-at",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 4,
+                                            "title": "Andrew Thiel V",
+                                            "image": "https://via.placeholder.com/200x200.png/0033dd?text=eum",
+                                            "link": "smitham.com",
+                                            "type": "iusto-aliquam-perferendis",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 5,
+                                            "title": "Oral Marks",
+                                            "image": "https://via.placeholder.com/200x200.png/009999?text=qui",
+                                            "link": "stamm.com",
+                                            "type": "magni-aperiam-quia",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 6,
+                                            "title": "Jamarcus Smitham",
+                                            "image": "https://via.placeholder.com/200x200.png/00bbcc?text=doloribus",
+                                            "link": "hoeger.org",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 7,
+                                            "title": "Brady Hilpert",
+                                            "image": "https://via.placeholder.com/200x200.png/00ffcc?text=voluptatibus",
+                                            "link": "herzog.com",
+                                            "type": "itaque-et",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 8,
+                                            "title": "Terrance Casper",
+                                            "image": "https://via.placeholder.com/200x200.png/00cc22?text=et",
+                                            "link": "toy.com",
+                                            "type": "consequatur-consequatur",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 9,
+                                            "title": "Earlene Wuckert",
+                                            "image": "https://via.placeholder.com/200x200.png/00ccff?text=aut",
+                                            "link": "abernathy.org",
+                                            "type": "mollitia-exercitationem-voluptatibus",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 10,
+                                            "title": "Magnus Collier",
+                                            "image": "https://via.placeholder.com/200x200.png/006611?text=et",
+                                            "link": "schowalter.net",
+                                            "type": "dicta-nobis",
+                                            "desc": null,
+                                            "content": null
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/slider/types/{type}": {
+            "get": {
+                "tags": ["Slider"],
+                "summary": "Get List Slider By Type",
+                "operationId": "get-list-slider-by-type",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "description": "type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 6,
+                                            "title": "Jamarcus Smitham",
+                                            "image": "https://via.placeholder.com/200x200.png/00bbcc?text=doloribus",
+                                            "link": "hoeger.org",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 1,
+                                            "title": "Nick Gerlach",
+                                            "image": "https://via.placeholder.com/200x200.png/005533?text=fugit",
+                                            "link": "auer.net",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/banner": {
+            "get": {
+                "tags": ["Banner"],
+                "summary": "Get List Banner",
+                "operationId": "get-list-banner",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Deanna Lemke PhD",
+                                            "image": "https://via.placeholder.com/200x200.png/00ff66?text=velit",
+                                            "link": "hermann.info",
+                                            "type": "quas-sit"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "title": "Orie Zieme",
+                                            "image": "https://via.placeholder.com/200x200.png/009999?text=veritatis",
+                                            "link": "mante.com",
+                                            "type": "id-ut"
+                                        },
+                                        {
+                                            "id": 3,
+                                            "title": "Brandyn Smitham",
+                                            "image": "https://via.placeholder.com/200x200.png/00ffff?text=qui",
+                                            "link": "romaguera.org",
+                                            "type": "dignissimos-ut"
+                                        },
+                                        {
+                                            "id": 4,
+                                            "title": "Gustave Johnston",
+                                            "image": "https://via.placeholder.com/200x200.png/008822?text=accusantium",
+                                            "link": "nienow.com",
+                                            "type": "rerum-asperiores-officiis"
+                                        },
+                                        {
+                                            "id": 5,
+                                            "title": "Gust Murray",
+                                            "image": "https://via.placeholder.com/200x200.png/00dd55?text=libero",
+                                            "link": "mertz.com",
+                                            "type": "inventore-et"
+                                        },
+                                        {
+                                            "id": 6,
+                                            "title": "Ella Ebert",
+                                            "image": "https://via.placeholder.com/200x200.png/004499?text=nemo",
+                                            "link": "lind.com",
+                                            "type": "asperiores-qui-qui"
+                                        },
+                                        {
+                                            "id": 7,
+                                            "title": "Vito Davis",
+                                            "image": "https://via.placeholder.com/200x200.png/00ee44?text=ut",
+                                            "link": "kessler.com",
+                                            "type": "inventore-et"
+                                        },
+                                        {
+                                            "id": 8,
+                                            "title": "Yolanda Satterfield I",
+                                            "image": "https://via.placeholder.com/200x200.png/00aa44?text=vel",
+                                            "link": "fisher.com",
+                                            "type": "eaque-sunt-ea"
+                                        },
+                                        {
+                                            "id": 9,
+                                            "title": "Prof. Alyson Marvin",
+                                            "image": "https://via.placeholder.com/200x200.png/00ffcc?text=magni",
+                                            "link": "smith.net",
+                                            "type": "animi-non-in"
+                                        },
+                                        {
+                                            "id": 10,
+                                            "title": "Rebecca Leannon II",
+                                            "image": "https://via.placeholder.com/200x200.png/004499?text=voluptatem",
+                                            "link": "batz.org",
+                                            "type": "eveniet-nostrum"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/banner/types/{type}": {
+            "get": {
+                "tags": ["Banner"],
+                "summary": "Get List Banner By Type",
+                "operationId": "get-list-banner-by-type",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "description": "type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 7,
+                                            "title": "Vito Davis",
+                                            "image": "https://via.placeholder.com/200x200.png/00ee44?text=ut",
+                                            "link": "kessler.com",
+                                            "type": "inventore-et"
+                                        },
+                                        {
+                                            "id": 5,
+                                            "title": "Gust Murray",
+                                            "image": "https://via.placeholder.com/200x200.png/00dd55?text=libero",
+                                            "link": "mertz.com",
+                                            "type": "inventore-et"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
