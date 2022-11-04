@@ -22,10 +22,18 @@ class PostCategory extends Model
      * @var array
      */
     protected $fillable = array(
-        'category_post_name',
+        'category_name',
+        'category_slug',
         'category_post_order',
         'category_post_display',
-        'category_post_slug',
+        'category_outstanding',
+        'category_desc',
+        'type',
+        'category_content',
+        'category_title',
+        'seo_keyword',
+        'created_at',
+        'update_at',
     );
     /**
      * timestamps

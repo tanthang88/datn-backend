@@ -22,12 +22,20 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'post_title',
+        'category_id',
+        'post_name',
         'post_slug',
-        'post_describe',
+        'type',
+        'post_desc',
         'post_content',
-        'post_status',
+        'post_display',
+        'post_order',
         'post_outstanding',
+        'post_seo_title',
+        'post_seo_keyword',
+        'post_sep_description',
+        'created_at',
+        'update_at',
     ];
     /**
      * timestamps

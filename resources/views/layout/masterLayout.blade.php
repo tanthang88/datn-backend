@@ -35,6 +35,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="../assets/plugins/summernote/summernote-bs4.min.css">
     @stack('style')
+   
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -134,8 +135,10 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../assets/dist/js/demo.js"></script>
 <script src="../assets/plugins/dropzone/min/dropzone.min.js"></script>
-
-
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('content')
+</script>
     @stack('scripts')
 </body>
 

@@ -53,23 +53,36 @@ print_r($data);
     {
         $product_categories= DB::table('product_categories')->where('parent_id', 0)->get();
         $parent_id=DB::table('product_categories')->where('id',$id)->get();
+        
+
         foreach($parent_id as $parent_id) {
             $parent_id_val = $parent_id -> parent_id;
         }
-        $parent_name=DB::table('product_categories')->where('id',$parent_id_val)->get();
-        foreach($parent_name as $parent_name) {
-            $parent_name_val = $parent_name -> category_name;
+           $updateCP= DB::table('product_categories')->where('id', $id)->get();
+            // echo $updateCP;
+            // exit;
+        if($parent_id_val !=0) {
+            $parent_name=DB::table('product_categories')->where('id',$parent_id_val)->get();
+            foreach($parent_name as $parent_name) {
+                $parent_name_val = $parent_name -> category_name;
+            //echo $parent_name_val;
+    
+            }
+            
+            return view('pages.categoriesproduct.edit',[
+            'updateCP' => $updateCP,
+            'parent_name_val'=>$parent_name_val,
+            'product_categories' =>$product_categories,
+            'parent_id_val' =>$parent_id_val
+        ]);
+        } else {
+            return view('pages.categoriesproduct.edit',[
+                'updateCP' => $updateCP,
+                'product_categories' =>$product_categories,
+                'parent_id_val' =>$parent_id_val
+            ]);
         }
-        //echo $parent_name_val;
-        $updateCP= DB::table('product_categories')->where('id', $id)->get();
-        // echo $updateCP;
-        // exit;
-        return view('pages.categoriesproduct.edit',[
-        'updateCP' => $updateCP,
-        'parent_name_val'=>$parent_name_val,
-        'product_categories' =>$product_categories,
-        'parent_id_val' =>$parent_id_val
-    ]);
+        
     }
     public function postUpdate(Request $request, $id)
     {

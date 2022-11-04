@@ -96,20 +96,45 @@
             <a href="#" class="nav-link">
             <i class="fa fa-th pl-1" aria-hidden="true"></i>
               <p class="pl-2">
-                Sản phẩm
+                Danh Mục Bài Viết
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">2</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="Product/Add" class="nav-link">
+                <a href="PostCategories/Add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Thêm mới</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="Product/List" class="nav-link">
+                <a href="PostCategories/List" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="fa fa-th pl-1" aria-hidden="true"></i>
+              <p class="pl-2">
+                Bài Viết
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="Post/Add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="Post/List" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Danh sách</p>
                 </a>
