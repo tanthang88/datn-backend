@@ -17,7 +17,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/dist/{city}', [DistController::class, 'dist']);
 Route::group(['prefix' => '/'], function () {
     Route::get('', function () {
         return view('pages.home');

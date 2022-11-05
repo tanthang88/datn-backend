@@ -11,7 +11,7 @@ const chooseFile = (fileInput) => {
 const onChangeCity = (city) => {
   const $select = document.querySelector('#myDist'); {
     $.ajax({
-      url: `dist/${city.target.value}`,
+      url: `api/information/dist/${city.target.value}`,
       type: 'GET',
       success: function (res) {
         const selectOption = $('#myDist');
