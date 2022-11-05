@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +33,8 @@
     <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../assets/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{asset('assets/plugins/toastr/toastr.min.css')}}">
+
     @stack('style')
 </head>
 
@@ -133,10 +134,15 @@
     <script src="../assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../assets/dist/js/demo.js"></script>
-<script src="../assets/plugins/dropzone/min/dropzone.min.js"></script>
-
+    <script src="../assets/plugins/dropzone/min/dropzone.min.js"></script>
+    <script src="{{asset('assets/plugins/toastr/toastr.min.js')}}"></script>
 
     @stack('scripts')
+    @if(Session::has('success'))
+    <script>
+        toastr.success("{!! Session::get('success')!!}");
+    </script>
+    @endif
 </body>
 
 </html>

@@ -11,6 +11,7 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasFactory, SoftDeletes, Notifiable, HasApiTokens;
+    const PASSWORD_DEFAULT = 'datn7878';
     const STATUS_BLOCK = 0;
     const STATUS_ACTIVE = 1;
 
@@ -62,4 +63,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * city
+     *
+     * @return Collection
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    /**
+     * pref
+     *
+     * @return Collection
+     */
+    public function dist()
+    {
+        return $this->belongsTo(Dist::class, 'dist_id', 'id');
+    }
 }

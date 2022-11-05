@@ -92,4 +92,16 @@ return [
             'failed' => 'Get list Banner by Type failed',
         ],
     ],
+    'add' => [
+        'success' => 'Create Successfully',
+        'error' => 'Create Failed'
+    ],
+    'update' => [
+        'success' => 'Update successful',
+        'error' => 'Update Failed'
+    ],
+    'delete' => [
+        'success' => 'Delete successful',
+        'error' => 'Delete Failed'
+    ],
 ];

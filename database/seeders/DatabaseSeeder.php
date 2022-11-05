@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PropertiesTableSeeder::class);
         $this->call(SliderTableSeeder::class);
         $this->call(BannerTableSeeder::class);
+        $this->call(UserTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
