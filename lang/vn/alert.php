@@ -104,4 +104,16 @@ return [
             'failed' => 'Không lấy được danh sách banner theo  type',
         ],
     ],
+    'add' => [
+        'success' => 'Thêm Thành Công',
+        'error' => 'Thêm Thất Bại'
+    ],
+    'update' => [
+        'success' => 'Cập Nhật Thành Công',
+        'error' => 'Cập Nhật Thất Bại'
+    ],
+    'delete' => [
+        'success' => 'Xoá Thành Công',
+        'error' => 'Xoá Thất Bại'
+    ],
 ];
