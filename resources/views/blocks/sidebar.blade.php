@@ -90,26 +90,26 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
-                        <p class="pl-2">
-                            Sản phẩm
-                            <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">2</span>
-                        </p>
+                    <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                      <p class="pl-2">
+                        Sản phẩm
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right">2</span>
+                      </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="Product/Add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="Product/List" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
+                      <li class="nav-item">
+                        <a href="product/list" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Danh sách</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Danh mục</p>
+                        </a>
+                      </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -152,9 +152,28 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      <p class="pl-2">
+                        Thông tin
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right">2</span>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="about/list" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Danh sách</p>
+                        </a>
+                      </li>
+                    </ul>
+                </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
 </aside>
