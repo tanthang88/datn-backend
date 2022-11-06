@@ -20,7 +20,7 @@ Chỉnh sửa khách hàng
                     </span>
                     @endif
                 </div>
-                <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}"
+                <form method="POST" action="{{ route('user.update', ['user' => $user->id]) }}"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">

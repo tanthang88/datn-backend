@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoriesProductController;
-use App\Http\Controllers\DistController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -40,11 +40,23 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/List', [CategoriesProductController::class, 'getList']);
         Route::get('/Delete/{id}', [CategoriesProductController::class, 'getDelete']);
     });
-    Route::group(['prefix' => 'users'], function () {
-        Route::get('/', [UserController::class, 'index'])->name('users.list');
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.list');
         Route::get('data', [UserController::class, 'dataUser'])->name('dataUser');
-        Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
-        Route::post('/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
+        Route::post('/{user}', [UserController::class, 'update'])->name('user.update');
         Route::get('/delete/{user}', [UserController::class, 'delete']);
     });
+
+    Route::group(['prefix' => 'role'], function () {
+        Route::get('/', [RoleController::class, 'index'])->name('role.list');
+        Route::get('data', [RoleController::class, 'dataRoles'])->name('dataRoles');
+        Route::get('/add', [RoleController::class, 'create'])->name('role.add');
+        Route::post('/store', [RoleController::class, 'store'])->name('role.store');
+        Route::get('/{role}', [RoleController::class, 'show'])->name('role.edit');
+        Route::post('/{role}', [RoleController::class, 'update'])->name('role.update');
+        Route::get('/delete/{role}', [RoleController::class, 'delete'])->name('role.delete');
+
+    });
+
 });

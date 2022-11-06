@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SliderTableSeeder::class);
         $this->call(BannerTableSeeder::class);
         $this->call(UserTableSeeder::class);
+        $this->call(AdminRoleTableSeeder::class);
+        $this->call(AdminPermissionTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
