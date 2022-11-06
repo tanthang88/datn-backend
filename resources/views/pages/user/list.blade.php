@@ -11,7 +11,7 @@
         <div class="col-12 table-responsive">
             <table
                 class="table table-striped display nowrap hover"
-                id="tableUser"
+                id="dataTable"
                 style="width: 100%"
             >
                 <thead>
@@ -36,5 +36,9 @@
 <script
     type="module"
     src="{{Vite::asset('resources/js/user/list.js')}}"
+></script>
+<script
+    type="module"
+    src="{{Vite::asset('resources/js/components/confirmDel.js')}}"
 ></script>
 @endprepend

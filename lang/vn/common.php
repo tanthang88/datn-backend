@@ -27,5 +27,20 @@ return [
         'address' => [
             'required' => 'Địa chỉ là bắt buộc'
         ],
+        'role' => [
+            'name' => [
+                'required' =>  'Tên phân quyền là bắt buộc'
+            ],
+            'display_name' => [
+                'required' => 'Vui lòng nhập mô tả vai trò phân quyền'
+            ],
+            'permission' => [
+                'required' => 'Vui lòng chọn phân quyền'
+            ],
+        ],
+    ],
+    'table' =>
+    [
+        'no_rows' => 'Không có bản ghi nào'
     ]
 ];
