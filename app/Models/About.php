@@ -14,7 +14,6 @@ class About extends Model
     const ABOUT_ACTIVE = 1;
     protected $table = 'abouts';
     protected $fillable = [
-        'id',
         'about_name',
         'about_slug',
         'type',

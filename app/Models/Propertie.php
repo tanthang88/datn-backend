@@ -12,6 +12,7 @@ class Propertie extends Model
     protected $table = 'properties';
     protected $fillable = [
         'propertie_name',
+        'propertie_slug',
         'propertie_value',
         'product_id',
         'created_at',

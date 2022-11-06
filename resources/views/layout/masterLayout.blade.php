@@ -38,7 +38,6 @@
 
     <!-- csrf-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     @stack('style')
 </head>
 
@@ -77,10 +76,12 @@
             <!-- /.content-header -->
             <section class="content">
                 @yield('content')
+
+                @include('sweetalert::alert')
             </section>
         </div>
         <!-- /.content-wrapper -->
-        @inclue('blocks/footer')
+        @include('blocks/footer')
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -112,6 +113,8 @@
     <script src="../assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+    <!-- Sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Ckeditor + Filemanager-->
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
@@ -129,7 +132,7 @@
     </script>
 
     <script>
-    CKEDITOR.replace('pro_content', options);
+            CKEDITOR.replace('pro_content', options);
     </script>
     <!-- Validate -->
 

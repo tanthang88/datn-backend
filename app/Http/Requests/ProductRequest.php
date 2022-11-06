@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'product_name'     => 'required|min:6|max:255|unique:products,product_name,'.$this->id,
-            'product_price'    => 'required|min:2|max:8',
+            // 'product_price'    => 'min:2|max:8',
             'product_quantity' => 'required|integer|min:1',
             'product_order'    => 'required|min:0',
             // 'config_screen'    => 'required',
@@ -45,9 +45,9 @@ class ProductRequest extends FormRequest
             'product_name.unique'       => 'Tên sản phẩm đã tồn tại',
             'product_name.max'          => 'Tên sản phẩm quá dài',
 
-            'product_price.required'    => 'Giá sản phẩm chưa nhập',
-            'product_price.min'         => 'Giá tối thiểu 2 chữ số',
-            'product_price.max'         => 'Giá tối đa 8 chữ số',
+            // 'product_price.required'    => 'Giá sản phẩm chưa nhập',
+            // 'product_price.min'         => 'Giá tối thiểu 2 chữ số',
+            // 'product_price.max'         => 'Giá tối đa 8 chữ số',
 
             'product_quantity.required'    => 'Số lượng kho chưa nhập',
             'product_quantity.min'         => 'Số lượng kho tối thiểu là 1',

@@ -117,7 +117,25 @@
 
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <p class="pl-2">
+                Thông tin
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="about/list" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
+                </a>
+              </li>
 
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -26,6 +26,28 @@
     span.help-block{
         color:#dc3545;
     }
+    #displayListImg, #displayImg, #imgNow, #imgListNow {
+        margin-top: 30px;
+    }
+    #displayImg img, #imgNow img{
+        height:180px;
+        margin-right: 15px;
+    }
+
+    #displayListImg img, #imgListNow img {
+        height: 50px;
+        margin-right: 15px;
+        display: inline-block;
+    }
+    .hide{
+        display:none;
+    }
+    .bg-gradient-last .form-control{
+        border:1px solid #555;
+    }
+    .bg-gradient-new .form-control{
+        border:1px solid #28a745;
+    }
 </style>
 @section('content')
     <!-- Content Header (Page header) -->
@@ -33,7 +55,7 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-              <form action="" method="post" class="col-12">
+              <form action="" method="post" class="col-12" enctype="multipart/form-data">
                     <div class="row" style="padding-bottom:20px;">
                         <div class="col-3">
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
@@ -155,11 +177,36 @@
                                                 </div>
                                             </div> --}}
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Ảnh sản phẩm:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Hình ảnh sản phẩm:(Độ dài 600x600px)</label>
                                                 <div class="input-group">
-                                                    <input id="sp_hinhanhlienquan" type="file" name="sp_hinhanhlienquan[]" multiple>
+                                                    <input id="img_product" type="file" name="img_product" onchange="ImagesFileAsURL()">
+                                                    <div id="imgNow">
+                                                        @if($data->product_image!='')
+                                                            <img src="{{$data->product_image}}">
+                                                        @endif
+                                                    </div>
+                                                    <div id="displayImg">
+
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group pd-row-2">
+                                                <label for="exampleInputFile">Album ảnh:(Độ dài 600x600px)</label>
+                                                <div class="input-group">
+                                                    <input id="img_list" type="file" name="img_list[]" onchange="ImagesListFileAsURL()" multiple>
+                                                    <div id="imgListNow">
+                                                        @if($images!=null)
+                                                            @foreach($images as $images)
+                                                                <img src="{{$images->image}}">
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                    <div id="displayListImg">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -180,6 +227,151 @@
 
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="card" style="border-top:1px solid rgba(0,0,0,.125);">
+                        <ul class="nav nav-pills">
+                            <li class="nav-content pd-row" style="border-right:1px solid rgba(0,0,0,.125);"><i class="fa fa-certificate" aria-hidden="true"></i></li>
+                            <li class="nav-content pd-row">Dữ liệu sản phẩm ---</li>
+                            <li class="nav-content">
+                                <select class="form-control is_variation" name="is_variation" id="is_variation" onchange="chooseProduct();" style="width:100%;">
+                                    @if($data->is_variation=='0')
+                                    <option value="0" ><a class="nav-link active" href="#infomation" data-toggle="tab" selected="selected">Sản phẩm đơn giản</a></option>
+                                    <option value="1"><a class="nav-link" href="#content" data-toggle="tab">Sản phẩm biến thể</a></option>
+                                    @else
+                                    <option value="1"><a class="nav-link" href="#content" data-toggle="tab" selected="selected">Sản phẩm biến thể</a></option>
+                                    <option value="0" ><a class="nav-link active" href="#infomation" data-toggle="tab">Sản phẩm đơn giản</a></option>
+                                    @endif
+                                </select>
+                            </li>
+                        </ul>
+                        <div style="border-top:1px solid rgba(0,0,0,.125)">
+                        </div>
+                        <div class="card-body" style="padding:0;">
+                            @if($data->is_variation=='0')
+                            <div class="type-nomarl">
+                                <input type="hidden" name="input_type" value="normal">
+                                <div class="row normalPro">
+                                    <div class="col-5 col-sm-3">
+                                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="vert-tabs-general-tab" data-toggle="pill" href="#vert-tabs-general" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fa fa-wrench icon-pd" aria-hidden="true"></i> Chung</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-sm-9" style="padding:0.75rem;">
+                                        <div class="tab-content" id="vert-tabs-tabContent">
+                                            <div class="tab-pane text-left fade show active" id="vert-tabs-general" role="tabpanel" aria-labelledby="vert-tabs-general-tab">
+                                                <div class="row pd-10">
+                                                    <label class="col-3">Giá sản phẩm (₫)</label>
+                                                    <input type="number" name="product_price" class="col-7 form-control" id="" value="{{ old('product_price')}}" placeholder="Giá">
+                                                    @error('product_price')
+                                                        <span class="col-4"></span>
+                                                        <span class="col-8 help-block">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row variantPro" style="display:none">
+                                    <div class="col-5 col-sm-3">
+                                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-properties" role="tab" aria-controls="vert-tabs-properties" aria-selected="true"><i class="fa fa-list-alt icon-pd" aria-hidden="true"></i> Thuộc tính</a>
+                                            <a class="nav-link" id="vert-tabs-variant-tab" data-toggle="pill" href="#vert-tabs-variant" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fa fa-random icon-pd" aria-hidden="true"></i> Biến thể</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-sm-9" style="padding:0.75rem;">
+                                        <div class="tab-content" id="vert-tabs-tabContent">
+                                            <div class="tab-pane text-left fade show active" id="vert-tabs-properties" role="tabpanel" aria-labelledby="vert-tabs-properties-tab">
+                                                <div style="padding-bottom:10px;"><a class="btn btn-primary" style="color:#2271b1;border-color: #2271b1;background: #f6f7f7;" onclick="typeProperties()">Thêm thuộc tính cho sản phẩm </a></div>
+
+                                                <div id="vert-tabs-content-properties-type">
+
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane text-left fade" id="vert-tabs-variant" role="tabpanel" aria-labelledby="vert-tabs-variant-tab">
+                                                Hãy cập nhật ở danh sách sản phẩm..
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                            <div class="type-variant">
+                                <input type="hidden" name="input_type" value="variant">
+                                <div class="row variantPro">
+                                    <div class="col-5 col-sm-3">
+                                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-properties" role="tab" aria-controls="vert-tabs-properties" aria-selected="true"><i class="fa fa-list-alt icon-pd" aria-hidden="true"></i> Thuộc tính</a>
+                                            <a class="nav-link" id="vert-tabs-variant-tab" data-toggle="pill" href="#vert-tabs-variant" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fa fa-random icon-pd" aria-hidden="true"></i> Biến thể</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-sm-9" style="padding:0.75rem;">
+                                        <div class="tab-content" id="vert-tabs-tabContent">
+                                            <div class="tab-pane text-left fade show active" id="vert-tabs-properties" role="tabpanel" aria-labelledby="vert-tabs-properties-tab">
+                                                <div style="padding-bottom:10px;"><a class="btn btn-primary" style="color:#2271b1;border-color: #2271b1;background: #f6f7f7;" onclick="addProperties()">Thêm thuộc tính cho sản phẩm </a></div>
+                                                <!-- /thuộc tính cũ -->
+                                                <div id="last-properties">
+                                                    @foreach($properties as $propertie)
+                                                        <div class="card bg-gradient-last collapsed-card" style="color:#555;border:1px solid #111111;background-color:#f6f7f7;">
+                                                            <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                                                                <h3 class="card-title">{{$propertie->propertie_name}}</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn bg-dark btn-sm" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+                                                                    <button type="button" id="remove" class="btn bg-dark btn-sm" onclick="removeRow({{$propertie->id}})"><i class="fas fa-times"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body" style="display:none;">
+                                                                <input type="hidden" name="id[]" value="{{$propertie->id}}">
+                                                                <div class="row pd-10">
+                                                                    <label class="col-3">Tên:</label>
+                                                                    <input type="text" name="propertie_name[]" value="{{$propertie->propertie_name}}" class="col-7 form-control" id=""  placeholder="Tên thuộc tính">
+                                                                </div>
+                                                                <div class="row pd-10"><label class="col-3">Giá trị(s):</label><textarea class="col-7 form-control" name="propertie_value[]" rows="3" placeholder="Nhập nội dung hoặc một số thuộc tính bằng '|' các giá trị riêng.">{{$propertie->propertie_value}}</textarea></div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <!-- /thuộc tính mới -->
+                                                <div id="new-properties">
+                                                    <input type="hidden" id="input-propertie" name="input_propertie">
+                                                    <div id="vert-tabs-content-properties">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane text-left fade" id="vert-tabs-variant" role="tabpanel" aria-labelledby="vert-tabs-variant-tab">
+                                                Hãy cập nhật ở danh sách sản phẩm..
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row normalPro" style="display:none;">
+                                    <div class="col-5 col-sm-3">
+                                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" id="vert-tabs-general-tab" data-toggle="pill" href="#vert-tabs-general" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fa fa-wrench icon-pd" aria-hidden="true"></i> Chung</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-sm-9" style="padding:0.75rem;">
+                                        <div class="tab-content" id="vert-tabs-tabContent">
+                                            <div class="tab-pane text-left fade show active" id="vert-tabs-general" role="tabpanel" aria-labelledby="vert-tabs-general-tab">
+                                                <div class="row pd-10">
+                                                    <label class="col-3">Giá sản phẩm (₫)</label>
+                                                    <input type="number" name="product_price" class="col-7 form-control" id="" value="{{ old('product_price')}}" placeholder="Giá">
+                                                    @error('product_price')
+                                                        <span class="col-4"></span>
+                                                        <span class="col-8 help-block">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
@@ -301,6 +493,23 @@
                     </div>
                     @csrf
               </form>
+              <!-- /form propertie -->
+              <div class="card bg-gradient-new" id="add-properties" style="display:none;color:#555;border:1px solid #28a745;background-color:#f6f7f7">
+                <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                    <h3 class="card-title">thuộc tính mới</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn bg-success btn-sm" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        <button type="button" id="remove" class="btn bg-success btn-sm" onclick="remove()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body" style="display: block;">
+                    <div class="row pd-10">
+                        <label class="col-3">Tên:</label>
+                        <input type="text" name="propertie_name_n[]" class="col-7 form-control" id=""  placeholder="Tên thuộc tính">
+                    </div>
+                    <div class="row pd-10"><label class="col-3">Giá trị(s):</label><textarea class="col-7 form-control" name="propertie_value_n[]" rows="3" placeholder="Nhập nội dung hoặc một số thuộc tính bằng '|' các giá trị riêng."></textarea></div>
+                </div>
+            </div>
             </div>
                 <!-- ./col -->
 
@@ -324,33 +533,68 @@
 </div>
 @endsection
 <script>
-     $("#sp_hinhanhlienquan").fileinput({
-            theme: 'fas',
-            showUpload: false,
-            showCaption: false,
-            browseClass: "btn btn-primary btn-lg",
-            fileType: "any",
-            append: false,
-            showRemove: false,
-            autoReplace: true,
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            overwriteInitial: false,
-            allowedFileExtensions: ["jpg", "gif", "png", "txt"],
-            initialPreviewShowDelete: false,
-            initialPreviewAsData: true,
-            initialPreview: [
-                @foreach($image as $imglist)
-                "{{ $imglist->image }}",
-                @endforeach
-            ],
-            initialPreviewConfig: [
-                @foreach($image as $index=>$imglist)
-                {
-                    size: {{ Storage::exists($imglist) ? Storage::size($imglist) : 0 }},
-                    width: "120px",
-                    url: "{$url}",
-                },
-                @endforeach
-            ]
-        });
+    // chọn loại sản phẩm
+     function chooseProduct(){
+        var valueIp = $('#is_variation').val();
+        if(valueIp === '1'){
+            $('.variantPro').show();
+            $('.normalPro').hide();
+        }else{
+            $('.variantPro').hide();
+            $('.normalPro').show();
+        }
+    }
+    function typeProperties(){
+        $("#add-properties").clone().appendTo("#vert-tabs-content-properties-type");
+        $("#add-properties").show();
+    }
+    function addProperties(){
+        if(confirm('Bạn có chắc muốn thêm thuộc tính mới không ?')){
+            $("#add-properties").clone().appendTo("#vert-tabs-content-properties");
+            $("#add-properties").show();
+            $('#input-propertie').val('check');
+        }
+    }
+    function remove(){
+        $('#add-properties').remove();
+    }
+    // ảnh sản phẩm
+     function ImagesFileAsURL() {
+               var fileSelected = document.getElementById('img_product').files;
+               var imgNow = document.getElementById('imgNow');
+               if (fileSelected.length > 0) {
+                       imgNow.classList.add("hide");
+                       var fileToLoad = fileSelected[0];
+                       var fileReader = new FileReader();
+                       fileReader.onload = function(fileLoaderEvent) {
+                           var srcData = fileLoaderEvent.target.result;
+                           var newImage = document.createElement('img');
+                           newImage.src = srcData;
+                           document.getElementById('displayImg').innerHTML = newImage.outerHTML;
+                       }
+                       fileReader.readAsDataURL(fileToLoad);
+
+               }
+    }
+    // list hình ảnh
+    function ImagesListFileAsURL() {
+               var fileSelected = document.getElementById('img_list').files;
+               var imgListNow = document.getElementById('imgListNow');
+               if (fileSelected.length > 0) {
+                   imgListNow.classList.add("hide");
+                   for (var i = 0; i < fileSelected.length; i++) {
+                       var fileToLoad = fileSelected[i];
+                       var fileReader = new FileReader();
+                       fileReader.onload = function(fileLoaderEvent) {
+                           var srcData = fileLoaderEvent.target.result;
+                           var newImage = document.createElement('img');
+                           newImage.src = srcData;
+                           document.getElementById('displayListImg').innerHTML += newImage.outerHTML;
+                       }
+                       fileReader.readAsDataURL(fileToLoad);
+                   }
+
+               }
+    }
+
 </script>

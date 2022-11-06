@@ -1,12 +1,6 @@
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-function removeRow(id,url)
+function removeRow(id)
 {
-    if(confirm('Bạn có chắc muốn xóa mục này không ?')){
+    if(confirm('Bạn có chắc muốn xóa mục này không '+id+' ?')){
         $.ajax({
             type:'DELETE',
             datatype:'JSON',
@@ -14,7 +8,6 @@ function removeRow(id,url)
             url:url,
             success: function (result){
                 if(result.error==false){
-                    alert(result.message)
                     location.reload();
                 }else{
                     alert('Xóa thất bại!!');

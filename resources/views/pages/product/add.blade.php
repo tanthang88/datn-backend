@@ -4,6 +4,16 @@
 @endsection
 @push('style')
 <style>
+    .nav-tabs .nav-link.active,
+    .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #eee;
+    border-color: #dee2e6 #dee2e6 #fff;
+    }
+    .icon-pd{
+        padding-right:5px;
+        font-size:12px;
+    }
     .nav-content{
         color:rgba(0,0,0,.6);
         padding:0.5rem 0.7rem;
@@ -25,14 +35,24 @@
     span.help-block{
         color:#dc3545;
     }
-    #displayListImg {
+    #displayListImg, #displayImg {
         margin-top: 30px;
+    }
+    #displayImg img{
+        height:180px;
+        margin-right: 15px;
     }
 
     #displayListImg img {
         height: 50px;
         margin-right: 15px;
         display: inline-block;
+    }
+    .show{
+        display:block !important;
+    }
+    .hide{
+        display:none !important;
     }
 </style>
 @endpush
@@ -86,14 +106,6 @@
                                                 </select>
                                             </div>
                                             <div class="row pd-10">
-                                                <label class="col-4">Giá sản phẩm (₫)</label>
-                                                <input type="number" name="product_price" class="col-8 form-control" id="" value="{{ old('product_price')}}" placeholder="Giá">
-                                                @error('product_price')
-                                                    <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{$message}}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="row pd-10">
                                                 <label class="col-4">Số lượng kho</label>
                                                 <input type="number" name="product_quantity" class="col-8 form-control" id="" value="{{ old('product_quantity')}}" placeholder="Số lượng nhập về">
                                                 @error('product_quantity')
@@ -107,7 +119,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Hiển thị</label>
-                                                <input type="checkbox" name="product_display">
+                                                <input type="checkbox" checked name="product_display">
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Số thứ tự</label>
@@ -116,6 +128,10 @@
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
                                                 @enderror
+                                            </div>
+                                            <div class="row pd-10">
+                                                <label class="col-4">Giảm giá</label>
+                                                <input type="checkbox" name="is_discount_product">
                                             </div>
                                         </div>
                                         <div class="col-6" style="padding:0 50px;">
@@ -165,28 +181,28 @@
                                                 </div>
                                             </div> --}}
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Ảnh sản phẩm:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Hình ảnh sản phẩm:(Độ dài 600x600px)</label>
                                                 <div class="input-group">
-                                                    <input id="img_product" type="file" name="img_product[]" onchange="ImagesFileAsURL()">
+                                                    <input id="img_product" type="file" name="img_product" onchange="ImagesFileAsURL()">
                                                     <div id="displayImg">
-
+                                                        {{-- Hiển thị hình ảnh --}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Ảnh sản phẩm:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Album ảnh:(Độ dài 600x600px)</label>
                                                 <div class="input-group">
                                                     <input id="img_list" type="file" name="img_list[]" onchange="ImagesListFileAsURL()" multiple>
                                                     <div id="displayListImg">
-
+                                                        {{-- Hiển thị hình ảnh --}}
                                                     </div>
                                                 </div>
                                             </div>
 
 
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="tab-pane" id="content">
                                     <div class="row pd-10">
                                         <label class="col-2">Mô tả</label>
@@ -204,6 +220,66 @@
 
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-top:1px solid rgba(0,0,0,.125);">
+                        <ul class="nav nav-pills">
+                            <li class="nav-content pd-row" style="border-right:1px solid rgba(0,0,0,.125);"><i class="fa fa-certificate" aria-hidden="true"></i></li>
+                            <li class="nav-content pd-row">Dữ liệu sản phẩm ---</li>
+                            <li class="nav-content">
+                                <select class="form-control is_variation" name="is_variation" id="is_variation" onchange="chooseProduct();" style="width:100%;">
+                                    <option value="0" ><a class="nav-link active" href="#infomation" data-toggle="tab">Sản phẩm đơn giản</a></option>
+                                    <option value="1"><a class="nav-link" href="#content" data-toggle="tab">Sản phẩm biến thể</a></option>
+                                </select>
+                            </li>
+                        </ul>
+                        <div style="border-top:1px solid rgba(0,0,0,.125)">
+                        </div>
+                        <div class="card-body" style="padding:0;">
+                            <div class="row normalPro">
+                                <div class="col-5 col-sm-3">
+                                    <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="vert-tabs-general-tab" data-toggle="pill" href="#vert-tabs-general" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fa fa-wrench icon-pd" aria-hidden="true"></i> Chung</a>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-sm-9" style="padding:0.75rem;">
+                                    <div class="tab-content" id="vert-tabs-tabContent">
+                                        <div class="tab-pane text-left fade show active" id="vert-tabs-general" role="tabpanel" aria-labelledby="vert-tabs-general-tab">
+                                            <div class="row pd-10">
+                                                <label class="col-3">Giá sản phẩm (₫)</label>
+                                                <input type="number" name="product_price" class="col-7 form-control" id="" value="{{ old('product_price')}}" placeholder="Giá">
+                                                @error('product_price')
+                                                    <span class="col-4"></span>
+                                                    <span class="col-8 help-block">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row variantPro" style="display:none">
+                                <div class="col-5 col-sm-3">
+                                    <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                                        <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill" href="#vert-tabs-properties" role="tab" aria-controls="vert-tabs-properties" aria-selected="true"><i class="fa fa-list-alt icon-pd" aria-hidden="true"></i> Thuộc tính</a>
+                                        <a class="nav-link" id="vert-tabs-variant-tab" data-toggle="pill" href="#vert-tabs-variant" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fa fa-random icon-pd" aria-hidden="true"></i> Biến thể</a>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-sm-9" style="padding:0.75rem;">
+                                    <div class="tab-content" id="vert-tabs-tabContent">
+                                        <div class="tab-pane text-left fade show active" id="vert-tabs-properties" role="tabpanel" aria-labelledby="vert-tabs-properties-tab">
+                                            <div style="padding-bottom:10px;"><a class="btn btn-primary" style="color:#2271b1;border-color: #2271b1;background: #f6f7f7;" onclick="addProperties()">Thêm thuộc tính cho sản phẩm </a></div>
+
+                                            <div id="vert-tabs-content-properties"></div>
+                                        </div>
+                                        <div class="tab-pane text-left fade" id="vert-tabs-variant" role="tabpanel" aria-labelledby="vert-tabs-variant-tab">
+                                            Hãy cập nhật ở danh sách sản phẩm..
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
@@ -319,6 +395,22 @@
                     </div>
                     @csrf
               </form>
+                <div class="card bg-gradient-info" id="add-properties" style="display:none">
+                    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+                        <h3 class="card-title">Thuộc tính mới</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                            <button type="button" id="remove" class="btn bg-info btn-sm" onclick="remove()"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="display: block;">
+                        <div class="row pd-10">
+                            <label class="col-3">Tên:</label>
+                            <input type="text" name="propertie_name[]" class="col-7 form-control" id=""  placeholder="Tên thuộc tính">
+                        </div>
+                        <div class="row pd-10"><label class="col-3">Giá trị(s):</label><textarea class="col-7 form-control" name="propertie_value[]" rows="3" placeholder="Nhập nội dung hoặc một số thuộc tính bằng '|' các giá trị riêng."></textarea></div>
+                    </div>
+                </div>
             </div>
                 <!-- ./col -->
 
@@ -342,45 +434,42 @@
 </div>
 @endsection
 <script>
+    // chọn loại sản phẩm
+    function chooseProduct(){
+        var valueIp = $('#is_variation').val();
+        if(valueIp === '1'){
+            $('.variantPro').show();
+            $('.normalPro').hide();
+        }else{
+            $('.variantPro').hide();
+            $('.normalPro').show();
+        }
+    }
+    // nút thêm thuộc tính
+    function addProperties(){
+        $("#add-properties").clone().appendTo("#vert-tabs-content-properties");
+        $("#add-properties").addClass("show");
+    }
+    // setTimeout(function () {
+    //     addProperties();
+    // }, 1000);
     // hình ảnh sản phẩm
-    $("#img_product").fileinput({
-      theme: 'fas',
-      showUpload: false,
-      showCaption: false,
-      browseClass: "btn btn-primary btn-lg",
-      fileType: "any",
-      previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-      overwriteInitial: false,
-      allowedFileExtensions: ["jpg", "gif", "png", "txt"]
-    });
     function ImagesFileAsURL() {
                var fileSelected = document.getElementById('img_product').files;
                if (fileSelected.length > 0) {
-                   for (var i = 0; i < fileSelected.length; i++) {
-                       var fileToLoad = fileSelected[i];
+                       var fileToLoad = fileSelected[0];
                        var fileReader = new FileReader();
                        fileReader.onload = function(fileLoaderEvent) {
                            var srcData = fileLoaderEvent.target.result;
                            var newImage = document.createElement('img');
                            newImage.src = srcData;
-                           document.getElementById('displayImg').innerHTML += newImage.outerHTML;
+                           document.getElementById('displayImg').innerHTML = newImage.outerHTML;
                        }
                        fileReader.readAsDataURL(fileToLoad);
-                   }
 
                }
     }
     // list hình ảnh
-    $("#img_list").fileinput({
-      theme: 'fas',
-      showUpload: false,
-      showCaption: false,
-      browseClass: "btn btn-primary btn-lg",
-      fileType: "any",
-      previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-      overwriteInitial: false,
-      allowedFileExtensions: ["jpg", "gif", "png", "txt"]
-    });
     function ImagesListFileAsURL() {
                var fileSelected = document.getElementById('img_list').files;
                if (fileSelected.length > 0) {
@@ -398,4 +487,10 @@
 
                }
     }
+    function remove(){
+        $('#add-properties').remove();
+    }
+    // setTimeout(function () {
+    //     remove();
+    // }, 1000);
 </script>
