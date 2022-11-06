@@ -23,6 +23,18 @@ return [
         ],
         'failed' => 'Đã có lỗi xảy ra',
     ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Không thêm được đơn hàng',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách đơn hàng',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết đơn hàng',
+        ],
+
+    ],
     'company' => [
         'failed' => 'Không lấy được thông tin cửa hàng',
     ],
@@ -43,5 +55,65 @@ return [
             'failed' => 'Không lấy được chi tiết sản phẩm',
         ],
         'failed' => 'Đã có lỗi xảy ra',
+    ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Không thêm được đơn hàng',
+        ],
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách đơn hàng',
+        ],
+        'get_detail' => [
+            'failed' => 'Không lấy được chi tiết đơn hàng',
+        ],
+    ],
+    'comment' => [
+        'get_list' => [
+            'failed' => 'Không lấy được danh sách bình luận',
+        ],
+        'create' => [
+            'failed' => 'Không thể bình luận',
+        ],
+    ],
+    'account' => [
+        'update' => [
+            'failed' => 'Không thể cập nhập tài khoản',
+        ],
+        'get_detail' => [
+            'failed' => 'Không thể lấy chi tiết tài khoản',
+        ],
+    ],
+    'filter' => [
+        'failed' => 'Không lấy được danh sách bộ lọc',
+    ],
+    'filterProduct' => [
+        'failed' => 'Không tìm thấy sản phẩm nào phù hợp ',
+    ],
+    'sort' => [
+        'failed' => 'Không lấy được danh sách sắp xếp',
+    ],
+    'slider' => [
+        'failed' => 'Đã có lỗi xảy ra',
+        'get_type' => [
+            'failed' => 'Không lấy được danh sách slider theo  type',
+        ],
+    ],
+    'banner' => [
+        'failed' => 'Đã có lỗi xảy ra',
+        'get_type' => [
+            'failed' => 'Không lấy được danh sách banner theo  type',
+        ],
+    ],
+    'add' => [
+        'success' => 'Thêm Thành Công',
+        'error' => 'Thêm Thất Bại'
+    ],
+    'update' => [
+        'success' => 'Cập Nhật Thành Công',
+        'error' => 'Cập Nhật Thất Bại'
+    ],
+    'delete' => [
+        'success' => 'Xoá Thành Công',
+        'error' => 'Xoá Thất Bại'
     ],
 ];

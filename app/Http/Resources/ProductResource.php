@@ -24,11 +24,12 @@ class ProductResource extends JsonResource
             'product_image' => $this->product_image,
             'product_configurations' => $this->productConfig,
             'is_variation' => $this->is_variation,
+            'is_selling' => $this->is_selling,
+            'product_outstanding' => $this->product_outstanding,
             'is_discount_product' => $this->is_discount_product,
             'properties' => $this->productPropertie,
             'category_name' => $this->productCategory?->category_name,
             'category_parent_id' => $this->productCategory?->parent_id,
-            'product_suppiler_name' => $this->supplier?->supplier_name,
         ];
     }
 }

@@ -2,14 +2,19 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\BillController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\DistController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\Auth\AccountController;
+use App\Http\Controllers\Api\ProductCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
-
+use App\Http\Controllers\Api\ProductFilterController;
+use App\Http\Controllers\Api\SliderController;
+use App\Http\Controllers\Api\BannerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +36,15 @@ Route::prefix('client')->group(function () {
     Route::post('register', [RegisterController::class, 'registerClient']);
     Route::middleware(['auth:user'])->group(function () {
         Route::post('logout', [LoginController::class, 'logoutClient']);
+        Route::group(['prefix' => 'bills'], function () {
+            Route::get('/', [BillController::class, 'index']);
+            Route::get('/{bill}', [BillController::class, 'show']);
+            Route::post('/add_to_bill', [BillController::class, 'create']);
+        });
+        Route::group(['prefix' => 'account'], function () {
+            Route::get('/{user}', [AccountController::class, 'show']);
+            Route::put('/{user}/update', [AccountController::class, 'update']);
+        });
     });
 });
 
@@ -50,7 +64,19 @@ Route::group(['prefix' => 'post'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::get('/categories', [ProductController::class, 'listCategories']);
     Route::get('/', [ProductController::class, 'listProducts']);
+    Route::get('/filter', [ProductFilterController::class, 'listFilter']);
+    Route::get('/sort', [ProductFilterController::class, 'listSort']);
+    Route::get('/{categories}/{filter}', [ProductFilterController::class, 'listProductFilter']);
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
+    Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
 });
-
+Route::group(['prefix' => 'slider'], function () {
+    Route::get('/', [SliderController::class, 'listSliders']);
+    Route::get('/types/{type}', [SliderController::class, 'listSlidersByType']);
+});
+Route::group(['prefix' => 'banner'], function () {
+    Route::get('/', [BannerController::class, 'listBanners']);
+    Route::get('/types/{type}', [BannerController::class, 'listBannersByType']);
+});

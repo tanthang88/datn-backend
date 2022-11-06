@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class AdminRole extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'admin_roles';
 
      /**
@@ -20,7 +20,7 @@ class AdminRole extends Model
         'display_name',
         'created_at'
     ];
-        
+
     /**
      * rolePermissions
      *

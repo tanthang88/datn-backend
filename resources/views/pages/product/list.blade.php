@@ -19,7 +19,6 @@
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
               <div class="col-12">
                 <div class="row">
@@ -54,9 +53,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    @include('components.alert')
-                </div>
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -132,16 +128,10 @@
                     {{$data->links()}}
                 <!-- ./col -->
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-</div>
+    </div>
 @endsection
 <script>
     funciton Del(name)

@@ -44,4 +44,64 @@ return [
         ],
         'failed' => 'An error has occurred',
     ],
+    'bill' => [
+        'create' => [
+            'failed' => 'Create bill failed',
+        ],
+        'get_list' => [
+            'failed' => 'get list bill failed',
+        ],
+        'get_detail' => [
+            'failed' => 'get detail bill failed',
+        ],
+    ],
+    'comment' => [
+        'get_list' => [
+            'failed' => 'Get list comments failed',
+        ],
+        'create' => [
+            'failed' => 'Create comment failed',
+        ],
+    ],
+    'account' => [
+        'update' => [
+            'failed' => 'Update account failed',
+        ],
+        'get_detail' => [
+            'failed' => 'get detail account failed',
+        ],
+    ],
+    'filter' => [
+        'failed' => 'Get Filter failed',
+    ],
+    'filterProduct' => [
+        'failed' => 'Get List  Filter Product failed',
+    ],
+    'sort' => [
+        'failed' => 'Get Sort failed',
+    ],
+    'slider' => [
+        'failed' => 'An error has occurred',
+        'get_type' => [
+            'failed' => 'Get list Slider by Type failed',
+        ],
+    ],
+    'banner' => [
+        'failed' => 'An error has occurred',
+        'get_type' => [
+            'failed' => 'Get list Banner by Type failed',
+        ],
+    ],
+    'add' => [
+        'success' => 'Create Successfully',
+        'error' => 'Create Failed'
+    ],
+    'update' => [
+        'success' => 'Update successful',
+        'error' => 'Update Failed'
+    ],
+    'delete' => [
+        'success' => 'Delete successful',
+        'error' => 'Delete Failed'
+    ],
 ];

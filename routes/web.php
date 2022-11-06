@@ -5,7 +5,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoriesProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,7 @@ use App\Http\Controllers\AboutController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group(['prefix' => '/'], function () {
     Route::get('', function () {
         return view('pages.home');
@@ -34,10 +36,8 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'CategoriesProduct'], function () {
         Route::get('/Add', [CategoriesProductController::class, 'getAdd']);
         Route::post('/Add', [CategoriesProductController::class, 'postAdd']);
-
         Route::get('/Update/{id}', [CategoriesProductController::class, 'getUpdate']);
         Route::post('/Update/{id}', [CategoriesProductController::class, 'postUpdate']);
-
         Route::get('/List', [CategoriesProductController::class, 'getList']);
         Route::get('/Delete/{id}', [CategoriesProductController::class, 'getDelete']);
     });
@@ -75,4 +75,23 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'laravel-filemanager',], function () {
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.list');
+        Route::get('data', [UserController::class, 'dataUser'])->name('dataUser');
+        Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
+        Route::post('/{user}', [UserController::class, 'update'])->name('user.update');
+        Route::get('/delete/{user}', [UserController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'role'], function () {
+        Route::get('/', [RoleController::class, 'index'])->name('role.list');
+        Route::get('data', [RoleController::class, 'dataRoles'])->name('dataRoles');
+        Route::get('/add', [RoleController::class, 'create'])->name('role.add');
+        Route::post('/store', [RoleController::class, 'store'])->name('role.store');
+        Route::get('/{role}', [RoleController::class, 'show'])->name('role.edit');
+        Route::post('/{role}', [RoleController::class, 'update'])->name('role.update');
+        Route::get('/delete/{role}', [RoleController::class, 'delete'])->name('role.delete');
+
+    });
+
 });

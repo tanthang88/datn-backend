@@ -50,7 +50,7 @@ class ProductController extends Controller
             $data->data=$listData;
             return $this->responseSuccess(['data' => $data]);
         } catch (\Throwable $th) {
-            Log::error("get list product ", $th);
+            Log::error("get list product ". $th);
             return $this->responseError(
                 array(trans('alert.product.failed')),
                 Response::HTTP_INTERNAL_SERVER_ERROR
@@ -72,7 +72,7 @@ class ProductController extends Controller
             $products->data = $listData;
             return $this->responseSuccess(['data' => $products]);
         } catch (\Throwable $th) {
-            Log::error("get product ", $th);
+            Log::error("get product ". $th);
             return $this->responseError(
                 array(trans('alert.product.get_list.failed')),
                 Response::HTTP_INTERNAL_SERVER_ERROR
@@ -92,7 +92,7 @@ class ProductController extends Controller
             $data = $this->productService->getProduct($product);
             return $this->responseSuccess(['data' => ProductDetailResource::make($data)]);
         } catch (\Throwable $th) {
-            Log::error("get product ", $th);
+            Log::error("get product ". $th);
             return $this->responseError(
                 array(trans('alert.product.get_detail.failed')),
                 Response::HTTP_INTERNAL_SERVER_ERROR

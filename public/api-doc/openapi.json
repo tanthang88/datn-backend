@@ -679,6 +679,267 @@
                 }
             }
         },
+        "/api/product/filter": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "Get All Filter Fields",
+                "operationId": "get-all-filter-fields",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "filter_title": "Giá",
+                                            "filter_name": "price",
+                                            "fields": [
+                                                {
+                                                    "field_label": "Dưới 2 triệu",
+                                                    "field_slug": "duoi-2-trieu",
+                                                    "field_value": "<2000000"
+                                                },
+                                                {
+                                                    "field_label": "Từ 2-4 triệu",
+                                                    "field_slug": "tu-2-4-trieu",
+                                                    "field_value": "2000000<>4000000"
+                                                },
+                                                {
+                                                    "field_label": "Từ 4-7 triệu",
+                                                    "field_slug": "tu-4-7-trieu",
+                                                    "field_value": "4000000<>7000000"
+                                                },
+                                                {
+                                                    "field_label": "Từ 7-13 triệu",
+                                                    "field_slug": "tu-7-13-trieu",
+                                                    "field_value": "7000000<>13000000"
+                                                },
+                                                {
+                                                    "field_label": "Trên 13 triệu",
+                                                    "field_slug": "tren-13-trieu",
+                                                    "field_value": ">13000000"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 2,
+                                            "filter_title": "Hiệu năng và Pin",
+                                            "filter_name": "battery",
+                                            "fields": [
+                                                {
+                                                    "field_label": "Dưới 3000 mah",
+                                                    "field_slug": "duoi-3000-mah",
+                                                    "field_value": "<3000"
+                                                },
+                                                {
+                                                    "field_label": "Từ  3000 - 4000 mah",
+                                                    "field_slug": "tu-3000-4000-mah",
+                                                    "field_value": "3000<>4000"
+                                                },
+                                                {
+                                                    "field_label": "Từ  4000 - 5000 mah",
+                                                    "field_slug": "tu-4000-5000-mah",
+                                                    "field_value": "4000<>5000"
+                                                },
+                                                {
+                                                    "field_label": "Trên 5000 mah",
+                                                    "field_slug": "tren-5000-mah",
+                                                    "field_value": ">5000"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 3,
+                                            "filter_title": "Màn hình",
+                                            "filter_name": "screen",
+                                            "fields": [
+                                                {
+                                                    "field_label": "Màn hình nhỏ: dưới 5.0 inch",
+                                                    "field_slug": "man-hinh-nho:-duoi-5.0-inch",
+                                                    "field_value": "<5"
+                                                },
+                                                {
+                                                    "field_label": "Nhỏ gọn vừa tay: dưới 6.0 inch ,tràn viền",
+                                                    "field_slug": "nho-gon-vua-tay:-duoi-6.0-inch-,-tran-vien",
+                                                    "field_value": "5<>6"
+                                                },
+                                                {
+                                                    "field_label": "Trên 6.0 inch",
+                                                    "field_slug": "tren-6.0-inch",
+                                                    "field_value": ">6"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 4,
+                                            "filter_title": "Camera",
+                                            "filter_name": "camera",
+                                            "fields": [
+                                                {
+                                                    "field_label": "12 MP",
+                                                    "field_slug": "12-mp",
+                                                    "field_value": "=12"
+                                                },
+                                                {
+                                                    "field_label": "32 MP",
+                                                    "field_slug": "32-mp",
+                                                    "field_value": "=32"
+                                                },
+                                                {
+                                                    "field_label": "48 MP",
+                                                    "field_slug": "48-mp",
+                                                    "field_value": "=48"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/sort": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "Get All Sort Fields",
+                "operationId": "get-all-sort-fields",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "sort_title": "Bán chạy nhất",
+                                            "sort_name": "bestselling",
+                                            "field_value": "1"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "sort_title": "Giá thấp",
+                                            "sort_name": "orderby",
+                                            "field_value": "asc"
+                                        },
+                                        {
+                                            "id": 3,
+                                            "sort_title": "Giá cao",
+                                            "sort_name": "orderby",
+                                            "field_value": "desc"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/{category_id}/{filter}": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "Filter Products By Category Id",
+                "operationId": "filter-products-by-category-id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "category_id",
+                        "required": true,
+                        "description": "1 or 2 or 3 ...",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "filter",
+                        "required": true,
+                        "description": "filter?price=100",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "current_page": 1,
+                                        "data": [
+                                            {
+                                                "id": 12,
+                                                "product_name": "s",
+                                                "product_slug": "s",
+                                                "product_image": "s",
+                                                "product_quantity": 0,
+                                                "product_desc": null,
+                                                "product_promotion_desc": null,
+                                                "is_discount_product": 0,
+                                                "product_price": 200000,
+                                                "config_battery": 73,
+                                                "config_screen": "2.1",
+                                                "is_selling": 0,
+                                                "rating": 0
+                                            },
+                                            {
+                                                "id": 7,
+                                                "product_name": "Mrs. Georgianna Lakin II",
+                                                "product_slug": "illum-aut-aut-doloribus-qui",
+                                                "product_image": "https://via.placeholder.com/200x200.png/00ee55?text=id",
+                                                "product_quantity": 459,
+                                                "product_desc": "Accusamus excepturi similique corporis neque cumque occaecati voluptatem.",
+                                                "product_promotion_desc": "Et rerum in soluta dicta odio dignissimos sit ut ipsum natus pariatur voluptas architecto omnis aliquid doloremque omnis consectetur in doloribus quia odit distinctio eligendi molestiae quia vero dolore dolorum qui aut nobis et voluptatibus officia eaque expedita repudiandae et quis velit suscipit accusantium rem veritatis et quasi sit doloribus modi non et voluptatem a laboriosam dignissimos molestiae sint occaecati eveniet nemo fuga consequatur quas et placeat voluptatem odit veritatis illum incidunt et corporis beatae qui omnis deleniti beatae pariatur excepturi tempora iusto totam error sapiente nobis cum id deleniti ut voluptate qui commodi omnis omnis tempora commodi temporibus sed odit maiores repudiandae quia reprehenderit cumque sunt molestiae nam voluptas minus et enim et nihil corporis voluptatem pariatur dolores dolores voluptas omnis natus ea in consequatur nemo cum doloremque quis ducimus eveniet cum saepe ut ut itaque esse iure.",
+                                                "is_discount_product": 1,
+                                                "product_price": 735,
+                                                "config_battery": 36,
+                                                "config_screen": "44.0",
+                                                "is_selling": 1,
+                                                "rating": 0
+                                            }
+                                        ],
+                                        "first_page_url": "http://127.0.0.1:8000/api/product/3/filter?page=1",
+                                        "from": 1,
+                                        "last_page": 1,
+                                        "last_page_url": "http://127.0.0.1:8000/api/product/3/filter?page=1",
+                                        "links": [
+                                            {
+                                                "url": null,
+                                                "label": "pagination.previous",
+                                                "active": false
+                                            },
+                                            {
+                                                "url": "http://127.0.0.1:8000/api/product/3/filter?page=1",
+                                                "label": "1",
+                                                "active": true
+                                            },
+                                            {
+                                                "url": null,
+                                                "label": "pagination.next",
+                                                "active": false
+                                            }
+                                        ],
+                                        "next_page_url": null,
+                                        "path": "http://127.0.0.1:8000/api/product/3/filter",
+                                        "per_page": 12,
+                                        "prev_page_url": null,
+                                        "to": 2,
+                                        "total": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/product/{id}": {
             "get": {
                 "tags": ["Product"],
@@ -870,12 +1131,120 @@
                 }
             }
         },
+        "/api/product/{id}/list_comments ": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "List comment for product",
+                "operationId": "get-list-comment-product",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "comment_id": 2,
+                                            "customer_id": 7,
+                                            "comment_name": "Tài phan",
+                                            "comment_content": "Có màu vàng không vậy",
+                                            "comment_date": "23-10-2022 09:29",
+                                            "children_comments": []
+                                        },
+                                        {
+                                            "comment_id": 1,
+                                            "customer_id": null,
+                                            "comment_name": "Trung Văn",
+                                            "comment_content": "sản phẩm còn không ạ?",
+                                            "comment_date": "23-10-2022 09:29",
+                                            "children_comments": [
+                                                {
+                                                    "comment_id": 3,
+                                                    "customer_id": 5,
+                                                    "comment_name": "Admin",
+                                                    "comment_content": "dạ sản phẩm này đang tạm hết hàng",
+                                                    "comment_date": "23-10-2022 09:29",
+                                                    "children_comments": []
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/{id}/comment": {
+            "post": {
+                "tags": ["Product"],
+                "summary": "Comment for a product",
+                "operationId": "comment-product",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "comment_content",
+                        "required": true,
+                        "description": "Comment content for product",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "customer_id",
+                        "required": false,
+                        "description": "customer id ",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "comment_name",
+                        "required": true,
+                        "description": "comment_name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "comment_phone",
+                        "required": true,
+                        "description": "comment_phone",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "comment_email",
+                        "required": true,
+                        "description": "comment_email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/about": {
             "get": {
                 "tags": ["About"],
                 "summary": "Get List About",
                 "operationId": "get-list-about",
-
                 "responses": {
                     "200": {
                         "description": "Get list success",
@@ -1018,6 +1387,821 @@
                                     "created_at": null,
                                     "updated_at": null,
                                     "deleted_at": null
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/bills/create": {
+            "post": {
+                "tags": ["Bill"],
+                "summary": "Order product in cart",
+                "operationId": "create-bill",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "customer_name",
+                        "required": true,
+                        "description": "name client",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "address",
+                        "required": true,
+                        "description": "address client",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "city_id",
+                        "required": true,
+                        "description": "id city",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "dist_id",
+                        "required": true,
+                        "description": "id dist",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "bill_price",
+                        "required": true,
+                        "description": "total product of bill",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "bill_phone",
+                        "required": true,
+                        "description": "phone client buy product",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "products",
+                        "required": true,
+                        "description": "list product in cart",
+                        "schema": {
+                            "type": "array",
+                            "value": [
+                                {
+                                    "id": "1",
+                                    "price": 4000,
+                                    "amount": 2,
+                                    "into_price": 2,
+                                    "sale": 30,
+                                    "fee": 10,
+                                    "total": 2
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {}
+                }
+            }
+        },
+        "/api/client/bills/{id}": {
+            "get": {
+                "tags": ["Bill"],
+                "summary": "Detail bill",
+                "operationId": "get-detail-bill",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "id": 50,
+                                        "customer_id": 5,
+                                        "bill_phone": "0973127009",
+                                        "customer_name": "Tấn Thanh",
+                                        "address": "Nghệ An",
+                                        "city_id": 2,
+                                        "dist_id": 3,
+                                        "bill_price": 30000,
+                                        "bill_status": 0,
+                                        "created_at": "2022-10-20T07:45:59.000000Z",
+                                        "updated_at": "2022-10-20T07:45:59.000000Z",
+                                        "deleted_at": null,
+                                        "bill_details": [
+                                            {
+                                                "id": 79,
+                                                "bill_id": 50,
+                                                "product_id": 3,
+                                                "price": 333333,
+                                                "amount": 3,
+                                                "into_price": 1,
+                                                "sale": 3,
+                                                "fee": 2,
+                                                "total": 10,
+                                                "created_at": null,
+                                                "updated_at": null,
+                                                "deleted_at": null
+                                            },
+                                            {
+                                                "id": 80,
+                                                "bill_id": 50,
+                                                "product_id": 3,
+                                                "price": 333333,
+                                                "amount": 3,
+                                                "into_price": 1,
+                                                "sale": 3,
+                                                "fee": 2,
+                                                "total": 10,
+                                                "created_at": null,
+                                                "updated_at": null,
+                                                "deleted_at": null
+                                            },
+                                            {
+                                                "id": 81,
+                                                "bill_id": 50,
+                                                "product_id": 3,
+                                                "price": 333333,
+                                                "amount": 3,
+                                                "into_price": 1,
+                                                "sale": 3,
+                                                "fee": 2,
+                                                "total": 10,
+                                                "created_at": null,
+                                                "updated_at": null,
+                                                "deleted_at": null
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/bills ": {
+            "get": {
+                "tags": ["Bill"],
+                "summary": "List bill",
+                "operationId": "get-detail-bill",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "customer_id": 5,
+                                            "bill_phone": "011111111",
+                                            "customer_name": "Nguyễn Tấn Dũng",
+                                            "address": "Thanh Xuân Hà lội",
+                                            "city_id": 1,
+                                            "dist_id": 19,
+                                            "bill_price": 500000,
+                                            "bill_status": 0,
+                                            "created_at": null,
+                                            "updated_at": null,
+                                            "deleted_at": null,
+                                            "bill_details": [
+                                                {
+                                                    "id": 2,
+                                                    "bill_id": 1,
+                                                    "product_id": 2,
+                                                    "price": 2250000,
+                                                    "amount": 1,
+                                                    "into_price": 1,
+                                                    "sale": 1,
+                                                    "fee": 12000,
+                                                    "total": 2250000,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                },
+                                                {
+                                                    "id": 3,
+                                                    "bill_id": 1,
+                                                    "product_id": 4,
+                                                    "price": 30000,
+                                                    "amount": 1,
+                                                    "into_price": 1,
+                                                    "sale": 1,
+                                                    "fee": 30000,
+                                                    "total": 30000,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                },
+                                                {
+                                                    "id": 4,
+                                                    "bill_id": 1,
+                                                    "product_id": 3,
+                                                    "price": 1450000,
+                                                    "amount": 1,
+                                                    "into_price": 1,
+                                                    "sale": 1,
+                                                    "fee": 90,
+                                                    "total": 1450000,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 2,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127008",
+                                            "customer_name": "Nguyễn Thanh Tùng",
+                                            "address": "Nghĩa Đàn",
+                                            "city_id": 1,
+                                            "dist_id": 19,
+                                            "bill_price": 1200000,
+                                            "bill_status": 0,
+                                            "created_at": null,
+                                            "updated_at": null,
+                                            "deleted_at": null,
+                                            "bill_details": [
+                                                {
+                                                    "id": 5,
+                                                    "bill_id": 2,
+                                                    "product_id": 3,
+                                                    "price": 2250000,
+                                                    "amount": 1,
+                                                    "into_price": 1,
+                                                    "sale": 1,
+                                                    "fee": 100,
+                                                    "total": 10000,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 12,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-11T16:56:24.000000Z",
+                                            "updated_at": "2022-10-11T16:56:24.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": [
+                                                {
+                                                    "id": 20,
+                                                    "bill_id": 12,
+                                                    "product_id": 3,
+                                                    "price": 530000,
+                                                    "amount": 2,
+                                                    "into_price": 3,
+                                                    "sale": 2,
+                                                    "fee": 1,
+                                                    "total": 1,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 16,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-11T17:20:51.000000Z",
+                                            "updated_at": "2022-10-11T17:20:51.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": [
+                                                {
+                                                    "id": 21,
+                                                    "bill_id": 16,
+                                                    "product_id": 3,
+                                                    "price": 530000,
+                                                    "amount": 2,
+                                                    "into_price": 3,
+                                                    "sale": 2,
+                                                    "fee": 1,
+                                                    "total": 1,
+                                                    "created_at": "2022-10-11T17:20:51.000000Z",
+                                                    "updated_at": "2022-10-11T17:20:51.000000Z",
+                                                    "deleted_at": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 18,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-19T07:30:48.000000Z",
+                                            "updated_at": "2022-10-19T07:30:48.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": []
+                                        },
+                                        {
+                                            "id": 19,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-19T07:42:16.000000Z",
+                                            "updated_at": "2022-10-19T07:42:16.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": []
+                                        },
+                                        {
+                                            "id": 20,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-19T07:42:36.000000Z",
+                                            "updated_at": "2022-10-19T07:42:36.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": []
+                                        },
+                                        {
+                                            "id": 21,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-19T07:43:21.000000Z",
+                                            "updated_at": "2022-10-19T07:43:21.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": []
+                                        },
+                                        {
+                                            "id": 22,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-19T07:44:44.000000Z",
+                                            "updated_at": "2022-10-19T07:44:44.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": []
+                                        },
+                                        {
+                                            "id": 31,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-20T06:37:54.000000Z",
+                                            "updated_at": "2022-10-20T06:37:54.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": [
+                                                {
+                                                    "id": 22,
+                                                    "bill_id": 31,
+                                                    "product_id": 3,
+                                                    "price": 530000,
+                                                    "amount": 2,
+                                                    "into_price": 3,
+                                                    "sale": 2,
+                                                    "fee": 1,
+                                                    "total": 1,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                },
+                                                {
+                                                    "id": 23,
+                                                    "bill_id": 31,
+                                                    "product_id": 3,
+                                                    "price": 530000,
+                                                    "amount": 2,
+                                                    "into_price": 3,
+                                                    "sale": 2,
+                                                    "fee": 1,
+                                                    "total": 1,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                },
+                                                {
+                                                    "id": 24,
+                                                    "bill_id": 31,
+                                                    "product_id": 3,
+                                                    "price": 530000,
+                                                    "amount": 2,
+                                                    "into_price": 3,
+                                                    "sale": 2,
+                                                    "fee": 1,
+                                                    "total": 1,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": 50,
+                                            "customer_id": 5,
+                                            "bill_phone": "0973127009",
+                                            "customer_name": "Tấn Thanh",
+                                            "address": "Nghệ An",
+                                            "city_id": 2,
+                                            "dist_id": 3,
+                                            "bill_price": 30000,
+                                            "bill_status": 0,
+                                            "created_at": "2022-10-20T07:45:59.000000Z",
+                                            "updated_at": "2022-10-20T07:45:59.000000Z",
+                                            "deleted_at": null,
+                                            "bill_details": [
+                                                {
+                                                    "id": 79,
+                                                    "bill_id": 50,
+                                                    "product_id": 3,
+                                                    "price": 333333,
+                                                    "amount": 3,
+                                                    "into_price": 1,
+                                                    "sale": 3,
+                                                    "fee": 2,
+                                                    "total": 10,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                },
+                                                {
+                                                    "id": 80,
+                                                    "bill_id": 50,
+                                                    "product_id": 3,
+                                                    "price": 333333,
+                                                    "amount": 3,
+                                                    "into_price": 1,
+                                                    "sale": 3,
+                                                    "fee": 2,
+                                                    "total": 10,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                },
+                                                {
+                                                    "id": 81,
+                                                    "bill_id": 50,
+                                                    "product_id": 3,
+                                                    "price": 333333,
+                                                    "amount": 3,
+                                                    "into_price": 1,
+                                                    "sale": 3,
+                                                    "fee": 2,
+                                                    "total": 10,
+                                                    "created_at": null,
+                                                    "updated_at": null,
+                                                    "deleted_at": null
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/slider": {
+            "get": {
+                "tags": ["Slider"],
+                "summary": "Get List Slider",
+                "operationId": "get-list-slider",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Nick Gerlach",
+                                            "image": "https://via.placeholder.com/200x200.png/005533?text=fugit",
+                                            "link": "auer.net",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 2,
+                                            "title": "Dr. Brendon Hackett DVM",
+                                            "image": "https://via.placeholder.com/200x200.png/007799?text=nulla",
+                                            "link": "gaylord.info",
+                                            "type": "eligendi-voluptate",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 3,
+                                            "title": "Kari Mayer",
+                                            "image": "https://via.placeholder.com/200x200.png/00aa66?text=beatae",
+                                            "link": "west.com",
+                                            "type": "odio-voluptate-at",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 4,
+                                            "title": "Andrew Thiel V",
+                                            "image": "https://via.placeholder.com/200x200.png/0033dd?text=eum",
+                                            "link": "smitham.com",
+                                            "type": "iusto-aliquam-perferendis",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 5,
+                                            "title": "Oral Marks",
+                                            "image": "https://via.placeholder.com/200x200.png/009999?text=qui",
+                                            "link": "stamm.com",
+                                            "type": "magni-aperiam-quia",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 6,
+                                            "title": "Jamarcus Smitham",
+                                            "image": "https://via.placeholder.com/200x200.png/00bbcc?text=doloribus",
+                                            "link": "hoeger.org",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 7,
+                                            "title": "Brady Hilpert",
+                                            "image": "https://via.placeholder.com/200x200.png/00ffcc?text=voluptatibus",
+                                            "link": "herzog.com",
+                                            "type": "itaque-et",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 8,
+                                            "title": "Terrance Casper",
+                                            "image": "https://via.placeholder.com/200x200.png/00cc22?text=et",
+                                            "link": "toy.com",
+                                            "type": "consequatur-consequatur",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 9,
+                                            "title": "Earlene Wuckert",
+                                            "image": "https://via.placeholder.com/200x200.png/00ccff?text=aut",
+                                            "link": "abernathy.org",
+                                            "type": "mollitia-exercitationem-voluptatibus",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 10,
+                                            "title": "Magnus Collier",
+                                            "image": "https://via.placeholder.com/200x200.png/006611?text=et",
+                                            "link": "schowalter.net",
+                                            "type": "dicta-nobis",
+                                            "desc": null,
+                                            "content": null
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/slider/types/{type}": {
+            "get": {
+                "tags": ["Slider"],
+                "summary": "Get List Slider By Type",
+                "operationId": "get-list-slider-by-type",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "description": "type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 6,
+                                            "title": "Jamarcus Smitham",
+                                            "image": "https://via.placeholder.com/200x200.png/00bbcc?text=doloribus",
+                                            "link": "hoeger.org",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        },
+                                        {
+                                            "id": 1,
+                                            "title": "Nick Gerlach",
+                                            "image": "https://via.placeholder.com/200x200.png/005533?text=fugit",
+                                            "link": "auer.net",
+                                            "type": "non-hic",
+                                            "desc": null,
+                                            "content": null
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/banner": {
+            "get": {
+                "tags": ["Banner"],
+                "summary": "Get List Banner",
+                "operationId": "get-list-banner",
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Deanna Lemke PhD",
+                                            "image": "https://via.placeholder.com/200x200.png/00ff66?text=velit",
+                                            "link": "hermann.info",
+                                            "type": "quas-sit"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "title": "Orie Zieme",
+                                            "image": "https://via.placeholder.com/200x200.png/009999?text=veritatis",
+                                            "link": "mante.com",
+                                            "type": "id-ut"
+                                        },
+                                        {
+                                            "id": 3,
+                                            "title": "Brandyn Smitham",
+                                            "image": "https://via.placeholder.com/200x200.png/00ffff?text=qui",
+                                            "link": "romaguera.org",
+                                            "type": "dignissimos-ut"
+                                        },
+                                        {
+                                            "id": 4,
+                                            "title": "Gustave Johnston",
+                                            "image": "https://via.placeholder.com/200x200.png/008822?text=accusantium",
+                                            "link": "nienow.com",
+                                            "type": "rerum-asperiores-officiis"
+                                        },
+                                        {
+                                            "id": 5,
+                                            "title": "Gust Murray",
+                                            "image": "https://via.placeholder.com/200x200.png/00dd55?text=libero",
+                                            "link": "mertz.com",
+                                            "type": "inventore-et"
+                                        },
+                                        {
+                                            "id": 6,
+                                            "title": "Ella Ebert",
+                                            "image": "https://via.placeholder.com/200x200.png/004499?text=nemo",
+                                            "link": "lind.com",
+                                            "type": "asperiores-qui-qui"
+                                        },
+                                        {
+                                            "id": 7,
+                                            "title": "Vito Davis",
+                                            "image": "https://via.placeholder.com/200x200.png/00ee44?text=ut",
+                                            "link": "kessler.com",
+                                            "type": "inventore-et"
+                                        },
+                                        {
+                                            "id": 8,
+                                            "title": "Yolanda Satterfield I",
+                                            "image": "https://via.placeholder.com/200x200.png/00aa44?text=vel",
+                                            "link": "fisher.com",
+                                            "type": "eaque-sunt-ea"
+                                        },
+                                        {
+                                            "id": 9,
+                                            "title": "Prof. Alyson Marvin",
+                                            "image": "https://via.placeholder.com/200x200.png/00ffcc?text=magni",
+                                            "link": "smith.net",
+                                            "type": "animi-non-in"
+                                        },
+                                        {
+                                            "id": 10,
+                                            "title": "Rebecca Leannon II",
+                                            "image": "https://via.placeholder.com/200x200.png/004499?text=voluptatem",
+                                            "link": "batz.org",
+                                            "type": "eveniet-nostrum"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/banner/types/{type}": {
+            "get": {
+                "tags": ["Banner"],
+                "summary": "Get List Banner By Type",
+                "operationId": "get-list-banner-by-type",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "description": "type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 7,
+                                            "title": "Vito Davis",
+                                            "image": "https://via.placeholder.com/200x200.png/00ee44?text=ut",
+                                            "link": "kessler.com",
+                                            "type": "inventore-et"
+                                        },
+                                        {
+                                            "id": 5,
+                                            "title": "Gust Murray",
+                                            "image": "https://via.placeholder.com/200x200.png/00dd55?text=libero",
+                                            "link": "mertz.com",
+                                            "type": "inventore-et"
+                                        }
+                                    ]
                                 }
                             }
                         }

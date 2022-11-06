@@ -10,7 +10,7 @@ class AdminPermission extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'admin_permissions';
-        
+
     /**
      * fillable
      *
@@ -19,6 +19,17 @@ class AdminPermission extends Model
     protected $fillable = [
         'name',
         'display_name',
+        'key_code',
         'created_at',
     ];
+
+    /**
+     * getPermissionChild
+     *
+     * @return void
+     */
+    public function getPermissionChild()
+    {
+        return $this->hasMany(AdminPermission::class, 'parent_id');
+    }
 }

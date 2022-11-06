@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\About;
 use App\Http\Requests\AboutRequest;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class AboutController extends Controller
 {
@@ -77,14 +76,12 @@ class AboutController extends Controller
             $about->seo_keyword = $request->seo_keyword;
             $about->seo_description = $request->seo_description;
             $about->save();
-            Alert::success('Thành công','Thông tin đã được cập nhật!!');
 
         }catch(\Exception $error){
-            Alert::error('Oops..','Thông tin lỗi!!');
             return redirect()->back();
         }
 
-        return redirect('/about/list');
+        return back()->with('success', trans('alert.update.success'));
 
     }
 
