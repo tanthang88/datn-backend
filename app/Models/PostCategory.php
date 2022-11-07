@@ -22,6 +22,7 @@ class PostCategory extends Model
      * @var array
      */
     protected $fillable = array(
+        'id',
         'category_name',
         'category_slug',
         'category_post_order',
@@ -41,4 +42,9 @@ class PostCategory extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'category_id', 'id');
+    }
 }

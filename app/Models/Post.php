@@ -9,19 +9,24 @@ use Illuminate\Notifications\Notifiable;
 
 class Post extends Model
 {
-    use HasFactory,SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable;
+    const POST_BLOCK = 0;
+    const POST_ACTIVE = 1;
+
     /**
      * table
      *
      * @var string
      */
     protected $table = 'posts';
+
     /**
      * fillable
      *
      * @var array
      */
     protected $fillable = [
+        'id',
         'category_id',
         'post_name',
         'post_slug',
@@ -43,4 +48,14 @@ class Post extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * getPostCategory
+     *
+     * @return void
+     */
+    public function postCategory()
+    {
+        return $this->belongsTo(PostCategory::class, 'category_id', 'id');
+    }
 }

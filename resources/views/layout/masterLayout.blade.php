@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +9,11 @@
     <!-- Google Font: Source Sans Pro -->
     <base href="{{asset('')}}">
     <link rel="SHORTCUT ICON" href="" type="image/x-icon" />
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
+
     <!-- Ionicons -->
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -34,6 +35,8 @@
     <link rel="stylesheet" href="../assets/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../assets/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}">
+
     @stack('style')
    
 </head>
@@ -43,7 +46,8 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="../assets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60"
+                width="60">
         </div>
 
         <!-- Navbar -->
@@ -76,7 +80,7 @@
             </section>
         </div>
         <!-- /.content-wrapper -->
-        @inclue('blocks/footer')
+        @include('blocks/footer')
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -85,6 +89,8 @@
     </div>
     <!-- ./wrapper -->
 
+    <!-- Deletejs -->
+    <script src="../js/delete.js"></script>
     <!-- jQuery -->
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -106,7 +112,27 @@
     <script src="../assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+    <!-- Sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <!-- Ckeditor + Filemanager-->
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script>
+          $('#lfm').filemanager('file');
+    </script>
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script>
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+    </script>
+
+    <script>
+            CKEDITOR.replace('pro_content', options);
+    </script>
     <!-- Validate -->
 
     <script src="../assets/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -134,12 +160,16 @@
     <script src="../assets/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../assets/dist/js/demo.js"></script>
-<script src="../assets/plugins/dropzone/min/dropzone.min.js"></script>
-<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('content')
-</script>
+    <script src="../assets/plugins/dropzone/min/dropzone.min.js"></script>
+
+    <script src="{{asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+
     @stack('scripts')
+    @if(Session::has('success'))
+    <script>
+        Swal.fire("{!! Session::get('success')!!}",'', 'success')
+    </script>
+    @endif
 </body>
 
 </html>

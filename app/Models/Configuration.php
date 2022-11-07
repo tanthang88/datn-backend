@@ -12,6 +12,7 @@ class Configuration extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'configurations';
     protected $fillable = [
+        'product_id',
         'config_screen',
         'config_cpu',
         'config_ram',
@@ -20,4 +21,8 @@ class Configuration extends Model
         'config_battery',
         'config_system',
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }
