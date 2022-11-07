@@ -7,6 +7,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PostCategoriesController;
+use App\Http\Controllers\PostController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,9 +76,6 @@ Route::group(['prefix' => '/'], function () {
         Route::get('delete/{id}', [AboutController::class,'delete']);
 
     });
-    Route::group(['prefix' => 'laravel-filemanager',], function () {
-        \UniSharp\LaravelFilemanager\Lfm::routes();
-    });
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.list');
         Route::get('data', [UserController::class, 'dataUser'])->name('dataUser');
@@ -94,4 +95,27 @@ Route::group(['prefix' => '/'], function () {
 
     });
 
+
+#postcategory
+Route::group(['prefix' => 'PostCategories'], function () {
+    Route::get('/Add', [PostCategoriesController::class, 'getAdd']);
+    Route::post('/Add', [PostCategoriesController::class, 'postAdd']);
+
+    Route::get('/Update/{id}', [PostCategoriesController::class, 'getUpdate']);
+    Route::post('/Update/{id}', [PostCategoriesController::class, 'postUpdate']);
+
+    Route::get('/List', [PostCategoriesController::class, 'getList']);
+    Route::get('/Delete/{id}', [PostCategoriesController::class, 'getDelete']);
+});
+#post
+Route::group(['prefix' => 'Post'], function () {
+    Route::get('/Add', [PostController::class, 'getAdd']);
+    Route::post('/Add', [PostController::class, 'postAdd']);
+
+    Route::get('/Update/{id}', [PostController::class, 'getUpdate']);
+    Route::post('/Update/{id}', [PostController::class, 'postUpdate']);
+
+    Route::get('/List', [PostController::class, 'getList']);
+    Route::get('/Delete/{id}', [PostController::class, 'getDelete']);
+});
 });

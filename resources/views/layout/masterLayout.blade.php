@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}">
 
     @stack('style')
+   
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
