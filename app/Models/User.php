@@ -11,7 +11,7 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasFactory, SoftDeletes, Notifiable, HasApiTokens;
-    const PASSWORD_DEFAULT = 'datn7878';
+    const PASSWORD_DEFAULT = 'Datn7878';
     const STATUS_BLOCK = 0;
     const STATUS_ACTIVE = 1;
 

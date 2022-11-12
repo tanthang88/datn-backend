@@ -7,6 +7,7 @@ import {
 export function dataTable(columns, urlRequest) {
   $('#dataTable').DataTable({
     lengthMenu: DEFAULT_MENU_RECOST,
+    processing: true,
     language: {
       "lengthMenu": DEFAULT_TITLE_TABLE.DEFAULT_LENGHT_RECOST,
       "zeroRecords": DEFAULT_TITLE_TABLE.NO_ROW,
@@ -18,7 +19,8 @@ export function dataTable(columns, urlRequest) {
         "first": DEFAULT_PAGINATE.FIRST,
         "last": DEFAULT_PAGINATE.LAST,
         "next": DEFAULT_PAGINATE.NEXT,
-        "previous": DEFAULT_PAGINATE.PREVIOUS
+        "previous": DEFAULT_PAGINATE.PREVIOUS,
+        "processing": 'Loading...',
       },
     },
     ajax:
