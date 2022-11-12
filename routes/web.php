@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PostCategoriesController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\StaffController;
 
 /*
@@ -27,10 +29,8 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'Supplier'], function () {
         Route::get('/Add', [SupplierController::class, 'getAdd']);
         Route::post('/Add', [SupplierController::class, 'postAdd']);
-
         Route::get('/Update/{id}', [SupplierController::class, 'getUpdate']);
         Route::post('/Update/{id}', [SupplierController::class, 'postUpdate']);
-
         Route::get('/List', [SupplierController::class, 'getList']);
         Route::get('/Delete/{id}', [SupplierController::class, 'getDelete']);
     });
@@ -47,31 +47,23 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'product'], function () {
         Route::get('/add', [ProductController::class, 'getAdd']);
         Route::post('/add', [ProductController::class, 'postAdd']);
-
         Route::get('/addVariant/{id}', [ProductController::class, 'getAddVariant']);
         Route::post('/addVariant/{id}', [ProductController::class, 'postAddVariant']);
-
         Route::get('/updateVariant/{id}', [ProductController::class, 'getUpdateVariant']);
-
         Route::get('/update/{id}', [ProductController::class, 'getUpdate']);
         Route::post('/update/{id}', [ProductController::class, 'postUpdate']);
-
         Route::get('/list', [ProductController::class, 'getList']);
-        Route::get('delete/{id}', [ProductController::class,'delete']);
-        Route::get('deletePropertie/{id}', [ProductController::class,'deletePropertie']);
-
+        Route::get('delete/{id}', [ProductController::class, 'delete']);
+        Route::get('deletePropertie/{id}', [ProductController::class, 'deletePropertie']);
     });
     #About
     Route::group(['prefix' => 'about'], function () {
         Route::get('/add', [AboutController::class, 'getAdd']);
         Route::post('/add', [AboutController::class, 'postAdd']);
-
         Route::get('/update/{id}', [AboutController::class, 'getUpdate']);
         Route::post('/update/{id}', [AboutController::class, 'postUpdate']);
-
         Route::get('/list', [AboutController::class, 'getList']);
-        Route::get('delete/{id}', [AboutController::class,'delete']);
-
+        Route::get('delete/{id}', [AboutController::class, 'delete']);
     });
     #User
     Route::group(['prefix' => 'user'], function () {
@@ -101,5 +93,22 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/{staff}', [StaffController::class, 'show'])->name('staff.show');
         Route::get('/delete/{staff}', [StaffController::class, 'delete'])->name('staff.delete');
     });
-
+    #postCategory
+    Route::group(['prefix' => 'PostCategories'], function () {
+        Route::get('/Add', [PostCategoriesController::class, 'getAdd']);
+        Route::post('/Add', [PostCategoriesController::class, 'postAdd']);
+        Route::get('/Update/{id}', [PostCategoriesController::class, 'getUpdate']);
+        Route::post('/Update/{id}', [PostCategoriesController::class, 'postUpdate']);
+        Route::get('/List', [PostCategoriesController::class, 'getList']);
+        Route::get('/Delete/{id}', [PostCategoriesController::class, 'getDelete']);
+    });
+    #post
+    Route::group(['prefix' => 'Post'], function () {
+        Route::get('/Add', [PostController::class, 'getAdd']);
+        Route::post('/Add', [PostController::class, 'postAdd']);
+        Route::get('/Update/{id}', [PostController::class, 'getUpdate']);
+        Route::post('/Update/{id}', [PostController::class, 'postUpdate']);
+        Route::get('/List', [PostController::class, 'getList']);
+        Route::get('/Delete/{id}', [PostController::class, 'getDelete']);
+    });
 });
