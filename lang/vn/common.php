@@ -10,7 +10,9 @@ return [
         ],
         'password' => [
             'required' => 'Mật khẩu không được để trống',
-            'regex' => 'Mật khẩu không đúng định dạng'
+            'regex' => 'Mật khẩu không đúng định dạng',
+            'max' => 'Mật khẩu vượt quá 16 ký tự cho phép',
+            'min' => 'Mật khẩu phải có ít nhất 6 ký tự',
         ],
         'gender' => [
             'in' => 'Giới tính không phù hợp',
@@ -37,6 +39,9 @@ return [
             'permission' => [
                 'required' => 'Vui lòng chọn phân quyền'
             ],
+        ],
+        'birthday' => [
+            'required' => 'Vui lòng nhập ngày sinh'
         ],
     ],
     'table' =>

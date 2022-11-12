@@ -183,7 +183,30 @@
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
-                            Quản Lý Phân Quyền
+                            Nhân viên
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('staff.add') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm mới</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('staff.list') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                        <p class="pl-2">
+                            Phân quyền
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>

@@ -10,7 +10,9 @@ return [
         ],
         'password' => [
             'required' => 'password is required',
-            'regex' => 'Password is not in the required format'
+            'regex' => 'Password is not in the required format',
+            'max' => 'Password exceeds 16 characters allowed',
+            'min' => 'password length must be at least 6 characters',
         ],
         'gender' => [
             'in' => 'Gender mismatch',
@@ -37,6 +39,9 @@ return [
             'permission' => [
                 'required' => 'permission is required'
             ],
+        ],
+        'birthday' => [
+            'required' => 'birthday is required'
         ],
     ],
     'table' =>
