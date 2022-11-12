@@ -15,8 +15,8 @@ class User extends Authenticatable
     const STATUS_BLOCK = 0;
     const STATUS_ACTIVE = 1;
 
-    const FEMALE = 0;
-    const MALE = 1;
+    const FEMALE = 1;
+    const MALE = 0;
 
     const GENDER = [
         self::MALE,

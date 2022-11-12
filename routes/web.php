@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StaffController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,7 +60,6 @@ Route::group(['prefix' => '/'], function () {
         Route::get('delete/{id}', [ProductController::class,'delete']);
         Route::get('deletePropertie/{id}', [ProductController::class,'deletePropertie']);
 
-
     });
     #About
     Route::group(['prefix' => 'about'], function () {
@@ -72,9 +73,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('delete/{id}', [AboutController::class,'delete']);
 
     });
-    Route::group(['prefix' => 'laravel-filemanager',], function () {
-        \UniSharp\LaravelFilemanager\Lfm::routes();
-    });
+    #User
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.list');
         Route::get('data', [UserController::class, 'dataUser'])->name('dataUser');
@@ -82,7 +81,7 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/{user}', [UserController::class, 'update'])->name('user.update');
         Route::get('/delete/{user}', [UserController::class, 'delete']);
     });
-
+    #Role
     Route::group(['prefix' => 'role'], function () {
         Route::get('/', [RoleController::class, 'index'])->name('role.list');
         Route::get('data', [RoleController::class, 'dataRoles'])->name('dataRoles');
@@ -91,7 +90,16 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/{role}', [RoleController::class, 'show'])->name('role.edit');
         Route::post('/{role}', [RoleController::class, 'update'])->name('role.update');
         Route::get('/delete/{role}', [RoleController::class, 'delete'])->name('role.delete');
-
+    });
+    #Staff
+    Route::group(['prefix' => 'staff'], function () {
+        Route::get('/', [StaffController::class, 'index'])->name('staff.list');
+        Route::get('data', [StaffController::class, 'dataStaffs'])->name('dataStaffs');
+        Route::get('/add', [StaffController::class, 'create'])->name('staff.add');
+        Route::post('/add', [StaffController::class, 'store'])->name('staff.store');
+        Route::post('/{staff}', [StaffController::class, 'update'])->name('staff.update');
+        Route::get('/{staff}', [StaffController::class, 'show'])->name('staff.show');
+        Route::get('/delete/{staff}', [StaffController::class, 'delete'])->name('staff.delete');
     });
 
 });
