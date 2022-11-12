@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginUserRequest extends FormRequest
+class LoginAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class LoginUserRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email'],
-            'password' => 'required',
+            'password' => ['required','max:16','min:6','regex:'.config('define.regex.password')]
         ];
     }
 
@@ -40,7 +40,10 @@ class LoginUserRequest extends FormRequest
             'email.required' => trans('common.validation.email.required'),
             'email.email' => trans('common.validation.email.format'),
             'password.required' => trans('common.validation.password.required'),
+            'password.max' => trans('common.validation.password.max'),
+            'password.min' => trans('common.validation.password.min'),
+            'password.regex' => trans('common.validation.password.regex'),
+            'birthday.required' => trans('common.validation.birthday.required'),
         ];
     }
-
 }

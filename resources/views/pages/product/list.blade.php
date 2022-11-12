@@ -109,7 +109,7 @@
                                             Biến thể
                                         </a>
                                 @endif
-                                <a class="btn btn-info btn-sm" href="/product/update/{{$product->id}}">
+                                <a class="btn btn-info btn-sm" href="{{route('product.update',['id'=>$product->id])}}">
                                     <i class="fas fa-pencil-alt">
                                     </i>
                                     Edit
