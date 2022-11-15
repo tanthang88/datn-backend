@@ -51,7 +51,6 @@
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
                             <button type="button" class="btn btn-warning"><a href="Product/Add" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                         </div>
-                        @include('components.alert')
                     </div>
 
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125);">

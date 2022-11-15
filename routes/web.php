@@ -50,13 +50,15 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/addVariant/{id}', [ProductController::class, 'postAddVariant']);
 
         Route::get('/updateVariant/{id}', [ProductController::class, 'getUpdateVariant']);
+        Route::post('/updateVariant/{id}', [ProductController::class, 'postUpdateVariant']);
 
         Route::get('/update/{id}', [ProductController::class, 'getUpdate']);
         Route::post('/update/{id}', [ProductController::class, 'postUpdate']);
 
         Route::get('/list', [ProductController::class, 'getList']);
         Route::get('delete/{id}', [ProductController::class,'delete']);
-        Route::get('deletePropertie/{id}', [ProductController::class,'deletePropertie']);
+        Route::get('deletePropertie/{id}/{product_id}', [ProductController::class,'deletePropertie']);
+        Route::get('deleteVariant/{id}', [ProductController::class,'deleteVariant']);
 
 
     });

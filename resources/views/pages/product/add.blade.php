@@ -67,9 +67,8 @@
                     <div class="row" style="padding-bottom:20px;">
                         <div class="col-3">
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
-                            <button type="button" class="btn btn-warning"><a href="Product/Add" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
+                            <button type="button" class="btn btn-warning"><a href="product/list" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                         </div>
-                        @include('components.alert')
                     </div>
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
                         <ul class="nav nav-pills">
@@ -99,11 +98,15 @@
                                             <div class="row pd-10">
                                                 <label class="col-4">Nhà cung cấp</label>
                                                 <select class="col-8 form-control select2 select2-hidden-accessible" name="supplier_id" style="width: 80%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                    <option selected="selected" data-select2-id="1">Nhà cung cấp</option>
+                                                    <option selected="selected" value="" data-select2-id="1">Nhà cung cấp</option>
                                                     @foreach($supplier as $supplier )
                                                         <option value="{{ $supplier->id }}">{{$supplier->supplier_name}}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('supplier_id')
+                                                    <span class="col-4"></span>
+                                                    <span class="col-8 help-block">{{$message}}</span>
+                                                @enderror
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Số lượng kho</label>
@@ -133,53 +136,24 @@
                                                 <label class="col-4">Giảm giá</label>
                                                 <input type="checkbox" name="is_discount_product">
                                             </div>
+                                            <div class="row pd-10">
+                                                <label class="col-4">Thông số kỹ thuật</label>
+                                                <input type="checkbox" id="is_configuration_product" name="is_configuration_product" onclick="chooseConfiguration()">
+                                            </div>
                                         </div>
                                         <div class="col-6" style="padding:0 50px;">
                                             <div class="row pd-10">
                                                 <label class="col-4">Lựa chọn danh mục</label>
                                                 <select class="col-8 form-control select2 select2-hidden-accessible" name="category_id" style="width: 80%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                    <option selected="selected" data-select2-id="1">Danh mục</option>
-                                                    <?php  $categories;
-                                                        $parent_id = 0;
-                                                        $char = '';
-                                                        foreach ($categories as $key => $category){
-                                                            if($category->parent_id == 0){
-                                                                $html = '
-                                                                <option value=" '.$category->id.' "> '. $char .$category->category_name.'</option>
-                                                                ';
-                                                            unset($category[$key]);
-                                                            }else{
-                                                                $html = '
-                                                                <option value=" '.$category->id.' "> '. '---' .$category->category_name.'</option>
-                                                                ';
-                                                            }
-                                                            echo $html;
-                                                        }
-                                                        ?>
-
-
+                                                    <option selected="selected" value="" data-select2-id="1">Danh mục</option>
+                                                    {!! \App\Helper\Product_Helper::product_category($categories) !!}
                                                 </select>
+                                                @error('category_id')
+                                                    <span class="col-4"></span>
+                                                    <span class="col-8 help-block">{{$message}}</span>
+                                                @enderror
                                             </div>
-                                            {{-- <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Ảnh sản phẩm:(Độ dài 600x600px)</label>
-                                                <div class="input-group">
-                                                    <input type="text" id="image" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-append">
-                                                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Ảnh sản phẩm:(Độ dài 600x600px)</label>
-                                                <div class="input-group">
-                                                    <input type="file" name="upload[]" id="upload" value="{{old('upload[]')}}" onchange="ImagesFileAsURL()" multiple />
-                                                    <div id="displayImg">
 
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                             <div class="form-group pd-row-2">
                                                 <label for="exampleInputFile">Hình ảnh sản phẩm:(Độ dài 600x600px)</label>
                                                 <div class="input-group">
@@ -282,7 +256,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
+                    <div class="card" id="div_configuration" style="border-top:1px solid rgba(0,0,0,.125); display:none">
                         <ul class="nav nav-pills">
                             <li class="nav-content" style="border-right:1px solid rgba(0,0,0,.125);"><i class="fa fa-barcode" aria-hidden="true"></i></li>
                             <li class="nav-content">Thông số kỹ thuật</li>
@@ -417,23 +391,17 @@
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="width:95% !important;margin: 1.75rem auto;" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <iframe src="/laravel-filemanager?type=image" style="width:100%; height:500px; overflow:hidden;border:none"></iframe>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-            </div>
-        </div>
 </div>
 @endsection
 <script>
+    // chọn thông số kỹ thuật
+     function chooseConfiguration(){
+        if($('#is_configuration_product').is(':checked')){
+            $('#div_configuration').show();
+        }else{
+            $('#div_configuration').hide();
+        }
+    }
     // chọn loại sản phẩm
     function chooseProduct(){
         var valueIp = $('#is_variation').val();
@@ -445,6 +413,7 @@
             $('.normalPro').show();
         }
     }
+
     // nút thêm thuộc tính
     function addProperties(){
         $("#add-properties").clone().appendTo("#vert-tabs-content-properties");
