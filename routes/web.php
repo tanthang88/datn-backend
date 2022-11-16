@@ -50,22 +50,25 @@ Route::group(['prefix' => '/'], function () {
     });
     #Product
     Route::group(['prefix' => 'product'], function () {
-        Route::get('/add', [ProductController::class, 'getAdd']);
+        Route::get('/add', [ProductController::class, 'getAdd'])->middleware(['auth'])->name('product.add');
         Route::post('/add', [ProductController::class, 'postAdd']);
-        Route::get('/addVariant/{id}', [ProductController::class, 'getAddVariant']);
+        Route::get('/addVariant/{id}', [ProductController::class, 'getAddVariant'])->middleware(['auth'])->name('variant.add');
         Route::post('/addVariant/{id}', [ProductController::class, 'postAddVariant']);
-        Route::get('/updateVariant/{id}', [ProductController::class, 'getUpdateVariant']);
+        Route::get('/updateVariant/{id}', [ProductController::class, 'getUpdateVariant'])->middleware(['auth'])->name('variant.update');
         Route::get('/update/{id}', [ProductController::class, 'getUpdate'])->middleware(['auth'])->name('product.update');
         Route::post('/update/{id}', [ProductController::class, 'postUpdate']);
         Route::get('/list', [ProductController::class, 'getList'])->middleware(['auth'])->name('product.list');
-        Route::get('delete/{id}', [ProductController::class, 'delete']);
-        Route::get('deletePropertie/{id}', [ProductController::class, 'deletePropertie']);
+        Route::get('delete/{id}', [ProductController::class,'delete']);
+        Route::get('deletePropertie/{id}/{product_id}', [ProductController::class,'deletePropertie']);
+        Route::get('deleteVariant/{id}', [ProductController::class,'deleteVariant']);
+
+
     });
     #About
     Route::group(['prefix' => 'about'], function () {
-        Route::get('/add', [AboutController::class, 'getAdd']);
+        Route::get('/add', [AboutController::class, 'getAdd'])->middleware(['auth'])->name('about.add');
         Route::post('/add', [AboutController::class, 'postAdd']);
-        Route::get('/update/{id}', [AboutController::class, 'getUpdate']);
+        Route::get('/update/{id}', [AboutController::class, 'getUpdate'])->middleware(['auth'])->name('about.update');
         Route::post('/update/{id}', [AboutController::class, 'postUpdate']);
         Route::get('/list', [AboutController::class, 'getList'])->middleware(['auth'])->name('about.list');
         Route::get('delete/{id}', [AboutController::class, 'delete']);

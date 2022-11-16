@@ -9,7 +9,7 @@ Danh mục bài viết
 @endpush
 @section('content')
     <!-- Content Header (Page header) -->
-    
+
     <!-- Main content -->
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
@@ -26,7 +26,7 @@ Danh mục bài viết
                     <tr>
                     <th>ID</th>
                     <th>Tên bài viết</th>
-                    <th>Số thứ tự</th>                 
+                    <th>Số thứ tự</th>
                     <th>Hiển Thị</th>
                     <th>Nổi bật</th>
                     <th>Mô Tả</th>
@@ -38,7 +38,7 @@ Danh mục bài viết
                         <tbody>
                             <tr>
                                 <td>{{$post_categories->id}}</td>
-                                <td>{{$post_categories->category_name}}</td>                 
+                                <td>{{$post_categories->category_name}}</td>
                                 <td>{{$post_categories->category_order}}</td>
                                 <td>
                                     @if($post_categories->category_display == 0)
@@ -47,7 +47,7 @@ Danh mục bài viết
                                     {{'Có'}}
                                     @endif
                                 </td>
-                                
+
                                 <td>
                                     @if($post_categories->category_outstanding == 0)
                                     {{'Không'}}
@@ -55,16 +55,16 @@ Danh mục bài viết
                                     {{'Có'}}
                                     @endif
                                 </td>
-                                <td>{{$post_categories->category_desc}}</td>    
-                                <td>{{$post_categories->category_content}}</td>    
-                                <td>{{$post_categories->created_at}}</td>   
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="PostCategories/Update/{{$post_categories->id}}">Sửa</a></td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="PostCategories/Delete/{{$post_categories->id}}"> Xóa</a></td>       
+                                <td>{{$post_categories->category_desc}}</td>
+                                <td>{{$post_categories->category_content}}</td>
+                                <td>{{$post_categories->created_at}}</td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="/PostCategories/Update/{{$post_categories->id}}">Sửa</a></td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="/PostCategories/Delete/{{$post_categories->id}}"> Xóa</a></td>
                             </tr>
-                            
+
                             </tbody>
                     @endforeach
-                  
+
                     </table>
                     </div>
             </div>
@@ -73,11 +73,11 @@ Danh mục bài viết
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <?php                
+    <?php
     $message = Session::get('message');
     if ($message){
         echo '<p>' . $message . '<p>';
-        Session::put('message', null);    
+        Session::put('message', null);
     }
      ?>
 </div>

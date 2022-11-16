@@ -2,8 +2,7 @@
 @section('title')
     {{$title}}
 @endsection
-@push('styles')
-@endpush
+@push('style')
 <style>
     .nav-content{
         color:rgba(0,0,0,.6);
@@ -49,6 +48,8 @@
         border:1px solid #28a745;
     }
 </style>
+@endpush
+
 @section('content')
     <!-- Content Header (Page header) -->
     <!-- Main content -->
@@ -59,7 +60,7 @@
                     <div class="row" style="padding-bottom:20px;">
                         <div class="col-3">
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
-                            <button type="button" class="btn btn-warning"><a href="Product/Add" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
+                            <button type="button" class="btn btn-warning"><a href="/product/list" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                         </div>
                     </div>
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
@@ -95,6 +96,10 @@
                                                         <option value="{{ $supplier->id }}" {{ $supplier->id == $data->supplier_id ? 'selected' : '' }}>{{$supplier->supplier_name}}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('supplier_id')
+                                                <span class="col-4"></span>
+                                                <span class="col-8 help-block">{{$message}}</span>
+                                                @enderror
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Giá sản phẩm (₫)</label>
@@ -128,56 +133,30 @@
                                                     <span class="col-8 help-block">{{$message}}</span>
                                                 @enderror
                                             </div>
+                                            <div class="row pd-10">
+                                                <label class="col-4">Giảm giá</label>
+                                                <input type="checkbox" {{ $data->is_discount_product=='1' ? 'checked' : ''}} name="is_discount_product">
+                                            </div>
+                                            <div class="row pd-10">
+                                                <label class="col-4">Thông số kỹ thuật</label>
+                                                <input type="checkbox" {{ $configuration!=null ? 'checked' : ''}} id="is_configuration_product" name="is_configuration_product" onclick="chooseConfiguration()">
+                                            </div>
                                         </div>
                                         <div class="col-6" style="padding:0 50px;">
                                             <div class="row pd-10">
                                                 <label class="col-4">Lựa chọn danh mục</label>
                                                 <select class="col-8 form-control select2 select2-hidden-accessible" name="category_id" style="width: 80%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                    <?php  $categories;
-                                                        $parent_id = 0;
-                                                        $char = '';
-                                                        foreach ($categories as $key => $category){ ?>
-                                                            <?php
-                                                            if($category->parent_id == 0){
-                                                                $html = '
-                                                                <option value=" '.$category->id.' " ' ?>
-                                                                    @if($category->id == $data->category_id )
-                                                                        <?php  $html .= 'selected' ?>
-                                                                    @endif
-                                                                <?php
-                                                                $html .=   ' > '.$char .$category->category_name.'</option>
-                                                                ';
-                                                            unset($category[$key]);
-                                                            }else{
-                                                                $html = '
-                                                                <option value=" '.$category->id.' " ' ?>
-                                                                    @if($category->id == $data->category_id )
-                                                                        <?php  $html .= 'checked' ?>
-                                                                    @endif
-                                                                <?php
-                                                                $html .= '   > '. '---' .$category->category_name.'</option>
-                                                                ';
-                                                            }
-                                                            echo $html;
-                                                        }
-                                                        ?>
-
-
+                                                    {{$category_id =  $data->category_id}}
+                                                    {!! \App\Helper\Product_Helper::product_category_update($categories, $category_id) !!}
                                                 </select>
+                                                @error('category_id')
+                                                <span class="col-4"></span>
+                                                <span class="col-8 help-block">{{$message}}</span>
+                                                @enderror
                                             </div>
-                                            {{-- <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Ảnh sản phẩm:(Độ dài 600x600px)</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-append">
-                                                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-folder-open" aria-hidden="true"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Hình ảnh sản phẩm:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Hình ảnh sản phẩm:</label>
                                                 <div class="input-group">
                                                     <input id="img_product" type="file" name="img_product" onchange="ImagesFileAsURL()">
                                                     <div id="imgNow">
@@ -191,7 +170,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Album ảnh:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Album ảnh:</label>
                                                 <div class="input-group">
                                                     <input id="img_list" type="file" name="img_list[]" onchange="ImagesListFileAsURL()" multiple>
                                                     <div id="imgListNow">
@@ -319,7 +298,7 @@
                                                                 <h3 class="card-title">{{$propertie->propertie_name}}</h3>
                                                                 <div class="card-tools">
                                                                     <button type="button" class="btn bg-dark btn-sm" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
-                                                                    <button type="button" id="remove" class="btn bg-dark btn-sm" onclick="removeRow({{$propertie->id}})"><i class="fas fa-times"></i></button>
+                                                                    <button type="button" id="" class="btn bg-dark btn-sm removePropertie" data-url="/product/deletePropertie/{{$propertie->id}}/{{$data->id}}"><i class="fas fa-times"></i></button>
                                                                 </div>
                                                             </div>
                                                             <div class="card-body" style="display:none;">
@@ -374,7 +353,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
+
+                    <div class="card" id="div_configuration" style="border-top:1px solid rgba(0,0,0,.125);display:none;">
                         <ul class="nav nav-pills">
                             <li class="nav-content" style="border-right:1px solid rgba(0,0,0,.125);"><i class="fa fa-barcode" aria-hidden="true"></i></li>
                             <li class="nav-content">Thông số kỹ thuật</li>
@@ -388,7 +368,7 @@
                                         <div class="col-6">
                                             <div class="row pd-10">
                                                 <label class="col-4">Màn hình</label>
-                                                <input type="text" name="config_screen" value="{{$configuration->config_screen}}" class="col-8 form-control" id="" placeholder="Màn hình">
+                                                <input type="text" name="config_screen" value="<?php if($configuration!= null) echo $configuration->config_screen ?>" class="col-8 form-control" id="" placeholder="Màn hình">
                                                 @error('config_screen')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -396,7 +376,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">CPU</label>
-                                                <input type="text" name="config_cpu" value="{{$configuration->config_cpu}}" class="col-8 form-control" id="" placeholder="CPU">
+                                                <input type="text" name="config_cpu" value="<?php if($configuration!= null) echo $configuration->config_cpu ?>" class="col-8 form-control" id="" placeholder="CPU">
                                                 @error('config_cpu')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -404,7 +384,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Ram</label>
-                                                <input type="text" name="config_ram" value="{{$configuration->config_ram}}" class="col-8 form-control" id="" placeholder="Ram">
+                                                <input type="text" name="config_ram" value="<?php if($configuration!= null) echo $configuration->config_ram ?>" class="col-8 form-control" id="" placeholder="Ram">
                                                 @error('config_ram')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -412,7 +392,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Camera sau</label>
-                                                <input type="text" name="config_camera" value="{{$configuration->config_camera}}" class="col-8 form-control" id="" placeholder="Camera sau">
+                                                <input type="text" name="config_camera" value="<?php if($configuration!= null) echo $configuration->config_camera ?>" class="col-8 form-control" id="" placeholder="Camera sau">
                                                 @error('config_camera')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -422,7 +402,7 @@
                                         <div class="col-6" style="padding:0 50px;">
                                             <div class="row pd-10">
                                                 <label class="col-4">Camera trước</label>
-                                                <input type="text" name="config_selfie" value="{{$configuration->config_selfie}}" class="col-8 form-control" id="" placeholder="Camera trước">
+                                                <input type="text" name="config_selfie" value="<?php if($configuration!= null) echo $configuration->config_selfie ?>" class="col-8 form-control" id="" placeholder="Camera trước">
                                                 @error('config_selfie')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -430,7 +410,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Thẻ nhớ ngoài</label>
-                                                <input type="text" name="config_battery" value="{{$configuration->config_battery}}" class="col-8 form-control" id="" placeholder="Thẻ nhớ ngoài">
+                                                <input type="text" name="config_battery" value="<?php if($configuration!= null) echo $configuration->config_battery ?>" class="col-8 form-control" id="" placeholder="Thẻ nhớ ngoài">
                                                 @error('config_battery')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -438,7 +418,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Hệ điều hành</label>
-                                                <input type="text" name="config_system" value="{{$configuration->config_system}}" class="col-8 form-control" id="" placeholder="Hệ điều hành">
+                                                <input type="text" name="config_system" value="<?php if($configuration!= null) echo $configuration->config_system ?>" class="col-8 form-control" id="" placeholder="Hệ điều hành">
                                                 @error('config_system')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -452,6 +432,7 @@
 
                         </div>
                     </div>
+
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
                         <div class="row" style="margin-left:3px;">
                             <ul class="nav nav-pills col-4">
@@ -516,85 +497,111 @@
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" style="width:95% !important;margin: 1.75rem auto;" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <iframe src="/laravel-filemanager" style="width:100%; height:500px; overflow:hidden;border:none"></iframe>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-            </div>
-        </div>
 </div>
 @endsection
-<script>
-    // chọn loại sản phẩm
-     function chooseProduct(){
-        var valueIp = $('#is_variation').val();
-        if(valueIp === '1'){
-            $('.variantPro').show();
-            $('.normalPro').hide();
-        }else{
-            $('.variantPro').hide();
-            $('.normalPro').show();
+@push('scripts')
+    <script>
+        function check(){
+            if($('#is_configuration_product').is(':checked')){
+                $('#div_configuration').show();
+            }
         }
-    }
-    function typeProperties(){
-        $("#add-properties").clone().appendTo("#vert-tabs-content-properties-type");
-        $("#add-properties").show();
-    }
-    function addProperties(){
-        if(confirm('Bạn có chắc muốn thêm thuộc tính mới không ?')){
-            $("#add-properties").clone().appendTo("#vert-tabs-content-properties");
+        $(function(){
+            check();
+        })
+    </script>
+    <script>
+        // chọn thông số kỹ thuật
+        function chooseConfiguration(){
+            if($('#is_configuration_product').is(':checked')){
+                $('#div_configuration').show();
+            }else{
+                $('#div_configuration').hide();
+            }
+        }
+        // chọn loại sp
+        function chooseProduct(){
+            var valueIp = $('#is_variation').val();
+            if(valueIp === '1'){
+                $('.variantPro').show();
+                $('.normalPro').hide();
+            }else{
+                $('.variantPro').hide();
+                $('.normalPro').show();
+            }
+        }
+        function typeProperties(){
+            $("#add-properties").clone().appendTo("#vert-tabs-content-properties-type");
             $("#add-properties").show();
-            $('#input-propertie').val('check');
         }
-    }
-    function remove(){
-        $('#add-properties').remove();
-    }
-    // ảnh sản phẩm
-     function ImagesFileAsURL() {
-               var fileSelected = document.getElementById('img_product').files;
-               var imgNow = document.getElementById('imgNow');
-               if (fileSelected.length > 0) {
-                       imgNow.classList.add("hide");
-                       var fileToLoad = fileSelected[0];
-                       var fileReader = new FileReader();
-                       fileReader.onload = function(fileLoaderEvent) {
-                           var srcData = fileLoaderEvent.target.result;
-                           var newImage = document.createElement('img');
-                           newImage.src = srcData;
-                           document.getElementById('displayImg').innerHTML = newImage.outerHTML;
-                       }
-                       fileReader.readAsDataURL(fileToLoad);
+        // thêm thuộc tính
+        function addProperties(){
+            if(confirm('Bạn có chắc muốn thêm thuộc tính mới không ?')){
+                $("#add-properties").clone().appendTo("#vert-tabs-content-properties");
+                $("#add-properties").show();
+                $('#input-propertie').val('check');
+            }
+        }
+        // tắt thêm thuộc tính
+        function remove(){
+            $('#add-properties').remove();
+        }
+        // ảnh sản phẩm
+         function ImagesFileAsURL() {
+                   var fileSelected = document.getElementById('img_product').files;
+                   var imgNow = document.getElementById('imgNow');
+                   if (fileSelected.length > 0) {
+                           imgNow.classList.add("hide");
+                           var fileToLoad = fileSelected[0];
+                           var fileReader = new FileReader();
+                           fileReader.onload = function(fileLoaderEvent) {
+                               var srcData = fileLoaderEvent.target.result;
+                               var newImage = document.createElement('img');
+                               newImage.src = srcData;
+                               document.getElementById('displayImg').innerHTML = newImage.outerHTML;
+                           }
+                           fileReader.readAsDataURL(fileToLoad);
 
-               }
-    }
-    // list hình ảnh
-    function ImagesListFileAsURL() {
-               var fileSelected = document.getElementById('img_list').files;
-               var imgListNow = document.getElementById('imgListNow');
-               if (fileSelected.length > 0) {
-                   imgListNow.classList.add("hide");
-                   for (var i = 0; i < fileSelected.length; i++) {
-                       var fileToLoad = fileSelected[i];
-                       var fileReader = new FileReader();
-                       fileReader.onload = function(fileLoaderEvent) {
-                           var srcData = fileLoaderEvent.target.result;
-                           var newImage = document.createElement('img');
-                           newImage.src = srcData;
-                           document.getElementById('displayListImg').innerHTML += newImage.outerHTML;
-                       }
-                       fileReader.readAsDataURL(fileToLoad);
                    }
+        }
+        // list hình ảnh
+        function ImagesListFileAsURL() {
+                   var fileSelected = document.getElementById('img_list').files;
+                   var imgListNow = document.getElementById('imgListNow');
+                   if (fileSelected.length > 0) {
+                       imgListNow.classList.add("hide");
+                       for (var i = 0; i < fileSelected.length; i++) {
+                           var fileToLoad = fileSelected[i];
+                           var fileReader = new FileReader();
+                           fileReader.onload = function(fileLoaderEvent) {
+                               var srcData = fileLoaderEvent.target.result;
+                               var newImage = document.createElement('img');
+                               newImage.src = srcData;
+                               document.getElementById('displayListImg').innerHTML += newImage.outerHTML;
+                           }
+                           fileReader.readAsDataURL(fileToLoad);
+                       }
 
-               }
-    }
+                   }
+        }
 
-</script>
+    </script>
+    <script>
+        // Xóa thuộc tính đã có
+        $(".removePropertie").click(function() {
+            let urlRequest = $(this).data('url');
+            let that = $(this);
+            if(confirm('Bạn có chắc muốn xóa mục này không ?')){
+                $.ajax({
+                    type:'GET',
+                    datatype:'JSON',
+                    url: urlRequest ,
+                    success: function (){
+                        that.parent().parent().parent().remove();
+                    }
+                })
+            }
+        });
+    </script>
+@endpush
+

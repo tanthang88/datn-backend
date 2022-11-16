@@ -1,13 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\DB;
 use App\Models\Promotion;
 // Mở composer.json
 // Thêm vào trong "autoload" chuỗi sau
-
-
 // Chạy cmd : composer  dumpautoload
-
 function changeTitle($str, $strSymbol = '-', $case = MB_CASE_LOWER)
 { // MB_CASE_UPPER / MB_CASE_TITLE / MB_CASE_LOWER
     $str = trim($str);
@@ -19,7 +15,6 @@ function changeTitle($str, $strSymbol = '-', $case = MB_CASE_LOWER)
     $str = preg_replace('/[\W|_]+/', $strSymbol, $str);
     return $str;
 }
-
 function stripUnicode($str)
 {
     if (!$str) return '';
@@ -78,7 +73,6 @@ function stripUnicode($str)
     }
     return $str;
 }
-
 function convertStringToDateDiff($dateRanges1, $dateRanges2)
 {
     $dateRange1 = strtotime($dateRanges1);
