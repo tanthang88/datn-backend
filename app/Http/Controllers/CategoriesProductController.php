@@ -115,7 +115,7 @@ print_r($data);
     public function getList()
     {
         $product_categories = DB::table('product_categories')->get();
-        return view('pages.CategoriesProduct.list',[
+        return view('pages.categoriesproduct.list',[
             'product_categories' => $product_categories,
         ]);
     }

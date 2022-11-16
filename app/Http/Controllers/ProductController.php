@@ -159,7 +159,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function postUpdate(Request $request, $id)
+    public function postUpdate(ProductRequest $request, $id)
     {
             $product        = Product::find($id);
             $product->product_name    = $request->product_name;
