@@ -10,8 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/passport": "v10.4",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7",
-        "unisharp/laravel-filemanager": "^2.5"
+        "laravel/tinker": "^2.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -28,8 +27,11 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
-    },
+        },
+        "files": [
+            "app/function/function.php"
+        ]
+        },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

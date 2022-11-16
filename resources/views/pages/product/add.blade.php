@@ -67,7 +67,7 @@
                     <div class="row" style="padding-bottom:20px;">
                         <div class="col-3">
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
-                            <button type="button" class="btn btn-warning"><a href="product/list" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
+                            <button type="button" class="btn btn-warning"><a href="/product/list" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                         </div>
                     </div>
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
@@ -155,7 +155,7 @@
                                             </div>
 
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Hình ảnh sản phẩm:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Hình ảnh sản phẩm:</label>
                                                 <div class="input-group">
                                                     <input id="img_product" type="file" name="img_product" onchange="ImagesFileAsURL()">
                                                     <div id="displayImg">
@@ -164,7 +164,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group pd-row-2">
-                                                <label for="exampleInputFile">Album ảnh:(Độ dài 600x600px)</label>
+                                                <label for="exampleInputFile">Album ảnh:</label>
                                                 <div class="input-group">
                                                     <input id="img_list" type="file" name="img_list[]" onchange="ImagesListFileAsURL()" multiple>
                                                     <div id="displayListImg">

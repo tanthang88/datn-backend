@@ -11,7 +11,7 @@ class AdminUser extends Authenticatable
 {
     use HasFactory, Notifiable ,SoftDeletes;
     protected $table = 'admin_users';
-    
+
     /**
      * fillable
      *
@@ -21,8 +21,11 @@ class AdminUser extends Authenticatable
         'name',
         'email',
         'password',
+        'tel',
+        'birthday',
+        'gender',
     ];
-    
+
     /**
      * hidden
      *
@@ -31,7 +34,7 @@ class AdminUser extends Authenticatable
     protected $hidden = [
         'password',
     ];
-    
+
     /**
      * AdminRolesUser
      *

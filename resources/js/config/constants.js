@@ -34,5 +34,11 @@ export const URL = {
     ADD: '',
     EDIT: 'user/',
     DELETE: 'user/delete/'
+  },
+  STAFF: {
+    LIST: 'staff/data',
+    ADD: '',
+    EDIT: 'staff/',
+    DELETE: 'staff/delete/'
   }
 };

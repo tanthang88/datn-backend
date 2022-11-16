@@ -29,7 +29,6 @@ class ProductRequest extends FormRequest
             'product_quantity' => 'required|integer|min:1',
             'product_order'    => 'required|min:0',
             'category_id'      => 'required',
-            'config_screen'    => 'max:3'
         ];
     }
     public function messages(): array
@@ -50,7 +49,6 @@ class ProductRequest extends FormRequest
 
             'category_id.required'    => 'Danh mục chưa chọn',
 
-            'config_screen.max'     => 'Chỉ nhập tối đa 3 số'
 
         ];
     }

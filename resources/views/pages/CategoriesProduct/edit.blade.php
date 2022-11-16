@@ -48,7 +48,9 @@ Danh mục sản phẩm
             <div class="form-group">
                 <label>Loại Danh Mục</label>
                 <select  name="parent_id" class="form-control">        
+                    @if($parent_id_val !=0)
                     <option value="{{$parent_id_val}}">{{$parent_name_val}} </option>
+@endif
                     <option value="0"> Danh Mục Cha </option>
                     @foreach($product_categories as $parent_cg)
                     <option value="{{ $parent_cg->id }}">{{ $parent_cg->category_name }}</option>

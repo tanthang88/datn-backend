@@ -43,16 +43,4 @@ class LoginUserRequest extends FormRequest
         ];
     }
 
-    // /**
-    //  * attributes
-    //  *
-    //  * @return string
-    //  */
-    // public function attributes()
-    // {
-    //     return [
-    //         'email' => trans('common.validation.email.required'),
-    //         'password' => trans('common.validation.password.required'),
-    //     ];
-    // }
 }

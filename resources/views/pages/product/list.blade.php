@@ -23,7 +23,7 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="product/add" style="color:#fff">Thêm</a></button>
+                        <button type="button" class="btn btn-dark"><a href="/product/add" style="color:#fff">Thêm</a></button>
                         <button type="button" class="btn btn-warning">Xóa Chọn</button>
                     </div>
                     <form action="" class="col-4">

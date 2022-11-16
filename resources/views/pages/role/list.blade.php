@@ -8,7 +8,6 @@ Danh sách phân quyền
 </style>
 @endpush
 @section('content')
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 table-responsive">
@@ -28,7 +27,6 @@ Danh sách phân quyền
 </div>
 </div>
 @endsection
-
 @prepend('scripts')
 <script type="module" src="{{Vite::asset('resources/js/role/list.js')}}"></script>
 <script type="module" src="{{Vite::asset('resources/js/components/confirmDel.js')}}"></script>
