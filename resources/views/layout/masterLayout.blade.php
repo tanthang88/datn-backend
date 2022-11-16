@@ -35,7 +35,6 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}">
-
     @stack('style')
 
 </head>
@@ -49,7 +48,7 @@
         @include('blocks/sidebar')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="overflow: auto;">
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -80,8 +79,6 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- Deletejs -->
-    <script src="{{asset('js/delete.js')}}"></script>
     <!-- jQuery -->
     <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -106,11 +103,7 @@
     <!-- Sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <!-- Ckeditor + Filemanager-->
-    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
-    <script>
-        $('#lfm').filemanager('file');
-    </script>
+    <!-- Ckeditor-->
     <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script>
         var options = {
@@ -122,7 +115,7 @@
     </script>
 
     <script>
-        CKEDITOR.replace('pro_content', options);
+            CKEDITOR.replace('pro_content', options);
     </script>
     <!-- Validate -->
 

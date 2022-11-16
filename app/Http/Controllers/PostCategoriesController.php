@@ -13,7 +13,7 @@ class PostCategoriesController extends Controller
 {
     public function getAdd()
     {
-        
+
         return view('pages.PostCategories.add');
     }
     public function postAdd(Request $request)
@@ -23,7 +23,7 @@ class PostCategoriesController extends Controller
         $data['category_slug'] = changeTitle($request->category_name);
         $data['category_order'] = $request->category_order;
         if($request->category_display=='on'){
-            $data['category_display']=1;
+            $data['category_display']=1; 
         }else{
             $data['category_display']=0;
         }
@@ -81,7 +81,7 @@ print_r($data);
     $post_categories->save();
         Session::put('message','Sửa thành công');
        return redirect('PostCategories/List');
-       
+
     }
     public function getList()
     {

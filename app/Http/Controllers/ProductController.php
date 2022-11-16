@@ -30,11 +30,8 @@ class ProductController extends Controller
     }
     public function postAdd(ProductRequest $request)
     {
-        try{
             $product = new Product;
-            $configuration = new Configuration;
-
-            // thêm thông tin sp bth
+            // thêm thông tin sp
             $product->product_name    = $request->product_name;
             $product->product_slug    = (Str::slug($product->product_name,'-'));
             $product->supplier_id     = $request->supplier_id;
@@ -77,16 +74,21 @@ class ProductController extends Controller
             $product->seo_keywords    = $request->seo_keywords;
             $product->save();
 
-        //     // thêm thông số kỹ thuật
-            $configuration->product_id      = $product->id;
-            $configuration->config_screen   = $request->config_screen;
-            $configuration->config_cpu      = $request->config_cpu;
-            $configuration->config_ram      = $request->config_ram;
-            $configuration->config_camera   = $request->config_camera;
-            $configuration->config_selfie   = $request->config_selfie;
-            $configuration->config_battery  = $request->config_battery;
-            $configuration->config_system   = $request->config_system;
-            $configuration->save();
+            // thêm thông số kỹ thuật
+            if($request->is_configuration_product == 'on'){
+                if($request->config_screen){
+                    $configuration = new Configuration;
+                    $configuration->product_id      = $product->id;
+                    $configuration->config_screen   = $request->config_screen;
+                    $configuration->config_cpu      = $request->config_cpu;
+                    $configuration->config_ram      = $request->config_ram;
+                    $configuration->config_camera   = $request->config_camera;
+                    $configuration->config_selfie   = $request->config_selfie;
+                    $configuration->config_battery  = $request->config_battery;
+                    $configuration->config_system   = $request->config_system;
+                    $configuration->save();
+                }
+            }
 
             // Lưu hình ảnh liên quan
             if($request->hasFile('img_list')) {
@@ -135,20 +137,11 @@ class ProductController extends Controller
 
                 }
             }
-
-            Session::flash('success', 'Tạo sản phẩm thành công !!');
-
-        }catch(\Exception $error){
-            Session::flash('error', 'Tạo sản phẩm thất bại!!');
-            return redirect()->back();
-        }
-
-        return redirect('/product/list');
-
-
+        return redirect('/product/list')->with('success', trans('alert.add.success'));
     }
     public function getUpdate($id)
     {
+
         $categories = ProductCategory::get();
         $supplier   = Supplier::get();
         $data = Product::where('id', $id)->first();
@@ -168,10 +161,7 @@ class ProductController extends Controller
 
     public function postUpdate(Request $request, $id)
     {
-        try{
             $product        = Product::find($id);
-            $configuration  = Configuration::where('product_id', $id)->first();
-
             $product->product_name    = $request->product_name;
             $product->product_slug    = (Str::slug($product->product_name,'-'));
             $product->supplier_id     = $request->supplier_id;
@@ -213,7 +203,6 @@ class ProductController extends Controller
                 );
 
                 $thumb = '/storage/' . $pathFull . '/' . $name;
-                // dd($thumb);
                 $product->product_image = $thumb;
 
             }
@@ -223,14 +212,33 @@ class ProductController extends Controller
             $product->updated_at       = NOW();
             $product->save();
 
-            $configuration->config_screen   = $request->config_screen;
-            $configuration->config_cpu      = $request->config_cpu;
-            $configuration->config_ram      = $request->config_ram;
-            $configuration->config_camera   = $request->config_camera;
-            $configuration->config_selfie   = $request->config_selfie;
-            $configuration->config_battery  = $request->config_battery;
-            $configuration->config_system   = $request->config_system;
-            $configuration->save();
+            if($request->is_configuration_product == 'on'){
+                if($request->config_screen){
+                    $configuration  = Configuration::where('product_id', $id)->first();
+                    if($configuration!=null){
+                        $configuration->config_screen   = $request->config_screen;
+                        $configuration->config_cpu      = $request->config_cpu;
+                        $configuration->config_ram      = $request->config_ram;
+                        $configuration->config_camera   = $request->config_camera;
+                        $configuration->config_selfie   = $request->config_selfie;
+                        $configuration->config_battery  = $request->config_battery;
+                        $configuration->config_system   = $request->config_system;
+                        $configuration->updated_at      = NOW();
+                        $configuration->save();
+                    }else{
+                        $configuration_n = new Configuration;
+                        $configuration_n->product_id      = $product->id;
+                        $configuration_n->config_screen   = $request->config_screen;
+                        $configuration_n->config_cpu      = $request->config_cpu;
+                        $configuration_n->config_ram      = $request->config_ram;
+                        $configuration_n->config_camera   = $request->config_camera;
+                        $configuration_n->config_selfie   = $request->config_selfie;
+                        $configuration_n->config_battery  = $request->config_battery;
+                        $configuration_n->config_system   = $request->config_system;
+                        $configuration_n->save();
+                    }
+                }
+            }
 
             // Lưu hình ảnh liên quan
             if ($request->hasFile('img_list')) {
@@ -285,16 +293,18 @@ class ProductController extends Controller
            if($request->input_type=='variant'){
                 if($request->is_variation=='1'){
                     // cập nhật lại thuộc tính cũ
-                    foreach($request->propertie_name as $index => $name){
+                    if(isset($request->propertie_name)){
+                        foreach($request->propertie_name as $index => $name){
                             $my_id = $request->id[$index];
                             $properties = Propertie::where('id', $my_id)->first();
                             $properties->propertie_name = $name;
                             $properties->propertie_slug = Str::slug($name);
                             $properties->propertie_value = $request->propertie_value[$index];
                             $properties->product_id = $id;
-                            // print_r($properties);
+                            $properties->updated_at   = NOW();
                             $properties->save();
 
+                    }
                     }
                     // thêm thuộc tính mới
                     if($request->input_propertie=='check'){
@@ -316,13 +326,7 @@ class ProductController extends Controller
                 }
            }
 
-            Session::flash('success', 'Cập nhật sản phẩm thành công !!');
-        }catch(\Exception $error){
-            Session::flash('error', 'Cập nhật sản phẩm thất bại!!');
-            // redirect()->back();
-        }
-
-        // return redirect('/product/list');
+        return redirect('/product/list')->with('success', trans('alert.update.success'));
 
     }
     public function getList(Request $request)
@@ -360,7 +364,6 @@ class ProductController extends Controller
     }
     public function postAddVariant(Request $request)
     {
-        try{
                     $arr = $request->propertie_id;
                     foreach($request->image as $index => $file){
                         $variant = new Variantion;
@@ -390,17 +393,13 @@ class ProductController extends Controller
                     $variant->save();
                     $arr = array_slice($arr,$count);
                 }
+        return redirect('/product/list')->with('success', trans('alert.update.success'));
 
-            Session::flash('success', 'Thêm thuộc tính thành công !!');
-        }catch(\Exception $error){
-            Session::flash('error', 'Cập nhật thuộc tính thất bại!!');
-            redirect()->back();
-        }
-
-        return redirect('/product/list');
     }
 
-    public function getUpdateVariant($id){
+    public function getUpdateVariant($id)
+    {
+        $i = 0;
         $variant = Variantion::where('product_id', $id)->get();
         $html = '';
         foreach($variant as $variant){
@@ -424,7 +423,9 @@ class ProductController extends Controller
             // Vòng 2
             $propertie_last = $variant->propertie_id_link;
             $arr_last = explode(' ', $propertie_last);
-            // dd($arr_last);
+            $count = count($arr_last);
+            $arr_search = array_search('', $arr_last);
+            unset($arr_last[$arr_search]);
             foreach($arr_last as $index => $arr_last){
                 $html .= '<select class="form-control is_variation col-3" name="propertie_id[]">';
                     $id_slug_last = $arr_last;
@@ -446,17 +447,18 @@ class ProductController extends Controller
                 $html .=    '</div>
                             <div class="card-tools">
                                 <button type="button" class="btn bg-dark btn-sm" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                <button type="button" class="btn bg-dark btn-sm" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                <button type="button" class="btn bg-dark btn-sm removeVariant" data-url ="/product/deleteVariant/'.$variant->id.'"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
                         <div class="card-body" style="display: block;">
-                            <input type="hidden" name="product_id" value="'.$id.'">
-                            <input type="hidden" name="count" value="">
+                            <input type="hidden" name="my_id[]" value="'.$variant->id.'">
+                            <input type="hidden" name="count" value="'.$count.'">
                             <div class="row pd-10">
                                 <label class="col-3">Giá:</label>
                                 <input type="text" name="price[]" value="'.$variant->price.'" class="col-7 form-control" id=""  placeholder="Giá sản phẩm">
                             </div>
                             <div class="row pd-10"><label class="col-3">Hình ảnh:</label>
+                                <input type="hidden" value="'.$variant->img.'" name="image_last[]">
                                 <input type="file" name="image[]" class="col-7 form-control" id="image" onchange="ImagesFileAsURL()">
                                 <div class="col-3"></div>
                                 <div class="col-7" id="displayImg">
@@ -466,46 +468,168 @@ class ProductController extends Controller
                         </div>
                     </div>';
             }
+
+        // html mới
+        $slug_n = Propertie::select('propertie_slug')->distinct('propertie_slug')->where('product_id', $id)->get();
+        $count_n = count($slug_n);
+        // $properties = [] ;
+        $html_n = '';
+        foreach($slug_n as $value){
+            $properties_n= Propertie::where('propertie_slug', $value->propertie_slug)->where('product_id', $id)->get();
+            $html_n.='<select class="form-control is_variation col-3" name="propertie_id_n[]">';
+               foreach($properties_n as $propertie){
+                $html_n.='<option value='.$propertie->id.'>'.$propertie->propertie_name.': '.$propertie->propertie_value.'</option>';
+               }
+            $html_n.='</select>';
+
+        }
         return view('pages.variant.update',[
             'title' => 'Cập nhật thuộc tính',
+            'html_n'  => $html_n,
             'html'  => $html,
             'id'    => $id,
-            // 'count' => $count,
+            'count' => $count_n,
         ]);
     }
 
+    public function postUpdateVariant(Request $request, $id)
+    {
+        // cập nhật biến thể cũ
+        $arr = $request->propertie_id;
+        foreach($request->price as $index => $file){
+            $my_id = $request->my_id[$index];
+            $variant = Variantion::where('id',$my_id)->first();
+            // lưu id link
+            $id_link = [];
+            $count = $request->count;
+            for($i=1;$i<$count;$i++){
+                $id_link[] = $arr[$i].' ';
+            }
+            $variant->propertie_id = $arr[0];
+            $variant->propertie_id_link = implode($id_link);
+            $variant->product_id = $id;
+            $variant->price = $file;
+            // check ảnh sp
+            $image = $request->image;
+            if(isset($image[$index])){
+                $name = $image[$index]->getClientOriginalName();
+                $pathFull = 'uploads/' . date("Y-m-d");
+                $image[$index]->storeAs(
+                    'public/' . $pathFull, $name
+                );
+
+                $thumb = '/storage/' . $pathFull . '/' . $name;
+                $variant->img = $thumb;
+            }else{
+                $variant->img = $request->image_last[$index];
+            }
+                $variant->save();
+                $arr = array_slice($arr,$count);
+        }
+        // thêm biến thể mới
+            if($request->input_variant == 'check'){
+                $arr_n = $request->propertie_id_n;
+                    foreach($request->image_n as $index => $file){
+                        $variant_n = new Variantion;
+                        // lưu id link
+                        $id_link_n = [];
+                        $count_n = $request->count_n;
+                        for($i=1;$i<$count_n;$i++){
+                            $id_link_n[] = $arr_n[$i].' ';
+                        }
+                        $variant_n->propertie_id = $arr_n[0];
+                        $variant_n->propertie_id_link = implode($id_link_n);
+                        $variant_n->product_id = $request->id;
+                        $variant_n->price = $request->price_n[$index];
+
+                        // check ảnh sp
+                        if ($request->hasFile('image_n')) {
+                                $name = $file->getClientOriginalName();
+                                $pathFull = 'uploads/' . date("Y-m-d");
+                                $file->storeAs(
+                                    'public/' . $pathFull, $name
+                                );
+
+                                $thumb = '/storage/' . $pathFull . '/' . $name;
+                                $variant_n->img = $thumb;
+                                }
+                        $variant_n->save();
+                        $arr_n = array_slice($arr_n,$count_n);
+                    }
+            }
+        return redirect('/product/list')->with('success', trans('alert.update.success'));
+    }
     // xóa sản phẩm
     public function delete($id)
     {
-        try{
             $product = Product::where('id', $id)->first();
             $configuration  = Configuration::where('product_id', $id)->first();
             $image = ProductImage::where('product_id', $id)->get();
-            if($product && $configuration){
+            $propertie = Propertie::where('product_id', $id)->get();
+            $variant = Variantion::where('product_id', $id)->get();
+            if($configuration != null){
+                $configuration->delete();
+            }
+            if(empty($image)){
                  // DELETE các dòng liên quan trong table `product image`
                 foreach ($image as $list) {
                     // Xóa hình cũ để tránh rác
                     $nameimg = substr(($list->image),28);
                     Storage::delete('public/uploads/'.$list->image.'/' . $nameimg);
-
                     // Xóa record
                     $list->delete();
-                }
-
-                // Xóa hình cũ để tránh rác
-                // Storage::delete('public/photos/' . $sp->sp_hinh);
-                $product->delete();
-                $configuration->delete();
-                $image->delete();
-                Session::flash('success', 'Xóa sản phẩm thành công !!');
+                    $image->delete();
             }
-        }catch(\Exception $error){
-            Session::flash('error', 'Xóa sản phẩm thất bại!!');
-            return redirect()->back();
+            if(!empty($propertie)){
+                foreach ($propertie as $propertie){
+                    $propertie->delete();
+                }
+            }
+            if(!empty($variant)){
+                foreach ($variant as $variant){
+                    $variant->delete();
+                }
+            }
+            $product->delete();
+            return redirect('/product/list')->with('success', trans('alert.update.success'));
+            }
+    }
+
+    // xóa thuộc tính
+    public function deletePropertie($id, $product_id)
+    {
+        $propertie = Propertie::where('id',$id)->first();
+        if($propertie){
+            $variant = Variantion::where('product_id', $product_id)->get();
+            if($variant){
+                foreach($variant as $variant){
+
+                    // xóa propertie id
+                    if($variant->propertie_id == $id){
+                        $variant->delete();
+                    }
+
+                    // xóa propertie id link
+                    $propertie_id_link = $variant->propertie_id_link;
+                    $propertie_id = explode(' ', $propertie_id_link);
+                    foreach($propertie_id as $propertie_id){
+                        if($propertie_id == $id){
+                            $variant->delete();
+                        }
+                    }
+
+                }
+            }
+            $propertie->delete();
         }
 
-        return redirect('/product/list');
     }
-    // xóa thuộc tính
-    // public function delete($id)
+
+    // xóa biến thể
+    public function deleteVariant($id)
+    {
+            $variant = Variantion::find($id);
+            $variant->delete();
+    }
 }
+
