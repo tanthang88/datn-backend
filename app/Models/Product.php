@@ -71,4 +71,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductComment::class, 'product_id', 'id');
     }
+    public function promotionProduct()
+    {
+        return $this->hasMany(PromotionProduct::class, 'promotion_id_product', 'id');
+    }
+    public function promotionProductCombo()
+    {
+        return $this->hasMany(PromotionProduct::class, 'promotion_id_product_combo', 'id');
+    }
 }

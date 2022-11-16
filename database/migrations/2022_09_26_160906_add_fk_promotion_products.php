@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::table('promotion_products', function (Blueprint $table) {
             //
-            $table->foreign('promotion_id')->references('id')->on('promotions');
-            $table->foreign('promotion_id_product')->references('id')->on('products');
-            $table->foreign('promotion_id_product_combo')->references('id')->on('products');
+            $table->foreign('promotion_id')->references('id')->on('promotions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('promotion_id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('promotion_id_product_combo')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

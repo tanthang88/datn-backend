@@ -43,6 +43,33 @@ return [
         'birthday' => [
             'required' => 'Vui lòng nhập ngày sinh'
         ],
+        'discoutcode_name' => [
+            'required' => 'Vui lòng nhập tên chương trình giảm giá',
+            'unique' => 'Tên chương trình đã tồn tại'
+        ],
+        'discoutcode_code' => [
+            'required' => 'Vui lòng nhập mã giảm giá cho chuơng trình',
+            'min' => 'Mã giảm giá ít nhất 4 ký tự',
+            'unique' => 'Mã khuyến mãi đã tồn tại'
+        ],
+        'discoutcode_daterange' => [
+            'required' => 'Vui lòng chọn thời gian khuyến mãi',
+        ],
+        'discoutcode_rate' => [
+            'required' => 'Vui lòng nhập mức giảm',
+            'integer' => 'Vui lòng nhập số nguyên',
+            'min' => 'Vui lòng nhập số lớn hơn 0',
+        ],
+        'discoutcode_ordervalue' => [
+            'required' => 'Vui lòng nhập giá trị đơn hàng tối thiểu',
+            'integer' => 'Vui lòng nhập số nguyên',
+            'min' => 'Vui lòng nhập số lớn hơn 0'
+        ],
+        'discoutcode_numberofuse' => [
+            'required' => 'Vui lòng nhập giới hạn số lượng mã',
+            'integer' => 'Vui lòng nhập số nguyên',
+            'min' => 'Vui lòng nhập số lớn hơn 0'
+        ],
     ],
     'table' =>
     [

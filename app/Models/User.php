@@ -82,4 +82,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Dist::class, 'dist_id', 'id');
     }
+    public function promotion()
+    {
+        return $this->hasMany(Promotion::class, 'promotion_id_customer', 'id');
+    }
 }

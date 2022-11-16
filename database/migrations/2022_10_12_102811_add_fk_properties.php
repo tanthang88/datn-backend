@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('properties', function (Blueprint $table) {
             //
             $table->unsignedBigInteger('propertie_id');
-            $table->foreign('propertie_id')->references('id')->on('propertie_types');
+            $table->foreign('propertie_id')->references('id')->on('propertie_types')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }
