@@ -5,6 +5,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoriesProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\DiscountCodeController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -117,5 +118,20 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/Update/{id}', [PostController::class, 'postUpdate']);
         Route::get('/List', [PostController::class, 'getList'])->middleware(['auth'])->name('post.list');
         Route::get('/Delete/{id}', [PostController::class, 'getDelete']);
+    });
+    #promotion
+    Route::group(['prefix' => 'promotion'], function () {
+        Route::group(['prefix' => 'discount-code'], function () {
+            Route::get('/', [DiscountCodeController::class, 'index'])->name('promotion.discount-code.list');
+            Route::get('data', [DiscountCodeController::class, 'dataDiscountCodes'])->name('dataDiscountCodes');
+            Route::get('dataend', [DiscountCodeController::class, 'dataDiscountCodesEnd'])->name('dataDiscountCodesEnd');
+            Route::get('datanotstart', [DiscountCodeController::class, 'dataDiscountCodesNotStart'])->name('dataDiscountCodesNotStart');
+            Route::get('/add', [DiscountCodeController::class, 'getAdd'])->name('promotion.discount-code.add');
+            Route::post('/add', [DiscountCodeController::class, 'store'])->name('promotion.discount-code.store');
+            Route::post('/{discountcode}', [DiscountCodeController::class, 'update'])->name('promotion.discount-code.update');
+            Route::get('/{discountcode}', [DiscountCodeController::class, 'show'])->name('promotion.discount-code.show');
+            Route::get('/delete/{id}', [DiscountCodeController::class, 'delete'])->name('promotion.discount-code.delete');
+            Route::get('/end/{id}', [DiscountCodeController::class, 'end'])->name('promotion.discount-code.end');
+        });
     });
 });

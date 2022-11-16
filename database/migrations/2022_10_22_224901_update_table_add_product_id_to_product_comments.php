@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('product_comments', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id')->after('id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

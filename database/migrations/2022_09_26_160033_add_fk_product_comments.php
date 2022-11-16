@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('product_comments', function (Blueprint $table) {
             //
-            $table->foreign('customer_id')->references('id')->on('users');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

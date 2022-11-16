@@ -8,8 +8,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="SHORTCUT ICON" href="" type="image/x-icon" />
-    <link rel="stylesheet"
-        href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
 
@@ -38,18 +37,18 @@
     @stack('style')
 
 </head>
-
+    @php
+        loadFunctions();
+    @endphp
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
         @include('blocks/nav')
-
         <!-- Main Sidebar Container -->
         @include('blocks/sidebar')
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="overflow: auto;">
-            <div class="content-header">
+            <div class="content-header border-bottom">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -145,9 +144,44 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('assets/dist/js/demo.js')}}"></script>
     <script src="{{asset('assets/plugins/dropzone/min/dropzone.min.js')}}"></script>
-
+    <script src="{{asset('assets/plugins/jquerynumber.js')}}"></script>
     <script src="{{asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
-
+    <!-- daterangerpicker -->
+    <script>
+        // JS dùng chung
+        //format tiền tệ và số
+        // Set up the number formatting.
+        $('.tiente').number(true);
+        // Get the value of the number for the demo.
+        $('.tiente').on('keyup', function() {
+            let loaigiamgiatien = $('.loaigiamgiatien').val();
+            if (loaigiamgiatien == 0 && $(this).hasClass('mucgiam')) {
+                let tien=(new Number($(this).val()));
+               if(tien>100){
+                $(this).val(1);
+               }
+            }
+            var val = $(this).val();
+            $(this).siblings('.tientehidden').val(val !== '' ? val : 0);
+        });
+        let loaigiamgiatien = $('.loaigiamgiatien').val();
+        $('.loaigiamgiatien').change(function () {
+            $('.tiente.mucgiam ').val(1);
+        })
+        //end format tiền tệ và số
+        $('.form-control').on('focus', function() {
+            $(this).removeClass('is-invalid');
+            $('.error-form').remove();
+        })
+        $('.reservationtime').daterangepicker({
+            timePicker: true,
+            timePicker24Hour: true,
+            timePickerIncrement: 10,
+            locale: {
+                format: 'YYYY-MM-DD hh:mm:ss A'
+            }
+        })
+    </script>
     @stack('scripts')
     @if(Session::has('success'))
     <script>

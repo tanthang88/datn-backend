@@ -4,8 +4,8 @@ import {
   DEFAULT_MENU_RECOST
 } from "../config/constants";
 
-export function dataTable(columns, urlRequest) {
-  $('#dataTable').DataTable({
+export function dataTable(columns, urlRequest,idName) {
+  $(idName).DataTable({
     lengthMenu: DEFAULT_MENU_RECOST,
     processing: true,
     language: {

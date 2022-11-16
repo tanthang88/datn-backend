@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('order_trackings', function (Blueprint $table) {
-            //
-            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade')->onUpdate('cascade');
-
-
+        Schema::table('promotions', function (Blueprint $table) {
+          $table->string('type',255)->comment('Loại chương trình khuyến mãi');
         });
     }
 
@@ -28,8 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('order_trackings', function (Blueprint $table) {
-            //
+        Schema::table('promotions', function (Blueprint $table) {
         });
     }
 };

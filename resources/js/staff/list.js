@@ -67,4 +67,4 @@ const columns = [
         orderable: false
     }
 ];
-dataTable(columns, url);
+dataTable(columns, url, '#dataTable');

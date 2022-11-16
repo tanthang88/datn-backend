@@ -239,8 +239,36 @@
                         </li>
                     </ul>
                 </li>
-
-
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="fa fa-gift" aria-hidden="true"></i>
+                        <p class="pl-2">
+                            Khuyến mãi
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">2</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('promotion.discount-code.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Mã khuyến mãi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="route('promotion.discount.list')" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Giảm giá sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="route('promotion.shock-deal.list')" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Deal sốc</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
