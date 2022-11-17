@@ -12,19 +12,29 @@ use Illuminate\Support\Str;
 class CategoriesProductController extends Controller
 
 {
-    public function getAdd()
+    public function create()
     {
         $product_categories= DB::table('product_categories')->where('parent_id', 0)->get();
         return view('pages.categoriesproduct.add',[
             'product_categories' => $product_categories,
         ]);
     }
-    public function postAdd(Request $request)
+    public function store(Request $request)
     {
         $data = array();
         $data['category_name'] = $request->category_name;
-        $data['category_slug'] = $request->category_slug;
-        $data['category_image'] = $request->category_image;
+        $data['category_slug'] = Str::slug($request->category_name);
+        if($request->hasFile('category_image')){
+            $name = $request->file('category_image')->getClientOriginalName();
+            $pathFull = 'uploads/' . date("Y-m-d");
+
+            $request->file('category_image')->storeAs(
+                'public/' . $pathFull, $name
+            );
+
+            $thumb = '/storage/' . $pathFull . '/' . $name;
+            $data['category_image'] = $thumb;
+        }
         $data['category_order'] = $request->category_order;
         $data['parent_id'] = $request->parent_id;
         if($request->category_display=='on'){
@@ -32,43 +42,36 @@ class CategoriesProductController extends Controller
         }else{
             $data['category_display']=0;
         }
-        //$data['supplier_display'] = $request->supplier_display;
         if($request->category_outstanding=='on'){
             $data['category_outstanding']=1;
         }else{
             $data['category_outstanding']=0;
         }
-      //  $data['supplier_outstanding'] = $request->supplier_outstanding;
         $data['category_desc'] = $request->category_desc;
         $data['category_content'] = $request->category_content;
         $data['seo_title'] = $request->seo_title;
         $data['seo_keywords'] = $request->seo_keywords;
         $data['seo_description'] = $request->seo_description;
         $data['created_at'] = NOW();
-print_r($data);
         DB::table('product_categories')->insert($data);
-        return Redirect::to('CategoriesProduct/List');
+        return Redirect::to('categoriesProduct/')->with('success', trans('alert.add.success'));
     }
-    public function getUpdate($id)
+    public function show($id)
     {
         $product_categories= DB::table('product_categories')->where('parent_id', 0)->get();
         $parent_id=DB::table('product_categories')->where('id',$id)->get();
-        
+
 
         foreach($parent_id as $parent_id) {
             $parent_id_val = $parent_id -> parent_id;
         }
            $updateCP= DB::table('product_categories')->where('id', $id)->get();
-            // echo $updateCP;
-            // exit;
         if($parent_id_val !=0) {
             $parent_name=DB::table('product_categories')->where('id',$parent_id_val)->get();
             foreach($parent_name as $parent_name) {
                 $parent_name_val = $parent_name -> category_name;
-            //echo $parent_name_val;
-    
             }
-            
+
             return view('pages.categoriesproduct.edit',[
             'updateCP' => $updateCP,
             'parent_name_val'=>$parent_name_val,
@@ -82,46 +85,58 @@ print_r($data);
                 'parent_id_val' =>$parent_id_val
             ]);
         }
-        
+
     }
-    public function postUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $product_categories = ProductCategories::find($id);
-        $product_categories->category_name = $request->category_name;
-       $product_categories->category_slug = $request->category_slug;
-       $product_categories->category_image = $request->category_image;
+        // dd($request->all());
+       $product_categories = ProductCategories::find($id);
+       $product_categories->category_name = $request->category_name;
+       $product_categories->category_slug = Str::slug($request->category_name);
+       if($request->hasFile('category_image')){
+            $name = $request->file('category_image')->getClientOriginalName();
+            $pathFull = 'uploads/' . date("Y-m-d");
+
+            $request->file('category_image')->storeAs(
+                'public/' . $pathFull, $name
+            );
+
+            $thumb = '/storage/' . $pathFull . '/' . $name;
+            $product_categories->category_image = $thumb;
+       }
        $product_categories->category_order = $request->category_order;
        $product_categories->parent_id = $request->parent_id;
-       if($request->supplier_display=='on'){
-        $product_categories->category_display = 1;
-    }else{
-        $product_categories->category_display = 0;
-    }
-    //$data['supplier_display'] = $request->supplier_display;
-    if($request->supplier_display=='on'){
-        $product_categories->category_outstanding = 1;
-    }else{
-        $product_categories->category_outstanding = 0;
-    }
-    $product_categories->category_desc = $request->category_desc;
-    $product_categories->category_content = $request->category_content;
-       $product_categories->seo_title = $request->seo_title;
-       $product_categories->seo_keywords = $request->seo_keywords;
-       $product_categories->seo_description = $request->seo_description;
-       $product_categories->created_at = NOW();
+       if($request->category_display=='on'){
+            $product_categories->category_display = 1;
+        }else{
+            $product_categories->category_display = 0;
+        }
+        if($request->category_display=='on'){
+            $product_categories->category_outstanding = 1;
+        }else{
+            $product_categories->category_outstanding = 0;
+        }
+      $product_categories->category_desc = $request->category_desc;
+      $product_categories->category_content = $request->category_content;
+      $product_categories->seo_title = $request->seo_title;
+      $product_categories->seo_keywords = $request->seo_keywords;
+      $product_categories->seo_description = $request->seo_description;
+      $product_categories->updated_at = NOW();
        $product_categories->save();
-       return redirect('CategoriesProduct/List')->with('thongbao','Sửa thành công');
+       return redirect('/categoriesProduct')->with('success', trans('alert.update.success'));
     }
-    public function getList()
+    public function index(Request $request)
     {
         $product_categories = DB::table('product_categories')->get();
+        if($search = $request->search){
+            $product_categories = DB::table('product_categories')->where('category_name','like','%'.$search.'%')->get();
+         }
         return view('pages.categoriesproduct.list',[
             'product_categories' => $product_categories,
         ]);
     }
-    public function getDelete($id)
+    public function delete($id)
     {
         DB::table('product_categories')->where('id', $id)->delete();
-       return Redirect::to('CategoriesProduct/List')->with('thongbao','Xóa thành công');
     }
 }

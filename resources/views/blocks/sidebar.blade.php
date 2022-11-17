@@ -46,31 +46,6 @@
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
-                            Danh Mục Bài Viết
-                            <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">2</span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('postCategory.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('postCategory.list')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
-                        <p class="pl-2">
                             Bài Viết
                             <i class="fas fa-angle-left right"></i>
                             <span class="badge badge-info right">2</span>
@@ -78,18 +53,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('post.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('post.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="{{route('postCategory.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh mục</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -120,30 +94,6 @@
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
-                            Danh mục sản phẩm
-                            <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">2</span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('categoryProduct.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('categoryProduct.list')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
-                        <p class="pl-2">
                             Sản phẩm
                             <i class="fas fa-angle-left right"></i>
                             <span class="badge badge-info right">2</span>
@@ -154,6 +104,14 @@
                             <a href="{{route('product.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('categoryProduct.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh mục</p>
                             </a>
                         </li>
                     </ul>

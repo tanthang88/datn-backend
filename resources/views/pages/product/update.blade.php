@@ -55,13 +55,11 @@
         display: none;
     }
 
-    .bg-gradient-last .form-control {
-        border: 1px solid #555;
+    .form-control {
+        box-shadow: 0px 1px 2px rgb(16 24 40 / 10%);
     }
 
-    .bg-gradient-new .form-control {
-        border: 1px solid #28a745;
-    }
+
 </style>
 @endpush
 
@@ -75,7 +73,7 @@
             <div class="row" style="padding-bottom:20px;">
                 <div class="col-3">
                     <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
-                    <button type="button" class="btn btn-warning"><a href="/product/list" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
+                    <button type="button" class="btn btn-warning"><a href="{{route('product.list')}}" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                 </div>
             </div>
             <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
@@ -116,14 +114,6 @@
                                         <span class="col-8 help-block">{{$message}}</span>
                                         @enderror
                                     </div>
-                                    <!-- <div class="row pd-10">
-                                        <label class="col-4">Giá sản phẩm (₫)</label>
-                                        <input type="number" name="product_price" class="col-8 form-control" id="" value="{{ $data->product_price}}" placeholder="Giá">
-                                        @error('product_price')
-                                        <span class="col-4"></span>
-                                        <span class="col-8 help-block">{{$message}}</span>
-                                        @enderror
-                                    </div> -->
                                     <div class="row pd-10">
                                         <label class="col-4">Số lượng kho</label>
                                         <input type="number" name="product_quantity" class="col-8 form-control" id="" value="{{$data->product_quantity}}" placeholder="Số lượng nhập về">
@@ -134,7 +124,7 @@
                                     </div>
                                     <div class="row pd-10">
                                         <label class="col-4">Nổi bật</label>
-                                        <input type="checkbox" {{ $data->product_outstanding=='1' ? 'checked' : ''}} name="product_outstanding">
+                                        <input type="checkbox" value="on" {{ $data->product_outstanding=='1' ? 'checked' : ''}} name="product_outstanding">
                                     </div>
                                     <div class="row pd-10">
                                         <label class="col-4">Hiển thị</label>
@@ -148,10 +138,6 @@
                                         <span class="col-8 help-block">{{$message}}</span>
                                         @enderror
                                     </div>
-                                    <!-- <div class="row pd-10">
-                                        <label class="col-4">Giảm giá</label>
-                                        <input type="checkbox" {{ $data->is_discount_product=='1' ? 'checked' : ''}} name="is_discount_product">
-                                    </div> -->
                                     <div class="row pd-10">
                                         <label class="col-4">Thông số kỹ thuật</label>
                                         <input type="checkbox" {{ $configuration!=null ? 'checked' : ''}} id="is_configuration_product" name="is_configuration_product" onclick="chooseConfiguration()">
@@ -308,7 +294,7 @@
                                         <!-- /thuộc tính cũ -->
                                         <div id="last-properties">
                                             @foreach($properties as $propertie)
-                                            <div class="card bg-gradient-last collapsed-card" style="color:#555;border:1px solid #111111;background-color:#f6f7f7;">
+                                            <div class="card bg-gradient-last collapsed-card" style="color:#555;border-left-color: #6BB5D8;border-left-width: 4px;background-color:#f6f7f7;">
                                                 <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                                                     <h3 class="card-title">{{$propertie->propertie_name}}</h3>
                                                     <div class="card-tools">
@@ -316,7 +302,7 @@
                                                         <button type="button" id="" class="btn bg-dark btn-sm removePropertie" data-url="/product/deletePropertie/{{$propertie->id}}/{{$data->id}}"><i class="fas fa-times"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="card-body" style="display:none;">
+                                                <div class="card-body" style="display:none;border-top-width:3px;border-top-style:solid;border-top-color:#EAECF0;">
                                                     <input type="hidden" name="id[]" value="{{$propertie->id}}">
                                                     <div class="row pd-10">
                                                         <label class="col-3">Tên:</label>
@@ -383,7 +369,7 @@
                                 <div class="col-6">
                                     <div class="row pd-10">
                                         <label class="col-4">Màn hình</label>
-                                        <input type="text" name="config_screen" value="<?php if ($configuration != null) echo $configuration->config_screen ?>" class="col-8 form-control" id="" placeholder="Màn hình">
+                                        <input type="text" name="config_screen" value="<?php if ($configuration != null) echo $configuration->config_screen ?>" class="col-8 form-control" id="" placeholder="Vd:6.7">
                                         @error('config_screen')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
@@ -391,7 +377,7 @@
                                     </div>
                                     <div class="row pd-10">
                                         <label class="col-4">CPU</label>
-                                        <input type="text" name="config_cpu" value="<?php if ($configuration != null) echo $configuration->config_cpu ?>" class="col-8 form-control" id="" placeholder="CPU">
+                                        <input type="text" name="config_cpu" value="<?php if ($configuration != null) echo $configuration->config_cpu ?>" class="col-8 form-control" id="" placeholder="Vd:Apple A15 Bionic">
                                         @error('config_cpu')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
@@ -399,7 +385,7 @@
                                     </div>
                                     <div class="row pd-10">
                                         <label class="col-4">Ram</label>
-                                        <input type="text" name="config_ram" value="<?php if ($configuration != null) echo $configuration->config_ram ?>" class="col-8 form-control" id="" placeholder="Ram">
+                                        <input type="text" name="config_ram" value="<?php if ($configuration != null) echo $configuration->config_ram ?>" class="col-8 form-control" id="" placeholder="Vd:6G">
                                         @error('config_ram')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
@@ -407,7 +393,7 @@
                                     </div>
                                     <div class="row pd-10">
                                         <label class="col-4">Camera sau</label>
-                                        <input type="text" name="config_camera" value="<?php if ($configuration != null) echo $configuration->config_camera ?>" class="col-8 form-control" id="" placeholder="Camera sau">
+                                        <input type="text" name="config_camera" value="<?php if ($configuration != null) echo $configuration->config_camera ?>" class="col-8 form-control" id="" placeholder="Vd:12.0">
                                         @error('config_camera')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
@@ -417,15 +403,15 @@
                                 <div class="col-6" style="padding:0 50px;">
                                     <div class="row pd-10">
                                         <label class="col-4">Camera trước</label>
-                                        <input type="text" name="config_selfie" value="<?php if ($configuration != null) echo $configuration->config_selfie ?>" class="col-8 form-control" id="" placeholder="Camera trước">
+                                        <input type="text" name="config_selfie" value="<?php if ($configuration != null) echo $configuration->config_selfie ?>" class="col-8 form-control" id="" placeholder="Vd:12.0">
                                         @error('config_selfie')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
                                         @enderror
                                     </div>
                                     <div class="row pd-10">
-                                        <label class="col-4">Thẻ nhớ ngoài</label>
-                                        <input type="text" name="config_battery" value="<?php if ($configuration != null) echo $configuration->config_battery ?>" class="col-8 form-control" id="" placeholder="Thẻ nhớ ngoài">
+                                        <label class="col-4">Pin</label>
+                                        <input type="text" name="config_battery" value="<?php if ($configuration != null) echo $configuration->config_battery ?>" class="col-8 form-control" id="" placeholder="Vd:4352 mAh">
                                         @error('config_battery')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
@@ -433,7 +419,7 @@
                                     </div>
                                     <div class="row pd-10">
                                         <label class="col-4">Hệ điều hành</label>
-                                        <input type="text" name="config_system" value="<?php if ($configuration != null) echo $configuration->config_system ?>" class="col-8 form-control" id="" placeholder="Hệ điều hành">
+                                        <input type="text" name="config_system" value="<?php if ($configuration != null) echo $configuration->config_system ?>" class="col-8 form-control" id="" placeholder="Vd:iOS">
                                         @error('config_system')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>
@@ -490,7 +476,7 @@
             @csrf
         </form>
         <!-- /form propertie -->
-        <div class="card bg-gradient-new" id="add-properties" style="display:none;color:#555;border:1px solid #28a745;background-color:#f6f7f7">
+        <div class="card bg-gradient-new" id="add-properties" style="display:none;color:#555;border-left-color: #28a745;border-left-width: 4px;background-color:#f6f7f7">
             <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                 <h3 class="card-title">thuộc tính mới</h3>
                 <div class="card-tools">
@@ -498,7 +484,7 @@
                     <button type="button" id="remove" class="btn bg-success btn-sm" onclick="remove()"><i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <div class="card-body" style="display: block;">
+            <div class="card-body" style="border-top-width:3px;border-top-style:solid;border-top-color:#EAECF0;">
                 <div class="row pd-10">
                     <label class="col-3">Tên:</label>
                     <input type="text" name="propertie_name_n[]" class="col-7 form-control" id="" placeholder="Tên thuộc tính">

@@ -34,7 +34,7 @@
         margin:.25em .25em .25em 0;
     }
     .form-control{
-        border:1px solid #111111;
+        box-shadow: 0px 1px 2px rgb(16 24 40 / 10%);
     }
 </style>
 @endpush
@@ -49,7 +49,7 @@
                     <div class="row" style="padding-bottom:20px;">
                         <div class="col-3">
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
-                            <button type="button" class="btn btn-warning"><a href="Product/Add" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
+                            <button type="button" class="btn btn-warning"><a href="{{route('product.list')}}" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                         </div>
                     </div>
 
@@ -73,7 +73,7 @@
                     </div>
                     @csrf
               </form>
-                <div class="card bg-gradient" style="color:#111111;border:1px solid #111111;background-color:#f6f7f7;display:none" id="add-properties">
+                <div class="card bg-gradient" style="color:#111111;border-left-color: #6BB5D8;border-left-width: 4px;;background-color:#f6f7f7;display:none" id="add-properties">
                     <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                         <div class="card-title row" style="display:flex;width:80%;">
                             <?php echo $html ?>
@@ -88,13 +88,13 @@
                         <input type="hidden" name="count" value="{{$count}}">
                         <div class="row pd-10">
                             <label class="col-3">Giá:</label>
-                            <input type="text" name="price[]" class="col-7 form-control" id=""  placeholder="Giá sản phẩm">
+                            <input type="text" name="price[]" class="col-7 form-control" id=""  placeholder="Giá sản phẩm" required>
                         </div>
                         <div class="row pd-10"><label class="col-3">Hình ảnh:</label>
-                            <input type="file" name="image[]" class="col-7 form-control" id="image" onchange="ImagesFileAsURL()">
+                            <input type="file" name="image[]" class="col-7 form-control" id="image" onchange="ImagesFileAsURL()" required>
                             <div class="col-3"></div>
                             <div class="col-7" id="displayImg">
-                                
+
                             </div>
                         </div>
                     </div>
