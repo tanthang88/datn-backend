@@ -10,14 +10,14 @@ use App\Http\Requests\AboutRequest;
 
 class AboutController extends Controller
 {
-    public function getAdd()
+    public function create()
     {
         return view('pages.about.add',[
             'title'      => 'Thêm mới thông tin',
         ]);
     }
 
-    public function postAdd(AboutRequest $request)
+    public function store(AboutRequest $request)
     {
             $about = new About;
             $about->about_name = $request->about_name;
@@ -37,10 +37,10 @@ class AboutController extends Controller
             $about->seo_description = $request->seo_description;
             $about->save();
 
-        return redirect('/about/list')->with('success', trans('alert.update.success'));
+        return redirect('/about')->with('success', trans('alert.add.success'));
     }
 
-    public function getUpdate($id)
+    public function show($id)
     {
         $about = About::where('id', $id)->first();
         return view('pages.about.update',[
@@ -49,7 +49,7 @@ class AboutController extends Controller
         ]);
     }
 
-    public function postUpdate(AboutRequest $request, $id)
+    public function update(AboutRequest $request, $id)
     {
             $about = About::find($id);
             $about->about_name = $request->about_name;
@@ -69,11 +69,11 @@ class AboutController extends Controller
             $about->seo_description = $request->seo_description;
             $about->save();
 
-            return redirect('/about/list')->with('success', trans('alert.update.success'));
+            return redirect('/about')->with('success', trans('alert.update.success'));
 
     }
 
-    public function getList(Request $request)
+    public function index(Request $request)
     {
         $data = About::orderBy('id','desc')->paginate(20);
         if($search = $request->search){
@@ -91,6 +91,5 @@ class AboutController extends Controller
             if($about){
                 $about->delete();
             }
-            return redirect('/about/list')->with('success', trans('alert.update.success'));
     }
 }

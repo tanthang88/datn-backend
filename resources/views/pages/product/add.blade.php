@@ -54,6 +54,9 @@
     .hide{
         display:none !important;
     }
+    .form-control{
+        box-shadow: 0px 1px 2px rgb(16 24 40 / 10%);
+    }
 </style>
 @endpush
 
@@ -67,7 +70,7 @@
                     <div class="row" style="padding-bottom:20px;">
                         <div class="col-3">
                             <button type="submit" class="btn btn-info"><i class="fa fa-check-circle" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
-                            <button type="button" class="btn btn-warning"><a href="/product/list" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
+                            <button type="button" class="btn btn-warning"><a href="{{route('product.list')}}" style="color:black"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Thoát</a></button>
                         </div>
                     </div>
                     <div class="card" style="border-top:1px solid rgba(0,0,0,.125)">
@@ -89,7 +92,7 @@
                                         <div class="col-6">
                                             <div class="row pd-10">
                                                 <label class="col-4">Tên sản phẩm</label>
-                                                <input type="text" name="product_name" class="col-8 form-control" id="" value="{{ old('product_name')}}" placeholder="Tên sản phẩm">
+                                                <input type="text" name="product_name" class="col-8 form-control" id="" value="{{ old('product_name')}}" placeholder="Tên sản phẩm" required>
                                                 @error('product_name')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -97,7 +100,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Nhà cung cấp</label>
-                                                <select class="col-8 form-control select2 select2-hidden-accessible" name="supplier_id" style="width: 80%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                <select class="col-8 form-control select2 select2-hidden-accessible" name="supplier_id" style="width: 80%;" tabindex="-1" aria-hidden="true" required>
                                                     <option selected="selected" value="" data-select2-id="1">Nhà cung cấp</option>
                                                     @foreach($supplier as $supplier )
                                                         <option value="{{ $supplier->id }}">{{$supplier->supplier_name}}</option>
@@ -110,7 +113,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Số lượng kho</label>
-                                                <input type="number" name="product_quantity" class="col-8 form-control" id="" value="{{ old('product_quantity')}}" placeholder="Số lượng nhập về">
+                                                <input type="number" name="product_quantity" class="col-8 form-control" id="" value="{{ old('product_quantity')}}" placeholder="Số lượng nhập về" required>
                                                 @error('product_quantity')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -118,7 +121,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Nổi bật</label>
-                                                <input type="checkbox" name="product_outstanding">
+                                                <input type="checkbox" value="on" name="product_outstanding">
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Hiển thị</label>
@@ -126,15 +129,11 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Số thứ tự</label>
-                                                <input type="number" name="product_order" class="col-8 form-control" id="" value="{{ old('product_order')}}" placeholder="Thứ tự">
+                                                <input type="number" name="product_order" class="col-8 form-control" id="" value="{{ old('product_order')}}" placeholder="Thứ tự" required>
                                                 @error('product_order')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
                                                 @enderror
-                                            </div>
-                                            <div class="row pd-10">
-                                                <label class="col-4">Giảm giá</label>
-                                                <input type="checkbox" name="is_discount_product">
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Thông số kỹ thuật</label>
@@ -144,7 +143,7 @@
                                         <div class="col-6" style="padding:0 50px;">
                                             <div class="row pd-10">
                                                 <label class="col-4">Lựa chọn danh mục</label>
-                                                <select class="col-8 form-control select2 select2-hidden-accessible" name="category_id" style="width: 80%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                                <select class="col-8 form-control select2 select2-hidden-accessible" name="category_id" style="width: 80%;" tabindex="-1" aria-hidden="true" required>
                                                     <option selected="selected" value="" data-select2-id="1">Danh mục</option>
                                                     {!! \App\Helper\Product_Helper::product_category($categories) !!}
                                                 </select>
@@ -268,7 +267,7 @@
                                         <div class="col-6">
                                             <div class="row pd-10">
                                                 <label class="col-4">Màn hình</label>
-                                                <input type="text" name="config_screen" value="{{old('config_screen')}}" class="col-8 form-control" id="" placeholder="Màn hình">
+                                                <input type="text" name="config_screen" value="{{old('config_screen')}}" class="col-8 form-control" id="" placeholder="Vd:6.7">
                                                 @error('config_screen')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -276,7 +275,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">CPU</label>
-                                                <input type="text" name="config_cpu" value="{{old('config_cpu')}}" class="col-8 form-control" id="" placeholder="CPU">
+                                                <input type="text" name="config_cpu" value="{{old('config_cpu')}}" class="col-8 form-control" id="" placeholder="Vd:Apple A15 Bionic">
                                                 @error('config_cpu')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -284,7 +283,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Ram</label>
-                                                <input type="text" name="config_ram" value="{{old('config_ram')}}" class="col-8 form-control" id="" placeholder="Ram">
+                                                <input type="text" name="config_ram" value="{{old('config_ram')}}" class="col-8 form-control" id="" placeholder="Vd:6G">
                                                 @error('config_ram')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -292,7 +291,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Camera sau</label>
-                                                <input type="text" name="config_camera" value="{{old('config_camera')}}" class="col-8 form-control" id="" placeholder="Camera sau">
+                                                <input type="text" name="config_camera" value="{{old('config_camera')}}" class="col-8 form-control" id="" placeholder="Vd:12.0">
                                                 @error('config_camera')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -302,15 +301,15 @@
                                         <div class="col-6" style="padding:0 50px;">
                                             <div class="row pd-10">
                                                 <label class="col-4">Camera trước</label>
-                                                <input type="text" name="config_selfie" value="{{old('config_selfie')}}" class="col-8 form-control" id="" placeholder="Camera trước">
+                                                <input type="text" name="config_selfie" value="{{old('config_selfie')}}" class="col-8 form-control" id="" placeholder="Vd:12.0">
                                                 @error('config_selfie')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
                                                 @enderror
                                             </div>
                                             <div class="row pd-10">
-                                                <label class="col-4">Thẻ nhớ ngoài</label>
-                                                <input type="text" name="config_battery" value="{{old('config_battery')}}" class="col-8 form-control" id="" placeholder="Thẻ nhớ ngoài">
+                                                <label class="col-4">Pin</label>
+                                                <input type="text" name="config_battery" value="{{old('config_battery')}}" class="col-8 form-control" id="" placeholder="Vd:4352 mAh">
                                                 @error('config_battery')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -318,7 +317,7 @@
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Hệ điều hành</label>
-                                                <input type="text" name="config_system" value="{{old('config_system')}}" class="col-8 form-control" id="" placeholder="Hệ điều hành">
+                                                <input type="text" name="config_system" value="{{old('config_system')}}" class="col-8 form-control" id="" placeholder="Vd:iOS">
                                                 @error('config_system')
                                                     <span class="col-4"></span>
                                                     <span class="col-8 help-block">{{$message}}</span>
@@ -369,7 +368,7 @@
                     </div>
                     @csrf
               </form>
-                <div class="card bg-gradient-info" id="add-properties" style="display:none">
+                <div class="card bg-gradient" id="add-properties" style="display:none;border-left-color: #6BB5D8;border-left-width: 4px;">
                     <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                         <h3 class="card-title">Thuộc tính mới</h3>
                         <div class="card-tools">

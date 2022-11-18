@@ -4,28 +4,20 @@ Danh mục sản phẩm
 @endsection
 @push('styles')
 <style>
-
+       #img_priv img{
+        height: 200px;
+        width: auto;
+    }
 </style>
 @endpush
 @section('content')
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Thêm danh mục sản phẩm</div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {{csrf_field() }}
         <div class="card-body">
 
@@ -34,12 +26,11 @@ Danh mục sản phẩm
                 <input type="text" name="category_name" class="form-control"  placeholder="Nhập tên danh mục sản phẩm" required>
             </div>
             <div class="form-group">
-                <label for="CategoryPd">Tên không dấu</label>
-                <input type="text" name="category_slug" class="form-control"  placeholder="Nhập tên không dấu" required>
-            </div>
-            <div class="form-group">
-                <label for="CategoryPd">Hình Ảnh</label>         
-                <input type="file" name="category_image" class="form-control" id = "Supplier" required>
+                <label for="">Hình ảnh</label>
+                <input id="post_img" type="file" onchange="img_priv()" name="category_image">
+                <div class="preview-upload" id="img_priv">
+
+                </div>
             </div>
             <div class="form-group">
                 <label for="CategoryPd">STT</label>
@@ -61,7 +52,7 @@ Danh mục sản phẩm
             </div>
             <div class="form-group">
                 <label for="CategoryPd">Nổi bật</label>
-                <input style="margin-left:17px"; type="checkbox" name="category_outstanding" >
+                <input style="margin-left:17px"; type="checkbox" checked name="category_outstanding" >
             </div>
             <div class="form-group">
                 <label>Mô Tả </label>
@@ -69,7 +60,7 @@ Danh mục sản phẩm
             </div>
             <div class="form-group">
                 <label>Nội dung </label>
-                <textarea name="category_content" class="form-control"></textarea>
+                <textarea name="category_content" id="pro_content" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <label>Title</label>
@@ -94,6 +85,20 @@ Danh mục sản phẩm
 @endsection
 @push('scripts')
 <script>
+     function img_priv() {
+        var fileSelected = document.getElementById('post_img').files;
+        if (fileSelected.length > 0) {
+                var fileToLoad = fileSelected[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoaderEvent) {
+                    var srcData = fileLoaderEvent.target.result;
+                    var newImage = document.createElement('img');
+                    newImage.src = srcData;
+                            document.getElementById('img_priv').innerHTML = newImage.outerHTML;
+                        }
+                        fileReader.readAsDataURL(fileToLoad);
 
-</script>
+                }
+        }
+    </script>
 @endpush

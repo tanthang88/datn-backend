@@ -31,33 +31,35 @@ Route::group(['prefix' => '/'], function () {
     Route::get('', function () {
         return view('pages.home');
     })->middleware(['auth']);
-    Route::group(['prefix' => 'Supplier'], function () {
-        Route::get('/Add', [SupplierController::class, 'getAdd'])->middleware(['auth'])->name('supplier.add');
-        Route::post('/Add', [SupplierController::class, 'postAdd']);
-        Route::get('/Update/{id}', [SupplierController::class, 'getUpdate'])->middleware(['auth'])->name('supplier.update');
-        Route::post('/Update/{id}', [SupplierController::class, 'postUpdate']);
-        Route::get('/List', [SupplierController::class, 'getList'])->middleware(['auth'])->name('supplier.list');
-        Route::get('/Delete/{id}', [SupplierController::class, 'getDelete']);
+    #Supplier
+    Route::group(['prefix' => 'supplier'], function () {
+        Route::get('/add', [SupplierController::class, 'create'])->middleware(['auth'])->name('supplier.add');
+        Route::post('/add', [SupplierController::class, 'store']);
+        Route::get('/update/{id}', [SupplierController::class, 'show'])->middleware(['auth'])->name('supplier.update');
+        Route::post('/update/{id}', [SupplierController::class, 'update']);
+        Route::get('/', [SupplierController::class, 'index'])->middleware(['auth'])->name('supplier.list');
+        Route::get('/delete/{id}', [SupplierController::class, 'delete'])->middleware(['auth'])->name('supplier.delete');
     });
     #Categories Product
-    Route::group(['prefix' => 'CategoriesProduct'], function () {
-        Route::get('/Add', [CategoriesProductController::class, 'getAdd'])->middleware(['auth'])->name('categoryProduct.add');
-        Route::post('/Add', [CategoriesProductController::class, 'postAdd']);
-        Route::get('/Update/{id}', [CategoriesProductController::class, 'getUpdate'])->middleware(['auth'])->name('categoryProduct.update');
-        Route::post('/Update/{id}', [CategoriesProductController::class, 'postUpdate']);
-        Route::get('/List', [CategoriesProductController::class, 'getList'])->middleware(['auth'])->name('categoryProduct.list');
-        Route::get('/Delete/{id}', [CategoriesProductController::class, 'getDelete']);
+    Route::group(['prefix' => 'categoriesProduct'], function () {
+        Route::get('/add', [CategoriesProductController::class, 'create'])->middleware(['auth'])->name('categoryProduct.add');
+        Route::post('/add', [CategoriesProductController::class, 'store']);
+        Route::get('/update/{id}', [CategoriesProductController::class, 'show'])->middleware(['auth'])->name('categoryProduct.update');
+        Route::post('/update/{id}', [CategoriesProductController::class, 'update']);
+        Route::get('/', [CategoriesProductController::class, 'index'])->middleware(['auth'])->name('categoryProduct.list');
+        Route::get('/delete/{id}', [CategoriesProductController::class, 'delete']);
     });
     #Product
     Route::group(['prefix' => 'product'], function () {
-        Route::get('/add', [ProductController::class, 'getAdd'])->middleware(['auth'])->name('product.add');
-        Route::post('/add', [ProductController::class, 'postAdd']);
-        Route::get('/addVariant/{id}', [ProductController::class, 'getAddVariant'])->middleware(['auth'])->name('variant.add');
-        Route::post('/addVariant/{id}', [ProductController::class, 'postAddVariant']);
-        Route::get('/updateVariant/{id}', [ProductController::class, 'getUpdateVariant'])->middleware(['auth'])->name('variant.update');
-        Route::get('/update/{id}', [ProductController::class, 'getUpdate'])->middleware(['auth'])->name('product.update');
-        Route::post('/update/{id}', [ProductController::class, 'postUpdate']);
-        Route::get('/list', [ProductController::class, 'getList'])->middleware(['auth'])->name('product.list');
+        Route::get('/add', [ProductController::class, 'create'])->middleware(['auth'])->name('product.add');
+        Route::post('/add', [ProductController::class, 'store']);
+        Route::get('/update/{id}', [ProductController::class, 'show'])->middleware(['auth'])->name('product.update');
+        Route::post('/update/{id}', [ProductController::class, 'update']);
+        Route::get('/', [ProductController::class, 'index'])->middleware(['auth'])->name('product.list');
+        Route::get('/addVariant/{id}', [ProductController::class, 'createVariant'])->middleware(['auth'])->name('variant.add');
+        Route::post('/addVariant/{id}', [ProductController::class, 'storeVariant']);
+        Route::get('/updateVariant/{id}', [ProductController::class, 'showVariant'])->middleware(['auth'])->name('variant.update');
+        Route::post('/updateVariant/{id}', [ProductController::class, 'updateVariant'])->middleware(['auth'])->name('variant.update');
         Route::get('delete/{id}', [ProductController::class,'delete']);
         Route::get('deletePropertie/{id}/{product_id}', [ProductController::class,'deletePropertie']);
         Route::get('deleteVariant/{id}', [ProductController::class,'deleteVariant']);
@@ -66,11 +68,11 @@ Route::group(['prefix' => '/'], function () {
     });
     #About
     Route::group(['prefix' => 'about'], function () {
-        Route::get('/add', [AboutController::class, 'getAdd'])->middleware(['auth'])->name('about.add');
-        Route::post('/add', [AboutController::class, 'postAdd']);
-        Route::get('/update/{id}', [AboutController::class, 'getUpdate'])->middleware(['auth'])->name('about.update');
-        Route::post('/update/{id}', [AboutController::class, 'postUpdate']);
-        Route::get('/list', [AboutController::class, 'getList'])->middleware(['auth'])->name('about.list');
+        Route::get('/add', [AboutController::class, 'create'])->middleware(['auth'])->name('about.add');
+        Route::post('/add', [AboutController::class, 'store']);
+        Route::get('/update/{id}', [AboutController::class, 'show'])->middleware(['auth'])->name('about.update');
+        Route::post('/update/{id}', [AboutController::class, 'update']);
+        Route::get('/', [AboutController::class, 'index'])->middleware(['auth'])->name('about.list');
         Route::get('delete/{id}', [AboutController::class, 'delete']);
     });
     #User
@@ -102,22 +104,22 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/delete/{staff}', [StaffController::class, 'delete'])->name('staff.delete');
     });
     #postCategory
-    Route::group(['prefix' => 'PostCategories'], function () {
-        Route::get('/Add', [PostCategoriesController::class, 'getAdd'])->middleware(['auth'])->name('postCategory.add');
-        Route::post('/Add', [PostCategoriesController::class, 'postAdd']);
-        Route::get('/Update/{id}', [PostCategoriesController::class, 'getUpdate']);
-        Route::post('/Update/{id}', [PostCategoriesController::class, 'postUpdate']);
-        Route::get('/List', [PostCategoriesController::class, 'getList'])->middleware(['auth'])->name('postCategory.list');
-        Route::get('/Delete/{id}', [PostCategoriesController::class, 'getDelete']);
+    Route::group(['prefix' => 'postCategories'], function () {
+        Route::get('/add', [PostCategoriesController::class, 'create'])->middleware(['auth'])->name('postCategory.add');
+        Route::post('/add', [PostCategoriesController::class, 'store']);
+        Route::get('/update/{id}', [PostCategoriesController::class, 'show'])->middleware(['auth'])->name('postCategory.update');
+        Route::post('/update/{id}', [PostCategoriesController::class, 'update']);
+        Route::get('/', [PostCategoriesController::class, 'index'])->middleware(['auth'])->name('postCategory.list');
+        Route::get('/delete/{id}', [PostCategoriesController::class, 'delete'])->middleware(['auth'])->name('postCategory.delete');
     });
     #post
-    Route::group(['prefix' => 'Post'], function () {
-        Route::get('/Add', [PostController::class, 'getAdd'])->middleware(['auth'])->name('post.add');
-        Route::post('/Add', [PostController::class, 'postAdd']);
-        Route::get('/Update/{id}', [PostController::class, 'getUpdate']);
-        Route::post('/Update/{id}', [PostController::class, 'postUpdate']);
-        Route::get('/List', [PostController::class, 'getList'])->middleware(['auth'])->name('post.list');
-        Route::get('/Delete/{id}', [PostController::class, 'getDelete']);
+    Route::group(['prefix' => 'post'], function () {
+        Route::get('/add', [PostController::class, 'create'])->middleware(['auth'])->name('post.add');
+        Route::post('/add', [PostController::class, 'store']);
+        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.update');
+        Route::post('/update/{id}', [PostController::class, 'update']);
+        Route::get('/', [PostController::class, 'index'])->middleware(['auth'])->name('post.list');
+        Route::get('/delete/{id}', [PostController::class, 'delete'])->middleware(['auth'])->name('post.delete');
     });
     #promotion
     Route::group(['prefix' => 'promotion'], function () {

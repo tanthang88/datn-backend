@@ -2,30 +2,22 @@
 @section('title')
 Nhà cung cấp
 @endsection
-@push('styles')
+@push('style')
 <style>
-
+       #img_priv img{
+        height: 200px;
+        width: auto;
+    }
 </style>
 @endpush
 @section('content')
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Thêm mới nhà cung cấp</div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         {{csrf_field() }}
         <div class="card-body">
 
@@ -34,8 +26,11 @@ Nhà cung cấp
                 <input type="text" name="supplier_name" class="form-control"  placeholder="Nhập tên nhà cung cấp" required>
             </div>
             <div class="form-group">
-                <label for="Supplier">Hình Ảnh Nhà Cung Cấp</label>         
-                <input type="file" name="supplier_photo" class="form-control" id = "Supplier" required>
+                <label for="Supplier">Hình Ảnh Nhà Cung Cấp</label>
+                <input type="file" id="post_img"  name="supplier_photo" onchange="img_priv()" class="form-control">
+                <div class="preview-upload" id="img_priv">
+
+                </div>
             </div>
             <div class="form-group">
                 <label for="Supplier">STT</label>
@@ -51,7 +46,7 @@ Nhà cung cấp
             </div>
             <div class="form-group">
                 <label>Mô Tả </label>
-                <textarea name="supplier_desc" class="form-control"></textarea>
+                <textarea name="supplier_desc" id="pro_content" class="form-control"></textarea>
             </div>
             <div class="form-group">
                 <label>Địa chỉ </label>
@@ -69,7 +64,7 @@ Nhà cung cấp
                 <label for="Supplier">Email</label>
                 <input type="email" name="supplier_email" class="form-control"  placeholder="Nhập email điện thoại nhà cung cấp" required>
             </div>
-       
+
         </div>
 
         <div class="card-footer">
@@ -81,11 +76,22 @@ Nhà cung cấp
 @endsection
 @push('scripts')
 <script>
+    function img_priv() {
+   var fileSelected = document.getElementById('post_img').files;
+   if (fileSelected.length > 0) {
+           var fileToLoad = fileSelected[0];
+           var fileReader = new FileReader();
+           fileReader.onload = function(fileLoaderEvent) {
+               var srcData = fileLoaderEvent.target.result;
+               var newImage = document.createElement('img');
+               newImage.src = srcData;
+                       document.getElementById('img_priv').innerHTML = newImage.outerHTML;
+                   }
+                   fileReader.readAsDataURL(fileToLoad);
 
+           }
+   }
 </script>
 @endpush
 @section('footer')
-    <script>
-        CKEDITOR.replace('content');
-    </script>
 @endsection

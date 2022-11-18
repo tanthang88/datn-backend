@@ -21,10 +21,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="row">
+                <div class="row" style="padding-top:15px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="/product/add" style="color:#fff">Thêm</a></button>
-                        <button type="button" class="btn btn-warning">Xóa Chọn</button>
+                        <button type="button" class="btn btn-dark"><a href="{{route('product.add')}}" style="color:#fff">Thêm mới</a></button>
                     </div>
                     <form action="" class="col-4">
                         <div class="input-group">
@@ -102,13 +101,13 @@
                                     <a class="btn btn-info btn-sm" href="/product/update/{{ $product->id }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-                                        Edit
+                                        Sửa
                                     </a>
                                     <a class="btn btn-danger btn-sm btn-action-delete"
                                         data-url="/product/delete/{{ $product->id }}">
                                         <i class="fas fa-trash">
                                         </i>
-                                        Delete
+                                        Xóa
                                     </a>
                                 </td>
                             </tr>

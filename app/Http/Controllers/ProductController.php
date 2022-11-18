@@ -18,7 +18,7 @@ use Storage;
 
 class ProductController extends Controller
 {
-    public function getAdd()
+    public function create()
     {
         $categories = ProductCategory::get();
         $supplier   = Supplier::get();
@@ -28,10 +28,10 @@ class ProductController extends Controller
             'supplier'   => $supplier,
         ]);
     }
-    public function postAdd(ProductRequest $request)
+    public function store(ProductRequest $request)
     {
-            $product = new Product;
             // thêm thông tin sp
+            $product = new Product();
             $product->product_name    = $request->product_name;
             $product->product_slug    = (Str::slug($product->product_name,'-'));
             $product->supplier_id     = $request->supplier_id;
@@ -49,11 +49,6 @@ class ProductController extends Controller
                 $product->product_display = 0;
             };
             $product->category_id     = $request->category_id;
-            if($request->is_discount_product == 'on'){
-                $product->is_discount_product = 1;
-            }else{
-                $product->is_discount_product = 0;
-            };
             $product->product_desc    = $request->product_desc;
             $product->product_content = $request->product_content;
             $product->is_variation = $request->is_variation;
@@ -137,9 +132,9 @@ class ProductController extends Controller
 
                 }
             }
-        return redirect('/product/list')->with('success', trans('alert.add.success'));
+        return redirect('/product')->with('success', trans('alert.add.success'));
     }
-    public function getUpdate($id)
+    public function show($id)
     {
 
         $categories = ProductCategory::get();
@@ -159,7 +154,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function postUpdate(ProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
             $product        = Product::find($id);
             $product->product_name    = $request->product_name;
@@ -283,7 +278,7 @@ class ProductController extends Controller
                                 $properties_up->propertie_name = $name;
                                 $properties_up->propertie_slug = Str::slug($name);
                                 $properties_up->propertie_value = $listValue;
-                                $properties_up->product_id = $product->id;
+                                $properties_up->product_id = $id;
                                 $properties_up->save();
                             }
                         }
@@ -326,12 +321,12 @@ class ProductController extends Controller
                 }
            }
 
-        return redirect('/product/list')->with('success', trans('alert.update.success'));
+        return redirect('/product')->with('success', trans('alert.update.success'));
 
     }
-    public function getList(Request $request)
+    public function index(Request $request)
     {
-        $data = Product::orderBy('id','desc')->paginate(20);
+        $data = Product::orderBy('id','desc')->paginate(15);
         if($search = $request->search){
            $data = Product::orderBy('id','desc')->where('product_name','like','%'.$search.'%')->paginate(20);
         }
@@ -340,7 +335,7 @@ class ProductController extends Controller
             'data'      => $data
         ]);
     }
-    public function getAddVariant($id)
+    public function createVariant($id)
     {
         $slug = Propertie::select('propertie_slug')->distinct('propertie_slug')->where('product_id', $id)->get();
         $count = count($slug);
@@ -362,7 +357,7 @@ class ProductController extends Controller
             'count' => $count,
         ]);
     }
-    public function postAddVariant(Request $request)
+    public function storeVariant(Request $request)
     {
                     $arr = $request->propertie_id;
                     foreach($request->image as $index => $file){
@@ -393,18 +388,18 @@ class ProductController extends Controller
                     $variant->save();
                     $arr = array_slice($arr,$count);
                 }
-        return redirect('/product/list')->with('success', trans('alert.update.success'));
+        return redirect('/product')->with('success', trans('alert.add.success'));
 
     }
 
-    public function getUpdateVariant($id)
+    public function showVariant($id)
     {
         $i = 0;
         $variant = Variantion::where('product_id', $id)->get();
         $html = '';
         foreach($variant as $variant){
             // Vòng 1
-            $html .= '<div class="card bg-gradient col-12" style="color:#111111;border:1px solid #111111;background-color:#f6f7f7">
+            $html .= '<div class="card bg-gradient col-12" style="color:#111111;border-left-color: #6BB5D8;border-left-width: 4px;background-color:#f6f7f7">
                     <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                         <div class="card-title row" style="display:flex;width:80%;">';
             $id_slug = $variant->propertie_id;
@@ -492,7 +487,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function postUpdateVariant(Request $request, $id)
+    public function updateVariant(Request $request, $id)
     {
         // cập nhật biến thể cũ
         $arr = $request->propertie_id;
@@ -557,7 +552,7 @@ class ProductController extends Controller
                         $arr_n = array_slice($arr_n,$count_n);
                     }
             }
-        return redirect('/product/list')->with('success', trans('alert.update.success'));
+        return redirect('/product')->with('success', trans('alert.update.success'));
     }
     // xóa sản phẩm
     public function delete($id)
@@ -591,7 +586,7 @@ class ProductController extends Controller
                 }
             }
             $product->delete();
-            return redirect('/product/list')->with('success', trans('alert.update.success'));
+            return redirect('/product')->with('success', trans('alert.update.success'));
             }
     }
 

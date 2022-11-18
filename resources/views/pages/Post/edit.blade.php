@@ -6,7 +6,7 @@ Bài viết
 @push('style')
 <style>
 #img_priv img{
-    height: 360px;
+    height: 200px;
     width: auto;
 }
 .hide{
@@ -19,34 +19,23 @@ Bài viết
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Sửa bài viết</div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
     <form action="" method="POST" enctype="multipart/form-data">
         {{csrf_field()}}
-        <div class="card-body">   
+        <div class="card-body">
+            <div class="form-group">
+                <label for="Post">Tiêu đề bài viết</label>
+                <input type="text" name="post_name" class="form-control" value="{{$posts->post_name}}" required>
+            </div>
             <div class="form-group">
                 <label>Danh mục bài viết</label>
                 <select  class="form-control" name="category_id">
                     @foreach($post_categories as $post_categorie)
-                    <option  {{($post_categorie->id== $category_id) ?' selected':''}} value="{{$post_categorie->id}}">{{$post_categorie->category_name}}</option>                 
+                    <option  {{($post_categorie->id== $category_id) ?' selected':''}} value="{{$post_categorie->id}}">{{$post_categorie->category_name}}</option>
                     @endforeach
                 </select>
-            </div> 
-            <div class="form-group">
-                <label for="Post">Tiêu đề bài viết</label>
-                <input type="text" name="post_name" class="form-control" value="{{$posts->post_name}}" required>
             </div>
            <div class="form-group">
                 <label for="Post">STT</label>
@@ -57,6 +46,7 @@ Bài viết
                 <div id="img_now"><img width="400px" src="{{$posts->post_img}}"></div>
                 <input id="post_img" type="file" onchange="img_priv()" name="post_img">
                 <div class="preview-upload" id="img_priv">
+                </div>
             </div>
             <div class="form-group">
                 <label for="Post">Hiển thị</label>
@@ -74,17 +64,17 @@ Bài viết
                 <input style="margin-left:17px"; type="checkbox" name="post_outstanding"  >
                 @endif
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label>Type </label>
                 <input type="text" name="type" class="form-control" value="{{$posts->type}}">
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label>Mô Tả ngắn  </label><br>
-                <textarea name="post_desc" class="form-control">{{$posts->post_desc}}</textarea>           
+                <textarea name="post_desc" class="form-control">{{$posts->post_desc}}</textarea>
             </div>
             <div class="form-group">
                 <label>Nội dung bài viết </label><br>
-                <textarea name="content" id="content">{{$posts->post_content}}</textarea>
+                <textarea name="content" id="pro_content">{{$posts->post_content}}</textarea>
             </div>
             <div class="form-group">
                 <label> Seo Title</label>
@@ -98,13 +88,13 @@ Bài viết
                 <label>SEO Description</label>
                 <input type="text" name="post_seo_description" class="form-control"  value="{{$posts->post_seo_description}}">
             </div>
-            
-        </div>   
+
+        </div>
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Cập nhật</button>
         </div>
     @csrf
-       
+
     </form>
 </div>
 @endsection

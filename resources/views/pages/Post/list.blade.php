@@ -10,15 +10,23 @@ Bài viết
 
 @section('content')
     <!-- Content Header (Page header) -->
-    
+
     <!-- Main content -->
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Danh sách bài viết</div>
-                <!-- ./col -->
+            <div class="row" style="padding-top:15px;padding-bottom:15px;">
+                <div class="col-2">
+                    <button type="button" class="btn btn-dark"><a href="{{route('post.add')}}" style="color:#fff">Thêm mới</a></button>
+                </div>
+                <form action="" class="col-4">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!-- /.row -->
             <!-- Main row -->
             <div class="row">
                 <div class="col-12 table-responsive">
@@ -26,49 +34,47 @@ Bài viết
                     <thead>
                     <tr>
                     <th>ID</th>
-                    <th>Thuộc danh mục</th>
                     <th>Tiêu đề bài viết</th>
                     <th>Hình ảnh</th>
+                    <th>Thuộc danh mục</th>
                     <th>Hiển Thị</th>
                     <th>Nổi bật</th>
-                    <th>Mô tả ngắn</th>                      
                     <th>Ngày Tạo</th>
+                    <th>Thao tác</th>
                     </tr>
                     </thead>
-                    @foreach($posts as $posts)
+                    @foreach($posts as $post)
                         <tbody>
                             <tr>
-                                <td>{{$posts->id}}</td>
-                                <td>{{$posts->category_id}}</td>
-                                <td>{{$posts->post_name}}</td> 
+                                <td>{{$post->id}}</td>
+                                <td>{{$post->post_name}}</td>
                                 <td>
-                                    <img width="100px" src="{{$posts->post_img}}"/>
-                                    </td>                
-                                <td>
-                                    @if($posts->post_display == 0)
-                                    {{'Không'}}
-                                    @else
-                                    {{'Có'}}
-                                    @endif
+                                    <img width="100px" src="{{$post->post_img}}"/>
                                 </td>
-                                
+                                <td>{{$post->category_id }}</td>
                                 <td>
-                                    @if($posts->post_outstanding == 0)
-                                    {{'Không'}}
-                                    @else
-                                    {{'Có'}}
-                                    @endif
+                                    <input type="checkbox" {{$post->post_display == 1 ? 'checked' : ''}}>
                                 </td>
-                                <td>{{$posts->post_desc}}</td>
-                              
-                                <td>{{$posts->created_at}}</td>   
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="Post/Update/{{$posts->id}}">Sửa</a></td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="Post/Delete/{{$posts->id}}"> Xóa</a></td>       
+                                <td>
+                                    <input type="checkbox" {{$post->post_outstanding == 1 ? 'checked' : ''}}>
+                                </td>
+                                <td>{{$post->created_at}}</td>
+                                <td>
+                                    <a class="btn btn-info" href="{{route('post.update',['id'=>$post->id])}}">
+                                        <i class="fas fa-pencil-alt"></i>Sửa
+                                    </a>
+                                    <a class="btn btn-danger btn-action-delete"
+                                        data-url="{{route('post.delete',['id'=>$post->id])}}">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Xóa
+                                    </a>
+                                </td>
                             </tr>
-                            
+
                             </tbody>
                     @endforeach
-                   
+
                     </table>
                     </div>
             </div>
@@ -77,17 +83,18 @@ Bài viết
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <?php                
+    <?php
     $message = Session::get('message');
     if ($message){
         echo '<p>' . $message . '<p>';
-        Session::put('message', null);    
+        Session::put('message', null);
     }
      ?>
 </div>
 @endsection
 @push('scripts')
-<script>
-
-</script>
+<script
+type="module"
+src="{{Vite::asset('resources/js/components/confirmDel.js')}}"
+></script>
 @endpush

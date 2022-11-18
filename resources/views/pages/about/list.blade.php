@@ -18,10 +18,9 @@
         <div class="container-fluid">
             <div class="row">
               <div class="col-12">
-                <div class="row">
+                <div class="row" style="padding-top:10px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="/about/add" style="color:#fff">Thêm</a></button>
-                        <button type="button" class="btn btn-warning">Xóa Chọn</button>
+                        <button type="button" class="btn btn-dark"><a href="{{route('about.add')}}" style="color:#fff">Thêm mới</a></button>
                     </div>
                     <form action="" class="col-4">
                         <div class="input-group">
@@ -62,10 +61,10 @@
                                 <td>
                                     <input type="hidden" id="id" value="{{$about->id}}">
                                     <a class="btn btn-info btn-sm" href="/about/update/{{$about->id}}">
-                                        <i class="fas fa-pencil-alt"></i>Edit
+                                        <i class="fas fa-pencil-alt"></i>Sửa
                                     </a>
                                     <a class="btn btn-danger btn-sm btn-action-delete" data-url="/about/delete/{{$about->id}}">
-                                        <i class="fas fa-trash"></i>Delete
+                                        <i class="fas fa-trash"></i>Xóa
                                     </a>
                                 </td>
                             </tr>
