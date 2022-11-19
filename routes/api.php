@@ -46,6 +46,12 @@ Route::prefix('client')->group(function () {
             Route::put('/{user}/update', [AccountController::class, 'update']);
         });
     });
+    Route::group(['prefix' => 'discountcode'], function () {
+        Route::get('/', [DiscountCodeController::class, 'listDiscountCodes']);
+        Route::middleware(['auth:user'])->group(function () {
+            Route::post('/verification', [DiscountCodeController::class, 'verification']);
+        });
+    });
 });
 
 Route::group(['prefix' => 'post'], function () {

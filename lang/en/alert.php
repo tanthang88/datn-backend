@@ -104,4 +104,12 @@ return [
         'success' => 'Delete successful',
         'error' => 'Delete Failed'
     ],
+    'discountcode'=>[
+        'failed'=>'An error occurred',
+        'verification'=>[
+            'error'=>'An error occurred ',
+            'failed'=>'You already used ',
+            'successed'=>'Valid code'
+        ]
+    ]
 ];
