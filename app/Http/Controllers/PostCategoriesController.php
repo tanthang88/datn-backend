@@ -13,7 +13,7 @@ class PostCategoriesController extends Controller
 {
     public function create()
     {
-        return view('pages.PostCategories.add');
+        return view('pages.postcategories.add');
     }
     public function store(Request $request)
     {
@@ -21,15 +21,15 @@ class PostCategoriesController extends Controller
         $data['category_name'] = $request->category_name;
         $data['category_slug'] = changeTitle($request->category_name);
         $data['category_order'] = $request->category_order;
-        if($request->category_display=='on'){
-            $data['category_display']=1;
-        }else{
-            $data['category_display']=0;
+        if ($request->category_display == 'on') {
+            $data['category_display'] = 1;
+        } else {
+            $data['category_display'] = 0;
         }
-        if($request->category_outstanding=='on'){
-            $data['category_outstanding']=1;
-        }else{
-            $data['category_outstanding']=0;
+        if ($request->category_outstanding == 'on') {
+            $data['category_outstanding'] = 1;
+        } else {
+            $data['category_outstanding'] = 0;
         }
         $data['category_desc'] = $request->category_desc;
         $data['category_content'] = $request->category_content;
@@ -40,13 +40,12 @@ class PostCategoriesController extends Controller
         $data['created_at'] = NOW();
         DB::table('post_categories')->insert($data);
         return Redirect::to('postCategories/')->with('success', trans('alert.add.success'));
-
     }
 
     public function show($id)
     {
-       $updateCPost= DB::table('post_categories')->where('id', $id)->first();
-       return view('pages.PostCategories.edit',[
+        $updateCPost = DB::table('post_categories')->where('id', $id)->first();
+        return view('pages.postcategories.edit', [
             'updateCPost' => $updateCPost,
         ]);
     }
@@ -56,14 +55,14 @@ class PostCategoriesController extends Controller
         $post_categories->category_name = $request->category_name;
         $post_categories->category_slug = changeTitle($request->category_name);
         $post_categories->category_order = $request->category_order;
-        if($request->category_display=='on'){
+        if ($request->category_display == 'on') {
             $post_categories->category_display = 1;
-        }else{
+        } else {
             $post_categories->category_display = 0;
         }
-        if($request->category_outstanding=='on'){
+        if ($request->category_outstanding == 'on') {
             $post_categories->category_outstanding = 1;
-        }else{
+        } else {
             $post_categories->category_outstanding = 0;
         }
         $post_categories->type = '';
@@ -79,15 +78,15 @@ class PostCategoriesController extends Controller
     public function index(Request $request)
     {
         $post_categories = DB::table('post_categories')->get();
-        if($search = $request->search){
-            $post_categories = DB::table('post_categories')->where('category_name','like','%'.$search.'%')->get();
-         }
-        return view('pages.PostCategories.list',[
+        if ($search = $request->search) {
+            $post_categories = DB::table('post_categories')->where('category_name', 'like', '%' . $search . '%')->get();
+        }
+        return view('pages.postcategories.list', [
             'post_categories' => $post_categories,
         ]);
     }
     public function delete($id)
     {
-       DB::table('post_categories')->where('id', $id)->delete();
-        }
+        DB::table('post_categories')->where('id', $id)->delete();
+    }
 }

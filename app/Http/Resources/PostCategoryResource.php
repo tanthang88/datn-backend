@@ -18,6 +18,7 @@ class PostCategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->category_name,
+            'slug' => $this->category_slug,
         ];
     }
 }
