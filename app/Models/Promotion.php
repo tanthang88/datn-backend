@@ -28,6 +28,6 @@ class Promotion extends Model
     }
     public function promotionProduct()
     {
-        return $this->hasMany(PromotionProduct::class, 'promotion_id', 'id');
+        return $this->hasOne(PromotionProduct::class, 'promotion_id', 'id');
     }
 }

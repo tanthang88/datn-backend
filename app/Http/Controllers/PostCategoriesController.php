@@ -33,6 +33,7 @@ class PostCategoriesController extends Controller
         }
         $data['category_desc'] = $request->category_desc;
         $data['category_content'] = $request->category_content;
+        $data['type'] = '';
         $data['category_title'] = $request->category_title;
         $data['seo_keyword'] = $request->seo_keyword;
         $data['seo_description'] = $request->seo_description;
@@ -65,6 +66,7 @@ class PostCategoriesController extends Controller
         }else{
             $post_categories->category_outstanding = 0;
         }
+        $post_categories->type = '';
         $post_categories->category_desc = $request->category_desc;
         $post_categories->category_content = $request->category_content;
         $post_categories->category_title = $request->category_title;
