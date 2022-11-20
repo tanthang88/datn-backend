@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductFilterController;
 use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\DiscountCodeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

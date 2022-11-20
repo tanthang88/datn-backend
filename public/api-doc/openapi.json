@@ -2217,7 +2217,7 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "discount_code_id",
+                        "name": "id",
                         "required": true,
                         "description": "Id discount code",
                         "schema": {
@@ -2226,7 +2226,7 @@
                     },
                     {
                         "in": "body",
-                        "name": "order_total",
+                        "name": "total",
                         "required": true,
                         "description": "order total",
                         "schema": {

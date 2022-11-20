@@ -15,7 +15,7 @@ const columns0 = [
     {
         data: "promotion_product",
         render: function (data) {
-            return first(data).promotion_code;
+            return data.promotion_code;
         },
     },
     {
@@ -101,7 +101,7 @@ const columns1 = [
     {
         data: "promotion_product",
         render: function (data) {
-            return first(data).promotion_code;
+            return data.promotion_code;
         },
     },
     {
@@ -187,7 +187,7 @@ const columns2 = [
     {
         data: "promotion_product",
         render: function (data) {
-            return first(data).promotion_code;
+            return data.promotion_code;
         },
     },
     {
