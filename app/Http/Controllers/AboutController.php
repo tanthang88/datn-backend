@@ -10,16 +10,15 @@ use App\Http\Requests\AboutRequest;
 
 class AboutController extends Controller
 {
-    public function getAdd()
+    public function create()
     {
         return view('pages.about.add',[
             'title'      => 'Thêm mới thông tin',
         ]);
     }
 
-    public function postAdd(AboutRequest $request)
+    public function store(AboutRequest $request)
     {
-        try{
             $about = new About;
             $about->about_name = $request->about_name;
             $about->about_slug = Str::slug($request->about_name);
@@ -37,17 +36,11 @@ class AboutController extends Controller
             $about->seo_keyword = $request->seo_keyword;
             $about->seo_description = $request->seo_description;
             $about->save();
-            Alert::success('Thành công','Thông tin đã được thêm mới!!');
 
-        }catch(\Exception $error){
-            Alert::error('Oops..','Thông tin lỗi!!');
-            return redirect()->back();
-        }
-
-        return redirect('/about/list');
+        return redirect('/about')->with('success', trans('alert.add.success'));
     }
 
-    public function getUpdate($id)
+    public function show($id)
     {
         $about = About::where('id', $id)->first();
         return view('pages.about.update',[
@@ -56,9 +49,8 @@ class AboutController extends Controller
         ]);
     }
 
-    public function postUpdate(AboutRequest $request, $id)
+    public function update(AboutRequest $request, $id)
     {
-        try{
             $about = About::find($id);
             $about->about_name = $request->about_name;
             $about->about_slug = Str::slug($request->about_name);
@@ -77,15 +69,11 @@ class AboutController extends Controller
             $about->seo_description = $request->seo_description;
             $about->save();
 
-        }catch(\Exception $error){
-            return redirect()->back();
-        }
-
-        return back()->with('success', trans('alert.update.success'));
+            return redirect('/about')->with('success', trans('alert.update.success'));
 
     }
 
-    public function getList(Request $request)
+    public function index(Request $request)
     {
         $data = About::orderBy('id','desc')->paginate(20);
         if($search = $request->search){
@@ -99,15 +87,9 @@ class AboutController extends Controller
 
     public function delete($id)
     {
-        try{
             $about = About::where('id', $id)->first();
             if($about){
                 $about->delete();
             }
-        }catch(\Exception $error){
-            return redirect()->back();
-        }
-
-        return redirect('/about/list');
     }
 }

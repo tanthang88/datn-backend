@@ -72,8 +72,7 @@
                             </label>
 
                             <div class="row">
-                                @foreach($permission->getPermissionChild as
-                                $keyChild => $perChild)
+                                @foreach($permission->getPermissionChild as $keyChild => $perChild)
                                 <div class="col-md-3">
                                     <div class="form-check">
                                         <input class="form-check-input checkbox_children" type="checkbox"

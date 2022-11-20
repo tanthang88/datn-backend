@@ -116,4 +116,12 @@ return [
         'success' => 'Xoá Thành Công',
         'error' => 'Xoá Thất Bại'
     ],
+    'discountcode'=>[
+        'failed' =>'Có lỗi xảy ra',
+        'verification'=>[
+            'error' =>'Có lỗi xảy ra',
+            'failed'=>'Bạn đã sử dụng mã giảm giá này',
+            'successed'=>'Áp dụng mã giảm giá thành công'
+        ]
+    ]
 ];

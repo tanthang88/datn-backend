@@ -16,13 +16,11 @@
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
               <div class="col-12">
-                <div class="row">
+                <div class="row" style="padding-top:10px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="about/add" style="color:#fff">Thêm</a></button>
-                        <button type="button" class="btn btn-warning">Xóa Chọn</button>
+                        <button type="button" class="btn btn-dark"><a href="{{route('about.add')}}" style="color:#fff">Thêm mới</a></button>
                     </div>
                     <form action="" class="col-4">
                         <div class="input-group">
@@ -46,71 +44,41 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $data)
+                        @foreach ($data as $about)
                             <tr>
                                 <td></td>
-                                <td>{{$data->about_order}}</td>
-                                <td>{{$data->about_name}}</td>
-                                <td>{{$data->type}}</td>
-                                <td>{{$data->created_at}}</td>
+                                <td>{{$about->about_order}}</td>
+                                <td>{{$about->about_name}}</td>
+                                <td>{{$about->type}}</td>
+                                <td>{{$about->created_at}}</td>
                                 <td>
-                                    @if($data->about_display == 1)
+                                    @if($about->about_display == 1)
                                         <input type="checkbox" checked>
                                     @else
                                         <input type="checkbox" >
                                     @endif
                                 </td>
                                 <td>
-                                    <input type="hidden" id="id" value="{{$data->id}}">
-                                    <a class="btn btn-info btn-sm" href="/about/update/{{$data->id}}">
-                                        <i class="fas fa-pencil-alt"></i>Edit
+                                    <input type="hidden" id="id" value="{{$about->id}}">
+                                    <a class="btn btn-info btn-sm" href="/about/update/{{$about->id}}">
+                                        <i class="fas fa-pencil-alt"></i>Sửa
                                     </a>
-                                    <a class="btn btn-danger btn-sm" id="btn_delete" onclick="Del({{$data->id}})">
-                                        <i class="fas fa-trash"></i>Delete
+                                    <a class="btn btn-danger btn-sm btn-action-delete" data-url="/about/delete/{{$about->id}}">
+                                        <i class="fas fa-trash"></i>Xóa
                                     </a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
-                    </table>
-                    <hr/>
-                    {{-- {{$data->links()}} --}}
-                <!-- ./col -->
+                </table>
+                <hr/>
+                {{$data->links()}}
+              </div>
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
 
-            </div>
-            <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-
-    <!-- /.content -->
-</div>
+        </div>
 @endsection
-<script>
-    function Del(id)
-    {
-        swal({
-            title: "Bạn có chắc không?",
-            text: "Sau khi bị xóa, bạn sẽ không thể khôi phục thông tin này!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-                window.location = "/about/delete/"+id+"",
-                swal("Thông tin của bạn đã bị xóa. ", {
-                title: "Đã xóa",
-                icon: "success",
-                });
-            } else {
-                swal("Thông tin của bạn an toàn!",{
-                    title: "Đã hủy",
-                    icon: "error",
-                });
-            }
-            });
-    }
-</script>
+<script
+    type="module"
+    src="{{Vite::asset('resources/js/components/confirmDel.js')}}"
+></script>

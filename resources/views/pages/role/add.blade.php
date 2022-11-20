@@ -16,7 +16,6 @@
                     <div class="card-header">
                         <h3 class="card-title">Thông Tin Phân Quyền</h3>
                     </div>
-
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -99,8 +98,7 @@
                             </label>
 
                             <div class="row">
-                                @foreach($permission->getPermissionChild as 
-                                $keyChild => $perChild)
+                                @foreach($permission->getPermissionChild as $keyChild => $perChild)
                                 <div class="col-md-3">
                                     <div class="form-check">
                                         <input

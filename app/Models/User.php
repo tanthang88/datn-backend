@@ -11,12 +11,12 @@ use Laravel\Passport\HasApiTokens;
 class User extends Authenticatable
 {
     use HasFactory, SoftDeletes, Notifiable, HasApiTokens;
-    const PASSWORD_DEFAULT = 'datn7878';
+    const PASSWORD_DEFAULT = 'Datn7878';
     const STATUS_BLOCK = 0;
     const STATUS_ACTIVE = 1;
 
-    const FEMALE = 0;
-    const MALE = 1;
+    const FEMALE = 1;
+    const MALE = 0;
 
     const GENDER = [
         self::MALE,
@@ -81,5 +81,9 @@ class User extends Authenticatable
     public function dist()
     {
         return $this->belongsTo(Dist::class, 'dist_id', 'id');
+    }
+    public function promotion()
+    {
+        return $this->hasMany(Promotion::class, 'promotion_id_customer', 'id');
     }
 }

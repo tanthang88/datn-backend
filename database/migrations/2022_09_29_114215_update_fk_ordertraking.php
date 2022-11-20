@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('order_trackings', function (Blueprint $table) {
             //
-            $table->foreign('bill_id')->references('id')->on('bills');
-          
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade')->onUpdate('cascade');
+
 
         });
     }

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->text('propertie_id_link');
             $table->integer('price');
             $table->string('img',255);
-            $table->foreign('propertie_id')->references('id')->on('properties');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('propertie_id')->references('id')->on('properties')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -11,89 +11,82 @@ use Illuminate\Support\Str;
 
 class PostCategoriesController extends Controller
 {
-    public function getAdd()
+    public function create()
     {
-        
-        return view('pages.PostCategories.add');
+        return view('pages.postcategories.add');
     }
-    public function postAdd(Request $request)
+    public function store(Request $request)
     {
         $data = array();
         $data['category_name'] = $request->category_name;
         $data['category_slug'] = changeTitle($request->category_name);
         $data['category_order'] = $request->category_order;
-        if($request->category_display=='on'){
-            $data['category_display']=1;
-        }else{
-            $data['category_display']=0;
+        if ($request->category_display == 'on') {
+            $data['category_display'] = 1;
+        } else {
+            $data['category_display'] = 0;
         }
-        //$data['supplier_display'] = $request->supplier_display;
-        if($request->category_outstanding=='on'){
-            $data['category_outstanding']=1;
-        }else{
-            $data['category_outstanding']=0;
+        if ($request->category_outstanding == 'on') {
+            $data['category_outstanding'] = 1;
+        } else {
+            $data['category_outstanding'] = 0;
         }
-      //  $data['supplier_outstanding'] = $request->supplier_outstanding;
         $data['category_desc'] = $request->category_desc;
-        $data['type'] = changeTitle($request->type);
         $data['category_content'] = $request->category_content;
+        $data['type'] = '';
         $data['category_title'] = $request->category_title;
         $data['seo_keyword'] = $request->seo_keyword;
         $data['seo_description'] = $request->seo_description;
         $data['created_at'] = NOW();
-print_r($data);
         DB::table('post_categories')->insert($data);
-        Session::put('message','Thêm thành công');
-        return Redirect::to('PostCategories/List');
+        return Redirect::to('postCategories/')->with('success', trans('alert.add.success'));
     }
 
-    public function getUpdate($id)
+    public function show($id)
     {
-       $updateCPost= DB::table('post_categories')->where('id', $id)->first();
-       return view('pages.PostCategories.edit',[
-        'updateCPost' => $updateCPost,
-    ]);
+        $updateCPost = DB::table('post_categories')->where('id', $id)->first();
+        return view('pages.postcategories.edit', [
+            'updateCPost' => $updateCPost,
+        ]);
     }
-    public function postUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $post_categories = PostCategory::find($id);
         $post_categories->category_name = $request->category_name;
         $post_categories->category_slug = changeTitle($request->category_name);
-       $post_categories->category_order = $request->category_order;
-       if($request->category_display=='on'){
-        $post_categories->category_display = 1;
-    }else{
-        $post_categories->category_display = 0;
+        $post_categories->category_order = $request->category_order;
+        if ($request->category_display == 'on') {
+            $post_categories->category_display = 1;
+        } else {
+            $post_categories->category_display = 0;
+        }
+        if ($request->category_outstanding == 'on') {
+            $post_categories->category_outstanding = 1;
+        } else {
+            $post_categories->category_outstanding = 0;
+        }
+        $post_categories->type = '';
+        $post_categories->category_desc = $request->category_desc;
+        $post_categories->category_content = $request->category_content;
+        $post_categories->category_title = $request->category_title;
+        $post_categories->seo_keyword = $request->seo_keyword;
+        $post_categories->seo_description = $request->seo_description;
+        $post_categories->created_at = NOW();
+        $post_categories->save();
+        return Redirect::to('postCategories/')->with('success', trans('alert.update.success'));
     }
-    //$data['supplier_display'] = $request->supplier_display;
-    if($request->category_outstanding=='on'){
-        $post_categories->category_outstanding = 1;
-    }else{
-        $post_categories->category_outstanding = 0;
-    }
-    $post_categories->category_desc = $request->category_desc;
-    $post_categories->category_content = $request->category_content;
-    $post_categories->type = changeTitle($request->type);
-    $post_categories->category_title = $request->category_title;
-    $post_categories->seo_keyword = $request->seo_keyword;
-    $post_categories->seo_description = $request->seo_description;
-    $post_categories->created_at = NOW();
-    $post_categories->save();
-        Session::put('message','Sửa thành công');
-       return redirect('PostCategories/List');
-       
-    }
-    public function getList()
+    public function index(Request $request)
     {
         $post_categories = DB::table('post_categories')->get();
-        return view('pages.PostCategories.list',[
+        if ($search = $request->search) {
+            $post_categories = DB::table('post_categories')->where('category_name', 'like', '%' . $search . '%')->get();
+        }
+        return view('pages.postcategories.list', [
             'post_categories' => $post_categories,
         ]);
     }
-    public function getDelete($id)
+    public function delete($id)
     {
-       DB::table('post_categories')->where('id', $id)->delete();
-       Session::put('message','Xóa thành công');
-       return Redirect::to('PostCategories/List');
-          }
+        DB::table('post_categories')->where('id', $id)->delete();
+    }
 }

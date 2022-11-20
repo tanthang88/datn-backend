@@ -11,17 +11,7 @@ Danh mục bài viết
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Thêm loại danh mục bài viết</div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
 
-            </div>
-            <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
@@ -51,12 +41,12 @@ Danh mục bài viết
             </div>
             <div class="form-group">
                 <label>Nội dung </label>
-                <textarea name="category_content" class="form-control"></textarea>
+                <textarea name="category_content" id="pro_content" class="form-control"></textarea>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="CategoryPost">Type</label>
                 <input type="text" name="type" class="form-control" required>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" name="category_title" class="form-control"  placeholder="Nội dung thẻ Meta Title dùng để SEO">

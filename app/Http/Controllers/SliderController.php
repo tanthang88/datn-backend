@@ -51,7 +51,7 @@ class SliderController extends Controller
     }
     public function getUpdate(Slider $slider)
     {
-       return view('pages.Slider.edit',[
+       return view('pages.slider.edit',[
         'slider' => $slider,
     ]);
     }
@@ -91,7 +91,7 @@ class SliderController extends Controller
         public function getList()
         {
             $sliders = DB::table('sliders')->get();
-            return view('pages.Slider/List',[
+            return view('pages.slider/List',[
                 'sliders' => $sliders,
             ]);
         }

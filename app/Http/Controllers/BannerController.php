@@ -29,7 +29,6 @@ class BannerController extends Controller
             );
     
             $thumb = '/storage/' . $pathFull . '/' . $name;
-            //dd($thumb);
             $data['image'] = $thumb;
         }
 
@@ -46,7 +45,7 @@ class BannerController extends Controller
     }
     public function getUpdate(Banner $banner)
     {
-       return view('pages.Banner.edit',[
+       return view('pages.banner.edit',[
         'banner' => $banner,
     ]);
     }
@@ -82,7 +81,7 @@ class BannerController extends Controller
         public function getList()
         {
             $banners = DB::table('banners')->get();
-            return view('pages.Banner/List',[
+            return view('pages.banner/List',[
                 'banners' => $banners,
             ]);
         }

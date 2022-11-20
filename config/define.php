@@ -5,6 +5,8 @@ return [
     'auth' => [
         'passport_personal_access_client_id' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_ID'),
         'passport_personal_access_client_secret' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'),
+        'passport_personal_access_staff_id' => env('PASSPORT_PERSONAL_ACCESS_STAFF_ID'),
+        'passport_personal_access_staff_secret' => env('PASSPORT_PERSONAL_ACCESS_STAFF_SECRET'),
     ],
     'regex' => [
         'password' => '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/',
@@ -17,7 +19,7 @@ return [
         'per_page' => 25
     ],
     'gender' => [
-        'male' => 1,
-        'female' => 0,
+        'male' => 0,
+        'female' => 1,
     ],
 ];

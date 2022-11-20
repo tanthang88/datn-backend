@@ -2208,6 +2208,82 @@
                     }
                 }
             }
+        },
+        "/api/client/discountcode/verification": {
+            "post": {
+                "tags": ["Discount Code"],
+                "summary": "Check Discount Code",
+                "operationId": "check-discount-code",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "id",
+                        "required": true,
+                        "description": "Id discount code",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "total",
+                        "required": true,
+                        "description": "order total",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Check discount code success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "success": true,
+                                            "message": "Áp dụng mã giảm giá thành công!",
+                                            "data": {
+                                                "total": 1000000,
+                                                "save_money": 1000000
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/client/discountcode": {
+            "get": {
+                "tags": ["Discount Code"],
+                "summary": "Get List Discount Code",
+                "operationId": "get-list-discount-code",
+                "responses": {
+                    "201": {
+                        "description": "get list discount code success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Chương trình mã giảm giá tháng 11",
+                                            "rate": 1000000,
+                                            "type": "Giảm tiền",
+                                            "minimum_order": 20000000,
+                                            "expiry_date": "2022-11-19 23:00:00"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

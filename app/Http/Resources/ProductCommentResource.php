@@ -16,6 +16,7 @@ class ProductCommentResource extends JsonResource
     {
         return [
             'comment_id' => $this->id,
+            'avatar' => env('APP_URL') . ($this->customer->avatar ? $this->customer->avatar : '/storage/default-avatar.png'),
             'customer_id' => $this->customer_id,
             'comment_name' => $this->comment_name,
             'comment_content' => $this->comment_content,

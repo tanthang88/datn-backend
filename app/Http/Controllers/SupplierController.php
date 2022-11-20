@@ -11,89 +11,96 @@ use Illuminate\Support\Str;
 
 class SupplierController extends Controller
 {
-    //
-    
-    public function getAdd()
+    public function create()
     {
-
         return view('pages.supplier.add');
     }
-    public function postAdd(Request $request)
+    public function store(Request $request)
     {
         $data = array();
         $data['supplier_name'] = $request->supplier_name;
-        $data['supplier_photo'] = $request->supplier_photo;
+        if($request->hasFile('supplier_photo')){
+            $name = $request->file('supplier_photo')->getClientOriginalName();
+            $pathFull = 'uploads/' . date("Y-m-d");
+
+            $request->file('supplier_photo')->storeAs(
+                'public/' . $pathFull, $name
+            );
+
+            $thumb = '/storage/' . $pathFull . '/' . $name;
+            $data['supplier_photo'] = $thumb;
+        }
         $data['supplier_order'] = $request->supplier_order;
         if($request->supplier_display=='on'){
             $data['supplier_display']=1;
         }else{
             $data['supplier_display']=0;
         }
-        //$data['supplier_display'] = $request->supplier_display;
         if($request->supplier_outstanding=='on'){
             $data['supplier_outstanding']=1;
         }else{
             $data['supplier_outstanding']=0;
         }
-      //  $data['supplier_outstanding'] = $request->supplier_outstanding;
         $data['supplier_desc'] = $request->supplier_desc;
         $data['supplier_address'] = $request->supplier_address;
         $data['supplier_map'] = $request->supplier_map;
         $data['supplier_phone'] = $request->supplier_phone;
         $data['supplier_email'] = $request->supplier_email;
         $data['created_at'] = NOW();
-print_r($data);
         DB::table('suppliers')->insert($data);
-        return Redirect::to('Supplier/List');
+        return redirect('supplier/')->with('success', trans('alert.add.success'));
     }
-    public function getUpdate($id)
+    public function show($id)
     {
-       $UpdateSL= DB::table('suppliers')->where('id', $id)->get();
+       $UpdateSL= DB::table('suppliers')->where('id', $id)->first();
        return view('pages.supplier.edit',[
         'UpdateSL' => $UpdateSL,
     ]);
     }
-    public function postUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $supplier = Supplier::find($id);
         $supplier->supplier_name = $request->supplier_name;
-       $supplier->supplier_photo = $request->supplier_photo;
-       $supplier->supplier_order = $request->supplier_order;
-       if($request->supplier_display=='on'){
-        $supplier->supplier_display = 1;
-    }else{
-        $supplier->supplier_display = 0;
-    }
-    //$data['supplier_display'] = $request->supplier_display;
-    if($request->supplier_display=='on'){
-        $supplier->supplier_outstanding = 1;
-    }else{
-        $supplier->supplier_outstanding = 0;
-    }
-    $supplier->supplier_desc = $request->supplier_desc;
-       $supplier->supplier_address = $request->supplier_address;
-       $supplier->supplier_map = $request->supplier_map;
-       $supplier->supplier_phone = $request->supplier_phone;
-       $supplier->supplier_email = $request->supplier_email;
-       $supplier->created_at = NOW();
+        if($request->hasFile('supplier_photo')){
+            $name = $request->file('supplier_photo')->getClientOriginalName();
+            $pathFull = 'uploads/' . date("Y-m-d");
 
-     
-       $supplier->save();
-       return redirect('Supplier/List')->with('thongbao','Sửa thành công');
-       
+            $request->file('supplier_photo')->storeAs(
+                'public/' . $pathFull, $name
+            );
 
-  
+            $thumb = '/storage/' . $pathFull . '/' . $name;
+            $supplier->supplier_photo = $thumb;
+        }
+        $supplier->supplier_order = $request->supplier_order;
+        if($request->supplier_display=='on'){
+            $supplier->supplier_display = 1;
+        }else{
+            $supplier->supplier_display = 0;
+        }
+        if($request->supplier_display=='on'){
+            $supplier->supplier_outstanding = 1;
+        }else{
+            $supplier->supplier_outstanding = 0;
+        }
+        $supplier->supplier_desc = $request->supplier_desc;
+        $supplier->supplier_address = $request->supplier_address;
+        $supplier->supplier_map = $request->supplier_map;
+        $supplier->supplier_phone = $request->supplier_phone;
+        $supplier->supplier_email = $request->supplier_email;
+        $supplier->updated_at = NOW();
+        $supplier->save();
+        return redirect('supplier/')->with('success', trans('alert.update.success'));
     }
-    public function getList()
+    public function index()
     {
         $supplier = DB::table('suppliers')->get();
         return view('pages.supplier.list',[
             'supplier' => $supplier,
         ]);
     }
-    public function getDelete($id)
+    public function delete($id)
     {
        DB::table('suppliers')->where('id', $id)->delete();
-       return Redirect::to('Supplier/List');
-          }
+    }
 }

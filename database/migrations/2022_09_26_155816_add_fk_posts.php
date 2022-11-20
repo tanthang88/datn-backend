@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->foreign('category_id')->references('id')->on('post_categories');
-        
+            $table->foreign('category_id')->references('id')->on('post_categories')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

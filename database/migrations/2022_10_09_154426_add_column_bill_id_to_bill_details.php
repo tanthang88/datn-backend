@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('bill_details', function (Blueprint $table) {
             $table->unsignedBigInteger('bill_id')->after('id');
-            $table->foreign('bill_id')->references('id')->on('bills');
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

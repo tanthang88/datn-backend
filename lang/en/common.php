@@ -10,7 +10,9 @@ return [
         ],
         'password' => [
             'required' => 'password is required',
-            'regex' => 'Password is not in the required format'
+            'regex' => 'Password is not in the required format',
+            'max' => 'Password exceeds 16 characters allowed',
+            'min' => 'password length must be at least 6 characters',
         ],
         'gender' => [
             'in' => 'Gender mismatch',
@@ -38,9 +40,40 @@ return [
                 'required' => 'permission is required'
             ],
         ],
+        'birthday' => [
+            'required' => 'birthday is required'
+        ],
+        'discoutcode_name' => [
+            'required' => 'Please enter the name of the discount program',
+            'unique' => 'program name already exists '
+        ],
+        'discoutcode_code' => [
+            'required' => 'Please enter the discount code for the program',
+            'min' => 'Coupon code length must be at least 6 characters',
+            'unique' => 'Promotion code already exists'
+        ],
+        'discoutcode_daterange' => [
+            'required' => 'Please choose a promotion period',
+        ],
+        'discoutcode_rate' => [
+            'required' => 'Please enter the discount',
+            'integer' => 'Please enter an integer',
+            'min' => 'Please enter a number greater than 0'
+        ],
+        'discoutcode_ordervalue' => [
+            'required' => 'Please enter the minimum order value',
+            'integer' => 'Please enter an integer',
+            'min' => 'Please enter a number greater than 0',
+        ],
+        'discoutcode_numberofuse' => [
+            'required' => 'Please enter a limited number of codes',
+            'integer' => 'Please enter an integer',
+            'min' => 'Please enter a number greater than 0',
+        ],
     ],
     'table' =>
     [
         'no_rows' => 'no rows'
-    ]
+    ],
+
 ];
