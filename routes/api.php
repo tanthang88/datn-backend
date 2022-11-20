@@ -60,9 +60,9 @@ Route::group(['prefix' => 'post'], function () {
     Route::get('/{post}', [PostController::class, 'show']);
 });
 
- Route::get('/company', [CompanyController::class, 'company']);
+Route::get('/company', [CompanyController::class, 'company']);
 
- Route::group(['prefix' => 'about'], function () {
+Route::group(['prefix' => 'about'], function () {
     Route::get('/', [AboutController::class, 'listAbouts']);
     Route::get('/types/{type}', [AboutController::class, 'listAboutsByType']);
     Route::get('/{about}', [AboutController::class, 'show']);
@@ -70,12 +70,12 @@ Route::group(['prefix' => 'post'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::get('/categories', [ProductController::class, 'listCategories']);
     Route::get('/', [ProductController::class, 'listProducts']);
+    Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
     Route::get('/filter', [ProductFilterController::class, 'listFilter']);
     Route::get('/sort', [ProductFilterController::class, 'listSort']);
     Route::get('/{categories}/{filter}', [ProductFilterController::class, 'listProductFilter']);
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
-    Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
     Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
 });
 Route::group(['prefix' => 'slider'], function () {

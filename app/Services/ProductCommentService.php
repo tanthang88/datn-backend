@@ -23,6 +23,7 @@ class ProductCommentService
                 'customer',
             ])
             ->where('product_id', $product->id)
+            ->where('parent_id', 0)
             ->get();
     }
 
