@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PostCategoriesController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\BannerController;
+
 
 
 /*
@@ -127,5 +130,27 @@ Route::group(['prefix' => 'Post'], function () {
 
     Route::get('/List', [PostController::class, 'getList']);
     Route::get('/Delete/{id}', [PostController::class, 'getDelete']);
+});
+#slider
+Route::group(['prefix' => 'Slider'], function () {
+    Route::get('/Add', [SliderController::class, 'getAdd'])->name('slider.add');
+    Route::post('/Add', [SliderController::class, 'postAdd'])->name('slider.store');
+
+    Route::get('show/{slider}', [SliderController::class, 'getUpdate'])->name('slider.show');
+    Route::post('update/{id}', [SliderController::class, 'postUpdate'])->name('slider.update');
+
+    Route::get('/List', [SliderController::class, 'getList'])->name('slider.list');
+    Route::get('/Delete/{id}', [SliderController::class, 'getDelete'])->name('slider.delete');
+});
+#Banner
+Route::group(['prefix' => 'Banner'], function () {
+    Route::get('/Add', [BannerController::class, 'getAdd'])->name('banner.add');
+    Route::post('/Add', [BannerController::class, 'postAdd'])->name('banner.store');
+
+    Route::get('show/{banner}', [BannerController::class, 'getUpdate'])->name('banner.show');
+    Route::post('update/{id}', [BannerController::class, 'postUpdate'])->name('banner.update');
+
+    Route::get('/List', [BannerController::class, 'getList'])->name('banner.list');
+    Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
 });
 });

@@ -42,6 +42,54 @@
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link">
+                      <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                      <p class="pl-2">
+                          Slider
+                          <i class="fas fa-angle-left right"></i>
+                          <span class="badge badge-info right">2</span>
+                      </p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="Slider/Add" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Thêm mới</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="Slider/List" class="nav-link">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Danh sách</p>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <p class="pl-2">
+                        Banner
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right">2</span>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="Banner/Add" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="Banner/List" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Danh sách</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
                   <i class="fa fa-th pl-1" aria-hidden="true"></i>
                     <p class="pl-2">
                       Danh Mục Bài Viết
