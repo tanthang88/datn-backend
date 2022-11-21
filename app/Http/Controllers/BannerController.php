@@ -81,7 +81,7 @@ class BannerController extends Controller
         public function getList()
         {
             $banners = DB::table('banners')->get();
-            return view('pages.banner/List',[
+            return view('pages.banner.list',[
                 'banners' => $banners,
             ]);
         }
