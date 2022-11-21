@@ -120,8 +120,3 @@ function img_priv() {
                }
     }
 </script>
-
-
-
-
-

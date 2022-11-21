@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PostCategoriesController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\StaffController;
 
 /*
@@ -60,11 +62,9 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/addVariant/{id}', [ProductController::class, 'storeVariant']);
         Route::get('/updateVariant/{id}', [ProductController::class, 'showVariant'])->middleware(['auth'])->name('variant.update');
         Route::post('/updateVariant/{id}', [ProductController::class, 'updateVariant'])->middleware(['auth'])->name('variant.update');
-        Route::get('delete/{id}', [ProductController::class,'delete']);
-        Route::get('deletePropertie/{id}/{product_id}', [ProductController::class,'deletePropertie']);
-        Route::get('deleteVariant/{id}', [ProductController::class,'deleteVariant']);
-
-
+        Route::get('delete/{id}', [ProductController::class, 'delete']);
+        Route::get('deletePropertie/{id}/{product_id}', [ProductController::class, 'deletePropertie']);
+        Route::get('deleteVariant/{id}', [ProductController::class, 'deleteVariant']);
     });
     #About
     Route::group(['prefix' => 'about'], function () {
@@ -93,6 +93,7 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/{role}', [RoleController::class, 'update'])->name('role.update');
         Route::get('/delete/{role}', [RoleController::class, 'delete'])->name('role.delete');
     });
+
     #Staff
     Route::group(['prefix' => 'staff'], function () {
         Route::get('/', [StaffController::class, 'index'])->middleware(['auth'])->name('staff.list');
@@ -135,5 +136,23 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/delete/{id}', [DiscountCodeController::class, 'delete'])->name('promotion.discount-code.delete');
             Route::get('/end/{id}', [DiscountCodeController::class, 'end'])->name('promotion.discount-code.end');
         });
+    });
+    #slider
+    Route::group(['prefix' => 'Slider'], function () {
+        Route::get('/Add', [SliderController::class, 'getAdd'])->name('slider.add');
+        Route::post('/Add', [SliderController::class, 'postAdd'])->name('slider.store');
+        Route::get('show/{slider}', [SliderController::class, 'getUpdate'])->name('slider.show');
+        Route::post('update/{id}', [SliderController::class, 'postUpdate'])->name('slider.update');
+        Route::get('/List', [SliderController::class, 'getList'])->name('slider.list');
+        Route::get('/Delete/{id}', [SliderController::class, 'getDelete'])->name('slider.delete');
+    });
+    #Banner
+    Route::group(['prefix' => 'Banner'], function () {
+        Route::get('/Add', [BannerController::class, 'getAdd'])->name('banner.add');
+        Route::post('/Add', [BannerController::class, 'postAdd'])->name('banner.store');
+        Route::get('show/{banner}', [BannerController::class, 'getUpdate'])->name('banner.show');
+        Route::post('update/{id}', [BannerController::class, 'postUpdate'])->name('banner.update');
+        Route::get('/List', [BannerController::class, 'getList'])->name('banner.list');
+        Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
     });
 });

@@ -43,6 +43,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        
         $permissions = $this->permission->where('parent_id', 0)->get();
         return view('pages.role.add', compact('permissions'));
     }
