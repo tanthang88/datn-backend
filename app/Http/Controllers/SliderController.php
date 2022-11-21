@@ -91,7 +91,7 @@ class SliderController extends Controller
         public function getList()
         {
             $sliders = DB::table('sliders')->get();
-            return view('pages.slider/List',[
+            return view('pages.slider.list',[
                 'sliders' => $sliders,
             ]);
         }
