@@ -4,7 +4,7 @@ import {
   DEFAULT_MENU_RECOST
 } from "../config/constants";
 
-export function dataTable(columns, urlRequest,idName) {
+export function dataTable(columns, urlRequest,idName,paramsRequest=null,ajaxType=null) {
   $(idName).DataTable({
     lengthMenu: DEFAULT_MENU_RECOST,
     processing: true,
@@ -25,7 +25,9 @@ export function dataTable(columns, urlRequest,idName) {
     },
     ajax:
     {
-      url: urlRequest
+      url: urlRequest,
+      type:ajaxType?ajaxType:'GET',
+      data:paramsRequest?paramsRequest:''
     },
     columns: columns,
     select: true,

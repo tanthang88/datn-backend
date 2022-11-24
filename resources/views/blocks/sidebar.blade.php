@@ -214,15 +214,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="route('promotion.discount.list')" class="nav-link">
+                            <a href="{{route('promotion.discount.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Giảm giá sản phẩm</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="route('promotion.shock-deal.list')" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Deal sốc</p>
                             </a>
                         </li>
                     </ul>

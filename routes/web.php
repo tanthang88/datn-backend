@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\DiscountCodeController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -134,6 +135,21 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/{discountcode}', [DiscountCodeController::class, 'show'])->name('promotion.discount-code.show');
             Route::get('/delete/{id}', [DiscountCodeController::class, 'delete'])->name('promotion.discount-code.delete');
             Route::get('/end/{id}', [DiscountCodeController::class, 'end'])->name('promotion.discount-code.end');
+        });
+        //discount
+        Route::group(['prefix' => 'discount'], function () {
+            Route::get('/', [DiscountController::class, 'index'])->name('promotion.discount.list');
+            Route::get('dataSession', [DiscountController::class, 'dataSession'])->name('promotion.discount.dataSession');
+            Route::get('dataProductAll', [DiscountController::class, 'dataProductAll'])->name('promotion.discountdataProductAll');
+            Route::post('addDataSession', [DiscountController::class, 'addDataSession'])->name('promotion.discount.addDataSession');
+            Route::get('/delete-dataSession/{product}', [DiscountController::class, 'deleteDataSession'])->name('promotion.discount.deleteDataSession');
+            Route::get('/add', [DiscountController::class, 'getAdd'])->name('promotion.discount.add');
+            Route::get('/changeMoney', [DiscountController::class, 'changeMoney'])->name('promotion.discount.changeMoney');
+            Route::post('/add', [DiscountController::class, 'store'])->name('promotion.discount.store');
+            Route::post('/{discount}', [DiscountController::class, 'update'])->name('promotion.discount.update');
+            Route::get('/{discount}', [DiscountController::class, 'show'])->name('promotion.discount.show');
+            Route::get('/delete/{id}', [DiscountController::class, 'delete'])->name('promotion.discount.delete');
+            Route::get('/end/{id}', [DiscountController::class, 'end'])->name('promotion.discount.end');
         });
     });
 });

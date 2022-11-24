@@ -6,7 +6,7 @@ Tạo chương trình mã giảm giá mới
 @endpush
 @section('content')
 <div class="container-fluid">
-    <x-alert errorText="{{ trans('alert.update.error') }}" />
+    <x-alert errorText="{{ trans('alert.add.error') }}" />
     <div class="row">
         <div class="col-md-12">
             <div class="card card-info">
@@ -28,7 +28,7 @@ Tạo chương trình mã giảm giá mới
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Thời gian diễn ra</label>
+                                    <label>Mã giảm giá</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">LF</span>

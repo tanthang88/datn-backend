@@ -50,8 +50,7 @@ Chương trình tạo mã giảm giá
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Bắt đầu sau</th>
-                                <th>Sửa</th>
-                                <th>Xoá</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                     </table>
@@ -81,8 +80,7 @@ Chương trình tạo mã giảm giá
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Kết thúc sau</th>
-                                <th>Kết thúc</th>
-                                <th>Sửa</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                     </table>
@@ -112,7 +110,7 @@ Chương trình tạo mã giảm giá
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Kết thúc được</th>
-                                <th>Xoá</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                     </table>

@@ -49,39 +49,18 @@ const columns0 = [
     {
         data: "promotion_datestart",
         render: function (data) {
-         moment.locale('vi')
-          return  moment(data).fromNow(true);
+            moment.locale("vi");
+            return moment(data).fromNow(true);
         },
     },
     {
-
         data: null,
-        className: "editor-edit",
         render: function (data) {
             return `
-            <a
-                href="${URL.DISCOUNT_CODE.EDIT + data.id}"
-            >
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <i class="cursor-pointer fas fa-edit"></i>
-                </button>
-            </a>`;
-        },
-        orderable: false,
-    },
-    {
-        data: null,
-        className: "editor-delete",
-        render: function (data) {
-            return `
-            <a
-                data-url="${URL.DISCOUNT_CODE.DELETE + data.id}"
-                class="btn-action-delete"
-            >
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </a>`;
+            <a class="btn btn-info btn-sm" href="${
+                URL.DISCOUNT_CODE.EDIT + data.id
+            }"><i class="fas fa-pencil-alt mr-2"></i>Sửa</a>
+            `;
         },
         orderable: false,
     },
@@ -135,41 +114,23 @@ const columns1 = [
     {
         data: "promotion_dateend",
         render: function (data) {
-         moment.locale('vi')
-          return  moment(data).fromNow(true);
+            moment.locale("vi");
+            return moment(data).fromNow(true);
         },
     },
     {
         data: null,
-        className: "editor-end",
         render: function (data) {
             return `
-            <a
-                data-url="${URL.DISCOUNT_CODE.END + data.id}"
-                class="btn-action-end"
-            >
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </button>
-            </a>`;
+            <a class="btn btn-danger btn-action-end btn-sm" data-url="${
+                URL.DISCOUNT_CODE.END + data.id
+            }"><i class="fa fa-hourglass-end mr-2" aria-hidden="true"></i>Kết thúc </a>
+            <a class="btn btn-info btn-sm" href="${
+                URL.DISCOUNT_CODE.EDIT + data.id
+            }"><i class="fas fa-pencil-alt mr-2"></i>Sửa</a>`;
         },
         orderable: false,
     },
-    {
-        data: null,
-        className: "editor-edit",
-        render: function (data) {
-            return `
-            <a
-                href="${URL.DISCOUNT_CODE.EDIT + data.id}"
-            >
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <i class="cursor-pointer fas fa-edit"></i>
-                </button>
-            </a>`;
-        },
-        orderable: false,
-    }
 ];
 dataTable(columns1, url1, "#dataTable");
 
@@ -221,8 +182,8 @@ const columns2 = [
     {
         data: "promotion_dateend",
         render: function (data) {
-         moment.locale('vi')
-          return  moment(data).fromNow(true);
+            moment.locale("vi");
+            return moment(data).fromNow(true);
         },
     },
     {
@@ -230,14 +191,9 @@ const columns2 = [
         className: "editor-delete",
         render: function (data) {
             return `
-            <a
-                data-url="${URL.DISCOUNT_CODE.DELETE + data.id}"
-                class="btn-action-delete"
-            >
-                <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </a>`;
+            <a class="btn btn-danger btn-sm  btn-action-delete" data-url="${
+                URL.DISCOUNT_CODE.DELETE + data.id
+            }"><i class="fas fa-trash mr-2"></i>Xóa </a> `;
         },
         orderable: false,
     },

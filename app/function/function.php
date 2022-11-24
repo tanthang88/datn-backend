@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Promotion;
 // Mở composer.json
@@ -104,6 +105,28 @@ function diffTimeNow($dateStart, $dateEnd)
         // đã kết thúc
     }
 }
+function diffDatePhp($date_end)
+{
+    $date_now = date('Y-m-d H:i:s');
+    $diff = abs(strtotime($date_end) - strtotime($date_now));
+    $years = floor($diff / (365 * 60 * 60 * 24));
+    $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+    $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+    $hours = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24) / (60 * 60));
+    $minutes = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24 - $hours * 60 * 60) / 60);
+    $data='';
+    if ($months > 0) {
+        $data.= '<span class="mx-1">'.$months.'</span>ngày';
+    }
+    if ($days > 0) {
+        $data.= '<span class="mx-1">'.$days.'</span>ngày';
+    }
+    if ($hours > 0) {
+        $data.= '<span class="mx-1">'.$hours.'</span>giờ';
+    }
+    $data.='<span class="mx-1">'.$minutes.'</span>phút';
+    return $data;
+}
 function updatePromotionStatus()
 {
     $now = strtotime(date("Y-m-d H:i:s"));
@@ -112,12 +135,12 @@ function updatePromotionStatus()
         //chưa diễn ra 0 ->  1 diễn ra
         if ($promotion->promotion_status == 0) {
             if ($now >= strtotime($promotion->promotion_datestart)) {
-                Promotion::where('id', $promotion->id)->update(array('promotion_status'=>1));
+                Promotion::where('id', $promotion->id)->update(array('promotion_status' => 1));
             }
         } else if ($promotion->promotion_status == 1) {
             if ($now >= $promotion->promotion_dateend) {
                 //diễn ra 1 -> 2 kết thúc
-                Promotion::where('id', $promotion->id)->update(array('promotion_status'=>2));
+                Promotion::where('id', $promotion->id)->update(array('promotion_status' => 2));
             }
         }
     }
