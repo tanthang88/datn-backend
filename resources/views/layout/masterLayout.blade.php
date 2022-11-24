@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-
+    <meta name="csrf-token" class="meta" content="{{ csrf_token() }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="SHORTCUT ICON" href="" type="image/x-icon" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -37,9 +37,11 @@
     @stack('style')
 
 </head>
-    @php
-        loadFunctions();
-    @endphp
+@php
+use Illuminate\Support\Facades\Session;
+loadFunctions();
+@endphp
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
@@ -114,7 +116,7 @@
     </script>
 
     <script>
-            CKEDITOR.replace('pro_content', options);
+        CKEDITOR.replace('pro_content', options);
     </script>
     <!-- Validate -->
 
@@ -156,16 +158,16 @@
         $('.tiente').on('keyup', function() {
             let loaigiamgiatien = $('.loaigiamgiatien').val();
             if (loaigiamgiatien == 0 && $(this).hasClass('mucgiam')) {
-                let tien=(new Number($(this).val()));
-               if(tien>100){
-                $(this).val(1);
-               }
+                let tien = (new Number($(this).val()));
+                if (tien > 100) {
+                    $(this).val(1);
+                }
             }
             var val = $(this).val();
             $(this).siblings('.tientehidden').val(val !== '' ? val : 0);
         });
         let loaigiamgiatien = $('.loaigiamgiatien').val();
-        $('.loaigiamgiatien').change(function () {
+        $('.loaigiamgiatien').change(function() {
             $('.tiente.mucgiam ').val(1);
         })
         //end format tiền tệ và số

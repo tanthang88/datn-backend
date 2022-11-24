@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Promotion\DiscountCode\AddDiscountRequest;
 use App\Http\Requests\Promotion\DiscountCode\UpdateDiscountRequest;
-use App\Http\Requests\Staff\UpdateDiscountRequest as StaffUpdateDiscountRequest;
 use App\Models\Promotion;
 use App\Models\PromotionProduct;
 use Faker\Extension\Helper;

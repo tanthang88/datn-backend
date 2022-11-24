@@ -15,6 +15,7 @@ function actionEnd(event) {
         type: 'GET',
         success: function () {
           that.parent().parent().remove();
+          location.reload();
           Swal.fire(
             'Thành Công',
             '',

@@ -26,7 +26,10 @@ export const DEFAULT_PAGINATE = {
 
 export const STATUS_BLOCK = 0;
 export const FORMAT_DATE = 'DD/MM/YYYY HH:mm';
-
+export const FORMAT_MONEY = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  });
 export const URL = {
   ROLE: {
     LIST: 'role/data',
@@ -52,5 +55,8 @@ export const URL = {
     END: 'discount-code/end/',
     EDIT: 'discount-code/',
     DELETE: 'discount-code/delete/'
+  },
+  DISCOUNT: {
+    DELETE: 'delete-dataSession/'
   }
 };
