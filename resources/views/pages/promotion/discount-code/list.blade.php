@@ -13,10 +13,11 @@ Chương trình tạo mã giảm giá
         justify-content: center;
         align-items: center;
     }
+
     .img-ma_giam_gia i {
-    font-size: 24px;
-    color: #fff;
-}
+        font-size: 24px;
+        color: #fff;
+    }
 </style>
 @endpush
 @section('content')
@@ -40,13 +41,9 @@ Chương trình tạo mã giảm giá
                     <table class="table table-striped display nowrap hover" id="dataTable0" style="width: 100%">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th >Mã giảm giá </thc>
-                                <th >Tên chương trình</th>
-                                <!-- <th >Số mã có thể sử dụng</th> -->
-                                <!-- <th>Đã dùng</th> -->
-                                <th>Trạng thái </th>
+                                <th>#</th>
+                                <th>Mã giảm giá </th>
+                                <th>Tên chương trình</th>
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Bắt đầu sau</th>
@@ -70,13 +67,9 @@ Chương trình tạo mã giảm giá
                     <table class="table table-striped display nowrap hover" id="dataTable" style="width: 100%">
                         <thead>
                             <tr>
-                            <th></th>
-                                <th></th>
-                                <th >Mã giảm giá </thc>
-                                <th >Tên chương trình</th>
-                                <!-- <th >Số mã có thể sử dụng</th> -->
-                                <!-- <th>Đã dùng</th> -->
-                                <th>Trạng thái </th>
+                                <th>#</th>
+                                <th>Mã giảm giá </th>
+                                <th>Tên chương trình</th>
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Kết thúc sau</th>
@@ -100,17 +93,14 @@ Chương trình tạo mã giảm giá
                     <table class="table table-striped display nowrap hover" id="dataTable2" style="width: 100%">
                         <thead>
                             <tr>
-                            <th></th>
-                                <th></th>
-                                <th >Mã giảm giá </thc>
-                                <th >Tên chương trình</th>
-                                <!-- <th >Số mã có thể sử dụng</th> -->
-                                <!-- <th>Đã dùng</th> -->
-                                <th>Trạng thái </th>
+                                <th>#</th>
+                                <th>Mã giảm giá </th>
+                                <th>Tên chương trình</th>
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Kết thúc được</th>
                                 <th>Thao tác</th>
+                            </tr>
                             </tr>
                         </thead>
                     </table>

@@ -7,32 +7,22 @@ const columns0 = [
         data: "id",
     },
     {
-        render: function () {
-            return `<div class="img-ma_giam_gia mr-2"><i class="fas fa-dollar-sign"></i></div>`;
+        data: "promotion_product",
+        render: function (data) {
+            return `
+                <div class="d-flex">
+                <div class="img-ma_giam_gia mr-2"><i class="fas fa-dollar-sign"></i></div>
+                <div>
+                <b class="d-block">${data.promotion_code}</b>
+                <small class="text-warning">Chưa diễn ra</small>
+                </div>
+                </div>
+            `;
         },
         orderable: false,
     },
     {
-        data: "promotion_product",
-        render: function (data) {
-            return data.promotion_code;
-        },
-    },
-    {
         data: "promotion_name",
-    },
-
-    {
-        data: "promotion_status",
-        render: function (data) {
-            if (data == 0) {
-                return PROMOTIONSTATUS.NOACTIVE;
-            } else if (data == 1) {
-                return PROMOTIONSTATUS.ACTIVE;
-            } else {
-                return PROMOTIONSTATUS.END;
-            }
-        },
     },
     {
         data: "promotion_datestart",
@@ -72,32 +62,22 @@ const columns1 = [
         data: "id",
     },
     {
-        render: function () {
-            return `<div class="img-ma_giam_gia mr-2"><i class="fas fa-dollar-sign"></i></div>`;
+        data: "promotion_product",
+        render: function (data) {
+            return `
+                <div class="d-flex">
+                <div class="img-ma_giam_gia mr-2"><i class="fas fa-dollar-sign"></i></div>
+                <div>
+                <b class="d-block">${data.promotion_code}</b>
+                <small class="text-success">Đang  diễn ra</small>
+                </div>
+                </div>
+            `;
         },
         orderable: false,
     },
     {
-        data: "promotion_product",
-        render: function (data) {
-            return data.promotion_code;
-        },
-    },
-    {
         data: "promotion_name",
-    },
-
-    {
-        data: "promotion_status",
-        render: function (data) {
-            if (data == 0) {
-                return PROMOTIONSTATUS.NOACTIVE;
-            } else if (data == 1) {
-                return PROMOTIONSTATUS.ACTIVE;
-            } else {
-                return PROMOTIONSTATUS.END;
-            }
-        },
     },
     {
         data: "promotion_datestart",
@@ -140,32 +120,22 @@ const columns2 = [
         data: "id",
     },
     {
-        render: function () {
-            return `<div class="img-ma_giam_gia mr-2"><i class="fas fa-dollar-sign"></i></div>`;
+        data: "promotion_product",
+        render: function (data) {
+            return `
+                <div class="d-flex">
+                <div class="img-ma_giam_gia mr-2"><i class="fas fa-dollar-sign"></i></div>
+                <div>
+                <b class="d-block">${data.promotion_code}</b>
+                <small class="text-danger">Đã kết thúc</small>
+                </div>
+                </div>
+            `;
         },
         orderable: false,
     },
     {
-        data: "promotion_product",
-        render: function (data) {
-            return data.promotion_code;
-        },
-    },
-    {
         data: "promotion_name",
-    },
-
-    {
-        data: "promotion_status",
-        render: function (data) {
-            if (data == 0) {
-                return PROMOTIONSTATUS.NOACTIVE;
-            } else if (data == 1) {
-                return PROMOTIONSTATUS.ACTIVE;
-            } else {
-                return PROMOTIONSTATUS.END;
-            }
-        },
     },
     {
         data: "promotion_datestart",
