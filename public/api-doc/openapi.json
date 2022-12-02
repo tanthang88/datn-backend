@@ -840,7 +840,7 @@
                 }
             }
         },
-        "/api/product/{category_id}/{filter}": {
+        "/api/product/filter/{category_id}/{filter}": {
             "get": {
                 "tags": ["Product"],
                 "summary": "Filter Products By Category Id",

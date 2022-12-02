@@ -9,7 +9,7 @@ Banner
 @endpush
 @section('content')
     <!-- Content Header (Page header) -->
-    
+
     <!-- Main content -->
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
@@ -29,6 +29,8 @@ Banner
                     <th>Hình ảnh</th>
                     <th>Đường liên kết</th>
                     <th>Hiển Thị</th>
+                    <th>Sửa</th>
+                    <th>Xoá</th>
                     </tr>
                     </thead>
                     @foreach($banners as $banners)
@@ -39,7 +41,7 @@ Banner
                                 <td>
                                     <img width="100px" src="{{$banners->image}}"/>
                                 </td>
-                                <td>{{$banners->link}}</td> 
+                                <td>{{$banners->link}}</td>
 
                                 <td>
                                     @if($banners->display == 0)
@@ -49,8 +51,8 @@ Banner
                                     @endif
                                 </td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href={{route('banner.show', ['banner' => $banners->id])}}>Sửa</a></td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href={{route('banner.delete', ['id' => $banners->id])}}> Xóa</a></td>       
-                            </tr>                         
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href={{route('banner.delete', ['id' => $banners->id])}}> Xóa</a></td>
+                            </tr>
                             </tbody>
                     @endforeach
                     </table>
@@ -61,11 +63,11 @@ Banner
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <?php                
+    <?php
     $message = Session::get('message');
     if ($message){
         echo '<p>' . $message . '<p>';
-        Session::put('message', null);    
+        Session::put('message', null);
     }
      ?>
 </div>

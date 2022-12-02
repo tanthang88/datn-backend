@@ -34,13 +34,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                    <a href="/" class="nav-link active">
+                <li class="nav-item  {{Route::currentRouteName()=='home'?'menu-is-opening menu-open':''}}">
+                    <a href="/" class="nav-link  ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Trang chủ</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('/post','/postCategories'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
@@ -64,9 +64,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/supplier'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <i class="fa fa-tasks" aria-hidden="true"></i>
                         <p class="pl-2">
                             Nhà cung cấp
                             <i class="fas fa-angle-left right"></i>
@@ -88,7 +88,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('/product','/categoriesProduct'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
@@ -114,12 +114,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/user'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <i class="fa fa-users" aria-hidden="true"></i>
                         <p class="pl-2">
                             Khách hàng
                             <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">1</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -131,12 +132,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/staff'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
                         <p class="pl-2">
                             Nhân viên
                             <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">2</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -154,12 +156,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/role'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <i class="fa fa-tasks" aria-hidden="true"></i>
                         <p class="pl-2">
                             Phân quyền
                             <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">2</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -177,13 +180,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/about'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         <p class="pl-2">
                             Thông tin
                             <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">2</span>
+                            <span class="badge badge-info right">1</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -195,13 +198,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('promotion/discount-code','promotion/discount','promotion/dealsock'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-gift" aria-hidden="true"></i>
                         <p class="pl-2">
                             Khuyến mãi
                             <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">2</span>
+                            <span class="badge badge-info right">3</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -217,11 +220,17 @@
                                 <p>Giảm giá sản phẩm</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('promotion.dealsock.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Mua kèm Deal sốc</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/Slider'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <i class="fa fa-align-left" aria-hidden="true"></i>
                         <p class="pl-2">
                             Slider
                             <i class="fas fa-angle-left right"></i>
@@ -243,9 +252,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Route::current()->getPrefix()=='/Banner'?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
-                        <i class="fa fa-th pl-1" aria-hidden="true"></i>
+                    <i class="fa fa-align-left" aria-hidden="true"></i>
                         <p class="pl-2">
                             Banner
                             <i class="fas fa-angle-left right"></i>
@@ -260,7 +269,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('banner.add')}}" class="nav-link">
+                            <a href="{{route('banner.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
                             </a>
@@ -273,3 +282,4 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+

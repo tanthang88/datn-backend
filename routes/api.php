@@ -75,7 +75,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
     Route::get('/filter', [ProductFilterController::class, 'listFilter']);
     Route::get('/sort', [ProductFilterController::class, 'listSort']);
-    Route::get('/{categories}/{filter}', [ProductFilterController::class, 'listProductFilter']);
+    Route::get('/filter/{categories}/{filter}', [ProductFilterController::class, 'listProductFilter']);
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
     Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
