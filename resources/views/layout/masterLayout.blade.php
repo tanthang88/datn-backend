@@ -183,6 +183,7 @@ loadFunctions();
                 format: 'YYYY-MM-DD hh:mm:ss A'
             }
         })
+         $('.nav-item.menu-is-opening.menu-open').children('a.nav-link').addClass('active')
     </script>
     @stack('scripts')
     @if(Session::has('success'))

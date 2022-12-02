@@ -114,7 +114,7 @@ class DiscountController extends Controller
      */
     public function dataProductAll()
     {
-        $promotions = PromotionProduct::select('promotion_id_product')->with(['promotion', 'product'])->whereRelation('promotion', 'type', '=', 'discount')->whereHas('promotion', function (Builder $query) {
+        $promotions = PromotionProduct::select('promotion_id_product')->with(['promotion', 'product'])->whereRelation('promotion', 'type', '!=', 'discount-code')->whereHas('promotion', function (Builder $query) {
             $query->whereIn('promotion_status', [0, 1]);
         })->get();
         $arrPromotion = $arrSession = [];

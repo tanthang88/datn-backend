@@ -9,7 +9,7 @@ Slider
 @endpush
 @section('content')
     <!-- Content Header (Page header) -->
-    
+
     <!-- Main content -->
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
@@ -31,6 +31,8 @@ Slider
                     <th>Đường liên kết</th>
                     <th>Hiển Thị</th>
                     <th>Mô tả</th>
+                    <th>Sửa</th>
+                    <th>Xoá</th>
                     </tr>
                     </thead>
                     @foreach($sliders as $sliders)
@@ -42,7 +44,7 @@ Slider
                                 <td>
                                     <img width="100px" src="{{$sliders->image}}"/>
                                 </td>
-                                <td>{{$sliders->link}}</td> 
+                                <td>{{$sliders->link}}</td>
 
                                 <td>
                                     @if($sliders->display == 0)
@@ -53,11 +55,11 @@ Slider
                                 </td>
                                 <td>{{$sliders->desc}}</td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href={{route('slider.show', ['slider' => $sliders->id])}}>Sửa</a></td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href={{route('slider.delete', ['id' => $sliders->id])}}> Xóa</a></td>       
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href={{route('slider.delete', ['id' => $sliders->id])}}> Xóa</a></td>
                             </tr>
                             </tbody>
                     @endforeach
-                   
+
                     </table>
                     </div>
             </div>
@@ -66,11 +68,11 @@ Slider
         </div><!-- /.container-fluid -->
 
     <!-- /.content -->
-    <?php                
+    <?php
     $message = Session::get('message');
     if ($message){
         echo '<p>' . $message . '<p>';
-        Session::put('message', null);    
+        Session::put('message', null);
     }
      ?>
 </div>

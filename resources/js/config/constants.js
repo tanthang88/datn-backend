@@ -58,5 +58,11 @@ export const URL = {
   },
   DISCOUNT: {
     DELETE: 'delete-dataSession/'
+  },
+  DEALSOCK: {
+    DELETE: 'delete-dataSession/'
+  },
+  DEALSOCKCOMBO: {
+    DELETE: 'delete-dataSessionCombo/'
   }
 };

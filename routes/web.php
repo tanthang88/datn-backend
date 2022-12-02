@@ -14,6 +14,7 @@ use App\Http\Controllers\PostCategoriesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\DealSockController;
 use App\Http\Controllers\StaffController;
 
 /*
@@ -33,7 +34,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('logout', [LoginAdminController::class, 'Logout'])->name('logout');
     Route::get('', function () {
         return view('pages.home');
-    })->middleware(['auth']);
+    })->middleware(['auth'])->name('home');
     #Supplier
     Route::group(['prefix' => 'supplier'], function () {
         Route::get('/add', [SupplierController::class, 'create'])->middleware(['auth'])->name('supplier.add');
@@ -151,6 +152,24 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/{discount}', [DiscountController::class, 'show'])->name('promotion.discount.show');
             Route::get('/delete/{id}', [DiscountController::class, 'delete'])->name('promotion.discount.delete');
             Route::get('/end/{id}', [DiscountController::class, 'end'])->name('promotion.discount.end');
+        });
+        //discount
+        Route::group(['prefix' => 'dealsock'], function () {
+            Route::get('/', [DealSockController::class, 'index'])->name('promotion.dealsock.list');
+            Route::get('dataSession', [DealSockController::class, 'dataSession'])->name('promotion.dealsock.dataSession');
+            Route::get('dataSessionCombo', [DealSockController::class, 'dataSessionCombo'])->name('promotion.dealsock.dataSessionCombo');
+            Route::get('dataProductAll', [DealSockController::class, 'dataProductAll'])->name('promotion.dealSockDataProductAll');
+            Route::get('dataProductAllCombo', [DealSockController::class, 'dataProductAllCombo'])->name('promotion.dealSockDataProductAllCombo');
+            Route::post('addDataSession', [DealSockController::class, 'addDataSession'])->name('promotion.dealsock.addDataSession');
+            Route::post('addDataSessionCombo', [DealSockController::class, 'addDataSessionCombo'])->name('promotion.dealsock.addDataSessionCombo');
+            Route::get('/delete-dataSession/{product}', [DealSockController::class, 'deleteDataSession'])->name('promotion.dealsock.deleteDataSession');
+            Route::get('/delete-dataSessionCombo/{product}', [DealSockController::class, 'deleteDataSessionCombo'])->name('promotion.dealsock.deleteDataSessionCombo');
+            Route::get('/add', [DealSockController::class, 'getAdd'])->name('promotion.dealsock.add');
+            Route::post('/add', [DealSockController::class, 'store'])->name('promotion.dealsock.store');
+            Route::post('/{dealsock}', [DealSockController::class, 'update'])->name('promotion.dealsock.update');
+            Route::get('/{dealsock}', [DealSockController::class, 'show'])->name('promotion.dealsock.show');
+            Route::get('/delete/{id}', [DealSockController::class, 'delete'])->name('promotion.dealsock.delete');
+            Route::get('/end/{id}', [DealSockController::class, 'end'])->name('promotion.dealsock.end');
         });
     });
     #slider
