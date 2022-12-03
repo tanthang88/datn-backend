@@ -7,7 +7,7 @@
     <title>@yield('title')</title>
     <meta name="csrf-token" class="meta" content="{{ csrf_token() }}">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="SHORTCUT ICON" href="" type="image/x-icon" />
+    <link rel="SHORTCUT ICON" href="{{$FAVICON}}" type="image/x-icon" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
@@ -34,6 +34,10 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('assets/plugins/summernote/summernote-bs4.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}">
+    <!-- select2 -->
+
+    <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     @stack('style')
 
 </head>
@@ -148,6 +152,8 @@ loadFunctions();
     <script src="{{asset('assets/plugins/dropzone/min/dropzone.min.js')}}"></script>
     <script src="{{asset('assets/plugins/jquerynumber.js')}}"></script>
     <script src="{{asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+    <!-- select2 -->
+    <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
     <!-- daterangerpicker -->
     <script>
         // JS dùng chung
@@ -183,7 +189,7 @@ loadFunctions();
                 format: 'YYYY-MM-DD hh:mm:ss A'
             }
         })
-         $('.nav-item.menu-is-opening.menu-open').children('a.nav-link').addClass('active')
+        $('.nav-item.menu-is-opening.menu-open').children('a.nav-link').addClass('active')
     </script>
     @stack('scripts')
     @if(Session::has('success'))

@@ -64,5 +64,9 @@ export const URL = {
   },
   DEALSOCKCOMBO: {
     DELETE: 'delete-dataSessionCombo/'
-  }
+  },
+  FEESHIP: {
+    EDIT: 'feeship/',
+    DELETE: 'feeship/delete/'
+  },
 };

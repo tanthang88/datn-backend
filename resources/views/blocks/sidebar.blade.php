@@ -184,7 +184,7 @@
                     <a href="#" class="nav-link">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         <p class="pl-2">
-                            Thông tin
+                            Về chúng tôi
                             <i class="fas fa-angle-left right"></i>
                             <span class="badge badge-info right">1</span>
                         </p>
@@ -272,6 +272,30 @@
                             <a href="{{route('banner.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('shop/info','shop/feeship'))?'menu-is-opening menu-open':''}}">
+                    <a href="#" class="nav-link">
+                    <i class="fa fa-archive" aria-hidden="true"></i>
+                        <p class="pl-2">
+                            Cửa hàng
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">2</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('info.edit')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thông tin </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('feeship.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Phí ship</p>
                             </a>
                         </li>
                     </ul>
