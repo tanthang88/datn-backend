@@ -72,6 +72,7 @@ Route::group(['prefix' => 'about'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::get('/categories', [ProductController::class, 'listCategories']);
     Route::get('/', [ProductController::class, 'listProducts']);
+    Route::get('/{product}/related', [ProductController::class, 'listProductsRelated']);
     Route::get('/{product}/list_comments', [ProductCommentController::class, 'listComments']);
     Route::get('/filter', [ProductFilterController::class, 'listFilter']);
     Route::get('/sort', [ProductFilterController::class, 'listSort']);

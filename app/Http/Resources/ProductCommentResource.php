@@ -16,11 +16,11 @@ class ProductCommentResource extends JsonResource
     {
         return [
             'comment_id' => $this->id,
-            'avatar' => env('APP_URL') . ($this->customer->avatar ? $this->customer->avatar : '/storage/default-avatar.png'),
+            'avatar' => $this->customer?->avatar ?? '/storage/default-avatar.png',
             'customer_id' => $this->customer_id,
-            'comment_name' => $this->comment_name,
+            'comment_name' => $this->customer?->name ?? $this->comment_name,
             'comment_content' => $this->comment_content,
-            'comment_date' => convertDateTimetoStr($this->created_at),
+            'comment_date' => $this->created_at,
             'children_comments' => $this->collection($this->childrenComment),
         ];
     }
