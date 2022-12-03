@@ -68,4 +68,19 @@ class ProductService
             ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
             ->first();
     }
+
+    /**
+     * getListProductsRelated
+     *
+     * @param  Product $product
+     * @return Response
+     */
+    public function getListProductsRelated(Product $product)
+    {
+        return Product::select(['*'])
+            ->with('productCategory')
+            ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
+            ->where('category_id', $product->category_id)
+            ->get();
+    }
 }
