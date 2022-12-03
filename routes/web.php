@@ -5,6 +5,8 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoriesProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DiscountCodeController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\LoginAdminController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\PostCategoriesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\DealSockController;
 use App\Http\Controllers\StaffController;
 
@@ -189,5 +192,20 @@ Route::group(['prefix' => '/'], function () {
         Route::post('update/{id}', [BannerController::class, 'postUpdate'])->name('banner.update');
         Route::get('/List', [BannerController::class, 'getList'])->name('banner.list');
         Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
+    });
+    Route::group(['prefix' => 'shop'], function () {
+        Route::group(['prefix' => 'info'], function () {
+            Route::get('/', [CompanyController::class, 'show'])->name('info.edit');
+            Route::post('/update', [CompanyController::class, 'update'])->name('info.update');
+        });
+        Route::group(['prefix' => 'feeship'], function () {
+            Route::get('/', [AboutController::class, 'listFeeShip'])->name('feeship.list');
+            Route::get('/add', [AboutController::class, 'getAddFeeShip'])->name('feeship.add');
+            Route::post('/add', [AboutController::class, 'storeAddFeeShip'])->name('feeship.store');
+            Route::get('/data', [AboutController::class, 'dataFeeShip'])->name('feeship.data');
+            Route::get('/{id}', [AboutController::class, 'showFeeShip'])->name('feeship.edit');
+            Route::get('/delete/{id}', [AboutController::class, 'deleteFeeShip'])->name('feeship.delete');
+            Route::post('/update/{id}', [AboutController::class, 'updateFeeShip'])->name('feeship.update');
+        });
     });
 });

@@ -12,7 +12,7 @@ class City extends Model
      * @var string
      */
     protected $table = 'cities';
-
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -21,5 +21,8 @@ class City extends Model
     public function dists(){
         return $this->hasMany(Dist::class, 'code', 'code');
     }
-
+    public function about()
+    {
+        return $this->hasMany(About::class, 'id_city', 'code');
+    }
 }

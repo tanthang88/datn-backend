@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class About extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     const ABOUT_BLOCK = 0;
     const ABOUT_ACTIVE = 1;
     protected $table = 'abouts';
@@ -25,4 +24,7 @@ class About extends Model
         'seo_keyword',
         'seo_description'
     ];
+    function city(){
+        return $this->belongsTo(City::class, 'id_city', 'code');
+    }
 }
