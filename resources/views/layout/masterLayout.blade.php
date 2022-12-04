@@ -43,9 +43,7 @@
 </head>
 @php
 use Illuminate\Support\Facades\Session;
-loadFunctions();
 @endphp
-
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->

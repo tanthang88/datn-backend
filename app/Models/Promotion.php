@@ -10,6 +10,7 @@ class Promotion extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'promotions';
+    public $timestamps=false;
     protected $fillable = [
         'promotion_name',
         'promotion_numer_of_use',
