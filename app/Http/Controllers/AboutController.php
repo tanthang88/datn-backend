@@ -74,7 +74,7 @@ class AboutController extends Controller
 
     public function index(Request $request)
     {
-        $data = About::orderBy('id', 'desc')->paginate(20);
+        $data = About::orderBy('id', 'desc')->where('type','!=','fee-ship')->paginate(20);
         if ($search = $request->search) {
             $data = About::orderBy('id', 'desc')->where('about_name', 'like', '%' . $search . '%')->paginate(20);
         }
