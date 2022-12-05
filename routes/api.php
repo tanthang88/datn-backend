@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\ProductFilterController;
 use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\DiscountCodeController;
+use App\Http\Controllers\Api\VariantionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
     Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
+    Route::get('/variantion/{product}/{properties}', [VariantionController::class, 'getVariantion']);
 });
 Route::group(['prefix' => 'slider'], function () {
     Route::get('/', [SliderController::class, 'listSliders']);

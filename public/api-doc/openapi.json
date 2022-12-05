@@ -859,7 +859,7 @@
                         "in": "path",
                         "name": "filter",
                         "required": true,
-                        "description": "filter?price=100",
+                        "description": "filter?price=100&screen=200",
                         "schema": {
                             "type": "string"
                         }
@@ -932,6 +932,53 @@
                                         "prev_page_url": null,
                                         "to": 2,
                                         "total": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/variantion/{product_id}/{properties}": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "Get Variant By Id Propertie -> to Price",
+                "operationId": "get-variant-by-id-propertie ->to-price",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "product_id",
+                        "required": true,
+                        "description": "1 or 2 or 3 ...",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "properties",
+                        "required": true,
+                        "description": "propertie?id=10&id_link=24,26",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "id": 3,
+                                        "price": 200000000,
+                                        "sale": 199980000,
+                                        "rate": 20000,
+                                        "type": 1,
+                                        "img": "/storage/uploads/2022-11-20/images (1).jpg",
+                                        "note": "Nhớ gửi id biến thể này khi mua hàng"
                                     }
                                 }
                             }
