@@ -60,6 +60,7 @@ Route::prefix('client')->group(function () {
 Route::group(['prefix' => 'post'], function () {
     Route::get('/categories', [PostController::class, 'listCategories']);
     Route::get('/categories/{category}', [PostController::class, 'listPosts']);
+    Route::get('/all', [PostController::class, 'showAll']);
     Route::get('/{post}', [PostController::class, 'show']);
 });
 

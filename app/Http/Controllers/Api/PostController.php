@@ -79,5 +79,16 @@ class PostController extends Controller
             );
         }
     }
-
+    public function showAll()
+    {
+        try {
+            return $this->responseSuccess(['data' => PostDetailResource::collection(Post::all())]);
+        } catch (\Throwable $th) {
+            Log::error("get post ", $th);
+            return $this->responseError(
+                array(trans('alert.post.get_detail.failed')),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
