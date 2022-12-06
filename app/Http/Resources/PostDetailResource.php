@@ -18,6 +18,7 @@ class PostDetailResource extends JsonResource
             'id' => $this->id,
             'post_category_name' => $this->postCategory?->category_name,
             'post_title' => $this->post_name,
+            'post_img' => $this->post_img,
             'post_desc' => $this->post_desc,
             'post_content' => $this->post_content,
             'post_slug' => $this->post_slug,
@@ -26,7 +27,6 @@ class PostDetailResource extends JsonResource
             'post_seo_keyword' => $this->post_seo_keyword,
             'post_seo_description' => $this->post_seo_description,
             'date' => $this->created_at,
-
         ];
     }
 }
