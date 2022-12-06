@@ -82,7 +82,7 @@ class PostController extends Controller
     public function showAll()
     {
         try {
-            return $this->responseSuccess(['data' => PostDetailResource::collection(Post::all())]);
+            return $this->responseSuccess(['data' => PostDetailResource::collection(Post::select('*')->orderBy('id', 'DESC')->get())]);
         } catch (\Throwable $th) {
             Log::error("get post ", $th);
             return $this->responseError(
