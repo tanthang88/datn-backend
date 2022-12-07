@@ -1472,7 +1472,7 @@
                 }
             }
         },
-        "/api/client/bills/create": {
+        "/api/client/bills/add_to_bill": {
             "post": {
                 "tags": ["Bill"],
                 "summary": "Order product in cart",
@@ -1550,6 +1550,24 @@
                                     "total": 2
                                 }
                             ]
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "bank_code",
+                        "required": false,
+                        "description": "code bank if payment online",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "discount_code_id",
+                        "required": false,
+                        "description": " discount code if used",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -2360,6 +2378,36 @@
                             }
                         }
                     }
+                }
+            }
+        },
+        "/api/payment/return-payment/{return}": {
+            "post": {
+                "tags": ["Payment Update"],
+                "summary": "Return Payment",
+                "operationId": "return-payment",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "vnp_ResponseCode",
+                        "required": true,
+                        "description": "status",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "vnp_TxnRef",
+                        "required": true,
+                        "description": "order id",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {}
                 }
             }
         }
