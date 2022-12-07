@@ -49,10 +49,10 @@ class VariantionController extends Controller
                     } else if ($type == 1) {
                         $money = ($data->price) - $rate;
                     }
-                    $data->rate = $rate;
-                    $data->type = $type;
-                    $data->sale = $money;
                 }
+                $data->rate = $rate;
+                $data->type = $type;
+                $data->sale = $money;
             }
             if ($data == '') {
                 $product->price = $product->product_price;

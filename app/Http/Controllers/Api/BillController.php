@@ -71,8 +71,8 @@ class BillController extends Controller
     public function create(Request $request)
     {
         try {
-            $this->billService->create($request);
-            return $this->responseSuccess([], Response::HTTP_CREATED);
+           $data= $this->billService->create($request);
+            return $this->responseSuccess($data, Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             Log::error("add to bill " . $th);
             return $this->responseError(

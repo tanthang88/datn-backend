@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\ProductFilterController;
 use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\DiscountCodeController;
+use App\Http\Controllers\api\PaymentController;
 use App\Http\Controllers\Api\VariantionController;
 
 /*
@@ -90,4 +91,7 @@ Route::group(['prefix' => 'slider'], function () {
 Route::group(['prefix' => 'banner'], function () {
     Route::get('/', [BannerController::class, 'listBanners']);
     Route::get('/types/{type}', [BannerController::class, 'listBannersByType']);
+});
+Route::group(['prefix' => 'payment'], function () {
+    Route::post('/return-payment/{return}', [PaymentController::class, 'return']);
 });
