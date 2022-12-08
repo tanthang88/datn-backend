@@ -14,6 +14,7 @@ use App\Models\Propertie;
 use App\Models\Variantion;
 use App\Http\Requests\ProductRequest;
 use Storage;
+use DB;
 
 
 class ProductController extends Controller
@@ -35,7 +36,11 @@ class ProductController extends Controller
             $product->product_name    = $request->product_name;
             $product->product_slug    = (Str::slug($product->product_name,'-'));
             $product->supplier_id     = $request->supplier_id;
-            $product->product_price   = $request->product_price;
+            if($request->is_variation=='0'){
+                $product->product_price   = $request->product_price;
+            }else{
+                $product->product_price   = null;
+            }
             $product->product_quantity= $request->product_quantity;
             $product->product_order   = $request->product_order;
             if($request->product_outstanding == 'on'){
@@ -116,11 +121,6 @@ class ProductController extends Controller
                         // cắt mảng
                         $x = $request->propertie_value[$value];
                          $val = explode('|', $x);
-                        echo '<pre>';
-                        // print_r($list);
-                        print_r($val);
-                        // print_r($listValue);
-                        echo '</pre>';
                         foreach($val as $list => $listValue){
                             $properties = new Propertie();
                             $properties->propertie_name = $name;
@@ -136,7 +136,6 @@ class ProductController extends Controller
     }
     public function show($id)
     {
-
         $categories = ProductCategory::get();
         $supplier   = Supplier::get();
         $data = Product::where('id', $id)->first();
@@ -154,13 +153,15 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
             $product        = Product::find($id);
             $product->product_name    = $request->product_name;
             $product->product_slug    = (Str::slug($product->product_name,'-'));
             $product->supplier_id     = $request->supplier_id;
-            $product->product_price   = $request->product_price;
+            if($request->is_variation=='0'){
+                $product->product_price   = $request->product_price;
+            }
             $product->product_quantity= $request->product_quantity;
             $product->product_order   = $request->product_order;
             if($request->product_outstanding == 'on'){
@@ -248,14 +249,12 @@ class ProductController extends Controller
                 $files = $request->img_list;
                 // duyệt từng ảnh và thực hiện lưu
                 foreach ($request->img_list as $index => $file) {
-
                     $name = $file->getClientOriginalName();
                     $pathFull = 'uploads/' . date("Y-m-d");
 
                     $file->storeAs(
                         'public/' . $pathFull, $name
                     );
-
                     $thumb = '/storage/' . $pathFull . '/' . $name;
                      // Tạo đối tưọng HinhAnh
                      $images = new ProductImage();
@@ -269,17 +268,19 @@ class ProductController extends Controller
             if($request->input_type=='normal'){
                 if($request->is_variation=='1'){
                 // thêm thuộc tính khi chuyển loại sp
-                        foreach($request->propertie_name_n as $value => $name){
-                            // cắt mảng
-                            $values = $request->propertie_value_n[$value];
-                            $value = explode('|', $values);
-                            foreach($value as $list => $listValue){
-                                $properties_up = new Propertie();
-                                $properties_up->propertie_name = $name;
-                                $properties_up->propertie_slug = Str::slug($name);
-                                $properties_up->propertie_value = $listValue;
-                                $properties_up->product_id = $id;
-                                $properties_up->save();
+                        if($request->propertie_name_n){
+                            foreach($request->propertie_name_n as $value => $name){
+                                // cắt mảng
+                                $values = $request->propertie_value_n[$value];
+                                $value = explode('|', $values);
+                                foreach($value as $list => $listValue){
+                                    $properties_up = new Propertie();
+                                    $properties_up->propertie_name = $name;
+                                    $properties_up->propertie_slug = Str::slug($name);
+                                    $properties_up->propertie_value = $listValue;
+                                    $properties_up->product_id = $id;
+                                    $properties_up->save();
+                                }
                             }
                         }
                 }
@@ -298,24 +299,25 @@ class ProductController extends Controller
                             $properties->product_id = $id;
                             $properties->updated_at   = NOW();
                             $properties->save();
-
-                    }
+                        }
                     }
                     // thêm thuộc tính mới
                     if($request->input_propertie=='check'){
-                        foreach($request->propertie_name_n as $value => $name){
-                            // cắt mảng
-                            $values = $request->propertie_value_n[$value];
-                            $value = explode('|', $values);
-                            foreach($value as $list => $listValue){
-                                $properties_n = new Propertie;
-                                $properties_n->propertie_name = $name;
-                                $properties_n->propertie_slug = Str::slug($name);
-                                $properties_n->propertie_value = $listValue;
-                                $properties_n->product_id = $id;
-                                $properties_n->save();
-                            }
+                        if($request->propertie_name_n){
+                            foreach($request->propertie_name_n as $value => $name){
+                                // cắt mảng
+                                $values = $request->propertie_value_n[$value];
+                                $value = explode('|', $values);
+                                foreach($value as $list => $listValue){
+                                    $properties_n = new Propertie;
+                                    $properties_n->propertie_name = $name;
+                                    $properties_n->propertie_slug = Str::slug($name);
+                                    $properties_n->propertie_value = $listValue;
+                                    $properties_n->product_id = $id;
+                                    $properties_n->save();
+                                }
 
+                            }
                         }
                     }
                 }
@@ -385,9 +387,12 @@ class ProductController extends Controller
                             $variant->img = $thumb;
                         }
 
-                    $variant->save();
-                    $arr = array_slice($arr,$count);
-                }
+                        $variant->save();
+                        $arr = array_slice($arr,$count);
+                    }
+                    $product = Product::where('id', $request->product_id)->first();
+                    $product->product_price = $request->price[0];
+                    $product->save();
         return redirect('/product')->with('success', trans('alert.add.success'));
 
     }
@@ -491,35 +496,40 @@ class ProductController extends Controller
     {
         // cập nhật biến thể cũ
         $arr = $request->propertie_id;
-        foreach($request->price as $index => $file){
-            $my_id = $request->my_id[$index];
-            $variant = Variantion::where('id',$my_id)->first();
-            // lưu id link
-            $id_link = [];
-            $count = $request->count;
-            for($i=1;$i<$count;$i++){
-                $id_link[] = $arr[$i].' ';
-            }
-            $variant->propertie_id = $arr[0];
-            $variant->propertie_id_link = implode($id_link);
-            $variant->product_id = $id;
-            $variant->price = $file;
-            // check ảnh sp
-            $image = $request->image;
-            if(isset($image[$index])){
-                $name = $image[$index]->getClientOriginalName();
-                $pathFull = 'uploads/' . date("Y-m-d");
-                $image[$index]->storeAs(
-                    'public/' . $pathFull, $name
-                );
+        if(isset($request->price)){
+            foreach($request->price as $index => $file){
+                $my_id = $request->my_id[$index];
+                $variant = Variantion::where('id',$my_id)->first();
+                // lưu id link
+                $id_link = [];
+                $count = $request->count;
+                for($i=1;$i<$count;$i++){
+                    $id_link[] = $arr[$i].' ';
+                }
+                $variant->propertie_id = $arr[0];
+                $variant->propertie_id_link = implode($id_link);
+                $variant->product_id = $id;
+                $variant->price = $file;
+                // check ảnh sp
+                $image = $request->image;
+                if(isset($image[$index])){
+                    $name = $image[$index]->getClientOriginalName();
+                    $pathFull = 'uploads/' . date("Y-m-d");
+                    $image[$index]->storeAs(
+                        'public/' . $pathFull, $name
+                    );
 
-                $thumb = '/storage/' . $pathFull . '/' . $name;
-                $variant->img = $thumb;
-            }else{
-                $variant->img = $request->image_last[$index];
+                    $thumb = '/storage/' . $pathFull . '/' . $name;
+                    $variant->img = $thumb;
+                }else{
+                    $variant->img = $request->image_last[$index];
+                }
+                    $variant->save();
+                    $arr = array_slice($arr,$count);
             }
-                $variant->save();
-                $arr = array_slice($arr,$count);
+            $product = Product::where('id', $request->id)->first();
+            $product->product_price = $request->price[0];
+            $product->save();
         }
         // thêm biến thể mới
             if($request->input_variant == 'check'){
@@ -551,6 +561,11 @@ class ProductController extends Controller
                         $variant_n->save();
                         $arr_n = array_slice($arr_n,$count_n);
                     }
+                    if(!isset($request->price)){
+                        $product = Product::where('id', $request->id)->first();
+                        $product->product_price = $request->price_n[0];
+                        $product->save();
+                    }
             }
         return redirect('/product')->with('success', trans('alert.update.success'));
     }
@@ -565,7 +580,7 @@ class ProductController extends Controller
             if($configuration != null){
                 $configuration->delete();
             }
-            if(empty($image)){
+            if(isset($image[0])){
                  // DELETE các dòng liên quan trong table `product image`
                 foreach ($image as $list) {
                     // Xóa hình cũ để tránh rác
@@ -574,20 +589,20 @@ class ProductController extends Controller
                     // Xóa record
                     $list->delete();
                     $image->delete();
+                }
             }
-            if(!empty($propertie)){
+            if(isset($propertie[0])){
                 foreach ($propertie as $propertie){
                     $propertie->delete();
                 }
             }
-            if(!empty($variant)){
+            if(isset($variant[0])){
                 foreach ($variant as $variant){
                     $variant->delete();
                 }
             }
             $product->delete();
             return redirect('/product')->with('success', trans('alert.update.success'));
-            }
     }
 
     // xóa thuộc tính

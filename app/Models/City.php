@@ -25,4 +25,9 @@ class City extends Model
     {
         return $this->hasMany(About::class, 'id_city', 'code');
     }
+
+    public function bills(){
+        return $this->hasMany(Bill::class, 'city_id', 'id');
+    }
+
 }

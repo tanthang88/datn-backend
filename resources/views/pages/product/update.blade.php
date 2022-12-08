@@ -147,7 +147,7 @@
                                     <div class="row pd-10">
                                         <label class="col-4">Lựa chọn danh mục</label>
                                         <select class="col-8 form-control select2 select2-hidden-accessible" name="category_id" style="width: 80%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            {{$category_id =  $data->category_id}}
+                                            <?php $category_id =  $data->category_id ?>
                                             {!! \App\Helper\Product_Helper::product_category_update($categories, $category_id) !!}
                                         </select>
                                         @error('category_id')

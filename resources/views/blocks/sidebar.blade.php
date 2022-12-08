@@ -276,6 +276,23 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <p class="pl-2">
+                            Đơn hàng
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('order.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('shop/info','shop/feeship'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                     <i class="fa fa-archive" aria-hidden="true"></i>
