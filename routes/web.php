@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CategoriesProductController;
 use App\Http\Controllers\ProductController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PostCategoriesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\DealSockController;
 use App\Http\Controllers\StaffController;
@@ -35,9 +37,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('login', [LoginAdminController::class, 'index']);
     Route::post('login', [LoginAdminController::class, 'Login'])->name('login');
     Route::get('logout', [LoginAdminController::class, 'Logout'])->name('logout');
-    Route::get('', function () {
-        return view('pages.home');
-    })->middleware(['auth'])->name('home');
+    Route::get('',[HomeController::class, 'index'])->middleware(['auth'])->name('home');
     #Supplier
     Route::group(['prefix' => 'supplier'], function () {
         Route::get('/add', [SupplierController::class, 'create'])->middleware(['auth'])->name('supplier.add');
@@ -66,7 +66,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/addVariant/{id}', [ProductController::class, 'createVariant'])->middleware(['auth'])->name('variant.add');
         Route::post('/addVariant/{id}', [ProductController::class, 'storeVariant']);
         Route::get('/updateVariant/{id}', [ProductController::class, 'showVariant'])->middleware(['auth'])->name('variant.update');
-        Route::post('/updateVariant/{id}', [ProductController::class, 'updateVariant'])->middleware(['auth'])->name('variant.update');
+        Route::post('/updateVariant/{id}', [ProductController::class, 'updateVariant']);
         Route::get('delete/{id}', [ProductController::class, 'delete']);
         Route::get('deletePropertie/{id}/{product_id}', [ProductController::class, 'deletePropertie']);
         Route::get('deleteVariant/{id}', [ProductController::class, 'deleteVariant']);
@@ -192,6 +192,19 @@ Route::group(['prefix' => '/'], function () {
         Route::post('update/{id}', [BannerController::class, 'postUpdate'])->name('banner.update');
         Route::get('/List', [BannerController::class, 'getList'])->name('banner.list');
         Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
+    });
+    #order
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('/', [OrderController::class, 'index'])->middleware(['auth'])->name('order.list');
+        Route::get('/select/{select}/{id}', [OrderController::class, 'select'])->middleware(['auth'])->name('order.select');
+        Route::get('dataSession', [OrderController::class, 'dataSession'])->name('order.dataSession');
+        Route::get('dataProductAll', [OrderController::class, 'dataProductAll'])->name('order.dataProductAll');
+        Route::post('addDataSession', [OrderController::class, 'addDataSession'])->name('order.addDataSession');
+        Route::get('/delete-dataSession/{product}', [OrderController::class, 'deleteDataSession'])->name('order.deleteDataSession');
+        Route::get('/add', [OrderController::class, 'create'])->middleware(['auth'])->name('order.add');
+        Route::post('/add', [OrderController::class, 'store']);
+        Route::get('/selectDist/{id}', [OrderController::class, 'selectDist']);
+        Route::get('/detail/{id}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.detail');
     });
     Route::group(['prefix' => 'shop'], function () {
         Route::group(['prefix' => 'info'], function () {

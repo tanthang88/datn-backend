@@ -34,7 +34,7 @@ class Product_Helper
                 $html .=   ' > '.$char .$category->category_name.'</option> ';
                 unset($category[$key]);
 
-                $html .= self::product_category_update($categories, $category->id, $char . '---');
+                $html .= self::product_category_update($categories,$category_id, $category->id, $char . '---');
             }
         }
 

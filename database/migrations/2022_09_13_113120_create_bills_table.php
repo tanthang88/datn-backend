@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('address',250);
             $table->unsignedInteger('city_id');
             $table->unsignedInteger('dist_id');
-            
-
             $table->integer('bill_price');
             $table->integer('bill_status')->default(0)->comment("0:Chờ xác nhận,1:Đã xác nhận,2:Đang giao hàng,3:Giao hàng thành công,4:Huỷ");
             $table->charset = 'utf8mb4';

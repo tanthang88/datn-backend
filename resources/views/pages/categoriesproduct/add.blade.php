@@ -5,8 +5,7 @@ Danh mục sản phẩm
 @push('styles')
 <style>
        #img_priv img{
-        height: 200px;
-        width: auto;
+        width: 200px;
     }
 </style>
 @endpush

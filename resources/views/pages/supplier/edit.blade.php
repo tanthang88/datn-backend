@@ -5,8 +5,7 @@ Nhà cung cấp
 @push('style')
 <style>
  #img_priv img{
-        height: 200px;
-        width: auto;
+    width:200px;
 }
 .hide{
     display:none;

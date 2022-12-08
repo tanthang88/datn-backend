@@ -17,6 +17,7 @@
 @section('content')
     <?php
     use App\Models\Variantion;
+    use App\Models\BillDetail;
     ?>
     <div class="container-fluid">
         <div class="row">
@@ -39,22 +40,21 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th style="width:3%"><input type="checkbox" style="text-align:center;"></th>
                             <th style="width:5.5%">Thứ tự</th>
                             <th style="width:7%">Hình ảnh</th>
-                            <th style="width:20%; text-align:center;">Tên sản phẩm</th>
+                            <th style="width:17%; text-align:center;">Tên sản phẩm</th>
                             <th style="width:6.5%">Phân loại</th>
                             <th style="width:6.5%">Lượt xem</th>
-                            <th style="width:10%">Ngày tạo</th>
+                            <th style="width:8%">Ngày tạo</th>
                             <th style="width:6%">Nổi bật</th>
-                            <th style="width:6%">Ẩn/hiện</th>
-                            <th style="width:20%; text-align:center;">Thao tác</th>
+                            <th style="width:6%">Bán chạy</th>
+                            <th style="width:3%">Ẩn/hiện</th>
+                            <th style="width:10%; text-align:center;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $product)
                             <tr>
-                                <td><input type="checkbox" style="text-align:center;"></td>
                                 <td>{{ $product->product_order }}</td>
                                 <td>
                                     @if ($product->product_image != '')
@@ -72,6 +72,8 @@
                                     @else
                                         <input type="checkbox">
                                     @endif
+                                </td>
+                                <td>
                                 </td>
                                 <td>
                                     @if ($product->product_display == '1')
@@ -92,23 +94,25 @@
                                             $object = 'update';
                                         }
                                         ?>
-                                        <a class="btn btn-dark btn-sm" style="background-color:#fff;color:#343a40;"
-                                            href="/product/{{ $object }}Variant/{{ $product->id }}">
-                                            <i class="fa fa-random icon-pd" aria-hidden="true"></i>
-                                            Biến thể
-                                        </a>
+                                        <p style="padding-top:10px;">
+                                            <a class="btn btn-dark btn-sm" style="background-color:#fff;color:#343a40;padding-right:24px;padding-left:24px;padding-top:7px;padding-bottom:7px;"
+                                                href="/product/{{ $object }}Variant/{{ $product->id }}">
+                                                <i class="fa fa-random icon-pd" aria-hidden="true"></i>
+                                                Biến thể
+                                            </a>
+                                        </p>
                                     @endif
-                                    <a class="btn btn-info btn-sm" href="/product/update/{{ $product->id }}">
-                                        <i class="fas fa-pencil-alt">
-                                        </i>
-                                        Sửa
-                                    </a>
-                                    <a class="btn btn-danger btn-sm btn-action-delete"
-                                        data-url="/product/delete/{{ $product->id }}">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Xóa
-                                    </a>
+                                        <a class="btn btn-info btn-sm" href="/product/update/{{ $product->id }}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Sửa
+                                        </a>
+                                        <a class="btn btn-danger btn-sm btn-action-delete"
+                                            data-url="/product/delete/{{ $product->id }}">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Xóa
+                                        </a>
                                 </td>
                             </tr>
                         @endforeach

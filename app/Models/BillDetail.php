@@ -26,11 +26,24 @@ class BillDetail extends Model
         'price',
         'amount',
         'into_price',
-        'sale',
-        'fee',
         'total',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'customer_id', 'id');
+    }
+
+    public function bill()
+    {
+        return $this->belongsTo(Bill::class, 'bill_id', 'id');
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }

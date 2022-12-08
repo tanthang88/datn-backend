@@ -34,33 +34,35 @@ class Bill extends Model
         'address',
         'city_id',
         'dist_id',
+        'sale',
+        'fee',
+        'note',
         'bill_price',
+        'payment',
         'bill_status',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    /**
-     *
-     * The attributes that are mass assignable.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function billDetails()
     {
         return $this->hasMany(BillDetail::class, 'bill_id', 'id');
     }
 
-    /**
-     *
-     * The attributes that are mass assignable.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
-     */
     public function user()
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');
+    }
+
+    public function city()
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
+    }
+
+    public function dist()
+    {
+        return $this->hasOne(Dist::class, 'id', 'dist_id');
     }
 
 }
