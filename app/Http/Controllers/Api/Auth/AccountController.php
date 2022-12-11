@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountRequest;
 use App\Models\User;
 use App\Services\AccountService;
+use App\Services\CityService;
+use App\Services\DistService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
-    public function __construct(private AccountService $accountService)
-    {
+    public function __construct(
+        private AccountService $accountService,
+        protected CityService $citySer,
+        protected DistService $distSer,
+    ) {
     }
 
     /**
@@ -22,9 +27,14 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user){
+    public function show(User $user)
+    {
         try {
-            return $this->responseSuccess(['data' => $user]);
+            return $this->responseSuccess(['data' => [
+                'user' => $user,
+                'cities' => $this->citySer->getCity(),
+                'dists' => $user->city ? $this->distSer->getDistByCity($user->city) : [],
+            ]]);
         } catch (\Throwable $th) {
             Log::error("get Account failed:" . $th);
             return $this->responseError(
@@ -33,7 +43,7 @@ class AccountController extends Controller
             );
         }
     }
-    
+
     /**
      * update
      *

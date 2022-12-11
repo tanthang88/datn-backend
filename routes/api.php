@@ -47,7 +47,7 @@ Route::prefix('client')->group(function () {
         });
         Route::group(['prefix' => 'account'], function () {
             Route::get('/{user}', [AccountController::class, 'show']);
-            Route::put('/{user}/update', [AccountController::class, 'update']);
+            Route::post('/{user}/update', [AccountController::class, 'update']);
         });
     });
     Route::group(['prefix' => 'discountcode'], function () {
