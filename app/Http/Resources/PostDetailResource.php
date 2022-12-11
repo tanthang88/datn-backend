@@ -17,6 +17,7 @@ class PostDetailResource extends JsonResource
         return [
             'id' => $this->id,
             'post_category_name' => $this->postCategory?->category_name,
+            'post_category_slug' => $this->postCategory?->category_slug,
             'post_title' => $this->post_name,
             'post_img' => $this->post_img,
             'post_desc' => $this->post_desc,
