@@ -26,7 +26,9 @@
     "paths": {
         "/api/client/login": {
             "post": {
-                "tags": ["Auth"],
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Client login",
                 "operationId": "client-login",
                 "parameters": [
@@ -85,7 +87,9 @@
         },
         "/api/client/logout": {
             "post": {
-                "tags": ["Auth"],
+                "tags": [
+                    "Auth"
+                ],
                 "summary": "Client logout",
                 "operationId": "client-logout",
                 "security": [
@@ -98,7 +102,9 @@
                         "description": "logout success",
                         "content": {
                             "application/json": {
-                                "example": [{}]
+                                "example": [
+                                    {}
+                                ]
                             }
                         }
                     }
@@ -107,7 +113,9 @@
         },
         "/api/client/register": {
             "post": {
-                "tags": ["Register"],
+                "tags": [
+                    "Register"
+                ],
                 "summary": "Client register",
                 "operationId": "get-list-category",
                 "parameters": [
@@ -188,7 +196,9 @@
         },
         "/api/information/city": {
             "get": {
-                "tags": ["Address"],
+                "tags": [
+                    "Address"
+                ],
                 "summary": "Client ciity",
                 "operationId": "get-list-city",
                 "responses": {
@@ -251,7 +261,9 @@
         },
         "/api/information/dist/{id}": {
             "get": {
-                "tags": ["Address"],
+                "tags": [
+                    "Address"
+                ],
                 "summary": "Client dists",
                 "operationId": "get-list-dists",
                 "responses": {
@@ -332,7 +344,9 @@
         },
         "/api/post/categories": {
             "get": {
-                "tags": ["Post (Bài viết)"],
+                "tags": [
+                    "Post (Bài viết)"
+                ],
                 "summary": "Get list categories post (list danh mục bài viết)",
                 "operationId": "get-list-category",
                 "responses": {
@@ -360,7 +374,9 @@
         },
         "/api/post/categories/{id}": {
             "get": {
-                "tags": ["Post (Bài viết)"],
+                "tags": [
+                    "Post (Bài viết)"
+                ],
                 "summary": "Get list Post by Category ID",
                 "operationId": "get-list-post-by-category-id",
                 "parameters": [
@@ -437,7 +453,9 @@
         },
         "/api/post/{id}": {
             "get": {
-                "tags": ["Post (Bài viết)"],
+                "tags": [
+                    "Post (Bài viết)"
+                ],
                 "summary": "Get Post by ID",
                 "operationId": "get-post-by-id",
                 "parameters": [
@@ -479,7 +497,9 @@
         },
         "/api/post/all": {
             "get": {
-                "tags": ["Post (Bài viết)"],
+                "tags": [
+                    "Post (Bài viết)"
+                ],
                 "summary": "Get All Post",
                 "operationId": "get-all-post",
                 "responses": {
@@ -510,7 +530,9 @@
         },
         "/api/product/categories": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get List Categories Product",
                 "operationId": "get-product-categories",
                 "responses": {
@@ -585,7 +607,9 @@
         },
         "/api/product": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get Product All",
                 "operationId": "get-product-all",
                 "responses": {
@@ -712,7 +736,9 @@
         },
         "/api/product/filter": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get All Filter Fields",
                 "operationId": "get-all-filter-fields",
                 "responses": {
@@ -835,7 +861,9 @@
         },
         "/api/product/sort": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get All Sort Fields",
                 "operationId": "get-all-sort-fields",
                 "responses": {
@@ -873,7 +901,9 @@
         },
         "/api/product/filter/{category_id}/{filter}": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Filter Products By Category Id",
                 "operationId": "filter-products-by-category-id",
                 "parameters": [
@@ -973,7 +1003,9 @@
         },
         "/api/product/variantion/{product_id}/{properties}": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get Variant By Id Propertie -> to Price",
                 "operationId": "get-variant-by-id-propertie ->to-price",
                 "parameters": [
@@ -1020,7 +1052,9 @@
         },
         "/api/product/{id}": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get Product By Id",
                 "operationId": "get-product-by-id",
                 "parameters": [
@@ -1135,7 +1169,9 @@
         },
         "/api/product/categories/{id}": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Get List Product By Id Category",
                 "operationId": "get-list-product-by-id-category",
                 "parameters": [
@@ -1211,7 +1247,9 @@
         },
         "/api/product/{id}/list_comments ": {
             "get": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "List comment for product",
                 "operationId": "get-list-comment-product",
                 "responses": {
@@ -1256,7 +1294,9 @@
         },
         "/api/product/{id}/comment": {
             "post": {
-                "tags": ["Product"],
+                "tags": [
+                    "Product"
+                ],
                 "summary": "Comment for a product",
                 "operationId": "comment-product",
                 "parameters": [
@@ -1320,7 +1360,9 @@
         },
         "/api/about": {
             "get": {
-                "tags": ["About"],
+                "tags": [
+                    "About"
+                ],
                 "summary": "Get List About",
                 "operationId": "get-list-about",
                 "responses": {
@@ -1356,7 +1398,9 @@
         },
         "/api/about/types/{type}": {
             "get": {
-                "tags": ["About"],
+                "tags": [
+                    "About"
+                ],
                 "summary": "Get List About By Type",
                 "operationId": "get-list-about-by-type",
                 "parameters": [
@@ -1395,7 +1439,9 @@
         },
         "/api/about/{id}": {
             "get": {
-                "tags": ["About"],
+                "tags": [
+                    "About"
+                ],
                 "summary": "Get  About By Id",
                 "operationId": "get-about-by-id",
                 "parameters": [
@@ -1436,7 +1482,9 @@
         },
         "/api/company": {
             "get": {
-                "tags": ["Company"],
+                "tags": [
+                    "Company"
+                ],
                 "summary": "Get  Company Info",
                 "operationId": "get-company-info",
                 "responses": {
@@ -1474,7 +1522,9 @@
         },
         "/api/client/bills/add_to_bill": {
             "post": {
-                "tags": ["Bill"],
+                "tags": [
+                    "Bill"
+                ],
                 "summary": "Order product in cart",
                 "operationId": "create-bill",
                 "parameters": [
@@ -1576,9 +1626,11 @@
                 }
             }
         },
-        "/api/client/bills/{id}": {
+        "/api/client/bills/{id}/detail": {
             "get": {
-                "tags": ["Bill"],
+                "tags": [
+                    "Bill"
+                ],
                 "summary": "Detail bill",
                 "operationId": "get-detail-bill",
                 "responses": {
@@ -1654,7 +1706,9 @@
         },
         "/api/client/bills ": {
             "get": {
-                "tags": ["Bill"],
+                "tags": [
+                    "Bill"
+                ],
                 "summary": "List bill",
                 "operationId": "get-detail-bill",
                 "responses": {
@@ -2013,7 +2067,9 @@
         },
         "/api/slider": {
             "get": {
-                "tags": ["Slider"],
+                "tags": [
+                    "Slider"
+                ],
                 "summary": "Get List Slider",
                 "operationId": "get-list-slider",
                 "responses": {
@@ -2123,7 +2179,9 @@
         },
         "/api/slider/types/{type}": {
             "get": {
-                "tags": ["Slider"],
+                "tags": [
+                    "Slider"
+                ],
                 "summary": "Get List Slider By Type",
                 "operationId": "get-list-slider-by-type",
                 "parameters": [
@@ -2172,7 +2230,9 @@
         },
         "/api/banner": {
             "get": {
-                "tags": ["Banner"],
+                "tags": [
+                    "Banner"
+                ],
                 "summary": "Get List Banner",
                 "operationId": "get-list-banner",
                 "responses": {
@@ -2262,7 +2322,9 @@
         },
         "/api/banner/types/{type}": {
             "get": {
-                "tags": ["Banner"],
+                "tags": [
+                    "Banner"
+                ],
                 "summary": "Get List Banner By Type",
                 "operationId": "get-list-banner-by-type",
                 "parameters": [
@@ -2307,7 +2369,9 @@
         },
         "/api/client/discountcode/verification": {
             "post": {
-                "tags": ["Discount Code"],
+                "tags": [
+                    "Discount Code"
+                ],
                 "summary": "Check Discount Code",
                 "operationId": "check-discount-code",
                 "parameters": [
@@ -2355,7 +2419,9 @@
         },
         "/api/client/discountcode": {
             "get": {
-                "tags": ["Discount Code"],
+                "tags": [
+                    "Discount Code"
+                ],
                 "summary": "Get List Discount Code",
                 "operationId": "get-list-discount-code",
                 "responses": {
@@ -2383,7 +2449,9 @@
         },
         "/api/payment/return-payment/{return}": {
             "post": {
-                "tags": ["Payment Update"],
+                "tags": [
+                    "Payment Update"
+                ],
                 "summary": "Return Payment",
                 "operationId": "return-payment",
                 "parameters": [

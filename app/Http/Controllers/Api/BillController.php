@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BillDetailResource;
 use App\Models\Bill;
 use App\Services\BillService;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class BillController extends Controller
     {
         try {
             $data = $this->billService->getBill($bill);
-            return $this->responseSuccess(['data' => $data]);
+            return $this->responseSuccess(['data' => BillDetailResource::make($data)]);
         } catch (\Throwable $th) {
             Log::error("get list category " . $th);
             return $this->responseError(
@@ -71,7 +72,7 @@ class BillController extends Controller
     public function create(Request $request)
     {
         try {
-           $data= $this->billService->create($request);
+            $data = $this->billService->create($request);
             return $this->responseSuccess($data, Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             Log::error("add to bill " . $th);
@@ -80,5 +81,28 @@ class BillController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    /**
+     * cancelBill
+     *
+     * @param  Bill $bill
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelBill(Bill $bill)
+    {
+        try {
+            if ($this->billService->cancel($bill)) {
+                return $this->responseSuccess([], Response::HTTP_NO_CONTENT);
+            }
+            $statusCode = Response::HTTP_BAD_REQUEST;
+        } catch (\Throwable $th) {
+            Log::error("Cancel bill fail" . $th);
+            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+        }
+        return $this->responseError(
+            [trans('alert.bill.cancel.failed')],
+            $statusCode
+        );
     }
 }

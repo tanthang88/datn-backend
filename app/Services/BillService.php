@@ -12,7 +12,9 @@ class BillService
 {
     public function getBills()
     {
-        return Bill::with('billDetails')
+        return Bill::with([
+            'billDetails.product:id,product_name,product_image',
+        ])
             ->where('customer_id', Auth::id())
             ->get();
     }
@@ -21,7 +23,9 @@ class BillService
     {
         return Bill::select($select)
             ->with([
-                'billDetails',
+                'billDetails.product:id,product_name,product_image',
+                'city',
+                'dist'
             ])
             ->where('customer_id', Auth::id())
             ->find($bill->id);
@@ -39,7 +43,7 @@ class BillService
             function () use ($request) {
                 $id_user = Auth::id();
                 $billData = [
-                    'customer_id' => $id_user != '' ? $id_user : 0,// mgrate anhhv will update
+                    'customer_id' => $id_user != '' ? $id_user : 0, // mgrate anhhv will update
                     'customer_name' => $request->customer_name,
                     'address' => $request->address,
                     'bill_phone' => $request->bill_phone,
@@ -48,7 +52,7 @@ class BillService
                     'bill_price' => $request->bill_price,
                     'bill_status' => Bill::BILL_STATUS_WAITING_CONFIRM,
                     'bill_payment_status' => 0, //migrate  AnhHv will update
-                    'discount_code_id' => $request->has('discount_code_id')?$request->discount_code_id:null //migrate Anhhv will update
+                    'discount_code_id' => $request->has('discount_code_id') ? $request->discount_code_id : null //migrate Anhhv will update
                 ];
                 $bill = new Bill($billData);
                 $bill->save();
@@ -63,7 +67,7 @@ class BillService
                         'sale' => $product["sale"],
                         'fee' => $product["fee"],
                         'total' => $product["total"],
-                        'variant_id' => $product['variant_id']!=null?$product['variant_id']:null //migrate Anhhv will update
+                        'variant_id' => $product['variant_id'] != null ? $product['variant_id'] : null //migrate Anhhv will update
                     ];
                     $billDetailData[] = $productData;
                 }
@@ -83,5 +87,14 @@ class BillService
                 }
             }
         );
+    }
+
+    public function cancel(Bill $bill)
+    {
+        return  DB::transaction(function () use ($bill) {
+            return Bill::whereId($bill->id)
+                ->where('bill_status', BILL::BILL_STATUS_WAITING_CONFIRM)
+                ->update(['bill_status' => Bill::BILL_STATUS_CANCEL]);
+        });
     }
 }

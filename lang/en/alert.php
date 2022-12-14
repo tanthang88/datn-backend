@@ -54,6 +54,9 @@ return [
         'get_detail' => [
             'failed' => 'get detail bill failed',
         ],
+        'cancel' => [
+            'failed' => 'cancel bill failed',
+        ]
     ],
     'comment' => [
         'get_list' => [
@@ -104,12 +107,12 @@ return [
         'success' => 'Delete successful',
         'error' => 'Delete Failed'
     ],
-    'discountcode'=>[
-        'failed'=>'An error occurred',
-        'verification'=>[
-            'error'=>'An error occurred ',
-            'failed'=>'You already used ',
-            'successed'=>'Valid code'
+    'discountcode' => [
+        'failed' => 'An error occurred',
+        'verification' => [
+            'error' => 'An error occurred ',
+            'failed' => 'You already used ',
+            'successed' => 'Valid code'
         ]
     ]
 ];

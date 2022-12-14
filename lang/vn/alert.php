@@ -33,6 +33,9 @@ return [
         'get_detail' => [
             'failed' => 'Không lấy được chi tiết đơn hàng',
         ],
+        'cancel' => [
+            'failed' => 'Không thể huỷ đơn hàng',
+        ]
 
     ],
     'company' => [
@@ -116,12 +119,12 @@ return [
         'success' => 'Xoá Thành Công',
         'error' => 'Xoá Thất Bại'
     ],
-    'discountcode'=>[
-        'failed' =>'Có lỗi xảy ra',
-        'verification'=>[
-            'error' =>'Có lỗi xảy ra',
-            'failed'=>'Bạn đã sử dụng mã giảm giá này',
-            'successed'=>'Áp dụng mã giảm giá thành công'
+    'discountcode' => [
+        'failed' => 'Có lỗi xảy ra',
+        'verification' => [
+            'error' => 'Có lỗi xảy ra',
+            'failed' => 'Bạn đã sử dụng mã giảm giá này',
+            'successed' => 'Áp dụng mã giảm giá thành công'
         ]
     ]
 ];
