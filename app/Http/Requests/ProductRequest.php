@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name'     => 'required|min:6|max:255|unique:products,product_name->ignore($id)',
+            'product_name'     => 'required|min:6|max:255|unique:products',
             'supplier_id'      => 'required',
             'product_quantity' => 'required|integer|min:1',
             'product_order'    => 'required|min:0',
