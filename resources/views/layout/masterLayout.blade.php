@@ -39,11 +39,13 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     @stack('style')
+    @vite('resources/js/app.js')
 
 </head>
 @php
 use Illuminate\Support\Facades\Session;
 @endphp
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
