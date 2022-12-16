@@ -40,12 +40,11 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th style="width:5.5%">Thứ tự</th>
+                            <th style="width:1%">#</th>
                             <th style="width:7%">Hình ảnh</th>
                             <th style="width:17%; text-align:center;">Tên sản phẩm</th>
-                            <th style="width:6.5%">Phân loại</th>
-                            <th style="width:6.5%">Lượt xem</th>
-                            <th style="width:8%">Ngày tạo</th>
+                            <th style="width:6.5%; text-align:center;">Danh mục</th>
+                            <th style="width:6.5%;text-align:center;">Giá</th>
                             <th style="width:6%">Nổi bật</th>
                             <th style="width:6%">Bán chạy</th>
                             <th style="width:3%">Ẩn/hiện</th>
@@ -55,7 +54,7 @@
                     <tbody>
                         @foreach ($data as $product)
                             <tr>
-                                <td>{{ $product->product_order }}</td>
+                                <td>{{ $product->id }}</td>
                                 <td>
                                     @if ($product->product_image != '')
                                         <img style="width:80px;height:80px;object-fit: cover;"
@@ -64,8 +63,7 @@
                                 </td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->productCategory->category_name }}</td>
-                                <td>{{ $product->product_views }}</td>
-                                <td>{{ $product->created_at }}</td>
+                                <td>{{ number_format($product->product_price,0,'','.')}} ₫</td>
                                 <td>
                                     @if ($product->product_outstanding == '1')
                                         <input type="checkbox" checked>

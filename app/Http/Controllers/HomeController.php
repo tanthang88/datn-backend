@@ -9,6 +9,7 @@ use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Product;
 use App\Models\Post;
+use App\Helper\Date_Helper;
 use DB;
 
 class HomeController extends Controller
@@ -24,6 +25,23 @@ class HomeController extends Controller
                             ->limit(5)->get();
         // đơn hàng mới
         $new_order = Bill::orderBy('id','desc')->limit(7)->get();
+        //thống kê doanh thu từng ngày
+        $list_day = Date_Helper::getListDayInMonth();
+        $turn_over = Bill::where('bill_status',3)->whereMonth('created_at',date('m'))
+                        ->select(\DB::raw('sum(bill_price) as sum_price'), \DB::raw('DATE(created_at) day'))
+                        ->groupBy('day')
+                        ->get()->toArray();
+        $arr_turn_over = [];
+        foreach($list_day as $day){
+            $total = 0;
+            foreach($turn_over as $turn){
+                if($turn['day'] === $day){
+                    $total = $turn['sum_price'];
+                    break;
+                }
+            }
+            $arr_turn_over[] = (int)$total;
+        }
         // thống kê trạng thái đơn hàng
         $orderPending = Bill::where('bill_status',0)->select('id')->count();
         $orderProcessing = Bill::where('bill_status',1)->select('id')->count();
@@ -38,13 +56,15 @@ class HomeController extends Controller
             ['Đã hủy', $orderCancel, false],
         ];
         return view('pages.home',[
-            'count_bill' => $count_bill,
+            'count_bill'    => $count_bill,
             'count_product' => $count_product,
-            'count_user' => $count_user,
-            'count_post' => $count_post,
+            'count_user'    => $count_user,
+            'count_post'    => $count_post,
             'top_product'   => $top_product,
-            'new_order' => $new_order,
-            'statusOrder' => json_encode($statusOrder),
+            'new_order'     => $new_order,
+            'statusOrder'   => json_encode($statusOrder),
+            'list_day'      => json_encode($list_day),
+            'arr_turn_over' => json_encode($arr_turn_over),
         ]);
     }
 }
