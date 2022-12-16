@@ -12,7 +12,8 @@ use App\Models\Supplier;
 use App\Models\ProductImage;
 use App\Models\Propertie;
 use App\Models\Variantion;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\Product\AddProductRequest;
+use App\Http\Requests\Product\EditProductRequest;
 use Storage;
 use DB;
 
@@ -29,7 +30,7 @@ class ProductController extends Controller
             'supplier'   => $supplier,
         ]);
     }
-    public function store(ProductRequest $request)
+    public function store(AddProductRequest $request)
     {
         // thêm thông tin sp
         $product = new Product();
@@ -154,7 +155,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(ProductRequest $request, $id)
+    public function update(EditProductRequest $request, $id)
     {
         $product        = Product::find($id);
         $product->product_name    = $request->product_name;
