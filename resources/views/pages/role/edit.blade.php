@@ -67,34 +67,20 @@
                         @foreach ($permissions as $key => $permission)
                         <div class="form-group py-2 px-3 border border-light bg-light rounded">
                             <label for="_checkGroup{{ $key }}">
-                                <input type="checkbox" id="_checkGroup{{ $key }}" class="checkGroupPermission" />
+                                <input type="checkbox" id="_checkGroup{{ $key }}" name="permission_id[]"
+                                    class="checkGroupPermission" value="{{ $permission->id }}"
+                                    @if($rolePerOld->contains('id',$permission->id))
+                                checked
+                                @endif
+                                />
                                 {{$permission->display_name}}
                             </label>
-
-                            <div class="row">
-                                @foreach($permission->getPermissionChild as $keyChild => $perChild)
-                                <div class="col-md-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input checkbox_children" type="checkbox"
-                                            id="_checkChild{{ $key.$keyChild }}" name="permission_id[]"
-                                            value="{{$perChild->id}}"
-                                            @if($rolePerOld->contains('id',$perChild->id))
-                                            checked
-                                            @endif
-                                        />
-                                        <label class="form-check-label" for="_checkChild{{ $key.$keyChild }}">
-                                            {{$perChild->display_name}}
-                                        </label>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
                         </div>
                         @endforeach
                     </div>
                     <div class="card-footer text-center">
                         <button type="submit" class="btn btn-primary">
-                            Thêm
+                            Cập nhật
                         </button>
                     </div>
                 </div>
