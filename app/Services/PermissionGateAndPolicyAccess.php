@@ -3,21 +3,21 @@
 namespace App\Services;
 
 use App\Policies\BillPolicy;
-use App\Policies\CategoryPolicy;
 use App\Policies\ContentLayoutPolicy;
 use App\Policies\FeeShipPolicy;
 use Illuminate\Support\Facades\Gate;
 use App\Policies\UserPolicy;
 use App\Policies\RolePolicy;
-use App\Policies\OrderPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\ProductPolicy;
+use App\Policies\PromotionPolicy;
 use App\Policies\StaffPolicy;
 
 class PermissionGateAndPolicyAccess
 {
     public function setGateAndPolicyAccess()
     {
+        $this->defineGatePost();
         $this->defineGateProduct();
         $this->defineGateUser();
         $this->defineGateStaff();
@@ -25,8 +25,17 @@ class PermissionGateAndPolicyAccess
         $this->defineGateContentLayout();
         $this->defineGateBill();
         $this->defineGateFeeShip();
+        $this->defineGatePromotion();
     }
 
+    public function defineGatePost()
+    {
+        Gate::define('view-post', [PostPolicy::class, 'view']);
+    }
+    public function defineGatePromotion()
+    {
+        Gate::define('view-promotion', [PromotionPolicy::class, 'view']);
+    }
     public function defineGateProduct()
     {
         Gate::define('view-product', [ProductPolicy::class, 'view']);
