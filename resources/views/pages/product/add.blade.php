@@ -234,7 +234,7 @@
                                 <div class="tab-pane text-left fade show active" id="vert-tabs-general" role="tabpanel" aria-labelledby="vert-tabs-general-tab">
                                     <div class="row pd-10">
                                         <label class="col-3">Giá sản phẩm (₫)</label>
-                                        <input type="number" name="product_price" class="col-7 form-control" id="" value="{{ old('product_price')}}" placeholder="Giá">
+                                        <input type="number" name="product_price" class="col-7 form-control" id="" value="{{ old('product_price')}}" placeholder="Giá" required>
                                         @error('product_price')
                                         <span class="col-4"></span>
                                         <span class="col-8 help-block">{{$message}}</span>

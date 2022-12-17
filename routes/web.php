@@ -37,98 +37,97 @@ Route::group(['prefix' => '/'], function () {
     Route::get('login', [LoginAdminController::class, 'index']);
     Route::post('login', [LoginAdminController::class, 'Login'])->name('login');
     Route::get('logout', [LoginAdminController::class, 'Logout'])->name('logout');
-    Route::get('',[HomeController::class, 'index'])->middleware(['auth'])->name('home');
+    Route::get('', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
     #Supplier
-    Route::group(['prefix' => 'supplier'], function () {
-        Route::get('/add', [SupplierController::class, 'create'])->middleware(['auth'])->name('supplier.add');
+    Route::group(['prefix' => 'supplier', 'middleware' => ['auth', 'can:view-product']], function () {
+        Route::get('/add', [SupplierController::class, 'create'])->name('supplier.add');
         Route::post('/add', [SupplierController::class, 'store']);
-        Route::get('/update/{id}', [SupplierController::class, 'show'])->middleware(['auth'])->name('supplier.update');
+        Route::get('/update/{id}', [SupplierController::class, 'show'])->name('supplier.update');
         Route::post('/update/{id}', [SupplierController::class, 'update']);
-        Route::get('/', [SupplierController::class, 'index'])->middleware(['auth'])->name('supplier.list');
-        Route::get('/delete/{id}', [SupplierController::class, 'delete'])->middleware(['auth'])->name('supplier.delete');
+        Route::get('/', [SupplierController::class, 'index'])->name('supplier.list');
+        Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
     });
     #Categories Product
-    Route::group(['prefix' => 'categoriesProduct'], function () {
-        Route::get('/add', [CategoriesProductController::class, 'create'])->middleware(['auth'])->name('categoryProduct.add');
+    Route::group(['prefix' => 'categoriesProduct', 'middleware' => ['auth', 'can:view-product']], function () {
+        Route::get('/add', [CategoriesProductController::class, 'create'])->name('categoryProduct.add');
         Route::post('/add', [CategoriesProductController::class, 'store']);
-        Route::get('/update/{id}', [CategoriesProductController::class, 'show'])->middleware(['auth'])->name('categoryProduct.update');
+        Route::get('/update/{id}', [CategoriesProductController::class, 'show'])->name('categoryProduct.update');
         Route::post('/update/{id}', [CategoriesProductController::class, 'update']);
-        Route::get('/', [CategoriesProductController::class, 'index'])->middleware(['auth'])->name('categoryProduct.list');
+        Route::get('/', [CategoriesProductController::class, 'index'])->name('categoryProduct.list');
         Route::get('/delete/{id}', [CategoriesProductController::class, 'delete']);
     });
     #Product
-    Route::group(['prefix' => 'product'], function () {
-        Route::get('/add', [ProductController::class, 'create'])->middleware(['auth'])->name('product.add');
+    Route::group(['prefix' => 'product', 'middleware' => ['auth', 'can:view-product']], function () {
+        Route::get('/add', [ProductController::class, 'create'])->name('product.add');
         Route::post('/add', [ProductController::class, 'store']);
-        Route::get('/update/{id}', [ProductController::class, 'show'])->middleware(['auth'])->name('product.update');
+        Route::get('/update/{id}', [ProductController::class, 'show'])->name('product.update');
         Route::post('/update/{id}', [ProductController::class, 'update']);
-        Route::get('/', [ProductController::class, 'index'])->middleware(['auth'])->name('product.list');
-        Route::get('/addVariant/{id}', [ProductController::class, 'createVariant'])->middleware(['auth'])->name('variant.add');
+        Route::get('/', [ProductController::class, 'index'])->name('product.list');
+        Route::get('/addVariant/{id}', [ProductController::class, 'createVariant'])->name('variant.add');
         Route::post('/addVariant/{id}', [ProductController::class, 'storeVariant']);
-        Route::get('/updateVariant/{id}', [ProductController::class, 'showVariant'])->middleware(['auth'])->name('variant.update');
+        Route::get('/updateVariant/{id}', [ProductController::class, 'showVariant'])->name('variant.update');
         Route::post('/updateVariant/{id}', [ProductController::class, 'updateVariant']);
         Route::get('delete/{id}', [ProductController::class, 'delete']);
         Route::get('deletePropertie/{id}/{product_id}', [ProductController::class, 'deletePropertie']);
         Route::get('deleteVariant/{id}', [ProductController::class, 'deleteVariant']);
     });
     #About
-    Route::group(['prefix' => 'about'], function () {
-        Route::get('/add', [AboutController::class, 'create'])->middleware(['auth'])->name('about.add');
+    Route::group(['prefix' => 'about', 'middleware' => ['auth']], function () {
+        Route::get('/add', [AboutController::class, 'create'])->name('about.add');
         Route::post('/add', [AboutController::class, 'store']);
-        Route::get('/update/{id}', [AboutController::class, 'show'])->middleware(['auth'])->name('about.update');
+        Route::get('/update/{id}', [AboutController::class, 'show'])->name('about.update');
         Route::post('/update/{id}', [AboutController::class, 'update']);
-        Route::get('/', [AboutController::class, 'index'])->middleware(['auth'])->name('about.list');
+        Route::get('/', [AboutController::class, 'index'])->name('about.list');
         Route::get('delete/{id}', [AboutController::class, 'delete']);
     });
     #User
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('/', [UserController::class, 'index'])->middleware(['auth'])->name('user.list');
-        Route::get('data', [UserController::class, 'dataUser'])->middleware(['auth'])->name('dataUser');
-        Route::get('/{user}', [UserController::class, 'show'])->middleware(['auth'])->name('user.show');
+    Route::group(['prefix' => 'user', 'middleware' => ['auth', 'can:view-user']], function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.list');
+        Route::get('data', [UserController::class, 'dataUser'])->name('dataUser');
+        Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
         Route::post('/{user}', [UserController::class, 'update'])->name('user.update');
         Route::get('/delete/{user}', [UserController::class, 'delete']);
     });
     #Role
-    Route::group(['prefix' => 'role'], function () {
-        Route::get('/', [RoleController::class, 'index'])->middleware(['auth'])->name('role.list');
-        Route::get('data', [RoleController::class, 'dataRoles'])->middleware(['auth'])->name('dataRoles');
-        Route::get('/add', [RoleController::class, 'create'])->middleware(['auth'])->name('role.add');
+    Route::group(['prefix' => 'role', 'middleware' => ['auth', 'can:view-role']], function () {
+        Route::get('/', [RoleController::class, 'index'])->name('role.list');
+        Route::get('data', [RoleController::class, 'dataRoles'])->name('dataRoles');
+        Route::get('/add', [RoleController::class, 'create'])->name('role.add');
         Route::post('/store', [RoleController::class, 'store'])->name('role.store');
-        Route::get('/{role}', [RoleController::class, 'show'])->middleware(['auth'])->name('role.edit');
+        Route::get('/{role}', [RoleController::class, 'show'])->name('role.edit');
         Route::post('/{role}', [RoleController::class, 'update'])->name('role.update');
         Route::get('/delete/{role}', [RoleController::class, 'delete'])->name('role.delete');
     });
-
     #Staff
-    Route::group(['prefix' => 'staff'], function () {
-        Route::get('/', [StaffController::class, 'index'])->middleware(['auth'])->name('staff.list');
-        Route::get('data', [StaffController::class, 'dataStaffs'])->middleware(['auth'])->name('dataStaffs');
-        Route::get('/add', [StaffController::class, 'create'])->middleware(['auth'])->name('staff.add');
+    Route::group(['prefix' => 'staff', 'middleware' => ['auth', 'can:view-staff']], function () {
+        Route::get('/', [StaffController::class, 'index'])->name('staff.list');
+        Route::get('data', [StaffController::class, 'dataStaffs'])->name('dataStaffs');
+        Route::get('/add', [StaffController::class, 'create'])->name('staff.add');
         Route::post('/add', [StaffController::class, 'store'])->name('staff.store');
         Route::post('/{staff}', [StaffController::class, 'update'])->name('staff.update');
-        Route::get('/{staff}', [StaffController::class, 'show'])->middleware(['auth'])->name('staff.show');
+        Route::get('/{staff}', [StaffController::class, 'show'])->name('staff.show');
         Route::get('/delete/{staff}', [StaffController::class, 'delete'])->name('staff.delete');
     });
     #postCategory
-    Route::group(['prefix' => 'postCategories'], function () {
-        Route::get('/add', [PostCategoriesController::class, 'create'])->middleware(['auth'])->name('postCategory.add');
+    Route::group(['prefix' => 'postCategories', 'middleware' => ['auth', 'can:view-post']], function () {
+        Route::get('/add', [PostCategoriesController::class, 'create'])->name('postCategory.add');
         Route::post('/add', [PostCategoriesController::class, 'store']);
-        Route::get('/update/{id}', [PostCategoriesController::class, 'show'])->middleware(['auth'])->name('postCategory.update');
+        Route::get('/update/{id}', [PostCategoriesController::class, 'show'])->name('postCategory.update');
         Route::post('/update/{id}', [PostCategoriesController::class, 'update']);
-        Route::get('/', [PostCategoriesController::class, 'index'])->middleware(['auth'])->name('postCategory.list');
-        Route::get('/delete/{id}', [PostCategoriesController::class, 'delete'])->middleware(['auth'])->name('postCategory.delete');
+        Route::get('/', [PostCategoriesController::class, 'index'])->name('postCategory.list');
+        Route::get('/delete/{id}', [PostCategoriesController::class, 'delete'])->name('postCategory.delete');
     });
     #post
-    Route::group(['prefix' => 'post'], function () {
-        Route::get('/add', [PostController::class, 'create'])->middleware(['auth'])->name('post.add');
+    Route::group(['prefix' => 'post',  'middleware' => ['auth', 'can:view-post']], function () {
+        Route::get('/add', [PostController::class, 'create'])->name('post.add');
         Route::post('/add', [PostController::class, 'store']);
         Route::get('/update/{id}', [PostController::class, 'show'])->name('post.update');
         Route::post('/update/{id}', [PostController::class, 'update']);
-        Route::get('/', [PostController::class, 'index'])->middleware(['auth'])->name('post.list');
-        Route::get('/delete/{id}', [PostController::class, 'delete'])->middleware(['auth'])->name('post.delete');
+        Route::get('/', [PostController::class, 'index'])->name('post.list');
+        Route::get('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
     });
     #promotion
-    Route::group(['prefix' => 'promotion'], function () {
+    Route::group(['prefix' => 'promotion', 'middleware' => ['auth', 'can:view-promotion']], function () {
         Route::group(['prefix' => 'discount-code'], function () {
             Route::get('/', [DiscountCodeController::class, 'index'])->name('promotion.discount-code.list');
             Route::get('data', [DiscountCodeController::class, 'dataDiscountCodes'])->name('dataDiscountCodes');
@@ -176,7 +175,7 @@ Route::group(['prefix' => '/'], function () {
         });
     });
     #slider
-    Route::group(['prefix' => 'Slider'], function () {
+    Route::group(['prefix' => 'Slider', 'middleware' => ['auth', 'can:view-content-layout']], function () {
         Route::get('/Add', [SliderController::class, 'getAdd'])->name('slider.add');
         Route::post('/Add', [SliderController::class, 'postAdd'])->name('slider.store');
         Route::get('show/{slider}', [SliderController::class, 'getUpdate'])->name('slider.show');
@@ -185,7 +184,7 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/Delete/{id}', [SliderController::class, 'getDelete'])->name('slider.delete');
     });
     #Banner
-    Route::group(['prefix' => 'Banner'], function () {
+    Route::group(['prefix' => 'Banner', 'middleware' => ['auth', 'can:view-content-layout']], function () {
         Route::get('/Add', [BannerController::class, 'getAdd'])->name('banner.add');
         Route::post('/Add', [BannerController::class, 'postAdd'])->name('banner.store');
         Route::get('show/{banner}', [BannerController::class, 'getUpdate'])->name('banner.show');
@@ -194,24 +193,24 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
     });
     #order
-    Route::group(['prefix' => 'order'], function () {
-        Route::get('/', [OrderController::class, 'index'])->middleware(['auth'])->name('order.list');
-        Route::get('/select/{select}/{id}', [OrderController::class, 'select'])->middleware(['auth'])->name('order.select');
+    Route::group(['prefix' => 'order', 'middleware' => ['auth', 'can:view-bill']], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('order.list');
+        Route::get('/select/{select}/{id}', [OrderController::class, 'select'])->name('order.select');
         Route::get('dataSession', [OrderController::class, 'dataSession'])->name('order.dataSession');
         Route::get('dataProductAll', [OrderController::class, 'dataProductAll'])->name('order.dataProductAll');
         Route::post('addDataSession', [OrderController::class, 'addDataSession'])->name('order.addDataSession');
         Route::get('/delete-dataSession/{product}', [OrderController::class, 'deleteDataSession'])->name('order.deleteDataSession');
-        Route::get('/add', [OrderController::class, 'create'])->middleware(['auth'])->name('order.add');
+        Route::get('/add', [OrderController::class, 'create'])->name('order.add');
         Route::post('/add', [OrderController::class, 'store']);
         Route::get('/selectDist/{id}', [OrderController::class, 'selectDist']);
-        Route::get('/detail/{id}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.detail');
+        Route::get('/detail/{id}', [OrderController::class, 'show'])->name('order.detail');
     });
     Route::group(['prefix' => 'shop'], function () {
         Route::group(['prefix' => 'info'], function () {
             Route::get('/', [CompanyController::class, 'show'])->name('info.edit');
             Route::post('/update', [CompanyController::class, 'update'])->name('info.update');
         });
-        Route::group(['prefix' => 'feeship'], function () {
+        Route::group(['prefix' => 'feeship', 'middleware' => ['auth', 'can:view-feeship']], function () {
             Route::get('/', [AboutController::class, 'listFeeShip'])->name('feeship.list');
             Route::get('/add', [AboutController::class, 'getAddFeeShip'])->name('feeship.add');
             Route::post('/add', [AboutController::class, 'storeAddFeeShip'])->name('feeship.store');
