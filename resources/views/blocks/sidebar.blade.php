@@ -318,6 +318,12 @@
                                 <p>Về chúng tôi</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('contact.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Liên hệ</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
