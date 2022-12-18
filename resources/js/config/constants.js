@@ -23,7 +23,7 @@ export const DEFAULT_PAGINATE = {
   NEXT: "Tiếp",
   PREVIOUS: "Trước"
 }
-
+export const URL_BACKEND=window.location.origin;
 export const STATUS_BLOCK = 0;
 export const FORMAT_DATE = 'DD/MM/YYYY HH:mm';
 export const FORMAT_MONEY = new Intl.NumberFormat('vi-VN', {
@@ -68,5 +68,9 @@ export const URL = {
   FEESHIP: {
     EDIT: 'feeship/',
     DELETE: 'feeship/delete/'
+  },
+  CONTACT: {
+    SHOW: 'contact/',
+    DELETE: 'contact/delete/'
   },
 };

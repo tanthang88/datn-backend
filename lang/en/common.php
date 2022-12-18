@@ -70,6 +70,12 @@ return [
             'integer' => 'Please enter an integer',
             'min' => 'Please enter a number greater than 0',
         ],
+        'subject' => [
+            'required' => 'Please enter title',
+        ],
+        'content' => [
+            'required' => 'Please enter content',
+        ],
     ],
     'table' =>
     [

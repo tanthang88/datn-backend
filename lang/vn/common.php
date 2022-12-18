@@ -70,6 +70,12 @@ return [
             'integer' => 'Vui lòng nhập số nguyên',
             'min' => 'Vui lòng nhập số lớn hơn 0'
         ],
+        'subject' => [
+            'required' => 'Vui lòng nhập tiêu đề',
+        ],
+        'content' => [
+            'required' => 'Vui lòng nhập nội dung',
+        ],
     ],
     'table' =>
     [

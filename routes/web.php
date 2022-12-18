@@ -19,6 +19,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CompanyController as ControllersCompanyController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealSockController;
 use App\Http\Controllers\StaffController;
 
@@ -218,6 +219,13 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/{id}', [AboutController::class, 'showFeeShip'])->name('feeship.edit');
             Route::get('/delete/{id}', [AboutController::class, 'deleteFeeShip'])->name('feeship.delete');
             Route::post('/update/{id}', [AboutController::class, 'updateFeeShip'])->name('feeship.update');
+        });
+        Route::group(['prefix' => 'contact'], function () {
+            Route::get('/', [ContactController::class, 'index'])->name('contact.list');
+            Route::get('/data', [ContactController::class, 'dataContact'])->name('contact.data');
+            Route::get('/countNotification', [ContactController::class, 'countNotifications'])->name('contact.count');
+            Route::get('/delete/{id}', [ContactController::class, 'deleteContact'])->name('contact.delete');
+            Route::get('/{id}', [ContactController::class, 'show'])->name('contact.show');
         });
     });
 });
