@@ -28,7 +28,7 @@ Danh sách bình luận
                                 <th>Sản phẩm</th>
                                 <th>Tên khách hàng </th>
                                 <th>Điện thoại </th>
-                                <th>Email </th>
+                                <th>Nội dung </th>
                                 <th>Trạng thái </th>
                                 <th>Thao tác</th>
                             </tr>
