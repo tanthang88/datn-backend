@@ -73,4 +73,8 @@ export const URL = {
     SHOW: 'comment/',
     DELETE: 'comment/delete/'
   },
+  CONTACT: {
+    SHOW: 'contact/',
+    DELETE: 'contact/delete/'
+  },
 };
