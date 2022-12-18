@@ -18,7 +18,8 @@ ajaxRequest(url,'GET','',function(data){
     $('.countNotiAll').text(data.total)
     $('.countNotiContact').text(data.contact.count)
     $('.countNotiOrder').text(data.order.count)
+    $('.countNotiComment').text(data.comment.count)
     $('.dateNotiContact').html((convert(data.contact.created_date)))
     $('.dateNotiOrder').html((convert(data.order.created_date)))
-
+    $('.dateNotiComment').html((convert(data.comment.created_date)))
 })

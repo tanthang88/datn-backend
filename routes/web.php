@@ -22,7 +22,7 @@ use App\Http\Controllers\CompanyController as ControllersCompanyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealSockController;
 use App\Http\Controllers\StaffController;
-
+use App\Http\Controllers\ProductCommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -192,6 +192,14 @@ Route::group(['prefix' => '/'], function () {
         Route::post('update/{id}', [BannerController::class, 'postUpdate'])->name('banner.update');
         Route::get('/List', [BannerController::class, 'getList'])->name('banner.list');
         Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
+    });
+     #comment
+     Route::group(['prefix' => 'comment'], function () {
+        Route::get('/', [ProductCommentController::class, 'index'])->name('comment.list');
+        Route::get('/data', [ProductCommentController::class, 'dataComment'])->name('comment.data');
+        Route::get('/{id}', [ProductCommentController::class, 'show'])->name('comment.show');
+        Route::post('/accept', [ProductCommentController::class, 'accept'])->name('comment.accept');
+        Route::post('/reply', [ProductCommentController::class, 'reply'])->name('comment.reply');
     });
     #order
     Route::group(['prefix' => 'order', 'middleware' => ['auth', 'can:view-bill']], function () {

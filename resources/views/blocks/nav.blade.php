@@ -17,7 +17,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge countNotiAll" ></span>
+                <span class="badge badge-warning navbar-badge countNotiAll"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <span class="dropdown-item dropdown-header"><span class="countNotiAll"></span> Thông báo </span>
@@ -28,10 +28,14 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="{{route('order.list')}}" class="dropdown-item">
-                <i class="fa fa-cart-arrow-down mr-2" aria-hidden="true"></i><span class="countNotiOrder"></span> Đơn hàng mới
-                    <span class="float-right text-muted text-sm dateNotiOrder" ></span>
+                    <i class="fa fa-cart-arrow-down mr-2" aria-hidden="true"></i><span class="countNotiOrder"></span> Đơn hàng mới
+                    <span class="float-right text-muted text-sm dateNotiOrder"></span>
                 </a>
                 <div class="dropdown-divider"></div>
+                <a href="{{route('comment.list')}}" class="dropdown-item">
+                <i class="fa fa-comments mr-2" aria-hidden="true"></i><span class="countNotiComment"></span> Bình luận mới
+                    <span class="float-right text-muted text-sm dateNotiComment"></span>
+                </a>
             </div>
         </li>
     </ul>

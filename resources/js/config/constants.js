@@ -69,8 +69,8 @@ export const URL = {
     EDIT: 'feeship/',
     DELETE: 'feeship/delete/'
   },
-  CONTACT: {
-    SHOW: 'contact/',
-    DELETE: 'contact/delete/'
+  COMMENT: {
+    SHOW: 'comment/',
+    DELETE: 'comment/delete/'
   },
 };

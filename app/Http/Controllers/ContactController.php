@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Models\Contact;
+use App\Models\ProductComment;
 
 class ContactController extends Controller
 {
@@ -37,9 +38,11 @@ class ContactController extends Controller
     public function countNotifications(){
         $contact=Contact::where('status','=',0)->orderBy('id','DESC')->get();
         $order=Bill::where('bill_status','=',0)->orderBy('id','DESC')->get();
+        $comment=ProductComment::where('comment_display',0)->where('parent_id',0)->orderBy('id','DESC')->get();
         $data['contact']=['count'=>$contact->count(),'created_date'=>($contact->count()!=0)?strip_tags(diffDatePhp($contact->first()->sent_date)):''];
         $data['order']=['count'=>$order->count(),'created_date'=>($order->count()!=0)?strip_tags(diffDatePhp($order->first()->created_at)):''];
-        $data['total']=($contact->count()) + ($order->count());
+        $data['comment']=['count'=>$comment->count(),'created_date'=>($comment->count()!=0)?strip_tags(diffDatePhp($comment->first()->created_at)):''];
+        $data['total']=($contact->count()) + ($order->count()) +($comment->count());
         return $data;
     }
 }
