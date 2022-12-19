@@ -1,10 +1,12 @@
 @extends('layout/masterLayout')
 @section('title')
-Danh mục bài viết
+{{$title}}
 @endsection
-@push('styles')
+@push('style')
 <style>
-
+ th {
+            font-size: 14px;
+        }
 </style>
 @endpush
 @section('content')
@@ -15,14 +17,14 @@ Danh mục bài viết
     <!-- Small boxes (Stat box) -->
     <div class="row" style="padding-top:15px;padding-bottom:15px;">
         <div class="col-2">
-            <button type="button" class="btn btn-dark"><a href="{{route('postCategory.add')}}" style="color:#fff">
-                    Thêm mới</a></button>
+            <button type="button" class="btn btn-success"><a href="{{route('postCategory.add')}}" style="color:#fff">+ Thêm mới</a></button>
         </div>
-        <form action="" class="col-4">
+        <div class="col-7"></div>
+        <form action="" class="col-3">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Search">
+                <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
                 <div class="input-group-append">
-                    <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                    <button type="submit" name="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </form>
@@ -30,15 +32,13 @@ Danh mục bài viết
     <!-- Main row -->
     <div class="row">
         <div class="col-12 table-responsive">
-            <table class="table table-striped">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Tên bài viết</th>
-                        <th>Số thứ tự</th>
                         <th>Hiển Thị</th>
                         <th>Nổi bật</th>
-                        <th>Ngày Tạo</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -47,7 +47,6 @@ Danh mục bài viết
                     <tr>
                         <td>{{$post_categories->id}}</td>
                         <td>{{$post_categories->category_name}}</td>
-                        <td>{{$post_categories->category_order}}</td>
                         <td>
                             <input type="checkbox" {{$post_categories->category_display == 1 ? 'checked' : ''}}>
                         </td>
@@ -55,13 +54,12 @@ Danh mục bài viết
                         <td>
                             <input type="checkbox" {{$post_categories->category_outstanding == 1 ? 'checked' : ''}}>
                         </td>
-                        <td>{{$post_categories->created_at}}</td>
                         <td>
-                            <a class="btn btn-info"
+                            <a class="btn btn-sm btn-info"
                                 href="{{route('postCategory.update',['id'=>$post_categories->id])}}">
                                 <i class="fas fa-pencil-alt"></i>Sửa
                             </a>
-                            <a class="btn btn-danger btn-action-delete"
+                            <a class="btn btn-sm btn-danger btn-action-delete"
                                 data-url="{{route('postCategory.delete',['id'=>$post_categories->id])}}">
                                 <i class="fas fa-trash">
                                 </i>

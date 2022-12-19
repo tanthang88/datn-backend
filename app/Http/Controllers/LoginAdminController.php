@@ -29,7 +29,7 @@ class LoginAdminController extends Controller
     public function Login(LoginAdminRequest $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/')->with('success', 'Đăng nhập thành công');
+            return redirect('/');
         } else {
             Session::flash('message', 'Email hoặc mật khẩu không đúng');
             return back();

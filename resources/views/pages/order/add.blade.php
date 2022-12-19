@@ -13,7 +13,7 @@
     <x-alert errorText="{{ trans('alert.add.error') }}" />
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-info">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Vui lòng điền thông tin chi tiết về đơn hàng </h3>
                 </div>
@@ -36,9 +36,7 @@
                                 <div class="form-group">
                                     <label for="type">Hình thức mua hàng</label>
                                     <select class="form-control" name="type" id="select_type" required>
-                                        <option value="">Chọn hình thức mua hàng</option>
                                         <option value="0"> Mua hàng offline </option>
-                                        <option value="1"> Mua hàng online </option>
                                     </select>
                                 </div>
                             </div>
@@ -59,8 +57,30 @@
                                 <div class="form-group">
                                     <label>Địa chỉ</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control float-right" id="address"  name="address" placeholder="Nhập địa chỉ người nhận" required>
+                                        <input type="text" class="form-control float-right" id="address"  name="address" value="Tại cửa hàng" placeholder="Nhập địa chỉ người nhận" required>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="city_id">Tỉnh/Thành</label>
+                                    <select class="form-control" name="city_id" id="city_id">
+                                        @foreach ($city as $city)
+                                            <option value="{{$city->id}}" {{$city->id == 32 ? 'selected' : ''}}>{{$city->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dist_id">Quận/Huyện</label>
+                                    <select class="form-control" name="dist_id" id="dist_id">
+                                        @foreach ($dist as $dist)
+                                            <option value="{{$dist->id}}" {{$dist->id == 355 ? 'selected' : ''}}>{{$dist->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -122,14 +142,17 @@
                                                 <td><input type="hidden" name="product_id[]" value="{{$value->id}}">{{$value->id}}</td>
                                                 <td>
                                                     <div class="d-flex">
+                                                      <input type="hidden" name="product_image[]" value="{{$value->product_image}}">
                                                       <img width="100px" src="{{$value->product_image}}" style="padding-right:10px;" alt="">
                                                         <div>
+                                                            <input type="hidden" name="product_name[]" value="{{$value->product_name}}">
                                                             {{$value->product_name}}
                                                             @php
                                                                 if($value->is_variation==1){
                                                                     $variant=Variantion::with('propertie')->where('product_id',$value->id)->get();
                                                                         if(isset($variant[0])){
-                                                                            $html = '<select class="form-control bienthe" name="variant_id[]">';
+                                                                            $html = '<input type="hidden" class="tenbienthe" name="variant_name[]">
+                                                                            <select class="form-control bienthe" name="variant_id[]">';
                                                                             foreach($variant as $key => $variant){
                                                                                 $html .= '<option value="'.$variant->id.' '.$variant->price.'"> ';
                                                                                 $propertie=Propertie::where('id',$variant->propertie->id)->first();
@@ -149,7 +172,8 @@
                                                                             echo $html;
                                                                         }
                                                                 }else{
-                                                                    $null = '<input type="hidden" name="variant_id[]" value="">';
+                                                                    $null = '<input type="hidden" name="variant_name[]" value="">
+                                                                    <input type="hidden" name="variant_id[]" value="">';
                                                                     echo $null;
                                                                 }
                                                             @endphp
@@ -159,7 +183,7 @@
                                                 <td class="tien">
                                                     <input type="hidden" name="price[]" value="{{$value->product_price}}">
                                                     <p data-price="{{$value->product_price}}">{{number_format($value->product_price,0,'','.')}} ₫</p>
-                                                    </td>
+                                                </td>
                                                 <td><input type="number" name="amount[]" value="1" min="1" max="{{$value->product_quantity}}" class="form-control soluong"></td>
                                                 <td class="thanhtien">
                                                     <input type="hidden" name="into_price[]" id="into_price" value="{{$value->product_price}}">
@@ -237,17 +261,6 @@
 @endsection
 @push('scripts')
 <script>
-    $('#select_type').change(function() {
-        type = $(this).val();
-        if(type === '0'){
-            // $('.address-group').hide();
-            $('#address').val('Tại cửa hàng');
-        }else{
-            // $('.address-group').show();
-            $('#address').val();
-        }
-
-    })
     $('#checkall_id_sp').click(function(event) {
         if (this.checked) {
             $(':checkbox.check_id_sp:not(:disabled)').each(function() {
@@ -282,6 +295,8 @@
         $('.tbody-product tr').each(function() {
             var into_price = $(this).find('.thanhtien input').val();
             total_price = total_price + parseFloat(into_price);
+            var val_variant = $(this).find('.bienthe option:selected').text();
+            $(this).find('.tenbienthe').val(val_variant);
         })
         $('.tongtien input').val(total_price);
         $('.tongtien p').html(parseInt(total_price).toLocaleString('vi', {style : 'currency', currency : 'VND'}));

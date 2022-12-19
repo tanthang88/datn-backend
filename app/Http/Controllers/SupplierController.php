@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Supplier\AddSupplierRequest;
+use App\Http\Requests\Supplier\UpdateSupplierRequest;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +15,11 @@ class SupplierController extends Controller
 {
     public function create()
     {
-        return view('pages.supplier.add');
+        return view('pages.supplier.add',[
+            'title' => 'Thêm mới nhà cung cấp',
+        ]);
     }
-    public function store(Request $request)
+    public function store(AddSupplierRequest $request)
     {
         $data = array();
         $data['supplier_name'] = $request->supplier_name;
@@ -30,7 +34,7 @@ class SupplierController extends Controller
             $thumb = '/storage/' . $pathFull . '/' . $name;
             $data['supplier_photo'] = $thumb;
         }
-        $data['supplier_order'] = $request->supplier_order;
+        $data['supplier_order'] = 1;
         if($request->supplier_display=='on'){
             $data['supplier_display']=1;
         }else{
@@ -54,10 +58,11 @@ class SupplierController extends Controller
     {
        $UpdateSL= DB::table('suppliers')->where('id', $id)->first();
        return view('pages.supplier.edit',[
+        'title' => 'Chỉnh sửa nhà cung cấp',
         'UpdateSL' => $UpdateSL,
-    ]);
+        ]);
     }
-    public function update(Request $request, $id)
+    public function update(UpdateSupplierRequest $request, $id)
     {
         $supplier = Supplier::find($id);
         $supplier->supplier_name = $request->supplier_name;
@@ -72,7 +77,7 @@ class SupplierController extends Controller
             $thumb = '/storage/' . $pathFull . '/' . $name;
             $supplier->supplier_photo = $thumb;
         }
-        $supplier->supplier_order = $request->supplier_order;
+        $supplier->supplier_order = 1;
         if($request->supplier_display=='on'){
             $supplier->supplier_display = 1;
         }else{
@@ -92,10 +97,14 @@ class SupplierController extends Controller
         $supplier->save();
         return redirect('supplier/')->with('success', trans('alert.update.success'));
     }
-    public function index()
+    public function index(Request $request)
     {
-        $supplier = DB::table('suppliers')->get();
+        $supplier = DB::table('suppliers')->orderBy('id','desc')->paginate(15);
+        if ($search = $request->search) {
+            $supplier = Supplier::orderBy('id', 'desc')->orderBy('id','desc')->where('supplier_name', 'like', '%' . $search . '%')->paginate(15);
+        }
         return view('pages.supplier.list',[
+            'title' => 'Danh sách nhà cung cấp',
             'supplier' => $supplier,
         ]);
     }

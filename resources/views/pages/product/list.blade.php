@@ -2,18 +2,18 @@
 @section('title')
     {{ $title }}
 @endsection
-@push('styles')
-@endpush
-<style>
-    th {
-        font-size: 14px;
-    }
+@push('style')
+    <style>
+        th {
+            font-size: 14px;
+        }
 
-    td,
-    td a {
-        text-align: center;
-    }
-</style>
+        td,
+        td a {
+            text-align: center;
+        }
+    </style>
+@endpush
 @section('content')
     <?php
     use App\Models\Variantion;
@@ -22,16 +22,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="row" style="padding-top:15px;">
+                <div class="row" style="padding-top:15px;padding-bottom:15px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="{{route('product.add')}}" style="color:#fff">Thêm mới</a></button>
+                        <button type="button" class="btn btn-success"><a href="{{route('product.add')}}" style="color:#fff">+ Thêm mới</a></button>
                     </div>
-                    <form action="" class="col-4">
+                    <div class="col-7"></div>
+                    <form action="" class="col-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search">
+                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
                             <div class="input-group-append">
-                                <button type="submit" name="submit" class="btn btn-success"><i
-                                        class="fas fa-search"></i></button>
+                                <button type="submit" name="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </form>
@@ -40,7 +40,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th style="width:1%">#</th>
+                            <th style="width:1%">ID</th>
                             <th style="width:7%">Hình ảnh</th>
                             <th style="width:17%; text-align:center;">Tên sản phẩm</th>
                             <th style="width:6.5%; text-align:center;">Danh mục</th>
@@ -62,7 +62,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->productCategory->category_name }}</td>
+                                <td>{{ $product->productCategory?->category_name }}</td>
                                 <td>{{ number_format($product->product_price,0,'','.')}} ₫</td>
                                 <td>
                                     @if ($product->product_outstanding == '1')
@@ -123,7 +123,10 @@
         </div><!-- /.container-fluid -->
     </div>
 @endsection
+@prepend('scripts')
 <script
     type="module"
     src="{{Vite::asset('resources/js/components/confirmDel.js')}}"
 ></script>
+@endprepend
+

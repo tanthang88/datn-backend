@@ -9,7 +9,7 @@ Cập nhật phí ship
     <x-alert errorText="{{ trans('alert.update.error') }}" />
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-info">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Vui lòng điền thông tin phí ship cho các khu vực </h3>
                 </div>
@@ -31,7 +31,7 @@ Cập nhật phí ship
                                     <label for="transport_fee">Giá ship</label>
                                     <input type="number"  hidden class="tientehidden" id="transport_fee" name="transport_fee" value="{{ $feeship->transport_fee->transport_fee }}">
                                     <input type="text" class="tiente mucgiam form-control @error('transport_fee') is-invalid @enderror" placeholder="0 VND" value="{{ $feeship->transport_fee->transport_fee }}">
-                                    <small class=" text-info" style="font-style: italic"><i class="fa fa-question-circle" aria-hidden="true"></i> Có thể để trống giá ship nếu muốn <b>Free Ship</b></small>
+                                    <small class=" text-primary" style="font-style: italic"><i class="fa fa-question-circle" aria-hidden="true"></i> Có thể để trống giá ship nếu muốn <b>Free Ship</b></small>
                                     @error('transport_fee')
                                     <small class="error-form" style="color: red;font-style: italic"> {{ $message }}</small>
                                     @enderror

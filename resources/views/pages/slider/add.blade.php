@@ -1,78 +1,73 @@
 @extends('layout/masterLayout')
 @section('title')
-Slider
+{{$title}}
 @endsection
 @push('style')
 <style>
-#img_priv img{
-    height: 360px;
-    width: auto;
-}
+  #img_priv img{
+        width:200px;
+        padding-top:10px;
+    }
 </style>
 @endpush
 @section('content')
     <!-- Content Header (Page header) -->
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Thêm mới slider</div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-
-            </div>
-            <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
-
-    <!-- /.content -->
-    <form action="{{route('slider.add') }}" method="POST" enctype="multipart/form-data">
-       @csrf
-        <div class="card-body">
-            <div class="form-group">
-                <label for="Slider">Tiêu đề của slider</label>
-                <input type="text" name="title" class="form-control"  placeholder="Nhập tiêu đề của silde" required>
-            </div>
-            <div class="form-group">
-                <label for="Slider">Hình ảnh</label>         
-                <input id="image" type="file" onchange="img_priv()" name="image">
-                <div class="preview-upload" id="img_priv">
+            <div class="card card-primary row">
+                <div class="card-header">
+                    <h3 class="card-title">{{$title}}</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{route('slider.add') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                            <div class="row" style="padding-bottom:20px;">
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-check" aria-hidden="true" style="padding-right:3px;"></i>Hoàn tất</button>
+                                    <button type="button" class="btn btn-warning"><a href="{{route('slider.list')}}" style="color:black"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Thoát</a></button>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                 <label for="Slider">Tiêu đề</label>
+                                 <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}"  placeholder="Nhập tiêu đề của slider">
+                                 @error('title')
+                                 <small class="error-form" style="color: red;font-style: italic"> {{ $message }}</small>
+                                 @enderror
+                             </div>
+                             <div class="form-group">
+                                 <label for="Slider">Hình ảnh</label>
+                                 <div class="custom-file">
+                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image"  onchange="img_priv()">
+                                    <label class="custom-file-label" for="image">Choose file</label>
+                                </div>
+                                @error('image')
+                                <small class="error-form" style="color: red;font-style: italic"> {{ $message }}</small>
+                                @enderror
+                                <div class="preview-upload" id="img_priv">
+                                </div>
+                             </div>
+                             <div class="form-group">
+                                 <label>Đường dẫn</label><br>
+                                 <input type="text" name="link" value="{{old('link')}}" class="form-control" placeholder="Link đường dẫn slider">
+                             </div>
+                             <div class="form-group">
+                                <label for="Post">Hiển thị</label>
+                                <input style="margin-left:17px" type="checkbox" name="display" checked >
+                            </div>
+                             <div class="form-group">
+                                 <label>Mô tả</label>
+                                 <textarea type="text" name="desc" class="form-control">{{old('desc')}}</textarea>
+                             </div>
+                             <div class="form-group">
+                                 <label>Nội dung</label>
+                                 <textarea name="content" id="pro_content" class="form-control">{{old('content')}}</textarea>
+                             </div>
+                     </form>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Đường dẫn</label><br>
-                <input type="text" name="link" class="form-control" >
-
-            <div class="form-group">
-                <label>type </label>
-                <input type="text" name="type" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label>Mô tả</label>
-                <input type="text" name="desc" class="form-control" >
-            </div>
-            <div class="form-group">
-                <label>Nội dung</label>
-                <textarea name="content" class="form-control"></textarea>           
-
-            </div>
-            <div class="form-group">
-                <label for="Post">Hiển thị</label>
-                <input style="margin-left:17px"; type="checkbox" name="display" checked >
-            </div>      
-            <div class="form-group">
-                <label>STT</label>
-                <input type="number" name="order" class="form-control" required>
-            </div>
-           
         </div>
+    <!-- /.content -->
 
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Thêm Mới</button>
-        </div>    
-    </form>
 </div>
 
 <script>
@@ -88,10 +83,9 @@ Slider
                                document.getElementById('img_priv').innerHTML = newImage.outerHTML;
                            }
                            fileReader.readAsDataURL(fileToLoad);
-    
+
                    }
         }
 </script>
 @endsection
 
-    

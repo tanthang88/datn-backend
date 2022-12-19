@@ -2,10 +2,7 @@
 @endsection @push('style') @endpush @section('content')
 
 <div class="container-fluid">
-    <!-- Small boxes (Stat box) -->
-    <div class="row">
-        <div class="col-12">Danh sách khách hàng</div>
-    </div>
+
     <!-- Main row -->
     <div class="row">
         <div class="col-12 table-responsive">
@@ -20,8 +17,7 @@
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
                         <th>Trạng thái</th>
-                        <th>Sửa</th>
-                        <th>Xoá</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
             </table>

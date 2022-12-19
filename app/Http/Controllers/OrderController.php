@@ -10,6 +10,8 @@ use App\Models\Dist;
 use App\Models\Product;
 use App\Models\Bill;
 use App\Models\BillDetail;
+use App\Models\Variantion;
+use App\Models\Propertie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -18,9 +20,10 @@ use PDF;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $bill = Bill::orderBy('id', 'desc')->get();
+        Session::forget('dataSessionProduct');
         return view('pages.order.list',[
             'title'      => 'Danh sách đơn hàng',
             'bill'       =>  $bill,
@@ -49,6 +52,7 @@ class OrderController extends Controller
     }
     public function dataSession(Request $request)
     {
+
         if (Session::has('dataSessionProduct')) {
             if (count(Session::get('dataSessionProduct')) <= 0) {
                 Session::forget('dataSessionProduct');
@@ -56,14 +60,13 @@ class OrderController extends Controller
             $data['data'] = Session::get('dataSessionProduct');
         } else {
             if ($request->has('edit') && $request->ajax()) {
-                $id_product = $request->edit;
-                $bill_details = BillDetail::select('product_id')
-                    ->with(['product'])
-                    ->where('product_id', $id_product)
+                $bill_id = $request->edit;
+                $bill_details = BillDetail::join('products', 'products.id', '=', 'bill_details.product_id')
+                    ->where('bill_id', $bill_id)
                     ->get();
                 $session = Session::get('dataSessionProduct');
                 foreach ($bill_details as $k => $promo) {
-                    $session[$k] = $promo->product;
+                    $session[] = $promo;
                 }
                 Session::put('dataSessionProduct', $session);
                 $data['data'] = $session;
@@ -126,27 +129,29 @@ class OrderController extends Controller
     public function create()
     {
         $city = City::orderBy('id','asc')->get();
+        $dist = Dist::where('code', 48)->get();
         return view('pages.order.add',[
             'title' => 'Thêm đơn hàng',
             'city' => $city,
+            'dist' => $dist,
         ]);
     }
     public function store(Request $request)
     {
         // lưu đơn hàng
         $order = new Bill;
-        $order->customer_id = 1;
+        $order->customer_id = null;
         $order->bill_phone = $request->bill_phone;
         $order->customer_name = $request->customer_name;
         $order->address = $request->address;
-        $order->city_id = 32 ;
-        $order->dist_id = 355;
+        $order->city_id = $request->city_id;
+        $order->dist_id = $request->dist_id;
         $order->sale = 0;
         $order->fee = 0;
         $order->bill_price = $request->total;
         $order->type = $request->type;
         $order->payment = $request->payment;
-        $order->bill_status = 1;
+        $order->bill_status = 0;
         $order->save();
         // lưu detail
         foreach($request->price as $index => $value){
@@ -154,6 +159,8 @@ class OrderController extends Controller
             $detail->bill_id = $order->id;
             $detail->product_id=$request->product_id[$index];
             $detail->price = $request->price[$index];
+            $detail->product_name = $request->product_name[$index];
+            $detail->product_image = $request->product_image[$index];
             $detail->amount = $request->amount[$index];
             $detail->into_price = $request->into_price[$index];
             // tách chuỗi variant_id
@@ -161,13 +168,14 @@ class OrderController extends Controller
                 $str_variant_id = $request->variant_id[$index];
                 $arr_variant_id = explode(' ', $str_variant_id);
                 $detail->variant_id = $arr_variant_id[0];
+                $detail->variant_name = $request->variant_name[$index];
            }
            $detail->save();
         }
         Session::forget('dataSessionProduct');
         return redirect(route('order.list'))->with('success', trans('alert.add.success'));
     }
-    public function show($id)
+    public function detail($id)
     {
         $bill = Bill::orderBy('id', 'desc')->where('id', $id)->first();
         $details = BillDetail::where('bill_id', $id)->orderBy('id', 'desc')->get();
@@ -177,14 +185,19 @@ class OrderController extends Controller
             'details'       =>  $details,
         ]);
     }
-    // public function print($checkId)
-    // {
-    //     $pdf = \App::make('dompdf.wrapper');
-    //     $pdf->loadHTML($this->printConvert($checkId));
-    //     return $pdf->stream();
-    // }
-    // public function printConvert($checkId)
-    // {
-    //     return $checkId;
-    // }
+    public function show(Bill $bill)
+    {
+        $detail = BillDetail::find($bill);
+        $city = City::get();
+        $code_city = City::find($bill->city_id);
+        $dist = Dist::where('code', $code_city->code)->get();
+        return view('pages.order.update',[
+            'title'      => 'Chỉnh sửa đơn hàng',
+            'bill'       =>  $bill,
+            'detail'       =>  $detail,
+            'city'       =>  $city,
+            'dist'       =>  $dist,
+        ]);
+    }
+
 }

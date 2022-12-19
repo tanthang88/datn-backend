@@ -67,12 +67,12 @@ const columns0 = [
             let title = "";
             $.inArray(data.id, JSON.parse(data.arrOrder)) < 0
                 ? ""
-                : (title = "Sản phẩm đã nằm trong chương trình khuyến mãi!");
+                : (title = "Sản phẩm đã nằm trong đơn hàng!");
             data.product_quantity > 0
                 ? ""
                 : (title = "Số lượng sản phẩm trong kho đã hết!");
             return `
-             <img  style="width:60px;height:60px" title="${title}" src="${
+             <img  style="width:100px" title="${title}" src="${
                 data.product_image
             }" alt="">
              <label for="product-${data.id}" id="" class="ml-2">
