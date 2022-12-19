@@ -2,56 +2,70 @@
 @section('title')
 Banner
 @endsection
-@push('styles')
+@push('style')
 <style>
-
+     th {
+            font-size: 14px;
+        }
 </style>
 @endpush
 @section('content')
-    <!-- Content Header (Page header) -->
-
     <!-- Main content -->
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-              <div class="col-12">Danh sách Banner</div>
-                <!-- ./col -->
+            <div class="row" style="padding-top:15px;padding-bottom:15px;">
+                <div class="col-2">
+                    <button type="button" class="btn btn-success"><a href="{{route('banner.add')}}" style="color:#fff">+ Thêm mới</a></button>
+                </div>
+                <div class="col-7"></div>
+                <form action="" class="col-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
+                        <div class="input-group-append">
+                            <button type="submit" name="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
             <div class="row">
                 <div class="col-12 table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                    <th>ID</th>
-                    <th>Tiêu đề</th>
-                    <th>Hình ảnh</th>
-                    <th>Đường liên kết</th>
-                    <th>Hiển Thị</th>
-                    <th>Sửa</th>
-                    <th>Xoá</th>
+                        <th>ID</th>
+                        <th>Hình ảnh</th>
+                        <th style="width:35%;">Tiêu đề</th>
+                        <th style="width:20%;">Đường liên kết</th>
+                        <th>Hiển Thị</th>
+                        <th>Thao tác</th>
                     </tr>
                     </thead>
-                    @foreach($banners as $banners)
+                    @foreach($banners as $banner)
                         <tbody>
                             <tr>
-                                <td>{{$banners->id}}</td>
-                                <td>{{$banners->title}}</td>
+                                <td>{{$banner->id}}</td>
                                 <td>
-                                    <img width="100px" src="{{$banners->image}}"/>
-                                </td>
-                                <td>{{$banners->link}}</td>
-
-                                <td>
-                                    @if($banners->display == 0)
-                                    {{'Không'}}
+                                    @if ($banner->image!=null)
+                                        <img width="100px" src="{{$banner->image}}"/>
                                     @else
-                                    {{'Có'}}
+                                        Trống
                                     @endif
                                 </td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href={{route('banner.show', ['banner' => $banners->id])}}>Sửa</a></td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href={{route('banner.delete', ['id' => $banners->id])}}> Xóa</a></td>
+                                <td>{{$banner->title}}</td>
+                                <td>{{$banner?->link}}</td>
+                                <td>
+                                    <input type="checkbox" {{$banner->display==1 ? "checked" : "" }} >
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" href="{{route('banner.show',['banner'=>$banner->id])}}">
+                                        <i class="fas fa-pencil-alt"></i>Sửa
+                                    </a>
+                                    <a class="btn btn-sm btn-danger btn-action-delete"
+                                        data-url="{{route('banner.delete',['id'=>$banner->id])}}">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Xóa
+                                    </a>
+                                </td>
                             </tr>
                             </tbody>
                     @endforeach
@@ -62,18 +76,11 @@ Banner
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
 
-    <!-- /.content -->
-    <?php
-    $message = Session::get('message');
-    if ($message){
-        echo '<p>' . $message . '<p>';
-        Session::put('message', null);
-    }
-     ?>
 </div>
 @endsection
 @push('scripts')
-<script>
-
-</script>
+<script
+type="module"
+src="{{Vite::asset('resources/js/components/confirmDel.js')}}"
+></script>
 @endpush

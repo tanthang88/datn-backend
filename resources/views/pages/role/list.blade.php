@@ -9,6 +9,11 @@ Danh sách phân quyền
 @endpush
 @section('content')
 <div class="container-fluid">
+    <div class="row" style="padding-top:15px;padding-bottom:15px;">
+        <div class="col-2">
+            <button type="button" class="btn btn-success"><a href="{{route('role.add')}}" style="color:#fff">+ Thêm mới</a></button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12 table-responsive">
             <table class="table table-striped display nowrap hover" id="dataTable">
@@ -17,8 +22,7 @@ Danh sách phân quyền
                         <th>ID</th>
                         <th>Tên vai trò</th>
                         <th>Mô tả</th>
-                        <th>Sửa</th>
-                        <th>Xoá</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
             </table>

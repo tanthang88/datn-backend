@@ -4,7 +4,7 @@ namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,6 @@ class EditProductRequest extends FormRequest
             'product_name'     => 'required|min:6|max:255|unique:products,product_name->ignore($id)',
             'supplier_id'      => 'required',
             'product_quantity' => 'required|integer|min:1',
-            'product_order'    => 'required|min:0',
             'category_id'      => 'required',
         ];
     }

@@ -7,8 +7,10 @@ Danh sách nhân viên
 @section('content')
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">Danh sách nhân viên</div>
+    <div class="row" style="padding-top:15px;padding-bottom:15px;">
+        <div class="col-2">
+            <button type="button" class="btn btn-success"><a href="{{route('staff.add')}}" style="color:#fff">+ Thêm mới</a></button>
+        </div>
     </div>
     <div class="row">
         <div class="col-12 table-responsive">
@@ -26,8 +28,7 @@ Danh sách nhân viên
                         <th>Giới tính</th>
                         <th>Điện thoại</th>
                         <th>Vai trò</th>
-                        <th>Sửa</th>
-                        <th>Xoá</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
             </table>

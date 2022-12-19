@@ -59,7 +59,7 @@ Route::group(['prefix' => '/'], function () {
     #Product
     Route::group(['prefix' => 'product', 'middleware' => ['auth', 'can:view-product']], function () {
         Route::get('/add', [ProductController::class, 'create'])->name('product.add');
-        Route::post('/add', [ProductController::class, 'store']);
+        Route::post('/add', [ProductController::class, 'store'])->name('product.store');
         Route::get('/update/{id}', [ProductController::class, 'show'])->name('product.update');
         Route::post('/update/{id}', [ProductController::class, 'update']);
         Route::get('/', [ProductController::class, 'index'])->name('product.list');
@@ -175,22 +175,22 @@ Route::group(['prefix' => '/'], function () {
         });
     });
     #slider
-    Route::group(['prefix' => 'Slider', 'middleware' => ['auth', 'can:view-content-layout']], function () {
-        Route::get('/Add', [SliderController::class, 'getAdd'])->name('slider.add');
-        Route::post('/Add', [SliderController::class, 'postAdd'])->name('slider.store');
-        Route::get('show/{slider}', [SliderController::class, 'getUpdate'])->name('slider.show');
-        Route::post('update/{id}', [SliderController::class, 'postUpdate'])->name('slider.update');
-        Route::get('/List', [SliderController::class, 'getList'])->name('slider.list');
-        Route::get('/Delete/{id}', [SliderController::class, 'getDelete'])->name('slider.delete');
+    Route::group(['prefix' => 'slider', 'middleware' => ['auth', 'can:view-content-layout']], function () {
+        Route::get('/add', [SliderController::class, 'create'])->name('slider.add');
+        Route::post('/add', [SliderController::class, 'store'])->name('slider.store');
+        Route::get('/update/{slider}', [SliderController::class, 'show'])->name('slider.show');
+        Route::post('update/{id}', [SliderController::class, 'update'])->name('slider.update');
+        Route::get('/', [SliderController::class, 'index'])->name('slider.list');
+        Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete');
     });
     #Banner
-    Route::group(['prefix' => 'Banner', 'middleware' => ['auth', 'can:view-content-layout']], function () {
-        Route::get('/Add', [BannerController::class, 'getAdd'])->name('banner.add');
-        Route::post('/Add', [BannerController::class, 'postAdd'])->name('banner.store');
-        Route::get('show/{banner}', [BannerController::class, 'getUpdate'])->name('banner.show');
-        Route::post('update/{id}', [BannerController::class, 'postUpdate'])->name('banner.update');
-        Route::get('/List', [BannerController::class, 'getList'])->name('banner.list');
-        Route::get('/Delete/{id}', [BannerController::class, 'getDelete'])->name('banner.delete');
+    Route::group(['prefix' => 'banner', 'middleware' => ['auth', 'can:view-content-layout']], function () {
+        Route::get('/add', [BannerController::class, 'create'])->name('banner.add');
+        Route::post('/add', [BannerController::class, 'store'])->name('banner.store');
+        Route::get('update/{banner}', [BannerController::class, 'show'])->name('banner.show');
+        Route::post('update/{id}', [BannerController::class, 'update'])->name('banner.update');
+        Route::get('/', [BannerController::class, 'index'])->name('banner.list');
+        Route::get('/delete/{id}', [BannerController::class, 'delete'])->name('banner.delete');
     });
     #order
     Route::group(['prefix' => 'order', 'middleware' => ['auth', 'can:view-bill']], function () {
@@ -202,8 +202,9 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/delete-dataSession/{product}', [OrderController::class, 'deleteDataSession'])->name('order.deleteDataSession');
         Route::get('/add', [OrderController::class, 'create'])->name('order.add');
         Route::post('/add', [OrderController::class, 'store']);
+        Route::get('/{bill}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.update');
         Route::get('/selectDist/{id}', [OrderController::class, 'selectDist']);
-        Route::get('/detail/{id}', [OrderController::class, 'show'])->name('order.detail');
+        Route::get('/detail/{id}', [OrderController::class, 'detail'])->middleware(['auth'])->name('order.detail');
     });
     Route::group(['prefix' => 'shop'], function () {
         Route::group(['prefix' => 'info'], function () {

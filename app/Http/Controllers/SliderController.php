@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Slider\AddSliderRequest;
+use App\Http\Requests\Slider\UpdateSliderRequest;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,27 +13,26 @@ use Illuminate\Support\Str;
 class SliderController extends Controller
 {
     //
-    
-    public function getAdd()
-    {
 
-        return view('pages.slider.add');
+    public function create()
+    {
+        return view('pages.slider.add',[
+            'title' => 'Thêm mới slider',
+        ]);
     }
-    public function postAdd(Request $request)
+    public function store(AddSliderRequest $request)
     {
         $data = array();
         $data['title'] = $request->title;
-       
         if($request->hasFile('image')){
             $name = $request->file('image')->getClientOriginalName();
             $pathFull = 'uploads/' . date("Y-m-d");
-    
+
             $request->file('image')->storeAs(
                 'public/' . $pathFull, $name
             );
-    
+
             $thumb = '/storage/' . $pathFull . '/' . $name;
-            //dd($thumb);
             $data['image'] = $thumb;
         }
 
@@ -44,61 +45,62 @@ class SliderController extends Controller
         }else{
             $data['display']=0;
         }
-        $data['order'] = $request->order;
+        $data['order'] = 1;
         DB::table('sliders')->insert($data);
-        Session::put('message','Thêm thành công');
-        return Redirect::to('Slider/List');
+        return redirect('slider/')->with('success', trans('alert.add.success'));
     }
-    public function getUpdate(Slider $slider)
+    public function show(Slider $slider)
     {
        return view('pages.slider.edit',[
+        'title' => 'Chỉnh sửa slider',
         'slider' => $slider,
     ]);
     }
-        public function postUpdate(Request $request, $id)
+        public function update(UpdateSliderRequest $request, $id)
         {
-        $sliders = Slider::find($id);
-        $sliders->title = $request->title;
-      
-        if($request->hasFile('image')){
-            $name = $request->file('image')->getClientOriginalName();
-            $pathFull = 'uploads/' . date("Y-m-d");
-    
-            $request->file('image')->storeAs(
-                'public/' . $pathFull, $name
-            );
-    
-            $thumb = '/storage/' . $pathFull . '/' . $name;
-            $sliders->image = $thumb;
-        }
+            $sliders = Slider::find($id);
+            $sliders->title = $request->title;
 
-        $sliders->link = $request->link;
-        $sliders->type = changeTitle($request->type);
-        $sliders->desc = $request->desc;
-        $sliders->content = $request->content;
+            if($request->hasFile('image')){
+                $name = $request->file('image')->getClientOriginalName();
+                $pathFull = 'uploads/' . date("Y-m-d");
 
-        if($request->display=='on'){
-            $sliders->display = 1;
-        }else{
-            $sliders->display = 0;
-        }
+                $request->file('image')->storeAs(
+                    'public/' . $pathFull, $name
+                );
 
-        $sliders->order = $request->order;        
-        $sliders->save();
-        Session::put('message','Cập nhật thành công');
-        return redirect('Slider/List');
+                $thumb = '/storage/' . $pathFull . '/' . $name;
+                $sliders->image = $thumb;
+            }
+
+            $sliders->link = $request->link;
+            $sliders->type = changeTitle($request->type);
+            $sliders->desc = $request->desc;
+            $sliders->content = $request->content;
+
+            if($request->display=='on'){
+                $sliders->display = 1;
+            }else{
+                $sliders->display = 0;
+            }
+
+            $sliders->order = 1;
+            $sliders->save();
+            return redirect('slider/')->with('success', trans('alert.update.success'));
         }
-        public function getList()
+        public function index(Request $request)
         {
-            $sliders = DB::table('sliders')->get();
+            $sliders = DB::table('sliders')->orderBy('id', 'desc')->paginate(15);
+            if ($search = $request->search) {
+                $sliders = Slider::orderBy('id', 'desc')->where('title', 'like', '%' . $search . '%')->paginate(15);
+            }
             return view('pages.slider.list',[
+                'title' => 'Danh sách slider',
                 'sliders' => $sliders,
             ]);
         }
-        public function getDelete($id)
+        public function delete($id)
         {
-        DB::table('sliders')->where('id', $id)->delete();
-        Session::put('message','Xóa thành công');
-        return Redirect::to('Slider/List');
-            }
+             DB::table('sliders')->where('id', $id)->delete();
+        }
 }

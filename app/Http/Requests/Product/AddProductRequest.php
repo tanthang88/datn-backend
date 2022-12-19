@@ -27,11 +27,14 @@ class AddProductRequest extends FormRequest
             'product_name'     => 'required|min:6|max:255|unique:products,product_name',
             'supplier_id'      => 'required',
             'product_quantity' => 'required|integer|min:1',
-            'product_order'    => 'required|min:0',
             'category_id'      => 'required',
+            'is_variation' => 'numeric',
+            'product_price' => 'required_if:is_variation,==,0',
+            'propertie_name' => 'required_if:is_variation,==,1',
+
         ];
     }
-    public function messages(): array
+    public function messages()
     {
         return [
             'product_name.required'     => 'Tên sản phẩm chưa được nhập',
@@ -46,7 +49,8 @@ class AddProductRequest extends FormRequest
 
             'product_order.required'    => 'Số thứ tự chưa nhập',
             'product_order.min'         => 'Số thứ tự là 0',
-
+            'product_price.required_if' =>  'Giá sản phẩm chưa nhập',
+            'propertie_name.required_if' =>  'Thuộc tính chưa nhập',
             'category_id.required'    => 'Danh mục chưa chọn',
 
 

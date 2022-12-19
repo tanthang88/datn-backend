@@ -25,15 +25,16 @@
         <div class="container-fluid">
             <div class="row">
               <div class="col-12">
-                <div class="row" style="padding-top:15px;padding-bottom:10px;">
+                <div class="row" style="padding-top:15px;padding-bottom:15px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="{{route('order.add')}}" style="color:#fff">Thêm mới</a></button>
+                        <button type="button" class="btn btn-success"><a href="{{route('order.add')}}" style="color:#fff">+ Thêm mới</a></button>
                     </div>
-                    <form action="" class="col-4">
+                    <div class="col-7"></div>
+                    <form action="" class="col-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search">
+                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
                             <div class="input-group-append">
-                                <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                                <button type="submit" name="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </form>
@@ -77,56 +78,105 @@
                                 </td>
                                 <td>
                                     @if($data->bill_status == 0)
-                                        <span class="badge badge-warning">chờ xác nhận</span>
+                                        <span class="badge badge-danger">chờ xác nhận</span>
                                     @elseif ($data->bill_status == 1)
                                         <span class="badge badge-info">đã xác nhận</span>
                                     @elseif ($data->bill_status == 2)
-                                        <span class="badge badge-success">đang giao hàng</span>
+                                        <span class="badge badge-warning">đang giao hàng</span>
                                     @elseif ($data->bill_status == 3)
-                                        <span class="badge badge-danger">giao thành công</span>
+                                        <span class="badge badge-success">giao thành công</span>
                                     @else
                                         <span class="badge badge-secondary">đã hủy</span>
                                     @endif
                                 </td>
-                                <td>
+                                <td style="text-align:left;">
                                     <a href="{{route('order.detail',[$data->id])}}" class="btn btn-dark btn-sm" style="border-color:black;">
                                         Xem chi tiết
                                     </a>
-                                    <div class="btn-group" style="padding-left:10px;">
-                                        <button type="button" class="btn btn-info btn-sm">Thao tác</button>
-                                        <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <span class="caret"><span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#" class="dropdown-item" >
-                                                    <i class="fas fa-trash" aria-hidden="true"></i> Xóa
-                                                </a>
-                                            </li>
-                                            <li class="dropdown-divider"></li>
-                                            <li>
-                                                <a href="#" data-url="{{route('order.select',['process', $data->id])}}" class="dropdown-item select-order">
-                                                    <i class="fa fa-ban" aria-hidden="true"></i> Xác nhận
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-url="{{route('order.select',['shipped', $data->id])}}" class="dropdown-item select-order">
-                                                    <i class="fa fa-ban" aria-hidden="true"></i> Giao hàng
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-url="{{route('order.select',['delivered', $data->id])}}" class="dropdown-item select-order">
-                                                    <i class="fa fa-ban" aria-hidden="true"></i> Thành công
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" data-url="{{route('order.select',['cancel', $data->id])}}" class="dropdown-item select-order">
-                                                    <i class="fa fa-ban" aria-hidden="true"></i> Hủy
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    @if ($data->bill_status==0)
+                                        <div class="btn-group" style="padding-left:10px;">
+                                            <button type="button" class="btn btn-info btn-sm">Thao tác</button>
+                                            <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"><span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="{{route('order.update',['bill' =>$data->id])}}" class="dropdown-item" >
+                                                        <i class="fas fa-edit" aria-hidden="true"></i> Sửa
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown-divider"></li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['process', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-check" aria-hidden="true"></i> Xác nhận
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['shipped', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-truck" aria-hidden="true"></i>Giao hàng
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['delivered', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-handshake" aria-hidden="true"></i> Thành công
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['cancel', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-ban" aria-hidden="true"></i> Hủy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @elseif ($data->bill_status==1)
+                                        <div class="btn-group" style="padding-left:10px;">
+                                            <button type="button" class="btn btn-info btn-sm">Thao tác</button>
+                                            <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"><span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['shipped', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-truck" aria-hidden="true"></i>Giao hàng
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['delivered', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-handshake" aria-hidden="true"></i> Thành công
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['cancel', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-ban" aria-hidden="true"></i> Hủy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @elseif ($data->bill_status==2)
+                                        <div class="btn-group" style="padding-left:10px;">
+                                            <button type="button" class="btn btn-info btn-sm">Thao tác</button>
+                                            <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"><span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['delivered', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-handshake" aria-hidden="true"></i> Thành công
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-url="{{route('order.select',['cancel', $data->id])}}" class="dropdown-item select-order">
+                                                        <i class="fa fa-ban" aria-hidden="true"></i> Hủy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    @else
+
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

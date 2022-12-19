@@ -13,10 +13,10 @@ use App\Models\ProductImage;
 use App\Models\Propertie;
 use App\Models\Variantion;
 use App\Http\Requests\Product\AddProductRequest;
-use App\Http\Requests\Product\EditProductRequest;
-use Storage;
+use App\Http\Requests\Product\UpdateProductRequest;
+use App\Http\Requests\Variant\AddVariantRequest;
 use DB;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $product->product_name    = $request->product_name;
         $product->product_slug    = (Str::slug($product->product_name, '-'));
         $product->supplier_id     = $request->supplier_id;
-        if ($request->is_variation == '0') {
+        if ($request->is_variation == 0) {
             $product->product_price   = $request->product_price;
         } else {
             $product->product_price   = null;
@@ -55,7 +55,7 @@ class ProductController extends Controller
             $product->product_display = 0;
         };
         $product->category_id     = $request->category_id;
-        $product->product_desc    = $request->product_desc;
+        $product->product_order     = 1;
         $product->product_content = $request->product_content;
         $product->is_variation = $request->is_variation;
         // check ảnh sp
@@ -118,21 +118,21 @@ class ProductController extends Controller
 
         //thêm thuộc tính
         if ($request->is_variation == '1') {
-
-            foreach ($request->propertie_name as $value => $name) {
-                // print_r($request->propertie_value);
-                // cắt mảng
-                $x = $request->propertie_value[$value];
-                $val = explode('|', $x);
-                foreach ($val as $list => $listValue) {
-                    $properties = new Propertie();
-                    $properties->propertie_name = $name;
-                    $properties->propertie_slug = Str::slug($name);
-                    $properties->propertie_value = $listValue;
-                    $properties->product_id = $product->id;
-                    $properties->save();
+           if($request->propertie_name){
+                foreach ($request->propertie_name as $value => $name) {
+                    // cắt mảng
+                    $x = $request->propertie_value[$value];
+                    $val = explode('|', $x);
+                    foreach ($val as $list => $listValue) {
+                        $properties = new Propertie();
+                        $properties->propertie_name = $name;
+                        $properties->propertie_slug = Str::slug($name);
+                        $properties->propertie_value = $listValue;
+                        $properties->product_id = $product->id;
+                        $properties->save();
+                    }
                 }
-            }
+           }
         }
         return redirect('/product')->with('success', trans('alert.add.success'));
     }
@@ -155,7 +155,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(EditProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $product        = Product::find($id);
         $product->product_name    = $request->product_name;
@@ -165,7 +165,7 @@ class ProductController extends Controller
             $product->product_price   = $request->product_price;
         }
         $product->product_quantity = $request->product_quantity;
-        $product->product_order   = $request->product_order;
+        $product->product_order   = 1;
         if ($request->product_outstanding == 'on') {
             $product->product_outstanding = 1;
         } else {
@@ -330,7 +330,7 @@ class ProductController extends Controller
     {
         $data = Product::orderBy('id', 'desc')->paginate(15);
         if ($search = $request->search) {
-            $data = Product::orderBy('id', 'desc')->where('product_name', 'like', '%' . $search . '%')->paginate(20);
+            $data = Product::orderBy('id', 'desc')->where('product_name', 'like', '%' . $search . '%')->paginate(15);
         }
         return view('pages.product.list', [
             'title'     => 'Danh sách sản phẩm',
@@ -358,7 +358,7 @@ class ProductController extends Controller
             'count' => $count,
         ]);
     }
-    public function storeVariant(Request $request)
+    public function storeVariant(AddVariantRequest $request)
     {
         $arr = $request->propertie_id;
         foreach ($request->image as $index => $file) {
@@ -453,7 +453,8 @@ class ProductController extends Controller
                             <input type="hidden" name="count" value="' . $count . '">
                             <div class="row pd-10">
                                 <label class="col-3">Giá:</label>
-                                <input type="text" name="price[]" value="' . $variant->price . '" class="col-7 form-control" id=""  placeholder="Giá sản phẩm">
+                                <input type="number" hidden class="tientehidden" id="price" name="price[]" value="' . $variant->price . '">
+                                <input type="text" class="col-7 tiente mucgiam form-control" value="' . $variant->price . '" placeholder="Giá sản phẩm" required>
                             </div>
                             <div class="row pd-10"><label class="col-3">Hình ảnh:</label>
                                 <input type="hidden" value="' . $variant->img . '" name="image_last[]">
