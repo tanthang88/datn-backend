@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminRoleTableSeeder::class);
         $this->call(AdminPermissionTableSeeder::class);
         $this->call(AdminUserTableSeeder::class);
+        $this->call(AdminRolePermissionTableSeeder::class);
         $this->call(AdminRoleUserTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

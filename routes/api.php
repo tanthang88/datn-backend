@@ -42,12 +42,13 @@ Route::prefix('client')->group(function () {
         Route::post('logout', [LoginController::class, 'logoutClient']);
         Route::group(['prefix' => 'bills'], function () {
             Route::get('/', [BillController::class, 'index']);
-            Route::get('/{bill}', [BillController::class, 'show']);
+            Route::get('/{bill}/detail', [BillController::class, 'show']);
             Route::post('/add_to_bill', [BillController::class, 'create']);
+            Route::post('/{bill}/cancel', [BillController::class, 'cancelBill']);
         });
         Route::group(['prefix' => 'account'], function () {
             Route::get('/{user}', [AccountController::class, 'show']);
-            Route::put('/{user}/update', [AccountController::class, 'update']);
+            Route::post('/{user}/update', [AccountController::class, 'update']);
         });
     });
     Route::group(['prefix' => 'discountcode'], function () {

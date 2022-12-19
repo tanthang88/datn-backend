@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\About;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AboutRequest extends FormRequest
+class AddAboutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class AboutRequest extends FormRequest
     public function rules()
     {
         return [
-            'about_name'     => 'required|min:3|max:255|unique:abouts,about_name,'.$this->id,
+            'about_name'     => 'required|min:3|max:255|unique:abouts,about_name',
             'type'           => 'required|min:3|max:255',
-            'about_order'    => 'required'
         ];
     }
 
@@ -41,8 +40,6 @@ class AboutRequest extends FormRequest
             'type.required'           => 'Loại chưa được nhập',
             'type.min'                => 'Loại quá ngắn',
             'type.max'                => 'Loại quá dài',
-
-            'about_order.required'    => 'Thứ tự chưa được nhập',
 
         ];
     }

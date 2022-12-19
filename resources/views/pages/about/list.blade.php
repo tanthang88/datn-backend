@@ -18,15 +18,16 @@
         <div class="container-fluid">
             <div class="row">
               <div class="col-12">
-                <div class="row" style="padding-top:10px;">
+                <div class="row" style="padding-top:15px;padding-bottom:15px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-dark"><a href="{{route('about.add')}}" style="color:#fff">Thêm mới</a></button>
+                        <button type="button" class="btn btn-success"><a href="{{route('about.add')}}" style="color:#fff">+ Thêm mới</a></button>
                     </div>
-                    <form action="" class="col-4">
+                    <div class="col-7"></div>
+                    <form action="" class="col-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search">
+                            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
                             <div class="input-group-append">
-                                <button type="submit" name="submit" class="btn btn-success"><i class="fas fa-search"></i></button>
+                                <button type="submit" name="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </form>
@@ -34,23 +35,19 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th style="width:3%"><input type="checkbox" style="text-align:center;"></th>
-                        <th style="width:5.5%">Thứ tự</th>
+                        <th style="width:5.5%;text-align:center;">ID</th>
                         <th style="width:20%; text-align:center;">Tên thông tin</th>
-                        <th style="width:6.5%">Phân loại</th>
-                        <th style="width:10%">Ngày tạo</th>
-                        <th style="width:6%" >Ẩn/hiện</th>
+                        <th style="width:6.5%;text-align:center;">Phân loại</th>
+                        <th style="width:6%;text-align:center;" >Ẩn/hiện</th>
                         <th style="width:20%; text-align:center;">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $about)
                             <tr>
-                                <td></td>
-                                <td>{{$about->about_order}}</td>
+                                <td>{{$about->id}}</td>
                                 <td>{{$about->about_name}}</td>
                                 <td>{{$about->type}}</td>
-                                <td>{{$about->created_at}}</td>
                                 <td>
                                     @if($about->about_display == 1)
                                         <input type="checkbox" checked>

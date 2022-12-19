@@ -86,7 +86,7 @@ Trang chủ
                 <section class="col-lg-8 connectedSortable ui-sortable">
                     <div class="card">
                         <figure class="highcharts-figure">
-                            <div id="container">
+                            <div id="container" data-list-day={{$list_day}} data-money={{$arr_turn_over}}>
                             </div>
                         </figure>
                     </div>
@@ -130,13 +130,13 @@ Trang chủ
                                         </td>
                                         <td>
                                             @if($new->bill_status == 0)
-                                                <span class="badge badge-warning">chờ xác nhận</span>
+                                                <span class="badge badge-danger">chờ xác nhận</span>
                                             @elseif ($new->bill_status == 1)
                                                 <span class="badge badge-info">đã xác nhận</span>
                                             @elseif ($new->bill_status == 2)
-                                                <span class="badge badge-success">đang giao hàng</span>
+                                                <span class="badge badge-warning">đang giao hàng</span>
                                             @elseif ($new->bill_status == 3)
-                                                <span class="badge badge-danger">giao thành công</span>
+                                                <span class="badge badge-success">giao thành công</span>
                                             @else
                                                 <span class="badge badge-secondary">đã hủy</span>
                                             @endif
@@ -184,7 +184,7 @@ Trang chủ
                                 @foreach ($top_product as $top)
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="{{$top->product_image}}" alt="{{$top->product_name}}" class="img-size-50">
+                                        <img src="{{$top->product_image}}" alt="{{$top->product_name}}">
                                     </div>
                                     <div class="product-info">
                                         <a href="javascript:void(0)" class="product-title">
@@ -222,57 +222,67 @@ Trang chủ
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script type="text/javascript">
+     let dataListDay = $('#container').attr('data-list-day');
+         dataListDay = JSON.parse(dataListDay);
+    let dataMoney = $('#container').attr('data-money');
+         dataMoney = JSON.parse(dataMoney);
         Highcharts.chart('container', {
-            chart: {
-                type: 'variwide'
-            },
             title: {
-                text: 'Thống kê doanh thu các ngày trong tháng'
-            },
-
-            subtitle: {
-                text: 'Source: <a href="http://ec.europa.eu/eurostat/web/' +
-                    'labour-market/labour-costs/main-tables">eurostat</a>'
+                text: 'Thống kê doanh thu từng ngày trong tháng'
             },
             xAxis: {
-                type: 'category'
-            },
-            legend: {
-                enabled: false
+                categories: dataListDay
             },
             series: [{
-                name: 'Labor Costs',
-                data: [
-                    ['Norway', 50.2, 335504],
-                    ['Denmark', 42, 277339],
-                    ['Belgium', 39.2, 421611],
-                    ['Sweden', 38, 462057],
-                    ['France', 35.6, 2228857],
-                    ['Netherlands', 34.3, 702641],
-                    ['Finland', 33.2, 215615],
-                    ['Germany', 33.0, 3144050],
-                    ['Austria', 32.7, 349344],
-                    ['Ireland', 30.4, 275567],
-                    ['Italy', 27.8, 1672438],
-                    ['United Kingdom', 26.7, 2366911],
-                    ['Spain', 21.3, 1113851],
-                    ['Greece', 14.2, 175887],
-                    ['Portugal', 13.7, 184933],
-                    ['Czech Republic', 10.2, 176564],
-                    ['Poland', 8.6, 424269],
-                    ['Romania', 5.5, 169578]
-                ],
-                dataLabels: {
-                    enabled: true,
-                    format: '€{point.y:.0f}'
-                },
-                tooltip: {
-                    pointFormat: 'Labor Costs: <b>€ {point.y}/h</b><br>' +
-                        'GDP: <b>€ {point.z} million</b><br>'
-                },
-                colorByPoint: true
+                type: 'column',
+                name: 'Doanh thu',
+                colorByPoint: true,
+                data: dataMoney,
+                showInLegend: false
             }]
-        });
+            });
+
+            document.getElementById('plain').addEventListener('click', () => {
+            chart.update({
+                chart: {
+                inverted: false,
+                polar: false
+                },
+                subtitle: {
+                text: 'Chart option: Plain | Source: ' +
+                    '<a href="https://www.nav.no/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/helt-ledige"' +
+                    'target="_blank">NAV</a>'
+                }
+            });
+            });
+
+            document.getElementById('inverted').addEventListener('click', () => {
+            chart.update({
+                chart: {
+                inverted: true,
+                polar: false
+                },
+                subtitle: {
+                text: 'Chart option: Inverted | Source: ' +
+                    '<a href="https://www.nav.no/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/helt-ledige"' +
+                    'target="_blank">NAV</a>'
+                }
+            });
+            });
+
+            document.getElementById('polar').addEventListener('click', () => {
+            chart.update({
+                chart: {
+                inverted: false,
+                polar: true
+                },
+                subtitle: {
+                text: 'Chart option: Polar | Source: ' +
+                    '<a href="https://www.nav.no/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/helt-ledige"' +
+                    'target="_blank">NAV</a>'
+                }
+            });
+            });
 
     </script>
     <script type="text/javascript">

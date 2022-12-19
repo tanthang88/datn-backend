@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\About\AddAboutRequest;
+use App\Http\Requests\About\UpdateAboutRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\About;
-use App\Http\Requests\AboutRequest;
 use App\Http\Requests\FeeShipRequest;
 use App\Models\City;
 
@@ -19,13 +20,13 @@ class AboutController extends Controller
         ]);
     }
 
-    public function store(AboutRequest $request)
+    public function store(AddAboutRequest $request)
     {
         $about = new About;
         $about->about_name = $request->about_name;
         $about->about_slug = Str::slug($request->about_name);
         $about->type = $request->type;
-        $about->about_order = $request->about_order;
+        $about->about_order = 1;
         if ($request->about_display == 'on') {
             $about->about_display = 1;
         } else {
@@ -50,13 +51,13 @@ class AboutController extends Controller
         ]);
     }
 
-    public function update(AboutRequest $request, $id)
+    public function update(UpdateAboutRequest $request, $id)
     {
         $about = About::find($id);
         $about->about_name = $request->about_name;
         $about->about_slug = Str::slug($request->about_name);
         $about->type = $request->type;
-        $about->about_order = $request->about_order;
+        $about->about_order = 1;
         if ($request->about_display == 'on') {
             $about->about_display = 1;
         } else {
@@ -74,9 +75,9 @@ class AboutController extends Controller
 
     public function index(Request $request)
     {
-        $data = About::orderBy('id', 'desc')->where('type','!=','fee-ship')->paginate(20);
+        $data = About::orderBy('id', 'desc')->where('type','!=','fee-ship')->paginate(15);
         if ($search = $request->search) {
-            $data = About::orderBy('id', 'desc')->where('about_name', 'like', '%' . $search . '%')->paginate(20);
+            $data = About::orderBy('id', 'desc')->where('about_name', 'like', '%' . $search . '%')->paginate(15);
         }
         return view('pages.about.list', [
             'title'     => 'Danh sách thông tin',
