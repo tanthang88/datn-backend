@@ -57,8 +57,7 @@
                                     @endif
                                 </td>
                                 <td>{{$post->post_name}}</td>
-                                {{-- <td>{{$post->postCategory->category_name}}</td> --}}
-                                <td>{{$post->category_id }}</td>
+                                 <td>{{$post->postCategory->category_name}}</td>
                                 <td>
                                     <input type="checkbox" {{$post->post_display == 1 ? 'checked' : ''}}>
                                 </td>

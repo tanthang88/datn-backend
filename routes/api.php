@@ -88,6 +88,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/{product}', [ProductController::class, 'show']);
     Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
     Route::get('/variantion/{product}/{properties}', [VariantionController::class, 'getVariantion']);
+    Route::get('/search/{product}', [ProductController::class, 'search']);
 });
 Route::group(['prefix' => 'slider'], function () {
     Route::get('/', [SliderController::class, 'listSliders']);

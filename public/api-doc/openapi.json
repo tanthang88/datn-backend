@@ -1318,6 +1318,237 @@
                 }
             }
         },
+        "/api/product/search/{name}": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "Product Search By Name",
+                "operationId": "produt-search-by-name",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "name",
+                        "required": true,
+                        "description": "name?name=iphone",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Get list success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "current_page": 1,
+                                        "data": [
+                                            {
+                                                "id": 27,
+                                                "product_title": "Grayson Ankunding",
+                                                "product_slug": "consequatur-voluptatem-ut-iure-iusto",
+                                                "product_desc": "Odit maiores maiores corrupti et ratione deserunt veritatis.",
+                                                "product_price": 612,
+                                                "product_image": "https://via.placeholder.com/200x200.png/00ff88?text=inventore",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 0,
+                                                "product_outstanding": 1,
+                                                "is_discount_product": 1,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": null,
+                                                "category_parent_id": null
+                                            },
+                                            {
+                                                "id": 25,
+                                                "product_title": "Reina Barrows",
+                                                "product_slug": "rerum-sit-nihil-iure-doloribus",
+                                                "product_desc": "Saepe atque ipsum iste cupiditate porro beatae sed.",
+                                                "product_price": 691,
+                                                "product_image": "https://via.placeholder.com/200x200.png/006677?text=laudantium",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 1,
+                                                "product_outstanding": 1,
+                                                "is_discount_product": 1,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": null,
+                                                "category_parent_id": null
+                                            },
+                                            {
+                                                "id": 24,
+                                                "product_title": "Tatum Lang DDS",
+                                                "product_slug": "odio-illo-ut-magnam-est-sit",
+                                                "product_desc": "Suscipit provident ad ipsum eaque ipsa.",
+                                                "product_price": 502,
+                                                "product_image": "https://via.placeholder.com/200x200.png/00dd77?text=eius",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 0,
+                                                "product_outstanding": 1,
+                                                "is_discount_product": 0,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": null,
+                                                "category_parent_id": null
+                                            },
+                                            {
+                                                "id": 23,
+                                                "product_title": "Maegan Armstrong",
+                                                "product_slug": "laborum-est-illum-odit-sunt-incidunt",
+                                                "product_desc": "Voluptatem culpa officia omnis enim.",
+                                                "product_price": 703,
+                                                "product_image": "https://via.placeholder.com/200x200.png/00cc33?text=rerum",
+                                                "product_configurations": null,
+                                                "is_variation": 1,
+                                                "is_selling": 0,
+                                                "product_outstanding": 1,
+                                                "is_discount_product": 0,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": null,
+                                                "category_parent_id": null
+                                            },
+                                            {
+                                                "id": 22,
+                                                "product_title": "Dr. Geovanny Vandervort",
+                                                "product_slug": "asperiores-ea-harum-natus-sint-laboriosam-suscipit",
+                                                "product_desc": "Sapiente aut aliquam molestias rerum earum ullam.",
+                                                "product_price": 487,
+                                                "product_image": "https://via.placeholder.com/200x200.png/00aa00?text=adipisci",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 1,
+                                                "product_outstanding": 0,
+                                                "is_discount_product": 0,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": null,
+                                                "category_parent_id": null
+                                            },
+                                            {
+                                                "id": 21,
+                                                "product_title": "Mrs. Suzanne Hermann",
+                                                "product_slug": "ab-praesentium-et-eius-quo",
+                                                "product_desc": "Ad iusto et reprehenderit cum excepturi tempore.",
+                                                "product_price": 635,
+                                                "product_image": "https://via.placeholder.com/200x200.png/000011?text=consequatur",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 1,
+                                                "product_outstanding": 0,
+                                                "is_discount_product": 0,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": null,
+                                                "category_parent_id": null
+                                            },
+                                            {
+                                                "id": 19,
+                                                "product_title": "Herminio Blanda DVM",
+                                                "product_slug": "alias-ea-praesentium-quis-voluptatem",
+                                                "product_desc": "At quae saepe qui soluta corporis accusantium.",
+                                                "product_price": 164,
+                                                "product_image": "https://via.placeholder.com/200x200.png/00cc66?text=sint",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 1,
+                                                "product_outstanding": 1,
+                                                "is_discount_product": 1,
+                                                "discount_product": null,
+                                                "dealsock_product": null,
+                                                "properties": [],
+                                                "category_name": "Fern Sawayn",
+                                                "category_parent_id": 2
+                                            },
+                                            {
+                                                "id": 18,
+                                                "product_title": "Iphone 14 Promax",
+                                                "product_slug": "iphone-14-promax",
+                                                "product_desc": null,
+                                                "product_price": 20000000,
+                                                "product_image": "/storage/uploads/2022-12-15/5-pinsạcdựphòng-120x120.png",
+                                                "product_configurations": null,
+                                                "is_variation": 0,
+                                                "is_selling": 0,
+                                                "product_outstanding": 0,
+                                                "is_discount_product": 1,
+                                                "discount_product": null,
+                                                "dealsock_product": [
+                                                    {
+                                                        "id": 283,
+                                                        "promotion_id_product": 18,
+                                                        "promotion_id_product_combo": 19,
+                                                        "promotion_id": 63,
+                                                        "promotion_rate": 1,
+                                                        "promotion_rate_combo": 1,
+                                                        "promotion": {
+                                                            "id": 63,
+                                                            "promotion_name": "GIảm deal sốc232131",
+                                                            "promotion_numer_of_use": 22,
+                                                            "promotion_numer_of_used": 0,
+                                                            "promotion_type": 0,
+                                                            "promotion_datestart": "2022-12-18 00:00:00",
+                                                            "promotion_dateend": "2022-12-18 23:59:59"
+                                                        },
+                                                        "product_combo": {
+                                                            "id": 19,
+                                                            "product_name": "Herminio Blanda DVM",
+                                                            "product_image": "https://via.placeholder.com/200x200.png/00cc66?text=sint",
+                                                            "product_price": 164,
+                                                            "product_quantity": 230,
+                                                            "product_desc": "At quae saepe qui soluta corporis accusantium."
+                                                        }
+                                                    }
+                                                ],
+                                                "properties": [],
+                                                "category_name": "Phụ kiện",
+                                                "category_parent_id": 0
+                                            }
+                                        ],
+                                        "first_page_url": "http://127.0.0.1:8000/api/product/search/name?page=1",
+                                        "from": 1,
+                                        "last_page": 1,
+                                        "last_page_url": "http://127.0.0.1:8000/api/product/search/name?page=1",
+                                        "links": [
+                                            {
+                                                "url": null,
+                                                "label": "pagination.previous",
+                                                "active": false
+                                            },
+                                            {
+                                                "url": "http://127.0.0.1:8000/api/product/search/name?page=1",
+                                                "label": "1",
+                                                "active": true
+                                            },
+                                            {
+                                                "url": null,
+                                                "label": "pagination.next",
+                                                "active": false
+                                            }
+                                        ],
+                                        "next_page_url": null,
+                                        "path": "http://127.0.0.1:8000/api/product/search/name",
+                                        "per_page": 12,
+                                        "prev_page_url": null,
+                                        "to": 8,
+                                        "total": 8
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/about": {
             "get": {
                 "tags": ["About"],
@@ -2468,8 +2699,7 @@
                         "description": "Create contact success",
                         "content": {
                             "application/json": {
-                                "example": {
-                                }
+                                "example": {}
                             }
                         }
                     }
