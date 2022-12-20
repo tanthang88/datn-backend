@@ -11,7 +11,7 @@ use App\Models\ProductCategories;
 use App\Services\ProductService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function __construct(protected ProductService $productService)
@@ -119,4 +119,25 @@ class ProductController extends Controller
             );
         }
     }
+    /**
+     * listProductsSearch
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        try {
+            $products = $this->productService->getSearch($request);
+            $listData = ProductResource::collection($products);
+            $products->data = $listData;
+            return $this->responseSuccess(['data' => $products]);
+        } catch (\Throwable $th) {
+            Log::error("get product " . $th);
+            return $this->responseError(
+                array(trans('alert.product.get_list.failed')),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
 }

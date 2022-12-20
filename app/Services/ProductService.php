@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\ProductCategories;
+use Illuminate\Http\Request;
 
 class ProductService
 {
@@ -82,5 +83,20 @@ class ProductService
             ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
             ->where('category_id', $product->category_id)
             ->get();
+    }
+    /**
+     * getListProductSearch
+     *
+     * @param  $select
+     * @return Object
+     */
+    public function getSearch(Request $request, $select = ['*'])
+    {
+        return Product::select($select)
+            ->when(!empty($request), function ($query) use ($request) {
+                $query->where('product_name','like','%' .$request->name . '%');
+            })
+            ->orderBy('id', 'DESC')
+            ->paginate($this->perPage);
     }
 }
