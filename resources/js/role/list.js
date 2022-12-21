@@ -13,36 +13,24 @@ const columns = [
     },
     {
         data: null,
-        className: 'editor-edit',
+        className: 'editor',
         render: function (data) {
             return (`
-        <a
+        <a class="btn btn-sm btn-info"
             href="${URL.ROLE.EDIT + data.id}"
         >
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                <i class="cursor-pointer fas fa-edit"></i>
-            </button>
-        </a>`
-            );
-        },
-        orderable: false
-    },
-    {
-        data: null,
-        className: 'editor-delete',
-        render: function (data) {
-            return (`
+            <i class="fas fa-pencil-alt"></i> Sửa
+        </a>
         <a
             data-url="${URL.ROLE.DELETE + data.id}"
-            class="btn-action-delete"
+            class="btn-action-delete btn btn-sm btn-danger"
         >
-            <button type="button" class="btn btn-sm btn-outline-secondary">
-                <i class="fas fa-trash"></i>
-            </button>
+                <i class="fas fa-trash"></i> Xóa
         </a>`
             );
         },
         orderable: false
     }
+
 ];
 dataTable(columns, url, '#dataTable');

@@ -130,13 +130,13 @@ Trang chủ
                                         </td>
                                         <td>
                                             @if($new->bill_status == 0)
-                                                <span class="badge badge-warning">chờ xác nhận</span>
+                                                <span class="badge badge-danger">chờ xác nhận</span>
                                             @elseif ($new->bill_status == 1)
                                                 <span class="badge badge-info">đã xác nhận</span>
                                             @elseif ($new->bill_status == 2)
-                                                <span class="badge badge-success">đang giao hàng</span>
+                                                <span class="badge badge-warning">đang giao hàng</span>
                                             @elseif ($new->bill_status == 3)
-                                                <span class="badge badge-danger">giao thành công</span>
+                                                <span class="badge badge-success">giao thành công</span>
                                             @else
                                                 <span class="badge badge-secondary">đã hủy</span>
                                             @endif
@@ -184,7 +184,7 @@ Trang chủ
                                 @foreach ($top_product as $top)
                                 <li class="item">
                                     <div class="product-img">
-                                        <img src="{{$top->product_image}}" alt="{{$top->product_name}}" class="img-size-50">
+                                        <img src="{{$top->product_image}}" alt="{{$top->product_name}}">
                                     </div>
                                     <div class="product-info">
                                         <a href="javascript:void(0)" class="product-title">

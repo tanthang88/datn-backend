@@ -26,8 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-//         $favicon = Company::select('company_favicon')->first();
-//         View::share('FAVICON',$favicon->company_favicon);
         Paginator::useBootstrap();
     }
 }

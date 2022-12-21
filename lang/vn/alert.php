@@ -126,5 +126,10 @@ return [
             'failed' => 'Bạn đã sử dụng mã giảm giá này',
             'successed' => 'Áp dụng mã giảm giá thành công'
         ]
-    ]
+    ],
+    'contact' => [
+        'create' => [
+            'failed' => 'Đã có lỗi xảy ra',
+        ]
+    ],
 ];

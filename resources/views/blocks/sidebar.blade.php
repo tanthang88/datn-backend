@@ -1,9 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-        <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: 0.8" />
-        <span class="brand-text font-weight-light">FivePass Admin</span>
+        <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
+        <span class="brand-text font-weight-light">LastFire Admin</span>
     </a>
 
     <!-- Sidebar -->
@@ -11,8 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
-                    alt="User Image" />
+                <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info text-white">
                 @if(!empty(Auth::user()))
@@ -32,8 +30,7 @@
                     </a>
                 </li>
                 @can('view-post')
-                <li
-                    class="nav-item {{ in_array(Route::current()->getPrefix(),array('/post','/postCategories'))?'menu-is-opening menu-open':''}}">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('/post','/postCategories'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
@@ -70,12 +67,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('supplier.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('supplier.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
@@ -85,8 +76,7 @@
                 </li>
                 @endcan
                 @can('view-product')
-                <li
-                    class="nav-item {{ in_array(Route::current()->getPrefix(),array('/product','/categoriesProduct'))?'menu-is-opening menu-open':''}}">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('/product','/categoriesProduct'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-th pl-1" aria-hidden="true"></i>
                         <p class="pl-2">
@@ -145,12 +135,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('staff.add') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('staff.list') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
@@ -171,12 +155,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('role.add') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('role.list') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
@@ -186,8 +164,7 @@
                 </li>
                 @endcan
                 @can('view-promotion')
-                <li
-                    class="nav-item {{ in_array(Route::current()->getPrefix(),array('promotion/discount-code','promotion/discount','promotion/dealsock'))?'menu-is-opening menu-open':''}}">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('promotion/discount-code','promotion/discount','promotion/dealsock'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-gift" aria-hidden="true"></i>
                         <p class="pl-2">
@@ -230,12 +207,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('slider.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('slider.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
@@ -254,12 +225,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('banner.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{route('banner.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
@@ -268,6 +233,24 @@
                     </ul>
                 </li>
                 @endcan
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('/comment'))?'menu-is-opening menu-open':''}}">
+                    <a href="#" class="nav-link">
+                    <i class="fa fa-comments mr-2" aria-hidden="true"></i>
+                        <p class="pl-2">
+                            Bình luận
+                            <i class="fas fa-angle-left right"></i>
+                            <span class="badge badge-info right">1</span>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('comment.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách </p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @can('view-bill')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -287,8 +270,7 @@
                     </ul>
                 </li>
                 @endcan
-                <li
-                    class="nav-item {{ in_array(Route::current()->getPrefix(),array('shop/info','shop/feeship'))?'menu-is-opening menu-open':''}}">
+                <li class="nav-item {{ in_array(Route::current()->getPrefix(),array('shop/info','shop/feeship'))?'menu-is-opening menu-open':''}}">
                     <a href="#" class="nav-link">
                         <i class="fa fa-archive" aria-hidden="true"></i>
                         <p class="pl-2">
@@ -316,6 +298,12 @@
                             <a href="{{route('about.list')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Về chúng tôi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('contact.list')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Liên hệ</p>
                             </a>
                         </li>
                     </ul>

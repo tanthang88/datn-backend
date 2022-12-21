@@ -100,29 +100,11 @@
                                <tr>
                                    <td>#{{$i++}}</td>
                                    <td class="d-flex">
-                                        <img width="100px" src="{{$data->product->product_image}}" style="padding-right:10px;" alt="">
+                                        <img width="100px" src="{{$data->product_image}}" style="padding-right:10px;" alt="">
                                         <div>
-                                            <h6 style="color:Teal">{{$data->product->product_name}}</h6>
+                                            <h6 style="color:Teal">{{$data->product_name}}</h6>
                                             <span style="color:Gray">
-                                                @php
-                                                    $html = '';
-                                                    if($data->variant_id!=''){
-                                                        $variant = Variantion::where('id', $data->variant_id)->first();
-                                                        $propertie = Propertie::where('id', $variant->propertie_id)->first();
-                                                        $html .= $propertie->propertie_value .' ';
-                                                        if($variant->propertie_id_link!=null){
-                                                            $arr_link = explode(' ', $variant->propertie_id_link);
-                                                            $arr_search = array_search('', $arr_link);
-                                                            unset($arr_link[$arr_search]);
-                                                            foreach($arr_link as $arr_link){
-                                                                $propertie_link = Propertie::where('id', $arr_link)->first();
-                                                                $html .=  $propertie_link->propertie_value .' ';
-                                                            }
-                                                        }
-
-                                                        echo $html ;
-                                                    }
-                                                @endphp
+                                                {{$data->variant_name}}
                                             </span>
                                         </div>
                                     </td>
@@ -157,7 +139,5 @@
 
         </div>
 @endsection
-<script>
 
-</script>
 

@@ -26,6 +26,8 @@ class ProductComment extends Model
         'comment_email',
         'comment_content',
         'customer_id',
+        'comment_display',
+        'parent_id',
     ];
 
     /**
@@ -46,5 +48,14 @@ class ProductComment extends Model
     public function customer()
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');
+    }
+     /**
+     * customer
+     *
+     * @return belongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

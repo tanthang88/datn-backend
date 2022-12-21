@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\AddPostRequest;
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,11 +17,12 @@ class PostController extends Controller
     {
         $post_categories = DB::table('post_categories')->get();
         return view('pages.Post.add',[
+            'title' => 'Thêm mới bài viết',
             'post_categories' => $post_categories,
         ]);
 
     }
-    public function store(Request $request)
+    public function store(AddPostRequest $request)
     {
         $data = array();
         $data['category_id'] = $request->category_id;
@@ -35,7 +38,6 @@ class PostController extends Controller
             );
 
             $thumb = '/storage/' . $pathFull . '/' . $name;
-            //dd($thumb);
             $data['post_img'] = $thumb;
         }
 
@@ -71,6 +73,7 @@ class PostController extends Controller
       $category_name =  $category_name->category_name;
 
       return view('pages.Post.edit',[
+        'title' => 'Chỉnh sửa danh mục',
         'category_name' => $category_name,
         'post_categories' => $post_categories,
         'posts' => $posts,
@@ -79,13 +82,13 @@ class PostController extends Controller
 
     ]);
     }
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
         $posts = Post::find($id);
         $posts->category_id =$request->category_id;
         $posts->post_name = $request->post_name;
         $posts->post_slug = changeTitle($request->post_name);
-        $posts->post_order = $request->post_order;
+        $posts->post_order = 1;
 
         if($request->hasFile('post_img')){
                 $name = $request->file('post_img')->getClientOriginalName();
@@ -121,11 +124,12 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
-        $posts = DB::table('posts')->get();
+        $posts = Post::with(['postCategory'])->orderBy('id','desc')->paginate(15);
         if($search = $request->search){
-            $posts = DB::table('posts')->where('post_name','like','%'.$search.'%')->get();
+            $posts =Post::with(['postCategory'])->orderBy('id','desc')->where('post_name','like','%'.$search.'%')->paginate(15);
          }
         return view('pages.post.list',[
+            'title' => 'Danh sách bài viết',
             'posts' => $posts,
         ]);
     }

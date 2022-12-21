@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriesPost\AddCategoriesPostRequest;
+use App\Http\Requests\CategoriesPost\UpdateCategoriesPostRequest;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,14 +15,16 @@ class PostCategoriesController extends Controller
 {
     public function create()
     {
-        return view('pages.postcategories.add');
+        return view('pages.postcategories.add',[
+            'title' => 'Thêm mới danh mục bài viết'
+        ]);
     }
-    public function store(Request $request)
+    public function store(AddCategoriesPostRequest $request)
     {
         $data = array();
         $data['category_name'] = $request->category_name;
         $data['category_slug'] = changeTitle($request->category_name);
-        $data['category_order'] = $request->category_order;
+        $data['category_order'] = 1;
         if ($request->category_display == 'on') {
             $data['category_display'] = 1;
         } else {
@@ -46,15 +50,16 @@ class PostCategoriesController extends Controller
     {
         $updateCPost = DB::table('post_categories')->where('id', $id)->first();
         return view('pages.postcategories.edit', [
+            'title' => 'Chỉnh sửa danh mục bài viết',
             'updateCPost' => $updateCPost,
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(UpdateCategoriesPostRequest $request, $id)
     {
         $post_categories = PostCategory::find($id);
         $post_categories->category_name = $request->category_name;
         $post_categories->category_slug = changeTitle($request->category_name);
-        $post_categories->category_order = $request->category_order;
+        $post_categories->category_order = 1;
         if ($request->category_display == 'on') {
             $post_categories->category_display = 1;
         } else {
@@ -77,11 +82,12 @@ class PostCategoriesController extends Controller
     }
     public function index(Request $request)
     {
-        $post_categories = DB::table('post_categories')->get();
+        $post_categories = DB::table('post_categories')->orderBy('id','desc')->paginate(15);
         if ($search = $request->search) {
-            $post_categories = DB::table('post_categories')->where('category_name', 'like', '%' . $search . '%')->get();
+            $post_categories = DB::table('post_categories')->orderBy('id','desc')->where('category_name', 'like', '%' . $search . '%')->paginate(15);
         }
         return view('pages.postcategories.list', [
+            'title' => 'Danh sách danh mục bài viết',
             'post_categories' => $post_categories,
         ]);
     }

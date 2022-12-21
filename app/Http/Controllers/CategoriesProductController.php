@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoriesProduct\AddCategoriesProductRequest;
+use App\Http\Requests\CategoriesProduct\UpdateCategoriesProductRequest;
 use Illuminate\Http\Request;
 use App\Models\ProductCategories;
 use Illuminate\Support\Facades\DB;
@@ -16,10 +18,11 @@ class CategoriesProductController extends Controller
     {
         $product_categories= DB::table('product_categories')->where('parent_id', 0)->get();
         return view('pages.categoriesproduct.add',[
+            'title' => 'Thêm mới danh mục',
             'product_categories' => $product_categories,
         ]);
     }
-    public function store(Request $request)
+    public function store(AddCategoriesProductRequest $request)
     {
         $data = array();
         $data['category_name'] = $request->category_name;
@@ -35,7 +38,7 @@ class CategoriesProductController extends Controller
             $thumb = '/storage/' . $pathFull . '/' . $name;
             $data['category_image'] = $thumb;
         }
-        $data['category_order'] = $request->category_order;
+        $data['category_order'] = 1;
         $data['parent_id'] = $request->parent_id;
         if($request->category_display=='on'){
             $data['category_display']=1;
@@ -65,7 +68,7 @@ class CategoriesProductController extends Controller
         foreach($parent_id as $parent_id) {
             $parent_id_val = $parent_id -> parent_id;
         }
-           $updateCP= DB::table('product_categories')->where('id', $id)->get();
+           $updateCP= DB::table('product_categories')->where('id', $id)->first();
         if($parent_id_val !=0) {
             $parent_name=DB::table('product_categories')->where('id',$parent_id_val)->get();
             foreach($parent_name as $parent_name) {
@@ -73,13 +76,15 @@ class CategoriesProductController extends Controller
             }
 
             return view('pages.categoriesproduct.edit',[
-            'updateCP' => $updateCP,
-            'parent_name_val'=>$parent_name_val,
-            'product_categories' =>$product_categories,
-            'parent_id_val' =>$parent_id_val
+                'title' => 'Chỉnh sửa danh mục',
+                'updateCP' => $updateCP,
+                'parent_name_val'=>$parent_name_val,
+                'product_categories' =>$product_categories,
+                'parent_id_val' =>$parent_id_val
         ]);
         } else {
             return view('pages.categoriesproduct.edit',[
+                'title' => 'Chỉnh sửa danh mục',
                 'updateCP' => $updateCP,
                 'product_categories' =>$product_categories,
                 'parent_id_val' =>$parent_id_val
@@ -87,9 +92,8 @@ class CategoriesProductController extends Controller
         }
 
     }
-    public function update(Request $request, $id)
+    public function update(UpdateCategoriesProductRequest $request, $id)
     {
-        // dd($request->all());
        $product_categories = ProductCategories::find($id);
        $product_categories->category_name = $request->category_name;
        $product_categories->category_slug = Str::slug($request->category_name);
@@ -104,7 +108,7 @@ class CategoriesProductController extends Controller
             $thumb = '/storage/' . $pathFull . '/' . $name;
             $product_categories->category_image = $thumb;
        }
-       $product_categories->category_order = $request->category_order;
+       $product_categories->category_order = 1;
        $product_categories->parent_id = $request->parent_id;
        if($request->category_display=='on'){
             $product_categories->category_display = 1;
@@ -121,17 +125,17 @@ class CategoriesProductController extends Controller
       $product_categories->seo_title = $request->seo_title;
       $product_categories->seo_keywords = $request->seo_keywords;
       $product_categories->seo_description = $request->seo_description;
-      $product_categories->updated_at = NOW();
        $product_categories->save();
        return redirect('/categoriesProduct')->with('success', trans('alert.update.success'));
     }
     public function index(Request $request)
     {
-        $product_categories = DB::table('product_categories')->get();
+        $product_categories = DB::table('product_categories')->orderBy('id','desc')->get();
         if($search = $request->search){
-            $product_categories = DB::table('product_categories')->where('category_name','like','%'.$search.'%')->get();
+            $product_categories = DB::table('product_categories')->where('category_name','like','%'.$search.'%')->orderBy('id','desc')->get();
          }
         return view('pages.categoriesproduct.list',[
+            'title' => 'Danh sách danh mục sản phẩm',
             'product_categories' => $product_categories,
         ]);
     }

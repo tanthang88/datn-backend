@@ -76,13 +76,15 @@ Chỉnh sửa khách hàng
                                 <div class="form-group">
                                     <label for="name">Giới tính</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="1" name="gender" {{
-                                            $user->gender === config('default.gender.male') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" value="0" name="gender"
+                                                @checked( $user->gender === 0 ?? false )
+                                            >
                                         <label class="form-check-label">Nam</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="0" name="gender" {{
-                                            $user->gender === config('default.gender.female') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" value="0" name="gender"
+                                            @checked( $user->gender === 1 ?? false )
+                                        >
                                         <label class="form-check-label">Nữ</label>
                                     </div>
                                 </div>

@@ -17,28 +17,29 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">15</span>
+                <span class="badge badge-warning navbar-badge countNotiAll"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <span class="dropdown-item dropdown-header"><span class="countNotiAll"></span> Thông báo </span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
+                <a href="{{route('contact.list')}}" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i> <span class="countNotiContact"></span> Liên hệ mới
+                    <span class="float-right text-muted text-sm dateNotiContact"></span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-users mr-2"></i> 8 friend requests
-                    <span class="float-right text-muted text-sm">12 hours</span>
+                <a href="{{route('order.list')}}" class="dropdown-item">
+                    <i class="fa fa-cart-arrow-down mr-2" aria-hidden="true"></i><span class="countNotiOrder"></span> Đơn hàng mới
+                    <span class="float-right text-muted text-sm dateNotiOrder"></span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-file mr-2"></i> 3 new reports
-                    <span class="float-right text-muted text-sm">2 days</span>
+                <a href="{{route('comment.list')}}" class="dropdown-item">
+                <i class="fa fa-comments mr-2" aria-hidden="true"></i><span class="countNotiComment"></span> Bình luận mới
+                    <span class="float-right text-muted text-sm dateNotiComment"></span>
                 </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
         </li>
     </ul>
 </nav>
+@prepend('scripts')
+<script type="module" src="{{Vite::asset('resources/js/contact/countNotification.js')}}"></script>
+@endprepend

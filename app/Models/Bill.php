@@ -132,11 +132,6 @@ class Bill extends Model
         return $this->hasMany(BillDetail::class, 'bill_id', 'id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'customer_id', 'id');
-    }
-
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
