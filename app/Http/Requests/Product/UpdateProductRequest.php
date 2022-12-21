@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name'     => 'required|min:6|max:255|unique:products,product_name->ignore($id)',
+            'product_name'     => 'required|min:6|max:255|unique:products,product_name,'.$this->id,
             'supplier_id'      => 'required',
             'product_quantity' => 'required|integer|min:1',
             'category_id'      => 'required',
