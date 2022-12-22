@@ -7,7 +7,7 @@ Thêm nhân viên
 
 @section('content')
 <div class="container-fluid">
-    <x-alert errorText="{{ trans('alert.update.error') }}" />
+    <x-alert errorText="{{ trans('alert.add.error') }}" />
     <div class="row">
         <div class="col-md-12">
             <div class="card card-primary">
@@ -44,7 +44,8 @@ Thêm nhân viên
                                 <div class="form-group">
                                     <label for="name">Mật khẩu</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        id="password" name="password" value="{{ old('password') }}" placeholder="Nhập mật khẩu">
+                                        id="password" name="password" value="{{ old('password') }}"
+                                        placeholder="Nhập mật khẩu">
                                     @error('password')
                                     <span style="color: red;font-style: italic"> {{ $message }}</span>
                                     @enderror
@@ -108,7 +109,7 @@ Thêm nhân viên
 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Cập nhật</button>
+                        <button type="submit" class="btn btn-primary float-right">Thêm</button>
                     </div>
                 </form>
             </div>
