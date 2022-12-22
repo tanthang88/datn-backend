@@ -40,8 +40,8 @@
                             <th>Hình ảnh</th>
                             <th style="width:35%;">Tiêu đề bài viết</th>
                             <th>Danh mục</th>
-                            <th>Hiển Thị</th>
-                            <th>Nổi bật</th>
+                            <th>Hiển thị</th>
+                            <th style="text-align:center">Nổi bật</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -57,13 +57,19 @@
                                     @endif
                                 </td>
                                 <td>{{$post->post_name}}</td>
-                                {{-- <td>{{$post->postCategory->category_name}}</td> --}}
+                                {{-- <td>{{$post->postCategory?->cate}}</td> --}}
                                 <td>{{$post->category_id }}</td>
                                 <td>
-                                    <input type="checkbox" {{$post->post_display == 1 ? 'checked' : ''}}>
+                                    @if($post->post_display == 1)
+                                        <span class="badge badge-success">Hiển thị</span>
+                                    @else
+                                        <span class="badge badge-danger">Ẩn</span>
+                                    @endif
                                 </td>
-                                <td>
-                                    <input type="checkbox" {{$post->post_outstanding == 1 ? 'checked' : ''}}>
+                                <td style="text-align:center">
+                                    @if($post->post_outstanding == 1)
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    @endif
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-info" href="{{route('post.update',['id'=>$post->id])}}">
@@ -80,8 +86,9 @@
 
                             </tbody>
                     @endforeach
-
                     </table>
+                    <hr/>
+                    {{$posts->links()}}
                     </div>
             </div>
 

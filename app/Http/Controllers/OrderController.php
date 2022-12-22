@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Order\AddOrderRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
@@ -22,7 +23,7 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $bill = Bill::orderBy('id', 'desc')->get();
+        $bill = Bill::orderBy('id', 'desc')->paginate(15);
         Session::forget('dataSessionProduct');
         return view('pages.order.list',[
             'title'      => 'Danh sách đơn hàng',
@@ -42,6 +43,17 @@ class OrderController extends Controller
                     break;
                 case 'delivered':
                     $bill->bill_status = 3;
+                    $details = BillDetail::where('bill_id', $bill->id)->orderBy('id', 'desc')->get();
+                    foreach ($details as $key => $value) {
+                        $product = Product::find($value->product_id);
+                        if($product){
+                            $quantity = $product->product_quantity;
+                            $update_quantity = $quantity - $value->amount;
+                            $product->product_quantity = $update_quantity;
+                            $product->product_views += $value->amount;
+                        }
+                        $product->update();
+                    }
                     break;
                 case 'cancel':
                     $bill->bill_status = 4;
@@ -136,7 +148,7 @@ class OrderController extends Controller
             'dist' => $dist,
         ]);
     }
-    public function store(Request $request)
+    public function store(AddOrderRequest $request)
     {
         // lưu đơn hàng
         $order = new Bill;

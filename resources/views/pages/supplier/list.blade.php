@@ -55,7 +55,11 @@ Nhà cung cấp
                             Email: {{$supplier->supplier_email}}
                         </td>
                         <td class="check">
-                            <input type="checkbox" {{$supplier->supplier_display == 1 ? 'checked' : ''}}>
+                            @if($supplier->supplier_display == 1)
+                                <span class="badge badge-success">Hiển thị</span>
+                            @else
+                                <span class="badge badge-danger">Ẩn</span>
+                            @endif
                         </td>
                         <td>
                             <a class="btn btn-sm btn-info" href="{{route('supplier.update',['id'=>$supplier->id])}}">

@@ -45,8 +45,8 @@
                             <th style="width:17%; text-align:center;">Tên sản phẩm</th>
                             <th style="width:6.5%; text-align:center;">Danh mục</th>
                             <th style="width:6.5%;text-align:center;">Giá</th>
-                            <th style="width:6%">Nổi bật</th>
-                            <th style="width:6%">Bán chạy</th>
+                            <th style="width:6%;text-align:center;">Nổi bật</th>
+                            <th style="width:6%">Bán ra/Kho</th>
                             <th style="width:3%">Ẩn/hiện</th>
                             <th style="width:10%; text-align:center;">Thao tác</th>
                         </tr>
@@ -66,18 +66,17 @@
                                 <td>{{ number_format($product->product_price,0,'','.')}} ₫</td>
                                 <td>
                                     @if ($product->product_outstanding == '1')
-                                        <input type="checkbox" checked>
-                                    @else
-                                        <input type="checkbox">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
                                     @endif
                                 </td>
                                 <td>
+                                    {{$product->product_views}}/{{$product->product_quantity}}
                                 </td>
                                 <td>
-                                    @if ($product->product_display == '1')
-                                        <input type="checkbox" checked>
+                                    @if ($product->product_display == 1)
+                                        <span class="badge badge-success">Hiển thị</span>
                                     @else
-                                        <input type="checkbox">
+                                        <span class="badge badge-danger">Ẩn</span>
                                     @endif
                                 </td>
                                 <td class="text-right" style="margin:0 auto;">

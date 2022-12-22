@@ -38,28 +38,32 @@
                         <th>Thao tác</th>
                     </tr>
                     </thead>
-                    @foreach($sliders as $sliders)
+                    @foreach($sliders as $slider)
                         <tbody>
                             <tr>
-                                <td>{{$sliders->id}}</td>
+                                <td>{{$slider->id}}</td>
                                 <td>
-                                    @if ($sliders->image!=null)
-                                        <img width="100px" src="{{$sliders->image}}"/>
+                                    @if ($slider->image!=null)
+                                        <img width="100px" src="{{$slider->image}}"/>
                                     @else
                                         Trống
                                     @endif
                                 </td>
-                                <td>{{$sliders->title}}</td>
-                                <td>{{$sliders?->link}}</td>
+                                <td>{{$slider->title}}</td>
+                                <td>{{$slider?->link}}</td>
                                 <td>
-                                    <input type="checkbox" {{$sliders->display==1 ? "checked" : "" }} >
+                                    @if($slider->display==1)
+                                        <span class="badge badge-success">Hiển thị</span>
+                                    @else
+                                        <span class="badge badge-danger">Ẩn</span>
+                                    @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-sm btn-info" href="{{route('slider.show',['slider'=>$sliders->id])}}">
+                                    <a class="btn btn-sm btn-info" href="{{route('slider.show',['slider'=>$slider->id])}}">
                                         <i class="fas fa-pencil-alt"></i>Sửa
                                     </a>
                                     <a class="btn btn-sm btn-danger btn-action-delete"
-                                        data-url="{{route('slider.delete',['id'=>$sliders->id])}}">
+                                        data-url="{{route('slider.delete',['id'=>$slider->id])}}">
                                         <i class="fas fa-trash">
                                         </i>
                                         Xóa
@@ -68,8 +72,9 @@
                             </tr>
                             </tbody>
                     @endforeach
-
                     </table>
+                    <hr/>
+                    {{$sliders->links();}}
                     </div>
             </div>
 

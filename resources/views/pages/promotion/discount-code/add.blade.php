@@ -9,7 +9,7 @@ Tạo chương trình mã giảm giá mới
     <x-alert errorText="{{ trans('alert.add.error') }}" />
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-info">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Vui lòng điền thông tin chi tiết về chương trình mã giảm giá của bạn </h3>
                 </div>
