@@ -193,8 +193,8 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/', [BannerController::class, 'index'])->name('banner.list');
         Route::get('/delete/{id}', [BannerController::class, 'delete'])->name('banner.delete');
     });
-     #comment
-     Route::group(['prefix' => 'comment'], function () {
+    #comment
+    Route::group(['prefix' => 'comment', 'middleware' => ['auth', 'can:view-comment']], function () {
         Route::get('/', [ProductCommentController::class, 'index'])->name('comment.list');
         Route::get('/data', [ProductCommentController::class, 'dataComment'])->name('comment.data');
         Route::get('/{id}', [ProductCommentController::class, 'show'])->name('comment.show');
@@ -229,7 +229,7 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/delete/{id}', [AboutController::class, 'deleteFeeShip'])->name('feeship.delete');
             Route::post('/update/{id}', [AboutController::class, 'updateFeeShip'])->name('feeship.update');
         });
-        Route::group(['prefix' => 'contact'], function () {
+        Route::group(['prefix' => 'contact', 'middleware' => ['auth']], function () {
             Route::get('/', [ContactController::class, 'index'])->name('contact.list');
             Route::get('/data', [ContactController::class, 'dataContact'])->name('contact.data');
             Route::get('/countNotification', [ContactController::class, 'countNotifications'])->name('contact.count');
