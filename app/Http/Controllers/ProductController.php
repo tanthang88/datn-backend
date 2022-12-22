@@ -331,7 +331,7 @@ class ProductController extends Controller
         $data = Product::orderBy('id', 'desc')->paginate(15);
         if ($search = $request->search) {
             $data = Product::orderBy('id', 'desc')->where('product_name', 'like', '%' . $search . '%')->paginate(15);
-        }
+        };
         return view('pages.product.list', [
             'title'     => 'Danh sách sản phẩm',
             'data'      => $data

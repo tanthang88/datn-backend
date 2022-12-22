@@ -9,7 +9,7 @@ Tạo chương trình Deal Sốc mới
     <x-alert errorText="{{ trans('alert.add.error') }}" />
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-info">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Vui lòng điền thông tin chi tiết về chương trình giảm giá của bạn </h3>
                 </div>
@@ -148,7 +148,7 @@ Tạo chương trình Deal Sốc mới
                 <div class="modal-header ">
                     <div>
                         <h4 class="modal-title">Chọn sản phẩm chính</h4>
-                        <p class="text-info mb-0">Một sản phẩm chỉ có thể tham gia một lần vào chương trình khuyến mãi</p>
+                        <p class="text-primary mb-0">Một sản phẩm chỉ có thể tham gia một lần vào chương trình khuyến mãi</p>
                     </div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>

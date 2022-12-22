@@ -17,14 +17,14 @@
                 <div class="card-header">
                     <h3 class="card-title">Vui lòng điền thông tin chi tiết về đơn hàng </h3>
                 </div>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{route('order.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="customer_name">Tên người nhận</label>
-                                    <input type="text" class="form-control @error('customer_name') is-invalid @enderror" id="customer_name" name="customer_name" placeholder="Nhập tên người nhận" value="{{ old('customer_name') }}" required>
+                                    <input type="text" class="form-control @error('customer_name') is-invalid @enderror" id="customer_name" name="customer_name" placeholder="Nhập tên người nhận" value="{{ old('customer_name') }}">
                                     @error('customer_name')
                                     <small class="error-form" style="color: red;font-style: italic"> {{ $message }}</small>
                                     @enderror
@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label>Điện thoại</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control float-right @error('bill_phone') is-invalid @enderror" id="bill_phone" name="bill_phone" placeholder="Nhập số điện thoại" value="{{ old('bill_phone') }}" required>
+                                        <input type="number" class="form-control float-right @error('bill_phone') is-invalid @enderror" id="bill_phone" name="bill_phone" placeholder="Nhập số điện thoại" value="{{ old('bill_phone') }}">
                                     </div>
                                     @error('bill_phone')
                                     <small class="error-form" style="color: red;font-style: italic"> {{ $message }}</small>

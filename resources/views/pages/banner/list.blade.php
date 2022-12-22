@@ -53,7 +53,11 @@ Banner
                                 <td>{{$banner->title}}</td>
                                 <td>{{$banner?->link}}</td>
                                 <td>
-                                    <input type="checkbox" {{$banner->display==1 ? "checked" : "" }} >
+                                    @if($banner->display==1)
+                                        <span class="badge badge-success">Hiển thị</span>
+                                    @else
+                                        <span class="badge badge-danger">Ẩn</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-info" href="{{route('banner.show',['banner'=>$banner->id])}}">
@@ -70,6 +74,8 @@ Banner
                             </tbody>
                     @endforeach
                     </table>
+                    <hr/>
+                    {{$banners->links();}}
                     </div>
             </div>
 

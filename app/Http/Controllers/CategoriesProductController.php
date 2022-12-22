@@ -130,9 +130,9 @@ class CategoriesProductController extends Controller
     }
     public function index(Request $request)
     {
-        $product_categories = DB::table('product_categories')->orderBy('id','desc')->get();
+        $product_categories = DB::table('product_categories')->orderBy('id','desc')->paginate(15);
         if($search = $request->search){
-            $product_categories = DB::table('product_categories')->where('category_name','like','%'.$search.'%')->orderBy('id','desc')->get();
+            $product_categories = DB::table('product_categories')->where('category_name','like','%'.$search.'%')->orderBy('id','desc')->paginate(15);
          }
         return view('pages.categoriesproduct.list',[
             'title' => 'Danh sách danh mục sản phẩm',
