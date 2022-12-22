@@ -29,6 +29,11 @@ class ProductFilterService
                 'filter_name' => 'price',
                 'fields' => [
                     [
+                        'field_label' => 'Tất cả',
+                        'field_slug' => '',
+                        'field_value' => ''
+                    ],
+                    [
                         'field_label' => 'Dưới 2 triệu',
                         'field_slug' => 'duoi-2-trieu',
                         'field_value' => '<2000000'
@@ -61,6 +66,11 @@ class ProductFilterService
                 'filter_name' => 'battery',
                 'fields' => [
                     [
+                        'field_label' => 'Tất cả',
+                        'field_slug' => '',
+                        'field_value' => ''
+                    ],
+                    [
                         'field_label' => 'Dưới 3000 mah',
                         'field_slug' => 'duoi-3000-mah',
                         'field_value' => '<3000'
@@ -88,6 +98,11 @@ class ProductFilterService
                 'filter_name' => 'screen',
                 'fields' => [
                     [
+                        'field_label' => 'Tất cả',
+                        'field_slug' => '',
+                        'field_value' => ''
+                    ],
+                    [
                         'field_label' => 'Màn hình nhỏ: dưới 5.0 inch',
                         'field_slug' => 'man-hinh-nho:-duoi-5.0-inch',
                         'field_value' => '<5'
@@ -109,6 +124,11 @@ class ProductFilterService
                 'filter_title' => 'Camera',
                 'filter_name' => 'camera',
                 'fields' => [
+                    [
+                        'field_label' => 'Tất cả',
+                        'field_slug' => '',
+                        'field_value' => ''
+                    ],
                     [
                         'field_label' => '12 MP',
                         'field_slug' => '12-mp',
@@ -141,20 +161,20 @@ class ProductFilterService
             [
                 'id' => 1,
                 'sort_title' => 'Bán chạy nhất',
-                'sort_name' => 'bestselling',
-                'field_value' => '1'
+                'sort_name' => 'rating',
+                'field_value' => '',
             ],
             [
                 'id' => 2,
-                'sort_title' => 'Giá thấp',
-                'sort_name' => 'orderby',
-                'field_value' => 'asc'
+                'sort_title' => 'Giá thấp - cao',
+                'sort_name' => 'product_price',
+                'field_value' => 'asc',
             ],
             [
                 'id' => 3,
-                'sort_title' => 'Giá cao',
-                'sort_name' => 'orderby',
-                'field_value' => 'desc'
+                'sort_title' => 'Giá cao - thấp',
+                'sort_name' => 'product_price',
+                'field_value' => 'desc',
             ]
         ];
         return $data;
@@ -169,49 +189,61 @@ class ProductFilterService
      *
      * @return Object
      */
-    public function getListProductFilter(Request $request, $select = ['products.id','product_name','product_slug','product_image','product_quantity','product_desc','product_promotion_desc','is_discount_product','product_price','config_battery','config_screen','config_camera','is_selling','rating'])
+    public function getListProductFilter(Request $request, $select = [
+        'products.id',
+        'product_name',
+        'product_slug',
+        'product_image',
+        'product_quantity',
+        'product_desc',
+        'product_promotion_desc',
+        'is_discount_product',
+        'product_price',
+        'config_battery',
+        'config_screen',
+        'config_camera',
+        'is_selling',
+        'rating'
+    ])
     {
-        return Product::select($select)->join('configurations','products.id','=','configurations.product_id')
-        ->where('category_id', $request->categories)
-        ->when($request->has('price'), function ($query) use($request)  {
-            $this->checkParamFilter($query,'product_price',$request->price);
-        })
-        ->when($request->has('battery'), function ($query) use($request)  {
-            $this->checkParamFilter($query,'config_battery', $request->battery);
-        })
-        ->when($request->has('screen'), function ($query) use($request)  {
-            $this->checkParamFilter($query,'config_screen', $request->screen);
-        })
-        ->when($request->has('camera'), function ($query) use($request)  {
-            $this->checkParamFilter($query,'config_camera', $request->camera);
-        })
-        ->when($request->has('rating'), function ($query) use($request)  {
-            $this->checkParamFilter($query,'rating', $request->rating);
-        })
-        ->when($request->has('bestselling'), function ($query) use($request)  {
-            $query->where('is_selling',$request->bestselling);
-        })
-        ->when($request->has('orderby'), function ($query) use($request)  {
-            $query->orderby('product_price',$request->orderby);
-        })
-        ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
-        ->paginate($this->perPage);
+        return Product::select($select)->join('configurations', 'products.id', '=', 'configurations.product_id')
+            ->when(!empty($request->price), function ($query) use ($request) {
+                $this->checkParamFilter($query, 'product_price', $request->price);
+            })
+            ->when(!empty($request->battery), function ($query) use ($request) {
+                $this->checkParamFilter($query, 'config_battery', $request->battery);
+            })
+            ->when(!empty($request->screen), function ($query) use ($request) {
+                $this->checkParamFilter($query, 'config_screen', $request->screen);
+            })
+            ->when(!empty($request->camera), function ($query) use ($request) {
+                $this->checkParamFilter($query, 'config_camera', $request->camera);
+            })
+            ->when(!empty($request->rating), function ($query) use ($request) {
+                $this->checkParamFilter($query, 'rating', $request->rating);
+            })
+            ->when(!empty($request->order_by), function ($query) use ($request) {
+                $query->orderBy($request->order_by, $request->order_type ?? 'DESC');
+            })
+            ->where('category_id', $request->categories)
+            ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
+            ->paginate($this->perPage);
     }
 
-    public function checkParamFilter($query,$field,$value){
-
+    public function checkParamFilter($query, $field, $value)
+    {
         if (preg_match("/^([0-9\.]+)$/", $value)) {
-           $query->where($field,$value);
-        }else if(preg_match("/^([0-9\.]+<>[0-9\.]+)$/", $value)){
-            $vl=str_replace('<>', ',', $value);
-            $vl=explode(',', $vl);
-            $query->whereBetween($field,$vl);
-        }else  if(preg_match("/^<[0-9\.]+$/", $value)){
-            $vl=str_replace('<', '', $value);
-            $query->where($field,'<',$vl);
-        }else  if(preg_match("/^>[0-9\.]+$/", $value)){
-            $vl=str_replace('>', '', $value);
-            $query->where($field,'>',$vl);
+            return  $query->where($field, (int)$value);
+        } else if (preg_match("/^([0-9\.]+<>[0-9\.]+)$/", $value)) {
+            $vl = str_replace('<>', ',', $value);
+            $vl = explode(',', $vl);
+            return  $query->whereBetween($field, array_map('intval', $vl));
+        } else if (preg_match("/^<[0-9\.]+$/", $value)) {
+            $vl = str_replace('<', '', $value);
+            return  $query->where($field, '<', (int)$vl);
+        } else if (preg_match("/^>[0-9\.]+$/", $value)) {
+            $vl = str_replace('>', '', $value);
+            return  $query->where($field, '>', (int)$vl);
         }
     }
 }

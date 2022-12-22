@@ -3,10 +3,10 @@ export const GENDER = {
   FEMALE: 1
 }
 export const PROMOTIONSTATUS = {
-    NOACTIVE: `<span class='text-warning'>Chưa diễn ra `,
-    ACTIVE: `<span class='text-success'>Đang diễn ra `,
-    END: `<span class='text-danger'>Đã kết thúc `,
-  }
+  NOACTIVE: `<span class='text-warning'>Chưa diễn ra `,
+  ACTIVE: `<span class='text-success'>Đang diễn ra `,
+  END: `<span class='text-danger'>Đã kết thúc `,
+}
 export const DEFAULT_MENU_RECOST = [[25, 50, 100, -1], [25, 50, 100, "All"]];
 export const DEFAULT_TITLE_TABLE = {
   DEFAULT_LENGHT_RECOST: 'Hiển thị _MENU_ bản ghi',
@@ -23,13 +23,13 @@ export const DEFAULT_PAGINATE = {
   NEXT: "Tiếp",
   PREVIOUS: "Trước"
 }
-export const URL_BACKEND=window.location.origin;
+export const URL_BACKEND = window.location.origin;
 export const STATUS_BLOCK = 0;
-export const FORMAT_DATE = 'DD/MM/YYYY HH:mm';
+export const FORMAT_DATE = 'DD/MM/YYYY';
 export const FORMAT_MONEY = new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  });
+  style: 'currency',
+  currency: 'VND',
+});
 export const URL = {
   ROLE: {
     LIST: 'role/data',
