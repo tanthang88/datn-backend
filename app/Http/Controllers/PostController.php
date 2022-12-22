@@ -124,9 +124,9 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
-        $posts = DB::table('posts')->orderBy('id','desc')->paginate(15);
+        $posts = Post::with(['postCategory'])->orderBy('id','desc')->paginate(15);
         if($search = $request->search){
-            $posts = DB::table('posts')->orderBy('id','desc')->where('post_name','like','%'.$search.'%')->paginate(15);
+            $posts =Post::with(['postCategory'])->orderBy('id','desc')->where('post_name','like','%'.$search.'%')->paginate(15);
          }
         return view('pages.post.list',[
             'title' => 'Danh sách bài viết',

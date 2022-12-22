@@ -57,8 +57,7 @@
                                     @endif
                                 </td>
                                 <td>{{$post->post_name}}</td>
-                                {{-- <td>{{$post->postCategory?->cate}}</td> --}}
-                                <td>{{$post->category_id }}</td>
+                                 <td>{{$post->postCategory->category_name}}</td>
                                 <td>
                                     @if($post->post_display == 1)
                                         <span class="badge badge-success">Hiển thị</span>
