@@ -24,14 +24,16 @@
             <div class="col-12">
                 <div class="row" style="padding-top:15px;padding-bottom:15px;">
                     <div class="col-2">
-                        <button type="button" class="btn btn-success"><a href="{{route('product.add')}}" style="color:#fff">+ Thêm mới</a></button>
+                        <button type="button" class="btn btn-success"><a href="{{ route('product.add') }}" style="color:#fff">+
+                                Thêm mới</a></button>
                     </div>
                     <div class="col-7"></div>
                     <form action="" class="col-3">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
                             <div class="input-group-append">
-                                <button type="submit" name="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                                <button type="submit" name="submit" class="btn btn-dark"><i
+                                        class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </form>
@@ -63,14 +65,14 @@
                                 </td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->productCategory?->category_name }}</td>
-                                <td>{{ number_format($product->product_price,0,'','.')}} ₫</td>
+                                <td>{{ number_format($product->product_price, 0, '', '.') }} ₫</td>
                                 <td>
                                     @if ($product->product_outstanding == '1')
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     @endif
                                 </td>
                                 <td>
-                                    {{$product->product_views}}/{{$product->product_quantity}}
+                                    {{ $product->product_views }}/{{ $product->product_quantity }}
                                 </td>
                                 <td>
                                     @if ($product->product_display == 1)
@@ -92,24 +94,26 @@
                                         }
                                         ?>
                                         <p style="padding-top:10px;">
-                                            <a class="btn btn-dark btn-sm" style="background-color:#fff;color:#343a40;padding-right:24px;padding-left:24px;padding-top:7px;padding-bottom:7px;"
+                                            <a class="btn btn-dark btn-sm"
+                                                style="background-color:#fff;color:#343a40;padding-right:24px;padding-left:24px;padding-top:7px;padding-bottom:7px;"
                                                 href="/product/{{ $object }}Variant/{{ $product->id }}">
                                                 <i class="fa fa-random icon-pd" aria-hidden="true"></i>
                                                 Biến thể
                                             </a>
                                         </p>
                                     @endif
-                                        <a class="btn btn-info btn-sm" href="/product/update/{{ $product->id }}">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Sửa
-                                        </a>
-                                        <a class="btn btn-danger btn-sm btn-action-delete"
-                                            data-url="/product/delete/{{ $product->id }}">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Xóa
-                                        </a>
+                                    <a class="btn btn-info btn-sm"
+                                        href="{{ route('product.update', ['id' => $product->id]) }}">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Sửa
+                                    </a>
+                                    <a class="btn btn-danger btn-sm btn-action-delete"
+                                        data-url="/product/delete/{{ $product->id }}">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Xóa
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -123,9 +127,8 @@
     </div>
 @endsection
 @prepend('scripts')
-<script
+    <script
     type="module"
     src="{{Vite::asset('resources/js/components/confirmDel.js')}}"
 ></script>
 @endprepend
-
