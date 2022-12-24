@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
-use App\Models\Product;
-use App\Models\ProductCategory;
-use App\Models\Configuration;
-use App\Models\Supplier;
-use App\Models\ProductImage;
-use App\Models\Propertie;
-use App\Models\Variantion;
 use App\Http\Requests\Product\AddProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Http\Requests\Variant\AddVariantRequest;
-use DB;
+use App\Models\Configuration;
+use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\ProductImage;
+use App\Models\Propertie;
+use App\Models\Supplier;
+use App\Models\Variantion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -75,18 +73,16 @@ class ProductController extends Controller
 
         // thêm thông số kỹ thuật
         if ($request->is_configuration_product == 'on') {
-            if ($request->config_screen) {
-                $configuration = new Configuration();
-                $configuration->product_id = $product->id;
-                $configuration->config_screen = $request->config_screen;
-                $configuration->config_cpu = $request->config_cpu;
-                $configuration->config_ram = $request->config_ram;
-                $configuration->config_camera = $request->config_camera;
-                $configuration->config_selfie = $request->config_selfie;
-                $configuration->config_battery = $request->config_battery;
-                $configuration->config_system = $request->config_system;
-                $configuration->save();
-            }
+            $configuration = new Configuration();
+            $configuration->product_id = $product->id;
+            $configuration->config_screen = $request->config_screen;
+            $configuration->config_cpu = $request->config_cpu;
+            $configuration->config_ram = $request->config_ram;
+            $configuration->config_camera = $request->config_camera;
+            $configuration->config_selfie = $request->config_selfie;
+            $configuration->config_battery = $request->config_battery;
+            $configuration->config_system = $request->config_system;
+            $configuration->save();
         }
 
         // Lưu hình ảnh liên quan
@@ -202,31 +198,31 @@ class ProductController extends Controller
         $product->save();
 
         if ($request->is_configuration_product == 'on') {
-            if ($request->config_screen) {
-                $configuration = Configuration::where('product_id', $id)->first();
-                if ($configuration != null) {
-                    $configuration->config_screen = $request->config_screen;
-                    $configuration->config_cpu = $request->config_cpu;
-                    $configuration->config_ram = $request->config_ram;
-                    $configuration->config_camera = $request->config_camera;
-                    $configuration->config_selfie = $request->config_selfie;
-                    $configuration->config_battery = $request->config_battery;
-                    $configuration->config_system = $request->config_system;
-                    $configuration->updated_at = NOW();
-                    $configuration->save();
-                } else {
-                    $configuration_n = new Configuration();
-                    $configuration_n->product_id = $product->id;
-                    $configuration_n->config_screen = $request->config_screen;
-                    $configuration_n->config_cpu = $request->config_cpu;
-                    $configuration_n->config_ram = $request->config_ram;
-                    $configuration_n->config_camera = $request->config_camera;
-                    $configuration_n->config_selfie = $request->config_selfie;
-                    $configuration_n->config_battery = $request->config_battery;
-                    $configuration_n->config_system = $request->config_system;
-                    $configuration_n->save();
-                }
+
+            $configuration = Configuration::where('product_id', $id)->first();
+            if ($configuration != null) {
+                $configuration->config_screen = $request->config_screen;
+                $configuration->config_cpu = $request->config_cpu;
+                $configuration->config_ram = $request->config_ram;
+                $configuration->config_camera = $request->config_camera;
+                $configuration->config_selfie = $request->config_selfie;
+                $configuration->config_battery = $request->config_battery;
+                $configuration->config_system = $request->config_system;
+                $configuration->updated_at = NOW();
+                $configuration->save();
+            } else {
+                $configuration_n = new Configuration();
+                $configuration_n->product_id = $product->id;
+                $configuration_n->config_screen = $request->config_screen;
+                $configuration_n->config_cpu = $request->config_cpu;
+                $configuration_n->config_ram = $request->config_ram;
+                $configuration_n->config_camera = $request->config_camera;
+                $configuration_n->config_selfie = $request->config_selfie;
+                $configuration_n->config_battery = $request->config_battery;
+                $configuration_n->config_system = $request->config_system;
+                $configuration_n->save();
             }
+
         }
 
         // Lưu hình ảnh liên quan
@@ -445,39 +441,39 @@ class ProductController extends Controller
                 $html .= '</select>';
             }
             $html .=
-                '</div>
+            '</div>
                             <div class="card-tools">
                                 <button type="button" class="btn bg-dark btn-sm" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                                 <button type="button" class="btn bg-dark btn-sm removeVariant" data-url ="/product/deleteVariant/' .
-                $variant->id .
-                '"><i class="fas fa-times"></i></button>
+            $variant->id .
+            '"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
                         <div class="card-body" style="display: block;">
                             <input type="hidden" name="my_id[]" value="' .
-                $variant->id .
-                '">
+            $variant->id .
+            '">
                             <input type="hidden" name="count" value="' .
-                $count .
-                '">
+            $count .
+            '">
                             <div class="row pd-10">
                                 <label class="col-3">Giá:</label>
                                 <input type="number" hidden class="tientehidden" id="price" name="price[]" value="' .
-                $variant->price .
-                '">
+            $variant->price .
+            '">
                                 <input type="text" class="col-7 tiente mucgiam form-control" value="' .
-                $variant->price .
-                '" placeholder="Giá sản phẩm" required>
+            $variant->price .
+            '" placeholder="Giá sản phẩm" required>
                             </div>
                             <div class="row pd-10"><label class="col-3">Hình ảnh:</label>
                                 <input type="hidden" value="' .
-                $variant->img .
-                '" name="image_last[]">
+            $variant->img .
+            '" name="image_last[]">
                                 <input type="file" name="image[]" class="col-7 form-control" id="image" onchange="ImagesFileAsURL()">
                                 <div class="col-3"></div>
                                 <div class="col-7" id="displayImg">
                                     <img src="' .
-                $variant->img .
+            $variant->img .
                 '">
                                 </div>
                             </div>
