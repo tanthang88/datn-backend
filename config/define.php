@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Slider;
+
 return [
     'date_format' => 'd-m-Y',
     'date_time_format' => 'd-m-Y H:i',
@@ -22,4 +25,20 @@ return [
         'male' => 0,
         'female' => 1,
     ],
+    'slider' => [
+        'slider_type' => [
+            [
+                'value' => Slider::PROMOTION,
+                'label' => 'Chương trình Khuyến mãi',
+            ],
+            [
+                'value' => Slider::PRODUCT,
+                'label' => 'Sản phẩm nổi bật',
+            ],
+            [
+                'value' => Slider::ACCESSORY,
+                'label' => 'Phụ kiện nổi bật',
+            ],
+        ]
+    ]
 ];
