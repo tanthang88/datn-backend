@@ -154,16 +154,19 @@
                                                 <label class="col-4">Nổi bật</label>
                                                 <input type="checkbox" value="on"
                                                     {{ $data->product_outstanding == '1' ? 'checked' : '' }}
+                                                    {{ old('product_outstanding') == 'on' ? 'checked' : '' }}
                                                     name="product_outstanding">
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Hiển thị</label>
                                                 <input type="checkbox" {{ $data->product_display == '1' ? 'checked' : '' }}
+                                                    {{ old('product_display') == 'on' ? 'checked' : '' }}
                                                     name="product_display">
                                             </div>
                                             <div class="row pd-10">
                                                 <label class="col-4">Thông số kỹ thuật</label>
                                                 <input type="checkbox" {{ $configuration != null ? 'checked' : '' }}
+                                                    {{ old('is_configuration_product') == 'on' ? 'checked' : '' }}
                                                     id="is_configuration_product" name="is_configuration_product"
                                                     onclick="chooseConfiguration()">
                                             </div>
@@ -259,14 +262,16 @@
                                                 phẩm biến thể</a></option>
                                     @else
                                         <option value="1"><a class="nav-link" href="#content" data-toggle="tab"
-                                                selected="selected">Sản phẩm biến thể</a></option>
+                                                selected="selected">Sản
+                                                phẩm biến thể</a></option>
                                         <option value="0"><a class="nav-link active" href="#infomation"
-                                                data-toggle="tab">Sản phẩm đơn giản</a></option>
+                                                data-toggle="tab">Sản
+                                                phẩm đơn giản</a></option>
                                     @endif
                                 </select>
                             </li>
                         </ul>
-                        <div style="border-top:1px solid rgba(0,0,0,.125)">
+                        <div style="border-top:1px solid rgba(59, 38, 38, 0.125)">
                         </div>
                         <div class="card-body" style="padding:0;">
                             @if ($data->is_variation == '0')
@@ -293,6 +298,10 @@
                                                             value="{{ $data->product_price }}">
                                                         <input type="text" class="col-7 tiente mucgiam form-control"
                                                             placeholder="VND" value="{{ $data->product_price }}">
+                                                        @error('product_price')
+                                                            <span class="col-4"></span>
+                                                            <span class="col-8 help-block">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
@@ -322,7 +331,6 @@
                                                             style="color:#2271b1;border-color: #2271b1;background: #f6f7f7;"
                                                             onclick="typeProperties()">Thêm thuộc tính cho sản phẩm </a>
                                                     </div>
-
                                                     <div id="vert-tabs-content-properties-type">
 
                                                     </div>
@@ -331,11 +339,18 @@
                                                     role="tabpanel" aria-labelledby="vert-tabs-variant-tab">
                                                     Hãy cập nhật ở danh sách sản phẩm..
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+                                @error('propertie_name')
+                                    <div class="row">
+                                        <span class="col-3"></span>
+                                        <small class="error-form col-9" style="color: red;font-style: italic">
+                                            {{ $message }}</small>
+                                    </div>
+                                @enderror
                             @else
                                 <div class="type-variant">
                                     <input type="hidden" name="input_type" value="variant">
@@ -471,10 +486,12 @@
                                                 <input type="text" name="config_screen" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_screen;
                                                 } ?>"
-                                                    class="col-8 form-control" id="" placeholder="Vd:6.7">
+                                                    class="col-8 form-control @error('config_screen') is-invalid @enderror"
+                                                    id="config_screen" placeholder="Vd:6.7">
                                                 @error('config_screen')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                             <div class="row pd-10">
@@ -482,11 +499,12 @@
                                                 <input type="text" name="config_cpu" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_cpu;
                                                 } ?>"
-                                                    class="col-8 form-control" id=""
-                                                    placeholder="Vd:Apple A15 Bionic">
+                                                    class="col-8 form-control @error('config_cpu') is-invalid @enderror"
+                                                    id="config_cpu" placeholder="Vd:Apple A15 Bionic">
                                                 @error('config_cpu')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                             <div class="row pd-10">
@@ -494,10 +512,12 @@
                                                 <input type="text" name="config_ram" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_ram;
                                                 } ?>"
-                                                    class="col-8 form-control" id="" placeholder="Vd:6G">
+                                                    class="col-8 form-control @error('config_ram') is-invalid @enderror"
+                                                    id="config_ram" placeholder="Vd:6G">
                                                 @error('config_ram')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                             <div class="row pd-10">
@@ -505,10 +525,12 @@
                                                 <input type="text" name="config_camera" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_camera;
                                                 } ?>"
-                                                    class="col-8 form-control" id="" placeholder="Vd:12.0">
+                                                    class="col-8 form-control @error('config_camera') is-invalid @enderror"
+                                                    id="config_camera" placeholder="Vd:12.0">
                                                 @error('config_camera')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                         </div>
@@ -518,10 +540,12 @@
                                                 <input type="text" name="config_selfie" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_selfie;
                                                 } ?>"
-                                                    class="col-8 form-control" id="" placeholder="Vd:12.0">
+                                                    class="col-8 form-control @error('config_selfie') is-invalid @enderror"
+                                                    id="config_selfie" placeholder="Vd:12.0">
                                                 @error('config_selfie')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                             <div class="row pd-10">
@@ -529,10 +553,12 @@
                                                 <input type="text" name="config_battery" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_battery;
                                                 } ?>"
-                                                    class="col-8 form-control" id="" placeholder="Vd:4352 mAh">
+                                                    class="col-8 form-control @error('config_battery') is-invalid @enderror"
+                                                    id="config_battery" placeholder="Vd:4352 mAh">
                                                 @error('config_battery')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                             <div class="row pd-10">
@@ -540,10 +566,12 @@
                                                 <input type="text" name="config_system" value="<?php if ($configuration != null) {
                                                     echo $configuration->config_system;
                                                 } ?>"
-                                                    class="col-8 form-control" id="" placeholder="Vd:iOS">
+                                                    class="col-8 form-control @error('config_cpu') is-invalid @enderror"
+                                                    id="" placeholder="Vd:iOS">
                                                 @error('config_system')
                                                     <span class="col-4"></span>
-                                                    <span class="col-8 help-block">{{ $message }}</span>
+                                                    <small class="error-form col-8" style="color: red;font-style: italic">
+                                                        {{ $message }}</small>
                                                 @enderror
                                             </div>
                                         </div>
@@ -740,6 +768,10 @@
                     }
                 })
             }
+        });
+        $(document).ready(function() {
+            chooseConfiguration();
+            chooseProduct();
         });
     </script>
 @endpush
