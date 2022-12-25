@@ -221,8 +221,8 @@
                                 <div class="tab-pane" id="content">
                                     <div class="row pd-10">
                                         <label class="col-2">Mô tả</label>
-                                        <textarea class="col-12 form-control" name="description" rows="3"
-                                            placeholder="Bạn bắt buộc phải nhập phần mô tả để SEO tốt hơn"></textarea>
+                                        <textarea class="col-12 form-control" name="product_desc" rows="3"
+                                            placeholder="Bạn bắt buộc phải nhập phần mô tả để SEO tốt hơn">{{old('product_desc')}}</textarea>
                                         <p class="col-12" style="padding-left:0;padding-top:10px;font-weight:bold">(Tốt
                                             nhất là 250 - 300 ký tự) <strong style="color:red;">- Chú ý: Bạn phải nhập phần
                                                 mô tả để có kết quả SEO tốt nhất trên Google</strong></p>
@@ -230,7 +230,7 @@
                                     </div>
                                     <div class="form-group pd-10" style="margin-left:-7.5px; margin-right:-7.5px;">
                                         <label>Nội dung</label>
-                                        <textarea class="col-10 form-control" name="content" id="pro_content" rows="3"></textarea>
+                                        <textarea class="col-10 form-control" name="product_content" id="pro_content" rows="3">{{old('product_content')}}</textarea>
                                         </select>
                                     </div>
                                 </div>
