@@ -41,5 +41,5 @@ return [
                 'label' => 'Phụ kiện nổi bật',
             ],
         ]
-    ]
+    ],
 ];

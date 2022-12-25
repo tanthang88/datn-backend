@@ -18,7 +18,6 @@ class PostController extends Controller
             'title' => 'Thêm mới bài viết',
             'post_categories' => $post_categories,
         ]);
-
     }
     public function store(AddPostRequest $request)
     {
@@ -32,7 +31,8 @@ class PostController extends Controller
             $pathFull = 'uploads/' . date("Y-m-d");
 
             $request->file('post_img')->storeAs(
-                'public/' . $pathFull, $name
+                'public/' . $pathFull,
+                $name
             );
 
             $thumb = '/storage/' . $pathFull . '/' . $name;
@@ -50,14 +50,14 @@ class PostController extends Controller
             $data['post_outstanding'] = 0;
         }
         $data['post_desc'] = $request->post_desc;
-        $data['type'] = changeTitle($request->type);
+        $data['type'] = 1;
         $data['post_content'] = $request->content;
         $data['post_seo_title'] = $request->post_seo_title;
         $data['post_seo_keyword'] = $request->post_seo_keyword;
         $data['post_seo_description'] = $request->post_seo_description;
         $data['created_at'] = NOW();
         DB::table('posts')->insert($data);
-        return Redirect::to('post/')->with('success', trans('alert.add.success'));
+        return redirect(route('post.list'))->with('success', trans('alert.add.success'));
     }
 
     public function show($id)
@@ -75,7 +75,6 @@ class PostController extends Controller
             'post_categories' => $post_categories,
             'posts' => $posts,
             'category_id' => $category_id,
-
         ]);
     }
     public function update(UpdatePostRequest $request, $id)
@@ -91,7 +90,8 @@ class PostController extends Controller
             $pathFull = 'uploads/' . date("Y-m-d");
 
             $request->file('post_img')->storeAs(
-                'public/' . $pathFull, $name
+                'public/' . $pathFull,
+                $name
             );
 
             $thumb = '/storage/' . $pathFull . '/' . $name;
@@ -109,14 +109,13 @@ class PostController extends Controller
         }
         $posts->post_desc = $request->post_desc;
         $posts->post_content = $request->content;
-        $posts->type = changeTitle($request->type);
+        $posts->type = 1;
         $posts->post_seo_title = $request->post_seo_title;
         $posts->post_seo_keyword = $request->post_seo_keyword;
         $posts->post_seo_description = $request->post_seo_description;
         $posts->created_at = NOW();
         $posts->save();
-        return redirect('post/')->with('success', trans('alert.update.success'));
-
+        return redirect(route('post.list'))->with('success', trans('alert.update.success'));
     }
     public function index(Request $request)
     {
