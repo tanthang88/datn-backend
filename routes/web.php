@@ -119,11 +119,11 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/delete/{id}', [PostCategoriesController::class, 'delete'])->name('postCategory.delete');
     });
     #post
-    Route::group(['prefix' => 'post',  'middleware' => ['auth', 'can:view-post']], function () {
+    Route::group(['prefix' => 'blog',  'middleware' => ['auth', 'can:view-post']], function () {
         Route::get('/add', [PostController::class, 'create'])->name('post.add');
-        Route::post('/add', [PostController::class, 'store']);
-        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.update');
-        Route::post('/update/{id}', [PostController::class, 'update']);
+        Route::post('/add', [PostController::class, 'store'])->name('post.store');
+        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.show');
+        Route::post('/update/{id}', [PostController::class, 'update'])->name('post.update');
         Route::get('/', [PostController::class, 'index'])->name('post.list');
         Route::get('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
     });

@@ -344,13 +344,6 @@
                                     </div>
 
                                 </div>
-                                @error('propertie_name')
-                                    <div class="row">
-                                        <span class="col-3"></span>
-                                        <small class="error-form col-9" style="color: red;font-style: italic">
-                                            {{ $message }}</small>
-                                    </div>
-                                @enderror
                             @else
                                 <div class="type-variant">
                                     <input type="hidden" name="input_type" value="variant">

@@ -19,7 +19,7 @@ class HomeController extends Controller
         $count_bill = Bill::count();
         $count_product = Product::count();
         $count_user = User::count();
-        $count_post = User::count();
+        $count_post = Post::count();
         // top sp bán nhiều
         $top_product = Product::where('product_display',1)->orderBy('product_views','desc')
                             ->limit(5)->get();

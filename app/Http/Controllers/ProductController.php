@@ -41,7 +41,7 @@ class ProductController extends Controller
             $product->product_price = null;
         }
         $product->product_quantity = $request->product_quantity;
-        $product->product_order = $request->product_order;
+        $product->product_order = 1;
         if ($request->product_outstanding == 'on') {
             $product->product_outstanding = 1;
         } else {
@@ -53,7 +53,7 @@ class ProductController extends Controller
             $product->product_display = 0;
         }
         $product->category_id = $request->category_id;
-        $product->product_order = 1;
+        $product->product_desc = $request->product_desc;
         $product->product_content = $request->product_content;
         $product->is_variation = $request->is_variation;
         // check ảnh sp
