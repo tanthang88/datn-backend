@@ -10,7 +10,7 @@ Danh sách liên hệ
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 table-responsive">
-            <div class="card card-info">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Danh sách liên hệ</h3>
                 </div>

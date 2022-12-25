@@ -38,40 +38,45 @@
                         <th>ID</th>
                         <th>Tên bài viết</th>
                         <th>Hiển Thị</th>
-                        <th>Nổi bật</th>
+                        <th style="text-align:center">Nổi bật</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
-                @foreach($post_categories as $post_categories)
+                @foreach($post_categories as $post_category)
                 <tbody>
                     <tr>
-                        <td>{{$post_categories->id}}</td>
-                        <td>{{$post_categories->category_name}}</td>
+                        <td>{{$post_category->id}}</td>
+                        <td>{{$post_category->category_name}}</td>
                         <td>
-                            <input type="checkbox" {{$post_categories->category_display == 1 ? 'checked' : ''}}>
+                            @if ($post_category->category_display == 1)
+                                <span class="badge badge-success">Hiển thị</span>
+                            @else
+                                <span class="badge badge-danger">Ẩn</span>
+                            @endif
                         </td>
-
-                        <td>
-                            <input type="checkbox" {{$post_categories->category_outstanding == 1 ? 'checked' : ''}}>
+                        <td style="text-align:center">
+                            @if($post_category->category_outstanding == 1)
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            @endif
                         </td>
                         <td>
                             <a class="btn btn-sm btn-info"
-                                href="{{route('postCategory.update',['id'=>$post_categories->id])}}">
+                                href="{{route('postCategory.update',['id'=>$post_category->id])}}">
                                 <i class="fas fa-pencil-alt"></i>Sửa
                             </a>
                             <a class="btn btn-sm btn-danger btn-action-delete"
-                                data-url="{{route('postCategory.delete',['id'=>$post_categories->id])}}">
+                                data-url="{{route('postCategory.delete',['id'=>$post_category->id])}}">
                                 <i class="fas fa-trash">
                                 </i>
                                 Xóa
                             </a>
                         </td>
                     </tr>
-
                 </tbody>
                 @endforeach
-
             </table>
+            <hr/>
+            {{$post_categories->links()}}
         </div>
     </div>
 
