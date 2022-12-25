@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use App\Models\ProductCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductFilterService
 {
@@ -179,54 +180,52 @@ class ProductFilterService
         ];
         return $data;
     }
+
+    /**
+     * join table configurations id
+     *
+     * @param  $query
+     *
+     */
+    public function getConfigurationProduct($query)
+    {
+        return $query->join('configurations', 'products.id', '=', 'configurations.product_id');
+    }
+
     /**
      * getListProductByCategory
      *
-
      * @param  Request $request
-
-     *
-     *
      * @return Object
      */
-    public function getListProductFilter(Request $request, $select = [
-        'products.id',
-        'product_name',
-        'product_slug',
-        'product_image',
-        'product_quantity',
-        'product_desc',
-        'product_promotion_desc',
-        'is_discount_product',
-        'product_price',
-        'config_battery',
-        'config_screen',
-        'config_camera',
-        'is_selling',
-        'rating'
-    ])
+    public function getListProductFilter(Request $request, $select = ['*'])
     {
-        return Product::select($select)->join('configurations', 'products.id', '=', 'configurations.product_id')
+        return Product::select($select)
+            ->with(['productConfig:id,product_id'])
             ->when(!empty($request->price), function ($query) use ($request) {
-                $this->checkParamFilter($query, 'product_price', $request->price);
+                $this->checkParamFilter($query, 'products.product_price', $request->price);
             })
             ->when(!empty($request->battery), function ($query) use ($request) {
-                $this->checkParamFilter($query, 'config_battery', $request->battery);
+                $this->getConfigurationProduct($query);
+                $this->checkParamFilter($query, 'configurations.config_battery', $request->battery);
             })
             ->when(!empty($request->screen), function ($query) use ($request) {
-                $this->checkParamFilter($query, 'config_screen', $request->screen);
+                $this->getConfigurationProduct($query);
+                $this->checkParamFilter($query, 'configurations.config_screen', $request->screen);
             })
             ->when(!empty($request->camera), function ($query) use ($request) {
-                $this->checkParamFilter($query, 'config_camera', $request->camera);
+                $this->getConfigurationProduct($query);
+                $this->checkParamFilter($query, 'configurations.config_camera', $request->camera);
             })
             ->when(!empty($request->rating), function ($query) use ($request) {
-                $this->checkParamFilter($query, 'rating', $request->rating);
+                $this->getConfigurationProduct($query);
+                $this->checkParamFilter($query, 'configurations.rating', $request->rating);
             })
             ->when(!empty($request->order_by), function ($query) use ($request) {
                 $query->orderBy($request->order_by, $request->order_type ?? 'DESC');
             })
-            ->where('category_id', $request->categories)
-            ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
+            ->where('products.category_id', $request->categories)
+            ->where('products.product_display', PRODUCT::PRODUCT_ACTIVE)
             ->paginate($this->perPage);
     }
 
