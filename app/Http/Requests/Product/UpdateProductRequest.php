@@ -30,7 +30,6 @@ class UpdateProductRequest extends FormRequest
             'category_id'      => 'required',
             'is_variation' => 'numeric',
             'product_price' => 'required_if:is_variation,==,0',
-            'propertie_name' => 'required_if:is_variation,==,1',
         ];
 
         if($this->is_configuration_product == 'on') {
@@ -55,7 +54,6 @@ class UpdateProductRequest extends FormRequest
             'product_quantity.required'    => 'Số lượng kho chưa nhập',
             'product_quantity.min'         => 'Số lượng kho tối thiểu là 1',
             'product_price.required_if' =>  'Giá sản phẩm chưa nhập',
-            'propertie_name.required_if' =>  'Thuộc tính chưa nhập',
             'category_id.required'    => 'Danh mục chưa chọn',
 
             'config_screen.required' => 'Màn hình chưa nhập',
