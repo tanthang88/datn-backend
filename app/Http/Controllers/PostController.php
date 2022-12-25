@@ -14,7 +14,7 @@ class PostController extends Controller
     public function create()
     {
         $post_categories = DB::table('post_categories')->get();
-        return view('pages.Post.add', [
+        return view('pages.post.add', [
             'title' => 'Thêm mới bài viết',
             'post_categories' => $post_categories,
         ]);
@@ -69,7 +69,7 @@ class PostController extends Controller
         $category_name = DB::table('post_categories')->where('id', $category_id)->first();
         $category_name = $category_name->category_name;
 
-        return view('pages.Post.edit', [
+        return view('pages.post.edit', [
             'title' => 'Chỉnh sửa danh mục',
             'category_name' => $category_name,
             'post_categories' => $post_categories,
