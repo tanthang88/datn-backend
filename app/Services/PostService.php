@@ -53,7 +53,7 @@ class PostService
      */
     public function getPost(Post $post, array $select = ['*'])
     {
-        $post->increment('post_view')->save();
+        $post->increment('post_view');
         return Post::select($select)
             ->where('id', $post->id)
             ->where('post_display', POST::POST_ACTIVE)
