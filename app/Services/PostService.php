@@ -8,7 +8,8 @@ use App\Models\PostCategory;
 class PostService
 {
     private mixed $perPage;
-    public function __construct(){
+    public function __construct()
+    {
         $this->perPage = request()->get('limit', 20);
     }
 
@@ -52,10 +53,10 @@ class PostService
      */
     public function getPost(Post $post, array $select = ['*'])
     {
+        $post->increment('post_view')->save();
         return Post::select($select)
             ->where('id', $post->id)
             ->where('post_display', POST::POST_ACTIVE)
             ->first();
     }
-
 }
