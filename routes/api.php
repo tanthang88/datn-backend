@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\api\ContactController as ApiContactController;
 use App\Http\Controllers\Api\DiscountCodeController;
-use App\Http\Controllers\api\PaymentController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\VariantionController;
 
 /*

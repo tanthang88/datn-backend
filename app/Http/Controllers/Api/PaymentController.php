@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -78,7 +78,7 @@ class PaymentController extends Controller
     {
         // <!-- nếu thành công thì update lại trạng thái đơn hàng đã thanh toán  -->
         if ($request->vnp_ResponseCode == '00') {
-           Bill::where('id', $request->vnp_TxnRef)->update(['bill_payment_status'=>1]);
+            Bill::where('id', $request->vnp_TxnRef)->update(['bill_payment_status' => 1]);
         }
     }
 }
