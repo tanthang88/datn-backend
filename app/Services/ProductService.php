@@ -65,7 +65,7 @@ class ProductService
      */
     public function getProduct(Product $product, array $select = ['*'])
     {
-        $product->increment('rating')->save();
+        $product->increment('rating');
         return Product::select($select)
             ->where('id', $product->id)
             ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
