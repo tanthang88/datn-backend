@@ -49,7 +49,7 @@ class ProductComment extends Model
     {
         return $this->belongsTo(User::class, 'customer_id', 'id');
     }
-     /**
+    /**
      * customer
      *
      * @return belongsTo

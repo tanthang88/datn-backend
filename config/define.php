@@ -42,4 +42,8 @@ return [
             ],
         ]
     ],
+    'display' => [
+        'show' => 1,
+        'hide' => 0,
+    ]
 ];

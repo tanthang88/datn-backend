@@ -24,6 +24,7 @@ class ProductCommentService
             ])
             ->where('product_id', $product->id)
             ->where('parent_id', 0)
+            ->where('comment_display', config('define.display.show'))
             ->get();
     }
 
