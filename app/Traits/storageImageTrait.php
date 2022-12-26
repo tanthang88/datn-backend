@@ -23,7 +23,7 @@ trait storageImageTrait
             $file = $request->file($filedName);
             $fileNameOrigin  = $file->getClientOriginalName();
             $fileNameHash = Str::random('20') . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs(
+            $path = $file->storePubliclyAs(
                 'public/' . $folderName . '/' . Auth::id(),
                 $fileNameHash,
                 [
@@ -31,11 +31,11 @@ trait storageImageTrait
                     'directory_visibility' => 'public'
                 ]
             );
-
             $dataUploadTrait = [
                 'file_name' => $fileNameOrigin,
                 'file_path' => Storage::url($path)
             ];
+            Storage::setVisibility($path, 'public');
             return $dataUploadTrait;
         }
         return null;
@@ -52,11 +52,19 @@ trait storageImageTrait
     {
         $fileNameOrigin  = $file->getClientOriginalName();
         $fileNameHash = Str::random('20') . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs('public/' . $folderName . '/' . Auth::id(), $fileNameHash);
+        $path = $file->storePubliclyAs(
+            'public/' . $folderName . '/' . Auth::id(),
+            $fileNameHash,
+            [
+                'visibility' => 'public',
+                'directory_visibility' => 'public'
+            ]
+        );
         $dataUploadTrait = [
             'file_name' => $fileNameOrigin,
             'file_path' => Storage::url($path)
         ];
+        Storage::setVisibility($path, 'public');
         return $dataUploadTrait;
     }
 }
