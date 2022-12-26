@@ -2,37 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\Models\User;
+use App\Http\Requests\Order\AddOrderRequest;
+use App\Models\Bill;
+use App\Models\BillDetail;
 use App\Models\City;
 use App\Models\Dist;
 use App\Models\Product;
-use App\Models\Bill;
-use App\Models\BillDetail;
-use App\Models\Variantion;
-use App\Models\Propertie;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use PDF;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $bill = Bill::orderBy('id', 'desc')->get();
+        $bill = Bill::orderBy('id', 'desc')->paginate(config('define.pagination.per_page'));
         Session::forget('dataSessionProduct');
-        return view('pages.order.list',[
-            'title'      => 'Danh sách đơn hàng',
-            'bill'       =>  $bill,
+        return view('pages.order.list', [
+            'title' => 'Danh sách đơn hàng',
+            'bill' => $bill,
         ]);
     }
     public function select($select, $id)
     {
         $bill = Bill::find($id);
-        if($bill) {
+        if ($bill) {
             switch ($select) {
                 case 'process':
                     $bill->bill_status = 1;
@@ -42,6 +36,17 @@ class OrderController extends Controller
                     break;
                 case 'delivered':
                     $bill->bill_status = 3;
+                    $details = BillDetail::where('bill_id', $bill->id)->orderBy('id', 'desc')->get();
+                    foreach ($details as $key => $value) {
+                        $product = Product::find($value->product_id);
+                        if ($product) {
+                            $quantity = $product->product_quantity;
+                            $update_quantity = $quantity - $value->amount;
+                            $product->product_quantity = $update_quantity;
+                            $product->product_views += $value->amount;
+                        }
+                        $product->update();
+                    }
                     break;
                 case 'cancel':
                     $bill->bill_status = 4;
@@ -88,7 +93,7 @@ class OrderController extends Controller
     public function deleteDataSession(Product $product)
     {
         $products = Session::get('dataSessionProduct');
-        $arr=collect();
+        $arr = collect();
         foreach ($products as $k => $pr) {
             if ($pr->id != $product->id) {
                 $arr->push($pr);
@@ -97,7 +102,7 @@ class OrderController extends Controller
         if (count(Session::get('dataSessionProduct')) <= 0) {
             Session::forget('dataSessionProduct');
         } else {
-                Session::put('dataSessionProduct', ($arr));
+            Session::put('dataSessionProduct', ($arr));
         }
         return back();
     }
@@ -123,20 +128,20 @@ class OrderController extends Controller
     }
     public function selectDist($id)
     {
-        $cities = Dist::where('code',$id)->get();
+        $cities = Dist::where('code', $id)->get();
         return response()->json($cities);
     }
     public function create()
     {
-        $city = City::orderBy('id','asc')->get();
+        $city = City::orderBy('id', 'asc')->get();
         $dist = Dist::where('code', 48)->get();
-        return view('pages.order.add',[
+        return view('pages.order.add', [
             'title' => 'Thêm đơn hàng',
             'city' => $city,
             'dist' => $dist,
         ]);
     }
-    public function store(Request $request)
+    public function store(AddOrderRequest $request)
     {
         // lưu đơn hàng
         $order = new Bill;
@@ -154,23 +159,23 @@ class OrderController extends Controller
         $order->bill_status = 0;
         $order->save();
         // lưu detail
-        foreach($request->price as $index => $value){
+        foreach ($request->price as $index => $value) {
             $detail = new BillDetail;
             $detail->bill_id = $order->id;
-            $detail->product_id=$request->product_id[$index];
+            $detail->product_id = $request->product_id[$index];
             $detail->price = $request->price[$index];
             $detail->product_name = $request->product_name[$index];
             $detail->product_image = $request->product_image[$index];
             $detail->amount = $request->amount[$index];
             $detail->into_price = $request->into_price[$index];
             // tách chuỗi variant_id
-           if($request->variant_id[$index] != null){
+            if ($request->variant_id[$index] != null) {
                 $str_variant_id = $request->variant_id[$index];
                 $arr_variant_id = explode(' ', $str_variant_id);
                 $detail->variant_id = $arr_variant_id[0];
                 $detail->variant_name = $request->variant_name[$index];
-           }
-           $detail->save();
+            }
+            $detail->save();
         }
         Session::forget('dataSessionProduct');
         return redirect(route('order.list'))->with('success', trans('alert.add.success'));
@@ -179,10 +184,10 @@ class OrderController extends Controller
     {
         $bill = Bill::orderBy('id', 'desc')->where('id', $id)->first();
         $details = BillDetail::where('bill_id', $id)->orderBy('id', 'desc')->get();
-        return view('pages.order.detail',[
-            'title'      => 'Đơn hàng chi tiết',
-            'bill'       =>  $bill,
-            'details'       =>  $details,
+        return view('pages.order.detail', [
+            'title' => 'Đơn hàng chi tiết',
+            'bill' => $bill,
+            'details' => $details,
         ]);
     }
     public function show(Bill $bill)
@@ -191,12 +196,12 @@ class OrderController extends Controller
         $city = City::get();
         $code_city = City::find($bill->city_id);
         $dist = Dist::where('code', $code_city->code)->get();
-        return view('pages.order.update',[
-            'title'      => 'Chỉnh sửa đơn hàng',
-            'bill'       =>  $bill,
-            'detail'       =>  $detail,
-            'city'       =>  $city,
-            'dist'       =>  $dist,
+        return view('pages.order.update', [
+            'title' => 'Chỉnh sửa đơn hàng',
+            'bill' => $bill,
+            'detail' => $detail,
+            'city' => $city,
+            'dist' => $dist,
         ]);
     }
 

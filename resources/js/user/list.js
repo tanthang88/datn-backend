@@ -18,7 +18,7 @@ const columns = [
   {
     data: 'birthday',
     render: function (data) {
-      return moment(data).format(FORMAT_DATE)
+      return data ? moment(data).format(FORMAT_DATE) : ''
     }
   },
   {

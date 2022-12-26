@@ -11,7 +11,7 @@ class Product_Helper
         foreach ($categories as $key => $category) {
             if ($category->parent_id == $parent_id) {
                 if ($oldId && $category->id == $oldId) {
-                    $html .= '<option value=" ' . $category->id . '" selected > ' . $char . $category->category_name . '</option>';
+                    $html .= '<option value=" ' . $category->id . '" selected> ' . $char . $category->category_name . '</option>';
                 }else{
                     $html .= '<option value=" ' . $category->id . '"  > ' . $char . $category->category_name . '</option>';
                 }

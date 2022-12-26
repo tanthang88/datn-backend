@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Policies\BillPolicy;
+use App\Policies\CommentPolicy;
 use App\Policies\ContentLayoutPolicy;
 use App\Policies\FeeShipPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -26,6 +27,7 @@ class PermissionGateAndPolicyAccess
         $this->defineGateBill();
         $this->defineGateFeeShip();
         $this->defineGatePromotion();
+        $this->defineGateComment();
     }
 
     public function defineGatePost()
@@ -69,5 +71,9 @@ class PermissionGateAndPolicyAccess
     public function defineGateFeeShip()
     {
         Gate::define('view-feeship', [FeeShipPolicy::class, 'view']);
+    }
+    public function defineGateComment()
+    {
+        Gate::define('view-comment', [CommentPolicy::class, 'view']);
     }
 }

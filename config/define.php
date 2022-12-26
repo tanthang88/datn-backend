@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Slider;
+
 return [
     'date_format' => 'd-m-Y',
     'date_time_format' => 'd-m-Y H:i',
@@ -13,6 +16,7 @@ return [
         'phone' => '/^(((\+|)84)|0)(3|5|7|8|9)([0-9]{8})$/',
         'company_phone' => '/^(((\+|)84)|0)(2|3|5|7|8|9)([0-9]{8})$/',
         'fax' => '/^(((\+|)84))(8)([0-9]{8})$/',
+        'decimal' => '/^\d*\.\d+$/',
         'name' => '/^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/i',
     ],
     'pagination' => [
@@ -21,5 +25,21 @@ return [
     'gender' => [
         'male' => 0,
         'female' => 1,
+    ],
+    'slider' => [
+        'slider_type' => [
+            [
+                'value' => Slider::PROMOTION,
+                'label' => 'Chương trình Khuyến mãi',
+            ],
+            [
+                'value' => Slider::PRODUCT,
+                'label' => 'Sản phẩm nổi bật',
+            ],
+            [
+                'value' => Slider::ACCESSORY,
+                'label' => 'Phụ kiện nổi bật',
+            ],
+        ]
     ],
 ];

@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\About\AddAboutRequest;
 use App\Http\Requests\About\UpdateAboutRequest;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Models\About;
 use App\Http\Requests\FeeShipRequest;
+use App\Models\About;
 use App\Models\City;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AboutController extends Controller
 {
     public function create()
     {
         return view('pages.about.add', [
-            'title'      => 'Thêm mới thông tin',
+            'title' => 'Thêm mới thông tin',
         ]);
     }
 
@@ -75,13 +74,13 @@ class AboutController extends Controller
 
     public function index(Request $request)
     {
-        $data = About::orderBy('id', 'desc')->where('type','!=','fee-ship')->paginate(15);
+        $data = About::orderBy('id', 'desc')->where('type', '!=', 'fee-ship')->paginate(config('define.pagination.per_page'));
         if ($search = $request->search) {
-            $data = About::orderBy('id', 'desc')->where('about_name', 'like', '%' . $search . '%')->paginate(15);
+            $data = About::orderBy('id', 'desc')->where('about_name', 'like', '%' . $search . '%')->paginate(config('define.pagination.per_page'));
         }
         return view('pages.about.list', [
-            'title'     => 'Danh sách thông tin',
-            'data'      => $data
+            'title' => 'Danh sách thông tin',
+            'data' => $data,
         ]);
     }
 
@@ -166,7 +165,7 @@ class AboutController extends Controller
         $about->save();
         if ($id_city != 0) {
             City::whereIn('code', $request->id_city)->update([
-                'transport_fee' => $request->transport_fee
+                'transport_fee' => $request->transport_fee,
             ]);
         }
         return redirect(route('feeship.list'))->with('success', trans('alert.add.success'));
@@ -226,7 +225,7 @@ class AboutController extends Controller
             $about->id_city = $id_city;
             $about->save();
             City::whereIn('code', $request->id_city)->update([
-                'transport_fee' => $request->transport_fee
+                'transport_fee' => $request->transport_fee,
             ]);
         } else {
             $abouts = About::select('id_city')->where('type', 'fee-ship')->where(function ($query) {
@@ -241,7 +240,7 @@ class AboutController extends Controller
             $rs = implode(',', $arr);
             $rss = explode(',', $rs);
             City::whereNotIn('code', $rss)->update([
-                'transport_fee' => $request->transport_fee
+                'transport_fee' => $request->transport_fee,
             ]);
             $about->id_city = 0;
             $about->save();

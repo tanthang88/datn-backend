@@ -102,7 +102,7 @@
                                             </button>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li>
-                                                    <a href="{{route('order.update',['bill' =>$data->id])}}" class="dropdown-item" >
+                                                    <a href="{{route('order.show',['bill' =>$data->id])}}" class="dropdown-item" >
                                                         <i class="fas fa-edit" aria-hidden="true"></i> Sửa
                                                     </a>
                                                 </li>
@@ -183,7 +183,7 @@
                     </tbody>
                 </table>
                 <hr/>
-                {{-- {{$data->links()}} --}}
+                {{$bill->links()}}
               </div>
             </div>
         </div>

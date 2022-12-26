@@ -119,11 +119,11 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/delete/{id}', [PostCategoriesController::class, 'delete'])->name('postCategory.delete');
     });
     #post
-    Route::group(['prefix' => 'post',  'middleware' => ['auth', 'can:view-post']], function () {
+    Route::group(['prefix' => 'blog',  'middleware' => ['auth', 'can:view-post']], function () {
         Route::get('/add', [PostController::class, 'create'])->name('post.add');
-        Route::post('/add', [PostController::class, 'store']);
-        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.update');
-        Route::post('/update/{id}', [PostController::class, 'update']);
+        Route::post('/add', [PostController::class, 'store'])->name('post.store');
+        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.show');
+        Route::post('/update/{id}', [PostController::class, 'update'])->name('post.update');
         Route::get('/', [PostController::class, 'index'])->name('post.list');
         Route::get('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
     });
@@ -193,8 +193,8 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/', [BannerController::class, 'index'])->name('banner.list');
         Route::get('/delete/{id}', [BannerController::class, 'delete'])->name('banner.delete');
     });
-     #comment
-     Route::group(['prefix' => 'comment'], function () {
+    #comment
+    Route::group(['prefix' => 'comment', 'middleware' => ['auth', 'can:view-comment']], function () {
         Route::get('/', [ProductCommentController::class, 'index'])->name('comment.list');
         Route::get('/data', [ProductCommentController::class, 'dataComment'])->name('comment.data');
         Route::get('/{id}', [ProductCommentController::class, 'show'])->name('comment.show');
@@ -210,8 +210,9 @@ Route::group(['prefix' => '/'], function () {
         Route::post('addDataSession', [OrderController::class, 'addDataSession'])->name('order.addDataSession');
         Route::get('/delete-dataSession/{product}', [OrderController::class, 'deleteDataSession'])->name('order.deleteDataSession');
         Route::get('/add', [OrderController::class, 'create'])->name('order.add');
-        Route::post('/add', [OrderController::class, 'store']);
-        Route::get('/{bill}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.update');
+        Route::post('/add', [OrderController::class, 'store'])->name('order.store');
+        Route::get('/{bill}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.show');
+        // Route::post('/{bill}', [OrderController::class, 'update'])->middleware(['auth'])->name('order.update');
         Route::get('/selectDist/{id}', [OrderController::class, 'selectDist']);
         Route::get('/detail/{id}', [OrderController::class, 'detail'])->middleware(['auth'])->name('order.detail');
     });
@@ -229,7 +230,7 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/delete/{id}', [AboutController::class, 'deleteFeeShip'])->name('feeship.delete');
             Route::post('/update/{id}', [AboutController::class, 'updateFeeShip'])->name('feeship.update');
         });
-        Route::group(['prefix' => 'contact'], function () {
+        Route::group(['prefix' => 'contact', 'middleware' => ['auth']], function () {
             Route::get('/', [ContactController::class, 'index'])->name('contact.list');
             Route::get('/data', [ContactController::class, 'dataContact'])->name('contact.data');
             Route::get('/countNotification', [ContactController::class, 'countNotifications'])->name('contact.count');
