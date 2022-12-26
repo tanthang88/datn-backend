@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\api\PaymentController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Models\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

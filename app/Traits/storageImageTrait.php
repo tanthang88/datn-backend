@@ -31,11 +31,11 @@ trait storageImageTrait
                     'directory_visibility' => 'public'
                 ]
             );
-
             $dataUploadTrait = [
                 'file_name' => $fileNameOrigin,
                 'file_path' => Storage::url($path)
             ];
+            Storage::setVisibility($path, 'public');
             return $dataUploadTrait;
         }
         return null;
@@ -57,6 +57,7 @@ trait storageImageTrait
             'file_name' => $fileNameOrigin,
             'file_path' => Storage::url($path)
         ];
+        Storage::setVisibility($path, 'public');
         return $dataUploadTrait;
     }
 }
