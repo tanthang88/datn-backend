@@ -198,32 +198,41 @@ class ProductFilterService
      * @param  Request $request
      * @return Object
      */
-    public function getListProductFilter(Request $request, $select = ['*'])
+    public function getListProductFilter(Request $request, $select = [
+        'products.id',
+        'product_name',
+        'product_slug',
+        'product_image',
+        'product_quantity',
+        'product_desc',
+        'product_promotion_desc',
+        'is_discount_product',
+        'product_price',
+        'config_battery',
+        'config_screen',
+        'config_camera',
+        'is_selling',
+        'rating'
+    ])
     {
         return Product::select($select)
-            ->with(['productConfig:id,product_id'])
+            ->leftJoin('configurations', 'products.id', '=', 'configurations.product_id')
             ->when(!empty($request->price), function ($query) use ($request) {
                 $this->checkParamFilter($query, 'products.product_price', $request->price);
             })
             ->when(!empty($request->battery), function ($query) use ($request) {
-                $this->getConfigurationProduct($query);
                 $this->checkParamFilter($query, 'configurations.config_battery', $request->battery);
             })
             ->when(!empty($request->screen), function ($query) use ($request) {
-                $this->getConfigurationProduct($query);
                 $this->checkParamFilter($query, 'configurations.config_screen', $request->screen);
             })
             ->when(!empty($request->camera), function ($query) use ($request) {
-                $this->getConfigurationProduct($query);
                 $this->checkParamFilter($query, 'configurations.config_camera', $request->camera);
             })
             ->when(!empty($request->rating), function ($query) use ($request) {
-                $this->getConfigurationProduct($query);
                 $this->checkParamFilter($query, 'configurations.rating', $request->rating);
             })
-            ->when(!empty($request->order_by), function ($query) use ($request) {
-                $query->orderBy($request->order_by, $request->order_type ?? 'DESC');
-            })
+            ->orderBy($request->order_by ?? 'id', $request->order_type ?? 'DESC')
             ->where('products.category_id', $request->categories)
             ->where('products.product_display', PRODUCT::PRODUCT_ACTIVE)
             ->paginate($this->perPage);
