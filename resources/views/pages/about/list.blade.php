@@ -50,9 +50,9 @@
                                 <td>{{$about->type}}</td>
                                 <td>
                                     @if($about->about_display == 1)
-                                        <input type="checkbox" checked>
+                                        <span class="badge badge-success">Hiển thị</span>
                                     @else
-                                        <input type="checkbox" >
+                                        <span class="badge badge-danger">Ẩn</span>
                                     @endif
                                 </td>
                                 <td>

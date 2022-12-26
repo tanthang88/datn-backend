@@ -119,11 +119,11 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/delete/{id}', [PostCategoriesController::class, 'delete'])->name('postCategory.delete');
     });
     #post
-    Route::group(['prefix' => 'post',  'middleware' => ['auth', 'can:view-post']], function () {
+    Route::group(['prefix' => 'blog',  'middleware' => ['auth', 'can:view-post']], function () {
         Route::get('/add', [PostController::class, 'create'])->name('post.add');
-        Route::post('/add', [PostController::class, 'store']);
-        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.update');
-        Route::post('/update/{id}', [PostController::class, 'update']);
+        Route::post('/add', [PostController::class, 'store'])->name('post.store');
+        Route::get('/update/{id}', [PostController::class, 'show'])->name('post.show');
+        Route::post('/update/{id}', [PostController::class, 'update'])->name('post.update');
         Route::get('/', [PostController::class, 'index'])->name('post.list');
         Route::get('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
     });
@@ -210,8 +210,9 @@ Route::group(['prefix' => '/'], function () {
         Route::post('addDataSession', [OrderController::class, 'addDataSession'])->name('order.addDataSession');
         Route::get('/delete-dataSession/{product}', [OrderController::class, 'deleteDataSession'])->name('order.deleteDataSession');
         Route::get('/add', [OrderController::class, 'create'])->name('order.add');
-        Route::post('/add', [OrderController::class, 'store']);
-        Route::get('/{bill}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.update');
+        Route::post('/add', [OrderController::class, 'store'])->name('order.store');
+        Route::get('/{bill}', [OrderController::class, 'show'])->middleware(['auth'])->name('order.show');
+        // Route::post('/{bill}', [OrderController::class, 'update'])->middleware(['auth'])->name('order.update');
         Route::get('/selectDist/{id}', [OrderController::class, 'selectDist']);
         Route::get('/detail/{id}', [OrderController::class, 'detail'])->middleware(['auth'])->name('order.detail');
     });

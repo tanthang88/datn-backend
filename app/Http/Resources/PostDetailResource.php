@@ -28,6 +28,11 @@ class PostDetailResource extends JsonResource
             'post_seo_keyword' => $this->post_seo_keyword,
             'post_seo_description' => $this->post_seo_description,
             'date' => $this->created_at,
+            'post_outstanding' => $this->post_outstanding,
+            'post_order' => $this->post_order,
+            'type' => $this->type,
+            'post_view' => $this->post_view
+
         ];
     }
 }
