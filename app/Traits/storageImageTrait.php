@@ -2,8 +2,9 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 trait storageImageTrait
@@ -11,7 +12,7 @@ trait storageImageTrait
     /**
      * storageTraitUpload
      *
-     * @param  mixed $request
+     * @param  Request $request
      * @param  mixed $filedName
      * @param  mixed $folderName
      * @return void
@@ -22,7 +23,14 @@ trait storageImageTrait
             $file = $request->file($filedName);
             $fileNameOrigin  = $file->getClientOriginalName();
             $fileNameHash = Str::random('20') . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/' . $folderName . '/' . Auth::id(), $fileNameHash);
+            $path = $file->storeAs(
+                'public/' . $folderName . '/' . Auth::id(),
+                $fileNameHash,
+                [
+                    'visibility' => 'public',
+                    'directory_visibility' => 'public'
+                ]
+            );
 
             $dataUploadTrait = [
                 'file_name' => $fileNameOrigin,
