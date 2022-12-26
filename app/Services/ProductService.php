@@ -23,15 +23,16 @@ class ProductService
     {
         return ProductCategories::where('parent_id', 0)
             ->with(['children' => function ($query) {
-                $query->with(['children']);
+                $query->with(['children'])->where('category_display',1);
             }])
+            ->where('category_display',1)
             ->get();
     }
     //  getListProduct
 
     public function getListProduct()
     {
-        return Product::select('*')->paginate($this->perPage);
+        return Product::select('*')->where('product_display',1)->paginate($this->perPage);
     }
     /**
      * getListProductByCategory
@@ -96,6 +97,7 @@ class ProductService
             ->when(!empty($request), function ($query) use ($request) {
                 $query->where('product_name','like','%' .$request->name . '%');
             })
+            ->where('product_display', PRODUCT::PRODUCT_ACTIVE)
             ->orderBy('id', 'DESC')
             ->paginate($this->perPage);
     }

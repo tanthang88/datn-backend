@@ -173,6 +173,7 @@ class ProductFilterService
     {
         return Product::select($select)->join('configurations','products.id','=','configurations.product_id')
         ->where('category_id', $request->categories)
+        ->where('product_display', 1)
         ->when($request->has('price'), function ($query) use($request)  {
             $this->checkParamFilter($query,'product_price',$request->price);
         })
