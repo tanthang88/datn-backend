@@ -51,8 +51,6 @@ class BillService
                     'dist_id' => $request->dist_id,
                     'bill_price' => $request->bill_price,
                     'bill_status' => Bill::BILL_STATUS_WAITING_CONFIRM,
-                    'bill_payment_status' => 0, //migrate  AnhHv will update
-                    'discount_code_id' => $request->has('discount_code_id') ? $request->discount_code_id : null //migrate Anhhv will update
                 ];
                 $bill = new Bill($billData);
                 $bill->save();
@@ -61,12 +59,12 @@ class BillService
                     $productData = [
                         'bill_id' => $bill->id,
                         'product_id' => $product["id"],
-                        'price' => $product["price"],
-                        'amount' => $product["amount"],
-                        'into_price' => $product["into_price"],
-                        'sale' => $product["sale"],
-                        'fee' => $product["fee"],
-                        'total' => $product["total"],
+                        'product_image' => $product["product_image"],
+                        'product_name' => $product["product_name"],
+                        'variant_name' => $product["variant_name"],
+                        'price' => $product["product_price"],
+                        'amount' => $product["quantity"],
+                        'into_price' => $product["product_price"] * $product["quantity"],
                         'variant_id' => $product['variant_id'] != null ? $product['variant_id'] : null //migrate Anhhv will update
                     ];
                     $billDetailData[] = $productData;

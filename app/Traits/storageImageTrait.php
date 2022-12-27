@@ -12,19 +12,21 @@ trait storageImageTrait
     /**
      * storageTraitUpload
      *
-     * @param  Request $request
-     * @param  mixed $filedName
-     * @param  mixed $folderName
+     * @param Request $request
+     * @param mixed $filedName
+     * @param mixed $folderName
      * @return void
      */
     public function storageTraitUpload($request, $filedName, $folderName)
     {
         if ($request->hasFile($filedName)) {
             $file = $request->file($filedName);
-            $fileNameOrigin  = $file->getClientOriginalName();
+            $fileNameOrigin = $file->getClientOriginalName();
+
             $fileNameHash = Str::random('20') . '.' . $file->getClientOriginalExtension();
+
             $path = $file->storeAs(
-                'public/' . $folderName,
+                "public/$folderName/" . Auth::id(),
                 $fileNameHash,
                 [
                     'visibility' => 'public',
@@ -40,17 +42,16 @@ trait storageImageTrait
         }
         return null;
     }
-
     /**
      * storageTraitUploadMutiple
      *
-     * @param  mixed $file
-     * @param  mixed $folderName
+     * @param mixed $file
+     * @param mixed $folderName
      * @return void
      */
     public function storageTraitUploadMutiple($file, $folderName)
     {
-        $fileNameOrigin  = $file->getClientOriginalName();
+        $fileNameOrigin = $file->getClientOriginalName();
         $fileNameHash = Str::random('20') . '.' . $file->getClientOriginalExtension();
         $path = $file->storeAs('public/' . $folderName, $fileNameHash);
         $dataUploadTrait = [
