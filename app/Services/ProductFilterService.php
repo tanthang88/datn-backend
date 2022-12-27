@@ -133,17 +133,17 @@ class ProductFilterService
                     [
                         'field_label' => '12 MP',
                         'field_slug' => '12-mp',
-                        'field_value' => '=12'
+                        'field_value' => '12'
                     ],
                     [
                         'field_label' => '32 MP',
                         'field_slug' => '32-mp',
-                        'field_value' => '=32'
+                        'field_value' => '32'
                     ],
                     [
                         'field_label' => '48 MP',
                         'field_slug' => '48-mp',
-                        'field_value' => '=48'
+                        'field_value' => '48'
                     ]
                 ]
             ]
