@@ -53,6 +53,7 @@ class ProductResource extends JsonResource
             'product_slug' => $this->product_slug,
             'product_desc' => $this->product_desc,
             'product_price' => $this->product_price,
+            'product_views' => $this->product_views,
             'product_image' => $this->product_image,
             'product_configurations' => $this->productConfig,
             'is_variation' => $this->is_variation,
