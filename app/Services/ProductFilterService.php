@@ -252,6 +252,9 @@ class ProductFilterService
         } else if (preg_match("/^>[0-9\.]+$/", $value)) {
             $vl = str_replace('>', '', $value);
             return  $query->where($field, '>', (int)$vl);
+        } else {
+            $vl = str_replace('=', '', $value);
+            return  $query->where($field, (int)$vl);
         }
     }
 }
