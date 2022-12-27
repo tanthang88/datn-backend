@@ -54,6 +54,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {!! \App\Helpers\Helper::category($categories) !!}
                         @foreach ($data as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
