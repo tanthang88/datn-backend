@@ -62,7 +62,7 @@ Nhà cung cấp
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-info" href="{{route('supplier.update',['id'=>$supplier->id])}}">
+                            <a class="btn btn-sm btn-info" href="{{route('supplier.show',['id'=>$supplier->id])}}">
                                 <i class="fas fa-pencil-alt"></i>Sửa
                             </a>
                             <a class="btn btn-sm btn-danger btn-action-delete"

@@ -24,7 +24,7 @@ class UpdateSupplierRequest extends FormRequest
     public function rules()
     {
         return [
-            'supplier_name'        => 'required|unique:product_categories,supplier_name,'.$this->id,
+            'supplier_name'        => 'required|unique:suppliers,supplier_name,'.$this->id,
             'supplier_address'     => 'required',
             'supplier_phone'       => ['required', 'regex:' . config('define.regex.phone')],
             'supplier_email'       => 'required|email|max:255',

@@ -27,7 +27,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('supplier.update',['id'=>$UpdateSL->id])}}" method="POST" enctype="multipart/form-data">
                         {{csrf_field() }}
                             <div class="row" style="padding-bottom:20px;">
                                 <div class="col-3">
