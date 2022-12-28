@@ -32,7 +32,7 @@ class ProductFilterController extends Controller
             );
         }
     }
-     /**
+    /**
      * listSort
      *
      * @return JsonResponse
@@ -52,17 +52,39 @@ class ProductFilterController extends Controller
     }
 
 
-     /**
+    /**
      * listProductFilter
      *
      *
-       * @param  Request $request
-       *
+     * @param  Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function listProductFilter( Request $request)
+    public function listProductFilter(Request $request)
     {
 
+        try {
+            $data = $this->productFilterService->getListProductFilter($request);
+            return $this->responseSuccess(['data' => $data]);
+        } catch (\Throwable $th) {
+            Log::error("get list  filter product", $th);
+            return $this->responseError(
+                array(trans('alert.filterProduct.failed')),
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    /**
+     * listProductFilter
+     *
+     *
+     * @param  Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listProductSearch(Request $request)
+    {
         try {
             $data = $this->productFilterService->getListProductFilter($request);
             return $this->responseSuccess(['data' => $data]);

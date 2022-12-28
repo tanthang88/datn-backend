@@ -235,8 +235,10 @@ class ProductFilterService
             ->when(!empty($request->product_name), function ($query) use ($request) {
                 $query->where('product_name', 'like', "%" . $request->product_name . "%");
             })
+            ->when(!empty($request->categories), function ($query) use ($request) {
+                $query->where('products.category_id', $request->categories);
+            })
             ->orderBy($request->order_by ?? 'id', $request->order_type ?? 'DESC')
-            ->where('products.category_id', $request->categories)
             ->where('products.product_display', PRODUCT::PRODUCT_ACTIVE)
             ->paginate($this->perPage);
     }
