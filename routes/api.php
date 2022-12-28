@@ -84,11 +84,11 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/filter', [ProductFilterController::class, 'listFilter']);
     Route::get('/sort', [ProductFilterController::class, 'listSort']);
     Route::get('/filter/{categories}/{filter}', [ProductFilterController::class, 'listProductFilter']);
+    Route::get('/search/{search}', [ProductFilterController::class, 'listProductFilter']);
     Route::get('/categories/{category}', [ProductController::class, 'listProductsByIdCategory']);
     Route::get('/{product}', [ProductController::class, 'show']);
     Route::post('/{product}/comment', [ProductCommentController::class, 'store']);
     Route::get('/variantion/{product}/{properties}', [VariantionController::class, 'getVariantion']);
-    Route::get('/search/{product}', [ProductFilterController::class, 'listProductSearch']);
 });
 Route::group(['prefix' => 'slider'], function () {
     Route::get('/', [SliderController::class, 'listSliders']);
