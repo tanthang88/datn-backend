@@ -51,6 +51,7 @@ class BillService
                     'dist_id' => $request->dist_id,
                     'bill_price' => $request->bill_price,
                     'bill_status' => Bill::BILL_STATUS_WAITING_CONFIRM,
+                    'sale' => $request->sale,
                 ];
                 $bill = new Bill($billData);
                 $bill->save();
