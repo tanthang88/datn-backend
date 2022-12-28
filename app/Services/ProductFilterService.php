@@ -232,6 +232,9 @@ class ProductFilterService
             ->when(!empty($request->rating), function ($query) use ($request) {
                 $this->checkParamFilter($query, 'configurations.rating', $request->rating);
             })
+            ->when(!empty($request->product_name), function ($query) use ($request) {
+                $query->where('product_name', 'like', "%" . $request->product_name . "%");
+            })
             ->orderBy($request->order_by ?? 'id', $request->order_type ?? 'DESC')
             ->where('products.category_id', $request->categories)
             ->where('products.product_display', PRODUCT::PRODUCT_ACTIVE)

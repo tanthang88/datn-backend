@@ -43,8 +43,8 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'supplier', 'middleware' => ['auth', 'can:view-product']], function () {
         Route::get('/add', [SupplierController::class, 'create'])->name('supplier.add');
         Route::post('/add', [SupplierController::class, 'store']);
-        Route::get('/update/{id}', [SupplierController::class, 'show'])->name('supplier.update');
-        Route::post('/update/{id}', [SupplierController::class, 'update']);
+        Route::get('/update/{id}', [SupplierController::class, 'show'])->name('supplier.show');
+        Route::post('/update/{id}', [SupplierController::class, 'update'])->name('supplier.update');
         Route::get('/', [SupplierController::class, 'index'])->name('supplier.list');
         Route::get('/delete/{id}', [SupplierController::class, 'delete'])->name('supplier.delete');
     });
